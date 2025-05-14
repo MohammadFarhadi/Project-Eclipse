@@ -8,7 +8,7 @@ public class ShootingEnemy : MonoBehaviour
     public float fireRate = 1.5f;
     public float bulletSpeed = 10f;
     public int health = 3;
-
+    [SerializeField] private Animator animator;
     private List<GameObject> playersInRange = new List<GameObject>();
     private GameObject currentTarget;
     private float timer = 0f;
@@ -65,8 +65,13 @@ public class ShootingEnemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject); // نابودی دشمن
+            animator.SetTrigger("Die");
+            Invoke(nameof(Die), 0.5f); 
         }
+    }
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 
 }
