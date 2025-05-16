@@ -15,5 +15,9 @@ public class Bullet : MonoBehaviour
 
             Destroy(gameObject); // حذف گلوله
         }
+        else if (other.CompareTag("Player"))
+        {
+            Debug.Log("player hit bullet");
+        }
     }
 }
