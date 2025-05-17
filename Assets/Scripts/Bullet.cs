@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
             {
                 enemy.TakeDamage(1);
             }
+            
+            
 
             Destroy(gameObject); // حذف گلوله
         }
