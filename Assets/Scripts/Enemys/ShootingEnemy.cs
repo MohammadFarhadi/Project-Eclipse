@@ -36,6 +36,7 @@ public class ShootingEnemy : MonoBehaviour
         if (target == null) return;
 
         Vector2 dir = (target.transform.position - firePoint.position).normalized;
+        animator.SetTrigger("Attack");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().linearVelocity = dir * bulletSpeed;
     }
