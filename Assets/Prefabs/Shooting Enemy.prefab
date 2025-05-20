@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 8217969350922546701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.608543, y: -0.51543915, z: 0}
+  m_LocalPosition: {x: -1.5986986, y: -1.7564583, z: 0}
   m_LocalScale: {x: 1.2557502, y: 1.4012128, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -241,6 +241,7 @@ MonoBehaviour:
   fireRate: 1.5
   bulletSpeed: 10
   health: 3
+  animator: {fileID: 0}
 --- !u!50 &2754030247191435130
 Rigidbody2D:
   serializedVersion: 5
@@ -256,7 +257,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

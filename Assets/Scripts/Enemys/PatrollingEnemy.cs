@@ -33,6 +33,7 @@ public class PatrollingEnemy : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
+            animator.SetTrigger("Attack");
             Debug.Log("Player hited ");
         }
         
