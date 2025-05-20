@@ -12,14 +12,28 @@ public class Bullet : MonoBehaviour
             {
                 enemy.TakeDamage(1);
             }
-            
-            
 
-            Destroy(gameObject); // حذف گلوله
+            gameObject.SetActive(false); // غیرفعال کردن گلوله به‌جای حذف
         }
         else if (other.CompareTag("Player"))
         {
             Debug.Log("player hit bullet");
+            gameObject.SetActive(false); // تیر پلیر هم بخوره، بره تو pool
         }
+    }
+    private void OnEnable()
+    {
+        // هر بار که فعال شد، بعد از ۱۰ ثانیه خودش خاموش بشه
+        Invoke(nameof(Disable), 10f);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke(); // اگه تیر زودتر غیرفعال شد، تایمر قطع شه
+    }
+
+    private void Disable()
+    {
+        gameObject.SetActive(false);
     }
 }

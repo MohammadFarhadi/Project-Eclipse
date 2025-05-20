@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - DetectionZone
   - TurnPoint
+  - Ground
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX
