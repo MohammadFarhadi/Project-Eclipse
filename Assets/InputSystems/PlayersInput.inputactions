@@ -2,7 +2,7 @@
     "name": "PlayersInput",
     "maps": [
         {
-            "name": "GamePlay",
+            "name": "Player1",
             "id": "fe7065c4-6257-4ebb-a3aa-a41e3d6e4c04",
             "actions": [
                 {
@@ -45,39 +45,6 @@
             "bindings": [
                 {
                     "name": "2D Vector",
-                    "id": "b006aee9-b189-4316-bc44-e67292df4be4",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "left",
-                    "id": "06b1eed5-7c2f-4bab-b7ee-a984109603ad",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse2",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "019b39da-6fc0-4fee-9ab0-3b77924387bd",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse2",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "2D Vector",
                     "id": "b85e20a5-c579-4400-902b-763a0773c9bc",
                     "path": "2DVector",
                     "interactions": "",
@@ -93,7 +60,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse1",
+                    "groups": "",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -104,21 +71,10 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse1",
+                    "groups": "",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "e88c1b24-ebf8-4e8b-af8a-93ce9f61432d",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse2",
-                    "action": "JumpP",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -126,19 +82,8 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse1",
+                    "groups": "",
                     "action": "JumpP",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2e0eaab3-e956-4f45-9da2-55ef14160719",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse2",
-                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -148,19 +93,8 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse1",
+                    "groups": "",
                     "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c325e6b0-1b44-4c30-8d16-a9789ce06fc3",
-                    "path": "<Keyboard>/rightShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse2",
-                    "action": "SpecialMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -170,41 +104,123 @@
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse1",
+                    "groups": "",
                     "action": "SpecialMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Player2",
+            "id": "fdab62c7-d155-4773-a03e-e40c41b1a9fc",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "e7bb1335-ec3f-48bb-afcb-7cef61e42eaf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SpecialMove",
+                    "type": "Button",
+                    "id": "5cc5e3ab-dc94-4cae-8b2d-34f9dee1c325",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "b1157857-6002-4f0d-a969-a669a9251a3e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JumpP",
+                    "type": "Button",
+                    "id": "78a8c7e9-145c-437b-a3e6-e2ce8f2b4055",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "8512a285-3eca-4dc4-861b-2c7eaae931b4",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "d5ea0123-6467-47e0-aac7-e2c13ffb498c",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "8766a280-49c4-4732-beab-0437f5d1fb04",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a6628be2-8e6d-4fee-9844-46d4d5b8762e",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cd15b5e-c35f-4edc-9b3a-825412e16e71",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d2285b9-9536-4fd5-be00-d118b2c25ec6",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpP",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "Keyboard&Mouse1",
-            "bindingGroup": "Keyboard&Mouse1",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Keyboard&Mouse2",
-            "bindingGroup": "Keyboard&Mouse2",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                },
-                {
-                    "devicePath": "<Mouse>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        }
-    ]
+    "controlSchemes": []
 }
