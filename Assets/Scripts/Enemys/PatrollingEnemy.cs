@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PatrollingEnemy : MonoBehaviour
+public class PatrollingEnemy : MonoBehaviour, InterfaceEnemies
 {
     public float speed = 2f;
     private int direction = -1;
@@ -26,7 +26,7 @@ public class PatrollingEnemy : MonoBehaviour
             scale.x *= -1;
             transform.localScale = scale;
         }
-        else if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Sword"))
+        else if (collision.gameObject.CompareTag("Bullet"))
         {
             TakeDamage(1);
             Destroy(collision.gameObject);

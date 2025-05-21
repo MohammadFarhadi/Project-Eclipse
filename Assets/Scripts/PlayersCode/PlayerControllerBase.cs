@@ -9,6 +9,16 @@ public abstract class PlayerControllerBase : MonoBehaviour
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Animator animator;
     
+    [Header("Stamina")]
+    public  float Stamina = 50;
+    public float Stamina_gain = 5f;
+    public float Stamina_loss = 10f;
+    public float Stamina_max = 50;
+    
+    [Header("Health")]
+    public float Health = 30;
+    public float Health_gain = 5f;
+    
     private Vector3 originalScale;
 
     protected SpriteRenderer Sprite;
@@ -69,9 +79,14 @@ public abstract class PlayerControllerBase : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             animator?.SetBool("IsJumping", false);
+            HandleLanding();
             isGrounded = true;
             HandleLanding(); 
         }
+    }
+
+    public virtual void HanleFalling()
+    {
     }
 
     public abstract void Attack();
@@ -93,5 +108,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
     protected virtual bool CanApplyMovement()
     {
         return true;
+    }
+
+    protected virtual void HealthGain()
+    {
+        
     }
 }

@@ -6,10 +6,19 @@ using UnityEngine.InputSystem;
 
 public class MeleePlayerController : PlayerControllerBase
 {
-    public bool doubleJump = true;
+  //متغیر ها برای dash زدن  
     bool isDashing = false;
     private float addforceSync = 1f;
     [SerializeField] private float DashValue = 100;
+    
+    //متغیر ها برای تعریف حمله کردن
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private int attackDamage = 1;
+    
+    
+    
     public void OnMove(InputAction.CallbackContext context)
     {   
         PlayerMove(context);
@@ -18,7 +27,20 @@ public class MeleePlayerController : PlayerControllerBase
 
     public override void Attack()
     {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach (Collider2D enemyCollider in hitEnemies)
+        {
+            InterfaceEnemies enemy = enemyCollider.GetComponent<InterfaceEnemies>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(attackDamage);
+            }
+        }
+
     }
+
+    
+    
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -34,6 +56,7 @@ public class MeleePlayerController : PlayerControllerBase
     public void OnAttack()
     {
         animator.SetBool("IsAttacking", true);
+        StartCoroutine(ResetAttackBool());
     }
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -55,16 +78,44 @@ public class MeleePlayerController : PlayerControllerBase
     
     private IEnumerator DelayedDashForce()
     {
-        float delay = 0.165f; // how long to wait before force
+        float delay = 0.165f; // time before dash force applies
         yield return new WaitForSeconds(delay);
 
         float direction = Mathf.Sign(transform.localScale.x);
         Vector2 dashForce = new Vector2(DashValue * direction, 0);
-        Debug.Log($"[Dash] Applying force: {dashForce}");
         rb.AddForce(dashForce, ForceMode2D.Impulse);
+    
+        // dash force applied
+        yield return new WaitForSeconds(0.2f); // dash duration
 
-        yield return new WaitForSeconds(0.2f); // total dash duration
         isDashing = false;
+
+        if (!isGrounded && rb.linearVelocity.y < 0)
+        {
+            animator.SetBool("IsFalling", true);
+        }
     }
 
+    // برای اینه که بیاد هیت باکس رو نشون بده داخل بازی بهمون
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+    // زمانیکه طول می کشه که انیمیشن اتک انجام بشه
+    private IEnumerator ResetAttackBool()
+    {
+        //چقدر طول میکشه که انیمیشن اتکمون اجرا بشه.
+        yield return new WaitForSeconds(0.2f); 
+        animator.SetBool("IsAttacking", false);
+    }
+    
+    protected override void HandleLanding()
+    {
+        animator.SetBool("IsFalling", false);
+    }
 }

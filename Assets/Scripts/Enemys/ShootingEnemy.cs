@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ShootingEnemy : MonoBehaviour
+public class ShootingEnemy : MonoBehaviour, InterfaceEnemies
 {
     public GameObject bulletPrefab;
     public Transform firePoint;

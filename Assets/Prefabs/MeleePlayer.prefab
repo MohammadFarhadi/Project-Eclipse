@@ -32,9 +32,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.13, y: 0.41, z: 0.024156036}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3604272796926253066}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7937074644622922588
@@ -145,6 +146,22 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 75c9d1c5-76a3-4306-8798-96bf248b0039
+    m_ActionName: 'Player1/Movement[/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff0ce5ce-d688-4421-a46d-a811cf26ecfb
+    m_ActionName: 'Player1/JumpP[/Keyboard/w]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d8eeb79-c006-4125-8b3e-218d131ffe4b
+    m_ActionName: 'Player1/Attack[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7e60110-8203-4197-a972-0bdb90c860e8
+    m_ActionName: 'Player1/SpecialMove[/Keyboard/leftShift]'
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5720790355984427683}
         m_TargetAssemblyTypeName: MeleePlayerController, Assembly-CSharp
@@ -158,8 +175,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 75c9d1c5-76a3-4306-8798-96bf248b0039
-    m_ActionName: 'GamePlay/Movement[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+    m_ActionId: e7bb1335-ec3f-48bb-afcb-7cef61e42eaf
+    m_ActionName: 'Player2/Movement[/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720790355984427683}
+        m_TargetAssemblyTypeName: MeleePlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5cc5e3ab-dc94-4cae-8b2d-34f9dee1c325
+    m_ActionName: 'Player2/SpecialMove[/Keyboard/rightShift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5720790355984427683}
+        m_TargetAssemblyTypeName: MeleePlayerController, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b1157857-6002-4f0d-a969-a669a9251a3e
+    m_ActionName: 'Player2/Attack[/Keyboard/downArrow]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5720790355984427683}
@@ -174,43 +223,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: ff0ce5ce-d688-4421-a46d-a811cf26ecfb
-    m_ActionName: 'GamePlay/Jump[/Keyboard/w,/Keyboard/upArrow]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2665428422457329473}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0d8eeb79-c006-4125-8b3e-218d131ffe4b
-    m_ActionName: 'GamePlay/Attack[/Keyboard/s,/Keyboard/downArrow]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: c7e60110-8203-4197-a972-0bdb90c860e8
-    m_ActionName: 'GamePlay/SpecialMove[/Keyboard/rightShift,/Keyboard/leftShift]'
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse2
-  m_DefaultActionMap: GamePlay
+    m_ActionId: 78a8c7e9-145c-437b-a3e6-e2ce8f2b4055
+    m_ActionName: 'Player2/JumpP[/Keyboard/upArrow]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player2
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!61 &8664033203185152163
@@ -297,4 +314,41 @@ MonoBehaviour:
   jumpForce: 5
   rb: {fileID: 0}
   animator: {fileID: 0}
-  doubleJump: 1
+  DashValue: 10
+  attackPoint: {fileID: 3604272796926253066}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  attackDamage: 1
+--- !u!1 &5697109330266714500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3604272796926253066}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3604272796926253066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5697109330266714500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.165, y: -0.022, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1093571156077408059}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
