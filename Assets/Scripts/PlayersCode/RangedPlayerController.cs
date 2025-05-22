@@ -14,10 +14,7 @@ public class RangedPlayerController: PlayerControllerBase
     private bool Is_Sprinting = false;
     private BulletPool bulletPool;
 
-    public  float Stamina = 50;
-    public float Stamina_gain = 5f;
-    public float Stamina_loss = 10f;
-    public float Stamina_max = 50;
+
 
     private void Awake()
     {

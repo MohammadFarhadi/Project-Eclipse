@@ -52,7 +52,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1201526842495556030
 Transform:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 75c9d1c5-76a3-4306-8798-96bf248b0039
-    m_ActionName: 'Ranged/Movement[/Keyboard/a,/Keyboard/d]'
+    m_ActionName: 'Player1/Movement[/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2492625144128786863}
@@ -231,7 +231,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: ff0ce5ce-d688-4421-a46d-a811cf26ecfb
-    m_ActionName: 'Ranged/Jump[/Keyboard/w]'
+    m_ActionName: 'Player1/JumpP[/Keyboard/w]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2492625144128786863}
@@ -247,7 +247,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 0d8eeb79-c006-4125-8b3e-218d131ffe4b
-    m_ActionName: 'Ranged/Attack[/Keyboard/s]'
+    m_ActionName: 'Player1/Attack[/Keyboard/s]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2492625144128786863}
@@ -263,10 +263,26 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: c7e60110-8203-4197-a972-0bdb90c860e8
-    m_ActionName: 'GamePlay/SpecialMove[/Keyboard/shift]'
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Keyboard&Mouse1
-  m_DefaultActionMap: GamePlay
+    m_ActionName: 'Player1/SpecialMove[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7bb1335-ec3f-48bb-afcb-7cef61e42eaf
+    m_ActionName: 'Player2/Movement[/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5cc5e3ab-dc94-4cae-8b2d-34f9dee1c325
+    m_ActionName: 'Player2/SpecialMove[/Keyboard/rightShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b1157857-6002-4f0d-a969-a669a9251a3e
+    m_ActionName: 'Player2/Attack[/Keyboard/downArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78a8c7e9-145c-437b-a3e6-e2ce8f2b4055
+    m_ActionName: 'Player2/JumpP[/Keyboard/upArrow]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!61 &6233137657958474618

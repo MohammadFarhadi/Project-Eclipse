@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MiniBossAI : MonoBehaviour
+public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 {
     [Header("Movement")]
     public float moveSpeed = 2f;
@@ -110,7 +110,7 @@ public class MiniBossAI : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
