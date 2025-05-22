@@ -1,17 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ShootingEnemy : MonoBehaviour, InterfaceEnemies
+public class ShootingEnemy : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 1.5f;
     public float bulletSpeed = 10f;
     public int health = 3;
+
     [SerializeField] private Animator animator;
     private List<GameObject> playersInRange = new List<GameObject>();
     private GameObject currentTarget;
     private float timer = 0f;
+
+
+
+    void Start()
+    {
+  
+    }
 
     void Update()
     {
@@ -60,6 +68,7 @@ public class ShootingEnemy : MonoBehaviour, InterfaceEnemies
             }
         }
     }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -70,9 +79,9 @@ public class ShootingEnemy : MonoBehaviour, InterfaceEnemies
             Invoke(nameof(Die), 0.5f); 
         }
     }
+
     public void Die()
     {
         Destroy(gameObject);
     }
-
 }
