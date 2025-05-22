@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ShootingEnemy : MonoBehaviour
+public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 {
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -14,11 +14,15 @@ public class ShootingEnemy : MonoBehaviour
     private GameObject currentTarget;
     private float timer = 0f;
 
-
+    // 🩸 نمایش نوار سلامتی
+    public EnemyHealthBarDisplay healthBarDisplay;
 
     void Start()
     {
-  
+        if (healthBarDisplay != null)
+        {
+            healthBarDisplay.UpdateHealthBar(health);
+        }
     }
 
     void Update()
@@ -72,6 +76,11 @@ public class ShootingEnemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+
+        if (healthBarDisplay != null)
+        {
+            healthBarDisplay.UpdateHealthBar(health);
+        }
 
         if (health <= 0)
         {

@@ -25,6 +25,9 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     [Header("Animation")]
     public Animator animator;
+    [Header("Health Bar")]
+    public EnemyHealthBarDisplay healthBarDisplay;
+
 
     void Start()
     {
@@ -112,11 +115,25 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        currentHealth -= damage * 5;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
         animator.SetTrigger("hurt");
+
+        int spriteIndex = Mathf.CeilToInt(currentHealth / 10f) - 1;
+        healthBarDisplay.UpdateHealthBar(spriteIndex);
+
+        if (currentHealth <= 0)
+        {
+            animator.SetTrigger("Death");
+            Invoke(nameof(Die), 0.2f); 
+        }
     }
 
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PointA") || collision.CompareTag("PointB"))

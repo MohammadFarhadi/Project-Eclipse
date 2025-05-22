@@ -912,6 +912,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5720790355984427683, guid: e03982d7ba93a4437bc9b1531ace74b4, type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6512228860254182245, guid: e03982d7ba93a4437bc9b1531ace74b4, type: 3}
       propertyPath: m_Constraints
       value: 4
