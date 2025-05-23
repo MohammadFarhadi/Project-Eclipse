@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private Transform attacker;
+
+    public void SetAttacker(Transform attacker)
+    {
+        this.attacker = attacker;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         // فقط به Enemy آسیب بزن، نه به میدان دید
@@ -11,7 +17,7 @@ public class Bullet : MonoBehaviour
             ShootingEnemy enemy = other.GetComponent<ShootingEnemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(1);
+                enemy.TakeDamage(1 , attacker);
             }
 
             gameObject.SetActive(false); // غیرفعال کردن گلوله به‌جای حذف

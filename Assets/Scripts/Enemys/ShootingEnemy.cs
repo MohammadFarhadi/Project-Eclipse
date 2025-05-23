@@ -73,7 +73,7 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage , Transform attacker)
     {
         health -= damage;
 
@@ -81,6 +81,15 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
         {
             healthBarDisplay.UpdateHealthBar(health);
         }
+        if (attacker != null)
+        {
+            float knockbackDistance = 0.5f; // مقدار جابه‌جایی به عقب
+            Vector3 direction = (transform.position - attacker.position).normalized;
+
+            // فقط در محور X جابه‌جا کن
+            transform.position += new Vector3(direction.x, 0f, 0f) * knockbackDistance;
+        }
+
 
         if (health <= 0)
         {

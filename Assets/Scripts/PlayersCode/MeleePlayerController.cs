@@ -33,7 +33,7 @@ public class MeleePlayerController : PlayerControllerBase
             InterfaceEnemies enemy = enemyCollider.GetComponent<InterfaceEnemies>();
             if (enemy != null)
             {
-                enemy.TakeDamage(attackDamage);
+                enemy.TakeDamage(attackDamage , this.transform);
             }
         }
 

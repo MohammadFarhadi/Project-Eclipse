@@ -70,6 +70,11 @@ public class RangedPlayerController: PlayerControllerBase
                 {
                     rbProj.linearVelocity = new Vector2(transform.localScale.x * projectileSpeed, 0f);
                 }
+                Bullet bulletScript = proj.GetComponent<Bullet>();
+                if (bulletScript != null)
+                {
+                    bulletScript.SetAttacker(this.transform);
+                }
             }
         }
     }

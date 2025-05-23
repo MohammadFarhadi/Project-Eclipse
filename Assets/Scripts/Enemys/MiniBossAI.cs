@@ -113,7 +113,7 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage , Transform attaker)
     {
         currentHealth -= damage * 5;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);

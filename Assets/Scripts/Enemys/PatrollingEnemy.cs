@@ -35,11 +35,6 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
             scale.x *= -1;
             transform.localScale = scale;
         }
-        else if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Sword"))
-        {
-            TakeDamage(1);
-            Destroy(collision.gameObject);
-        }
         else if (collision.gameObject.CompareTag("Player"))
         {
             animator.SetTrigger("Attack");
@@ -47,7 +42,7 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage , Transform attacker)
     {
         health -= damage;
 
@@ -56,6 +51,15 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
         {
             healthBarDisplay.UpdateHealthBar(health);
         }
+        if (attacker != null)
+        {
+            float knockbackDistance = 0.5f; // مقدار جابه‌جایی به عقب
+            Vector3 direction = (transform.position - attacker.position).normalized;
+
+            // فقط در محور X جابه‌جا کن
+            transform.position += new Vector3(direction.x, 0f, 0f) * knockbackDistance;
+        }
+
 
         if (health <= 0 && direction == 1)
         {
