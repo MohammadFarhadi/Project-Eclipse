@@ -76,7 +76,6 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
     public void TakeDamage(int damage , Transform attacker)
     {
         health -= damage;
-
         if (healthBarDisplay != null)
         {
             healthBarDisplay.UpdateHealthBar(health);
