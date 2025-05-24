@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,14 +12,18 @@ public abstract class PlayerControllerBase : MonoBehaviour
     [SerializeField] protected Animator animator;
     
     [Header("Stamina")]
-    public  float Stamina = 50;
-    public float Stamina_gain = 5f;
-    public float Stamina_loss = 10f;
-    public float Stamina_max = 50;
+    [SerializeField]protected  float Stamina = 50;
+    [SerializeField]protected float Stamina_gain = 5f;
+    [SerializeField]protected float Stamina_max = 50;
+
+    [Header("Health")] 
+    private int HealthPoint = 3;
+    [SerializeField] protected float max_health = 100f;
+    [SerializeField] protected float current_health = 30;
+    [SerializeField] protected float Health_gain = 5f;
     
-    [Header("Health")]
-    public float Health = 30;
-    public float Health_gain = 5f;
+    
+    [SerializeField] private PlayersUI playersUI;
     
     private Vector3 originalScale;
 
@@ -30,6 +36,8 @@ public abstract class PlayerControllerBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         originalScale = Sprite.transform.localScale;
+        playersUI?.SetHealthBar(current_health, max_health);
+        playersUI?.SetHearts(HealthPoint);
     }
 
     // Update is called once per frame
@@ -48,6 +56,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     protected virtual void PlayerMove(InputAction.CallbackContext context)
     {
+        Debug.Log("Move input: " + move_input);
         move_input = context.ReadValue<Vector2>();
         FlipDirection(move_input.x);
     }
@@ -113,5 +122,76 @@ public abstract class PlayerControllerBase : MonoBehaviour
     protected virtual void HealthGain()
     {
         
+    }
+
+    public  virtual void HealthSystem(int value, bool status)
+    {
+        if (status == true)
+        {
+            if (current_health + value > max_health)
+            {
+                if (HealthPoint == 3)
+                {
+                    current_health = max_health;
+                }else if (HealthPoint < 3)
+                {
+                    HealthPoint++;
+                    current_health = current_health + value - max_health;
+                }
+            }
+            else
+            {
+                current_health += value;
+            }
+        }
+        else
+        {
+            animator.SetTrigger("GotHit");
+            if (current_health - value <= 0)
+            {
+                if (HealthPoint > 0)
+                {
+                    HealthPoint--;
+                    current_health = max_health;
+                }
+                else
+                {
+                    current_health = 0;
+                    animator.SetBool("IsDead", true);
+                }
+            }
+            else
+            {
+                current_health -= value;
+            }
+        }
+        playersUI?.SetHealthBar(current_health, max_health);
+        playersUI?.SetHearts(HealthPoint);
+    }
+    
+    protected virtual void StaminaSystem(float value, bool status)
+    {
+        if (status == true)
+        {
+            if (Stamina + value > Stamina_max)
+            {
+                Stamina = Stamina_max;
+            }
+            else
+            {
+                Stamina += value;
+            }
+        }
+        else
+        {
+            if (Stamina - value <= 0)
+            {
+                Stamina = 0;
+            }
+            else
+            {
+                Stamina -= value;
+            }
+        }
     }
 }

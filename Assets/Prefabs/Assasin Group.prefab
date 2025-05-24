@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6570635783109799764}
   m_Layer: 6
   m_Name: Assasin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,12 +208,12 @@ MonoBehaviour:
   moveSpeed: 2
   player1: {fileID: 0}
   player2: {fileID: 0}
-  detectionRange: 5
+  detectionRange: 4
   normalBulletPrefab: {fileID: 7012351190103006667, guid: 3fac667621162ab41b96dcb2ce3425b9, type: 3}
   fireBulletPrefab: {fileID: 388981467383489509, guid: d0fe6502492f9624ca57ecb072b092db, type: 3}
   firePoint: {fileID: 5727718998132618465}
   maxHealth: 100
-  normalFireRate: 2
+  normalFireRate: 4
   enragedFireRate: 0.8
   animator: {fileID: 6842580500627669250}
   healthBarDisplay: {fileID: 5158330600532340840}
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6819996205105341663}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa592f92bb09f854e90fe1d494709cd7, type: 3}
   m_Name: 

@@ -10,4 +10,10 @@ public class EnemyHealthBarDisplay : MonoBehaviour
         int index = Mathf.Clamp(health, 0, healthSprites.Length - 1);
         spriteRenderer.sprite = healthSprites[index];
     }
+    public void Show(int health)
+    {
+        gameObject.SetActive(true);
+        UpdateHealthBar(health);
+    }
+
 }    
