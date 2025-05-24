@@ -49,6 +49,7 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
         // 👇 بروز رسانی نوار سلامتی
         if (healthBarDisplay != null)
         {
+            healthBarDisplay.Show(health);
             healthBarDisplay.UpdateHealthBar(health);
         }
         if (attacker != null)

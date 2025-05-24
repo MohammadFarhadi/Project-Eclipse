@@ -13,12 +13,23 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
     private List<GameObject> playersInRange = new List<GameObject>();
     private GameObject currentTarget;
     private float timer = 0f;
+    
+    private BulletPool bulletPool;
+
 
     // 🩸 نمایش نوار سلامتی
     public EnemyHealthBarDisplay healthBarDisplay;
 
     void Start()
     {
+        bulletPool = FindFirstObjectByType<BulletPool>();
+
+        if (healthBarDisplay != null)
+        {
+            healthBarDisplay.UpdateHealthBar(health);
+        }
+
+        
         if (healthBarDisplay != null)
         {
             healthBarDisplay.UpdateHealthBar(health);
@@ -45,13 +56,34 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 
     void ShootAt(GameObject target)
     {
-        if (target == null) return;
+        if (target == null || firePoint == null || bulletPool == null) return;
 
         Vector2 dir = (target.transform.position - firePoint.position).normalized;
         animator.SetTrigger("Attack");
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = dir * bulletSpeed;
+
+        GameObject bullet = bulletPool.GetBullet("Bullet"); 
+        if (bullet != null)
+        {
+            bullet.transform.position = firePoint.position;
+            bullet.transform.rotation = Quaternion.identity;
+
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Vector3 bulletScale = rb.transform.localScale;
+                bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                rb.transform.localScale = bulletScale;
+                rb.linearVelocity = dir * bulletSpeed;
+            }
+
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                bulletScript.SetAttacker(this.transform);
+            }
+        }
     }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -79,6 +111,7 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 
         if (healthBarDisplay != null)
         {
+            healthBarDisplay.Show(health);
             healthBarDisplay.UpdateHealthBar(health);
         }
         if (attacker != null)

@@ -24,18 +24,26 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<InterfaceEnemies>().TakeDamage(1, attacker);
-            
-            
-
             gameObject.SetActive(false); // غیرفعال کردن گلوله به‌جای حذف
         }
         else if (other.CompareTag("Player"))
         {
-            
-            player.HealthSystem(10, false);
-            Debug.Log("player hit bullet");
-            gameObject.SetActive(false); // تیر پلیر هم بخوره، بره تو pool
+            // Prevent friendly fire این مشکل حل نشد هنوز پلیر می تونه تیر بزنه به خودی
+            // if (attacker.root.CompareTag("Player"))
+            // {
+            //     return;
+            // }
+
+            var targetPlayer = other.GetComponent<PlayerControllerBase>();
+            if (targetPlayer != null)
+            {
+                targetPlayer.HealthSystem(10, false);
+                Debug.Log($"{targetPlayer.name} got hit by bullet from {attacker?.name}");
+            }
+
+            gameObject.SetActive(false);
         }
+
     }
     private void OnEnable()
     {

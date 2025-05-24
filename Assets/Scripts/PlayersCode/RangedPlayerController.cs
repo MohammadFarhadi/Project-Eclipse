@@ -72,11 +72,6 @@ public class RangedPlayerController: PlayerControllerBase
                     }
                     // تا اینجا اضافه شده
                 }
-                Bullet bulletScript = proj.GetComponent<Bullet>();
-                if (bulletScript != null)
-                {
-                    bulletScript.SetAttacker(this.transform);
-                }
             }
         }
     }
