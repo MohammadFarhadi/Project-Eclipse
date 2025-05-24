@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MiniBossAI : MonoBehaviour, InterfaceEnemies
@@ -31,6 +32,7 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     void Start()
     {
+        healthBarDisplay.gameObject.SetActive(false);
         currentHealth = maxHealth;
     }
 
@@ -106,15 +108,17 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
             Vector2 direction = (currentTargetPlayer.position - firePoint.position).normalized;
 
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            float bulletSpeed = 10f;
+            float bulletSpeed = 5f;
             rb.linearVelocity = direction * bulletSpeed;
 
             nextFireTime = Time.time + fireRate;
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Transform attacker)
     {
+        
+        healthBarDisplay.gameObject.SetActive(true);
         currentHealth -= damage * 5;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
@@ -128,6 +132,17 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
             animator.SetTrigger("Death");
             Invoke(nameof(Die), 0.2f); 
         }
+        
+        //از اینجا
+        if (attacker != null)
+        {
+            float knockbackDistance = 0.5f; // مقدار جابه‌جایی به عقب
+            Vector3 direction = (transform.position - attacker.position).normalized;
+
+            // فقط در محور X جابه‌جا کن
+            transform.position += new Vector3(direction.x, 0f, 0f) * knockbackDistance;
+        }
+        // تا اینجا اضافه شده
     }
 
     public void Die()

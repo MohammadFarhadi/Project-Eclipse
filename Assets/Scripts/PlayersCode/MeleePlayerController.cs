@@ -10,12 +10,18 @@ public class MeleePlayerController : PlayerControllerBase
     bool isDashing = false;
     private float addforceSync = 1f;
     [SerializeField] private float DashValue = 100;
+    private bool canDash = true;
+    [SerializeField] private float dashCooldown = 1f; 
     
     //متغیر ها برای تعریف حمله کردن
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private int attackDamage = 1;
+    
+    
+    [Header("Stamina")]
+    [SerializeField] private float dashCost = 25;
     
     
     
@@ -33,7 +39,7 @@ public class MeleePlayerController : PlayerControllerBase
             InterfaceEnemies enemy = enemyCollider.GetComponent<InterfaceEnemies>();
             if (enemy != null)
             {
-                enemy.TakeDamage(attackDamage);
+                enemy.TakeDamage(attackDamage, this.transform);
             }
         }
 
@@ -58,17 +64,21 @@ public class MeleePlayerController : PlayerControllerBase
         animator.SetBool("IsAttacking", true);
         StartCoroutine(ResetAttackBool());
     }
+    
+    
+    
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing)
+        if (context.performed && canDash && !isDashing && Stamina >= dashCost)
         {
+            StaminaSystem(Mathf.RoundToInt(dashCost), false);
             isDashing = true;
+            canDash = false;
             animator.SetTrigger("IsDashing");
             StartCoroutine(DelayedDashForce());
-
-                addforceSync = 1f;
         }
     }
+
 
     protected override bool CanApplyMovement()
     {
@@ -78,14 +88,13 @@ public class MeleePlayerController : PlayerControllerBase
     
     private IEnumerator DelayedDashForce()
     {
-        float delay = 0.165f; // time before dash force applies
+        float delay = 0.165f;
         yield return new WaitForSeconds(delay);
 
         float direction = Mathf.Sign(transform.localScale.x);
         Vector2 dashForce = new Vector2(DashValue * direction, 0);
         rb.AddForce(dashForce, ForceMode2D.Impulse);
-    
-        // dash force applied
+
         yield return new WaitForSeconds(0.2f); // dash duration
 
         isDashing = false;
@@ -94,6 +103,10 @@ public class MeleePlayerController : PlayerControllerBase
         {
             animator.SetBool("IsFalling", true);
         }
+
+        // ⏲ Start cooldown
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     // برای اینه که بیاد هیت باکس رو نشون بده داخل بازی بهمون

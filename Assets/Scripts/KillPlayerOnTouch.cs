@@ -9,4 +9,5 @@ public class KillPlayerOnTouch : MonoBehaviour
             Debug.Log("Devrease Health of Player");
         }
     }
+    
 }

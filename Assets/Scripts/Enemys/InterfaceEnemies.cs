@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public interface InterfaceEnemies
 {
-    void TakeDamage(int damage);
+    void TakeDamage(int damage, Transform attacker);
 }

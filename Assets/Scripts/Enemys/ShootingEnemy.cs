@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Random = UnityEngine.Random;
 
 public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 {
@@ -8,6 +10,9 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
     public float fireRate = 1.5f;
     public float bulletSpeed = 10f;
     public int health = 3;
+    // از بولت پول یه کلس می گیریم تا بتونیم ازش استفاده کنیم برای دسترسی به تیر ها
+    private BulletPool bulletPool;
+
 
     [SerializeField] private Animator animator;
     private List<GameObject> playersInRange = new List<GameObject>();
@@ -16,7 +21,12 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 
     // 🩸 نمایش نوار سلامتی
     public EnemyHealthBarDisplay healthBarDisplay;
-
+    
+    //صدا زدن بولت پول و گرفتنش
+    private void Awake()
+    {
+        bulletPool = FindFirstObjectByType<BulletPool>();
+    }
     void Start()
     {
         if (healthBarDisplay != null)
@@ -36,22 +46,14 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 
             timer += Time.deltaTime;
             if (timer >= fireRate)
-            {
-                ShootAt(currentTarget);
+            { 
+                animator.SetTrigger("Attack");
                 timer = 0f;
             }
         }
     }
 
-    void ShootAt(GameObject target)
-    {
-        if (target == null) return;
 
-        Vector2 dir = (target.transform.position - firePoint.position).normalized;
-        animator.SetTrigger("Attack");
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = dir * bulletSpeed;
-    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -73,14 +75,29 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Transform attacker)
     {
+        if (healthBarDisplay != null && !healthBarDisplay.gameObject.activeSelf)
+        {
+            healthBarDisplay.Show(health); // show it before taking damage
+        }
         health -= damage;
 
         if (healthBarDisplay != null)
         {
             healthBarDisplay.UpdateHealthBar(health);
         }
+        
+        //از اینجا
+        if (attacker != null)
+        {
+            float knockbackDistance = 0.5f; // مقدار جابه‌جایی به عقب
+            Vector3 direction = (transform.position - attacker.position).normalized;
+
+            // فقط در محور X جابه‌جا کن
+            transform.position += new Vector3(direction.x, 0f, 0f) * knockbackDistance;
+        }
+        //تا اینجا هم اضافه شده
 
         if (health <= 0)
         {
@@ -92,5 +109,32 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
     public void Die()
     {
         Destroy(gameObject);
+    }
+    
+    
+    // اینطوریه این کد که تیر زدن رو براساس event داخل انیمیشن انجام میده که با animation هماهنگ باشه.
+    public void FireBullet()
+    {
+        if (currentTarget == null)
+        {
+            return;
+        }
+        // گرفتن تیر مورد نظر
+        GameObject proj = bulletPool.GetBullet("Bullet");
+        if (proj != null)
+        {
+            proj.transform.position = firePoint.position;
+            proj.transform.rotation = firePoint.rotation; 
+            Vector2 dir = (currentTarget.transform.position - firePoint.position).normalized;
+            Rigidbody2D rbProj = proj.GetComponent<Rigidbody2D>();
+            if (rbProj != null)
+            {
+                // تیر به سمت پلیر برتاب میشه هم چنین براساس موقعیتی که این شوتینگ انمی وایساده تیر زده میشه.
+                Vector3 bulletScale = rbProj.transform.lossyScale;
+                bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                rbProj.linearVelocity = dir * bulletSpeed;
+                rbProj.transform.localScale = bulletScale;
+            }
+        }
     }
 }

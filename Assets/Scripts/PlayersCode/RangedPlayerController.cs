@@ -9,25 +9,21 @@ public class RangedPlayerController: PlayerControllerBase
     [SerializeField] public GameObject projectilePrefab;
     [SerializeField] public Transform firePoint;
     [SerializeField] private float projectileSpeed = 10f;
+
+    [Header("Stamina")] public float SpriniingCost = 5f;
     
     public bool doubleJump = true;
     private bool Is_Sprinting = false;
     private BulletPool bulletPool;
 
-
-
-    private void Awake()
-    {
-        Debug.Log("salam");
-        Debug.Log($"Player {gameObject.name} is using: {GetComponent<PlayerInput>().currentControlScheme}");
-    }
-
-    public  void  Start()
+    protected override void Start()
     {
         base.Start();
         bulletPool = FindFirstObjectByType<BulletPool>();
-        Debug.Log($"{gameObject.name} Rigidbody assigned: {rb != null}");
-        Debug.Log($"{gameObject.name} Animator assigned: {animator != null}");
+        
+        Debug.Log($"[TEST] Rigidbody موجوده؟ {rb != null}");
+        Debug.Log($"[TEST] Rigidbody simulated: {rb.simulated}");
+        Debug.Log($"[TEST] BodyType: {rb.bodyType}");
     }
 
     public void Update()
@@ -36,17 +32,16 @@ public class RangedPlayerController: PlayerControllerBase
         {
             SetMoveSpeed(3);
             Debug.Log(moveSpeed);
-            Stamina -=  Stamina_loss * Time.deltaTime;
+            StaminaSystem(Mathf.RoundToInt(SpriniingCost * Time.deltaTime), false);
             animator.SetBool("IsSprinting", true);
         }
         else
         {
             SetMoveSpeed(1.5f);
-            Debug.Log(moveSpeed);
             animator.SetBool("IsSprinting", false);
             if (Stamina < Stamina_max)
             {
-                Stamina +=  Stamina_gain * Time.deltaTime;
+                StaminaSystem(Mathf.RoundToInt(Stamina_gain * Time.deltaTime), true);
             }
         }
     }
@@ -54,12 +49,9 @@ public class RangedPlayerController: PlayerControllerBase
     public override void Attack()
     {
         animator.SetBool("IsShooting", false);
-        Debug.Log((bool)firePoint);
-        Debug.Log((bool)bulletPool);
         if (firePoint && bulletPool != null)
         {
             GameObject proj = bulletPool.GetBullet("PlayerBullet");
-            Debug.Log(proj);
             if (proj != null)
             {
                 proj.transform.position = firePoint.position;
@@ -68,21 +60,32 @@ public class RangedPlayerController: PlayerControllerBase
                 Rigidbody2D rbProj = proj.GetComponent<Rigidbody2D>();
                 if (rbProj != null)
                 {
+                    Vector3 bulletScale = rbProj.transform.localScale;
+                    bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
                     rbProj.linearVelocity = new Vector2(transform.localScale.x * projectileSpeed, 0f);
+                    rbProj.transform.localScale = bulletScale;
+                    // از اینجا 
+                    Bullet bulletScript = proj.GetComponent<Bullet>();
+                    if (bulletScript != null)
+                    {
+                        bulletScript.SetAttacker(this.transform);
+                    }
+                    // تا اینجا اضافه شده
                 }
             }
         }
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log($"[Ranged] OnMove triggered | Phase: {context.phase}, Value: {context.ReadValue<Vector2>()}");
         PlayerMove(context); 
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        
         if (context.performed)
         {
+
             if (isGrounded)
             {
                 PlayerJump(context); // استفاده از AddForce در پرش اول اوکیه
@@ -110,7 +113,6 @@ public class RangedPlayerController: PlayerControllerBase
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        Debug.Log($"RangedPlayer Move input: {move_input}");
         animator.SetBool("IsShooting", true);
     }
 
