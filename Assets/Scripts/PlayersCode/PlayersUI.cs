@@ -14,12 +14,5 @@ public class PlayersUI : MonoBehaviour
         healthBar.maxValue = max;
         healthBar.value = current;
     }
-
-    public void SetHearts(int healthPoint)
-    {
-        for (int i = 0; i < hearts.Length; i++)
-        {
-            hearts[i].SetActive(i < healthPoint);
-        }
-    }
+    
 }

@@ -423,7 +423,7 @@ MonoBehaviour:
   Stamina_gain: 2.5
   Stamina_max: 50
   max_health: 100
-  current_health: 30
+  current_health: 100
   Health_gain: 5
   playersUI: {fileID: 0}
   projectilePrefab: {fileID: 7534035931637628498, guid: b39c447b97c694a0ebfbcba480e7142c, type: 3}

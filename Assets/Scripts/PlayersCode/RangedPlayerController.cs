@@ -72,7 +72,6 @@ public class RangedPlayerController: PlayerControllerBase
                     }
                     // تا اینجا اضافه شده
                 }
-                
             }
         }
     }

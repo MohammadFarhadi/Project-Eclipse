@@ -28,13 +28,20 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
     public Animator animator;
     [Header("Health Bar")]
     public EnemyHealthBarDisplay healthBarDisplay;
+    
+    
+    private BulletPool bulletPool;
+
 
 
     void Start()
     {
         healthBarDisplay.gameObject.SetActive(false);
         currentHealth = maxHealth;
+
+        bulletPool = FindFirstObjectByType<BulletPool>();
     }
+
 
     void Update()
     {
@@ -97,23 +104,39 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     void Shoot()
     {
-        if (Time.time >= nextFireTime)
+        if (Time.time >= nextFireTime && bulletPool != null)
         {
             bool isEnraged = currentHealth <= maxHealth / 2;
-            GameObject bulletToShoot = isEnraged ? fireBulletPrefab : normalBulletPrefab;
+            string bulletTag = isEnraged ? "FireBullet" : "Bullet";
             float fireRate = isEnraged ? enragedFireRate : normalFireRate;
 
-            GameObject bullet = Instantiate(bulletToShoot, firePoint.position, Quaternion.identity);
+            GameObject bullet = bulletPool.GetBullet(bulletTag);
+            if (bullet != null)
+            {
+                bullet.transform.position = firePoint.position;
+                bullet.transform.rotation = Quaternion.identity;
 
-            Vector2 direction = (currentTargetPlayer.position - firePoint.position).normalized;
+                Vector2 direction = (currentTargetPlayer.position - firePoint.position).normalized;
 
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            float bulletSpeed = 5f;
-            rb.linearVelocity = direction * bulletSpeed;
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                Vector3 bulletScale = rb.transform.localScale;
+                bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                float bulletSpeed = 5f;
+                rb.transform.localScale = bulletScale;
 
-            nextFireTime = Time.time + fireRate;
+                rb.linearVelocity = direction * bulletSpeed;
+
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                if (bulletScript != null)
+                {
+                    bulletScript.SetAttacker(this.transform);
+                }
+
+                nextFireTime = Time.time + fireRate;
+            }
         }
     }
+
 
     public void TakeDamage(int damage, Transform attacker)
     {
@@ -126,6 +149,7 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
         int spriteIndex = Mathf.CeilToInt(currentHealth / 10f) - 1;
         healthBarDisplay.UpdateHealthBar(spriteIndex);
+        healthBarDisplay.gameObject.SetActive(true);
 
         if (currentHealth <= 0)
         {
