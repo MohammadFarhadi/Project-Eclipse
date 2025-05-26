@@ -10,6 +10,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     [SerializeField] protected float jumpForce = 100f;
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Animator animator;
+    public bool HasKey = false ;
     
     [Header("Stamina")]
     [SerializeField]protected  float Stamina = 50;
@@ -191,7 +192,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
         playersUI?.SetHealthBar(current_health, max_health);
     }
     
-    protected virtual void StaminaSystem(float value, bool status)
+    public virtual void StaminaSystem(float value, bool status)
     {
         if (status == true)
         {
@@ -221,4 +222,14 @@ public abstract class PlayerControllerBase : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    public virtual void Respawn(Vector3 position)
+    {
+        transform.position = position;
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+        }
+    }
+
 }
