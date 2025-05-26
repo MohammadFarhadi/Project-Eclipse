@@ -234,6 +234,45 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1284,7 +1323,54 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Artifact_0: -5853448795988058721
+      Artifact_1: 6420335280444456012
+      Artifact_10: 2547319533734360987
+      Artifact_11: 1236294669846314439
+      Artifact_12: -6982787943819219262
+      Artifact_13: -4729381320361090820
+      Artifact_14: 7022955122196070429
+      Artifact_15: 6755510970164990128
+      Artifact_16: -5278295849485176772
+      Artifact_17: -3978965287821099198
+      Artifact_18: -5331978856054249972
+      Artifact_19: 5952099510870586949
+      Artifact_2: 6968189061560145404
+      Artifact_20: -8071770908341798084
+      Artifact_21: 5110399131449382807
+      Artifact_22: -2313880572191281817
+      Artifact_23: 8017669917449336617
+      Artifact_24: -6517102452907764034
+      Artifact_25: -1836974091995040692
+      Artifact_26: -3221874032976943970
+      Artifact_27: -8039821351340559375
+      Artifact_28: 4809658291906046957
+      Artifact_29: -599631947276459150
+      Artifact_3: -3637331131132274840
+      Artifact_30: -5466878014540787658
+      Artifact_31: -1913906368786791339
+      Artifact_32: 3682455779085008207
+      Artifact_33: 4359846492219828296
+      Artifact_34: -2295655048583138265
+      Artifact_35: 964582643736062948
+      Artifact_36: 4471043829770650919
+      Artifact_37: -1334441208042688317
+      Artifact_38: -6594147781876481381
+      Artifact_39: -6184957954638431812
+      Artifact_4: 3543837341046283191
+      Artifact_40: -429428449814941905
+      Artifact_41: 4588693929507242893
+      Artifact_42: 6621607783905785608
+      Artifact_43: 1200500113232605018
+      Artifact_44: 1079422209073807728
+      Artifact_45: -1333727334962161962
+      Artifact_46: 2634863891868660458
+      Artifact_5: -5443900549935818308
+      Artifact_6: -6085912085030592631
+      Artifact_7: 376279282691440066
+      Artifact_8: -1729600040276034156
+      Artifact_9: -2630831024509287884
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

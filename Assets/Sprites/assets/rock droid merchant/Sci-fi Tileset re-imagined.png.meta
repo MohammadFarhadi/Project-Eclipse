@@ -277,8 +277,8 @@ TextureImporter:
         serializedVersion: 2
         x: 17
         y: 241
-        width: 15
-        height: 15
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -869,10 +869,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_29
       rect:
         serializedVersion: 2
-        x: 32
-        y: 224
-        width: 16
-        height: 16
+        x: 36
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -891,10 +891,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_30
       rect:
         serializedVersion: 2
-        x: 48
-        y: 224
-        width: 16
-        height: 16
+        x: 50
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -914,9 +914,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 224
-        width: 16
-        height: 16
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -935,10 +935,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_32
       rect:
         serializedVersion: 2
-        x: 80
-        y: 224
-        width: 16
-        height: 16
+        x: 78
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -957,10 +957,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_33
       rect:
         serializedVersion: 2
-        x: 96
-        y: 224
-        width: 16
-        height: 16
+        x: 92
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -979,10 +979,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_34
       rect:
         serializedVersion: 2
-        x: 112
-        y: 224
-        width: 16
-        height: 16
+        x: 106
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1001,10 +1001,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_35
       rect:
         serializedVersion: 2
-        x: 128
-        y: 224
-        width: 16
-        height: 16
+        x: 120
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1023,10 +1023,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_36
       rect:
         serializedVersion: 2
-        x: 144
-        y: 224
-        width: 16
-        height: 16
+        x: 134
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1045,10 +1045,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_37
       rect:
         serializedVersion: 2
-        x: 160
-        y: 224
-        width: 16
-        height: 16
+        x: 148
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1067,10 +1067,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_38
       rect:
         serializedVersion: 2
-        x: 176
-        y: 224
-        width: 16
-        height: 16
+        x: 162
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1089,10 +1089,10 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_39
       rect:
         serializedVersion: 2
-        x: 192
-        y: 224
-        width: 16
-        height: 16
+        x: 176
+        y: 225
+        width: 14
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4785,9 +4785,9 @@ TextureImporter:
       name: Sci-fi Tileset re-imagined_17
       rect:
         serializedVersion: 2
-        x: 465
+        x: 477
         y: 0
-        width: 95
+        width: 64
         height: 55
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -5051,8 +5051,8 @@ TextureImporter:
         serializedVersion: 2
         x: 243
         y: 117
-        width: 52
-        height: 27
+        width: 44
+        height: 21
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -5459,6 +5459,28 @@ TextureImporter:
       bones: []
       spriteID: aed7fcd067ea94ac88e35a0c3442f985
       internalID: -1064642542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sci-fi Tileset re-imagined_40
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 225
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1565cade046164ab89a358bfd4bf6e86
+      internalID: 752548883
       vertices: []
       indices: 
       edges: []
