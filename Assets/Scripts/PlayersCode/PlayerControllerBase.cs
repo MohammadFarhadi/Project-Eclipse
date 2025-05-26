@@ -24,6 +24,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
     [SerializeField] protected float Health_gain = 5f;
     
     
+    //player interaction
+    protected bool Interacting = false;
+    
+    
     [SerializeField] private PlayersUI playersUI;
     
     private Vector3 originalScale;
@@ -237,4 +241,11 @@ public abstract class PlayerControllerBase : MonoBehaviour
         Stamina_max += value;
     }
 
+    public virtual void OnInteracting(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Interacting = true;
+        }
+    }
 }

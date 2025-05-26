@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617655182703963483}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15359497, y: 3.0828085, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62,13 +62,13 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.5
     y: 0
-    width: 1
-    height: 0.5
+    width: 0.5
+    height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 15
+  field of view: 33
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 4506451074955373024}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.15359497, y: 3.0828085, z: -10}
   m_LocalScale: {x: 1.6230685, y: 2, z: 1.1313713}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -227,7 +227,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 15
+    FieldOfView: 33
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -261,7 +261,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0, y: 0}
+    ScreenPosition: {x: -0.014583558, y: 0.26018465}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -389,8 +389,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1030671779
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 3244445856464080758, guid: d9b88e74e949445739240b48810f6255, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -419,6 +419,7 @@ MonoBehaviour:
   jumpForce: 5
   rb: {fileID: 0}
   animator: {fileID: 0}
+  HasKey: 0
   Stamina: 50
   Stamina_gain: 2.5
   Stamina_max: 50
@@ -536,6 +537,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 78a8c7e9-145c-437b-a3e6-e2ce8f2b4055
     m_ActionName: 'Player2/JumpP[/Keyboard/upArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2492625144128786863}
+        m_TargetAssemblyTypeName: PlayerControllerBase, Assembly-CSharp
+        m_MethodName: OnInteracting
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5f39b465-3325-4f25-b29a-014fb3446f41
+    m_ActionName: 'Player1/InterAction[/Keyboard/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 19058f40-0021-438a-86ee-16554ac6ecc7
+    m_ActionName: 'Player2/InterAction[/Keyboard/enter]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1

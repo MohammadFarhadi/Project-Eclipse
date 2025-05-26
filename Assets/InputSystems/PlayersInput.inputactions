@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InterAction",
+                    "type": "Button",
+                    "id": "5f39b465-3325-4f25-b29a-014fb3446f41",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -108,6 +117,17 @@
                     "action": "SpecialMove",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30f3ff0e-2c32-46bc-8ce0-7ca0622051fe",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InterAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -146,6 +166,15 @@
                     "name": "JumpP",
                     "type": "Button",
                     "id": "78a8c7e9-145c-437b-a3e6-e2ce8f2b4055",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InterAction",
+                    "type": "Button",
+                    "id": "19058f40-0021-438a-86ee-16554ac6ecc7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -216,6 +245,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "JumpP",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ae3d26b-d915-4061-be82-bb44ec463daf",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InterAction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
