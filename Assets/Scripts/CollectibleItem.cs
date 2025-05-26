@@ -15,10 +15,12 @@ public class CollectibleItem : MonoBehaviour
             switch (type)
             {
                 case CollectibleType.Health:
-                    player.HealthSystem(value, true); // جون اضافه کن
+                    player.HealthSystem(100, true); // جون اضافه کن
                     break;
                 case CollectibleType.Stamina:
-                    player.StaminaSystem(value, true); // استامینا اضافه کن
+                    //اینجا
+                    player.SetStamina(50f); // استامینا اضافه کن
+                    // تا اینجا
                     break;
                 case CollectibleType.Key:
                     player.HasKey = true;

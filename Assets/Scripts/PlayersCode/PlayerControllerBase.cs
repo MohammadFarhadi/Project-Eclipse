@@ -231,5 +231,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
             rb.angularVelocity = 0f;
         }
     }
+    public void SetStamina(float value)
+    {
+        Stamina += value;
+        Stamina_max += value;
+    }
 
 }
