@@ -1,25 +1,28 @@
 fileFormatVersion: 2
-guid: 8b09836890cae4c0596c4f02a4fd785b
+guid: 418caece762b4be4d85b4eced99c5a0b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1991833948588684125
-    second: Clouds V2_0
+      213: 6356632054987546715
+    second: flags_0
   - first:
-      213: -4053539982750107920
-    second: Clouds V2_1
+      213: -7858788262442410435
+    second: flags_1
   - first:
-      213: -7936898829634126891
-    second: Clouds V2_2
+      213: 2474233907157199686
+    second: flags_2
   - first:
-      213: 5759530782791945932
-    second: Clouds V2_3
+      213: -7531011346372572665
+    second: flags_3
   - first:
-      213: 3125839181209662389
-    second: Clouds V2_4
+      213: 6089401747053245849
+    second: flags_4
   - first:
-      213: 3204778827486154777
-    second: Clouds V2_5
+      213: -4699548671627458655
+    second: flags_5
+  - first:
+      213: -8207172110540127640
+    second: flags_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -111,56 +114,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Clouds V2_0
+      name: flags_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 79
-        width: 62
-        height: 37
+        x: 0
+        y: 85
+        width: 61
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d53313d4c6a64ab10800000000000000
-      internalID: 1991833948588684125
+      spriteID: b50e465dc2b473850800000000000000
+      internalID: 6356632054987546715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clouds V2_1
+      name: flags_1
       rect:
         serializedVersion: 2
-        x: 80
-        y: 83
-        width: 32
-        height: 22
+        x: 0
+        y: 0
+        width: 55
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f6365dbcdeeeb7c0800000000000000
-      internalID: -4053539982750107920
+      spriteID: d3e5c1486b9ffe290800000000000000
+      internalID: -7858788262442410435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clouds V2_2
+      name: flags_2
       rect:
         serializedVersion: 2
-        x: 7
-        y: 49
-        width: 36
-        height: 25
+        x: 61
+        y: 85
+        width: 61
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +177,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5dbb171e0987ad190800000000000000
-      internalID: -7936898829634126891
+      spriteID: 64be45721ae365220800000000000000
+      internalID: 2474233907157199686
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clouds V2_3
+      name: flags_3
       rect:
         serializedVersion: 2
-        x: 66
-        y: 43
-        width: 52
-        height: 31
+        x: 61
+        y: 0
+        width: 54
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,20 +199,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ccecd3d4bb6fdef40800000000000000
-      internalID: 5759530782791945932
+      spriteID: 70ac60cd4197c7790800000000000000
+      internalID: -7531011346372572665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clouds V2_4
+      name: flags_4
       rect:
         serializedVersion: 2
-        x: 15
-        y: 13
-        width: 43
-        height: 30
+        x: 122
+        y: 85
+        width: 61
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b3fff48c26316b20800000000000000
-      internalID: 3125839181209662389
+      spriteID: 99570cb30a6e18450800000000000000
+      internalID: 6089401747053245849
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clouds V2_5
+      name: flags_5
       rect:
         serializedVersion: 2
-        x: 71
-        y: 10
-        width: 33
-        height: 26
+        x: 122
+        y: 0
+        width: 57
+        height: 85
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,8 +243,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 910510c2d59a97c20800000000000000
-      internalID: 3204778827486154777
+      spriteID: 1a78cf6e169d7ceb0800000000000000
+      internalID: -4699548671627458655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flags_6
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 85
+        width: 61
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86243cce2744a1e80800000000000000
+      internalID: -8207172110540127640
       vertices: []
       indices: 
       edges: []
@@ -298,13 +284,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Clouds V2_0: 1991833948588684125
-      Clouds V2_1: -4053539982750107920
-      Clouds V2_2: -7936898829634126891
-      Clouds V2_3: 5759530782791945932
-      Clouds V2_4: 3125839181209662389
-      Clouds V2_5: 3204778827486154777
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
