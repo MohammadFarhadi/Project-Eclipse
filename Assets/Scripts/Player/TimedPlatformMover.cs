@@ -3,51 +3,66 @@ using UnityEngine;
 public class TimedPlatformMover : MonoBehaviour
 {
     public Transform platform;
+    public Transform startPoint;
+    public Transform endPoint;
     public float moveSpeed = 2f;
-    public float moveDuration = 2.5f;
 
     private bool isMoving = false;
-    private bool movingUp = true;
-    private float moveTimer = 0f;
-    private bool playerOnPad = false;
+    private Transform currentTarget;
 
-    void Update()
+    private PlayerControllerBase currentPlayer;
+
+    private void Start()
     {
-        // وقتی بازیکن روی کنترل‌پد هست و X رو می‌زنه و هنوز در حال حرکت نیست
-        if (playerOnPad && Input.GetKeyDown(KeyCode.X) && !isMoving)
+        if (platform == null || startPoint == null || endPoint == null)
         {
-            isMoving = true;
-            moveTimer = 0f;
+            Debug.LogError("Platform or points not assigned!");
+            enabled = false;
+            return;
         }
 
-        // اگر در حال حرکت باشه
+        platform.position = startPoint.position;
+        currentTarget = endPoint;
+    }
+
+    private void Update()
+    {
+        if (currentPlayer != null && currentPlayer.IsInteracting() && !isMoving)
+        {
+            isMoving = true;
+        }
+
         if (isMoving)
         {
-            float direction = movingUp ? 1f : -1f;
-            platform.transform.Translate(Vector2.up * direction * moveSpeed * Time.deltaTime);
+            platform.position = Vector3.MoveTowards(
+                platform.position,
+                currentTarget.position,
+                moveSpeed * Time.deltaTime
+            );
 
-            moveTimer += Time.deltaTime;
-            if (moveTimer >= moveDuration)
+            if (Vector3.Distance(platform.position, currentTarget.position) < 0.01f)
             {
                 isMoving = false;
-                movingUp = !movingUp; // دفعه بعد جهت برعکس
+                currentTarget = (currentTarget == startPoint) ? endPoint : startPoint;
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
+        if (player != null)
         {
-            playerOnPad = true;
+            currentPlayer = player;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
+        if (player != null && currentPlayer == player)
         {
-            playerOnPad = false;
+            currentPlayer = null;
         }
     }
 }

@@ -26,6 +26,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
     
     //player interaction
     protected bool Interacting = false;
+    private float interactBufferTime = 0.2f;
+    private float interactTimer = 0f;
+
+
     
     
     [SerializeField] private PlayersUI playersUI;
@@ -55,6 +59,11 @@ public abstract class PlayerControllerBase : MonoBehaviour
         if (animator != null)
         {
             animator.SetFloat("IsRunning", Mathf.Abs(move_input.x));
+        }
+        
+        if (interactTimer > 0f)
+        {
+            interactTimer -= Time.deltaTime;
         }
     }
 
@@ -246,6 +255,13 @@ public abstract class PlayerControllerBase : MonoBehaviour
         if (context.performed)
         {
             Interacting = true;
+            interactTimer = interactBufferTime;
         }
+    }
+
+    public virtual bool IsInteracting()
+    {
+        return interactTimer > 0;
+
     }
 }
