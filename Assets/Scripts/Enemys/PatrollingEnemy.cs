@@ -12,7 +12,9 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
 
     // 👇 اضافه کن:
     public EnemyHealthBarDisplay healthBarDisplay;
-
+    [Header("Possible Drops")]
+    [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
+    [SerializeField] private float dropChance = 0.5f; 
     void Start()
     {
         if (healthBarDisplay != null)
@@ -76,6 +78,19 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
 
     public void Die()
     {
+        DropRandomItem();
         Destroy(gameObject);
+    }
+    public void DropRandomItem()
+    {
+        if (dropItems.Length == 0) return;
+
+        float rand = Random.value;
+        if (rand <= dropChance)
+        {
+            int index = Random.Range(0, dropItems.Length);
+            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
+            Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+        }
     }
 }

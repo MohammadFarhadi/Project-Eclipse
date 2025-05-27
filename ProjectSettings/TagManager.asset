@@ -11,6 +11,8 @@ TagManager:
   - Ground
   - PlayerBullet
   - Trap
+  - PointA
+  - PointB
   layers:
   - Default
   - TransparentFX
@@ -53,6 +55,15 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1027895571
+    locked: 0
+  - name: Collectible
+    uniqueID: 3921709577
+    locked: 0
+  - name: Bullet
+    uniqueID: 4270681407
+    locked: 0
+  - name: Enemy
+    uniqueID: 2855032491
     locked: 0
   - name: Player
     uniqueID: 3264295517

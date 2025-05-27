@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 {
+    
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 1.5f;
@@ -19,6 +20,9 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 
     // 🩸 نمایش نوار سلامتی
     public EnemyHealthBarDisplay healthBarDisplay;
+    [Header("Possible Drops")]
+    [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
+    [SerializeField] private float dropChance = 0.5f; // بین ۰ تا ۱ مثلا 0.5 یعنی ۵۰٪ احتمال اسپاون آیتم
 
     void Start()
     {
@@ -132,6 +136,19 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 
     public void Die()
     {
+        DropRandomItem();
         Destroy(gameObject);
+    }
+    public void DropRandomItem()
+    {
+        if (dropItems.Length == 0) return;
+
+        float rand = Random.value;
+        if (rand <= dropChance)
+        {
+            int index = Random.Range(0, dropItems.Length);
+            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
+            Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+        }
     }
 }
