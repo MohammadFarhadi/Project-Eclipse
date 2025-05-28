@@ -1,25 +1,10 @@
 fileFormatVersion: 2
-guid: 4e9cf5a9e9563d642a5ee949af3ff0ed
+guid: 13a798d56edb143f3809a107898b1e76
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8246277137709552081
-    second: f95a8758-ef81-4e86-b4b6-e38627f78d4e_0
-  - first:
-      213: 2286388973464911937
-    second: f95a8758-ef81-4e86-b4b6-e38627f78d4e_1
-  - first:
-      213: -491622454087272368
-    second: f95a8758-ef81-4e86-b4b6-e38627f78d4e_2
-  - first:
-      213: 1673447994434077963
-    second: f95a8758-ef81-4e86-b4b6-e38627f78d4e_3
-  - first:
-      213: -6079306023301549527
-    second: f95a8758-ef81-4e86-b4b6-e38627f78d4e_4
-  - first:
-      213: -2197141961901557564
-    second: f95a8758-ef81-4e86-b4b6-e38627f78d4e_5
+      213: 2267961942396351233
+    second: parallax_field_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -154,133 +139,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: f95a8758-ef81-4e86-b4b6-e38627f78d4e_0
+      name: parallax_field_0
       rect:
         serializedVersion: 2
-        x: 11
+        x: 0
         y: 0
-        width: 535
-        height: 1024
+        width: 319
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f2ea56742a65f8d80800000000000000
-      internalID: -8246277137709552081
+      spriteID: 6d18b3c7cd4e8481ebee9e93c553f004
+      internalID: 567696904
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: f95a8758-ef81-4e86-b4b6-e38627f78d4e_1
+      name: parallax_field_1
       rect:
         serializedVersion: 2
-        x: 558
+        x: 320
         y: 0
-        width: 518
-        height: 1016
+        width: 319
+        height: 180
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1400fb558a2eabf10800000000000000
-      internalID: 2286388973464911937
+      spriteID: a2e5dce92aace4aed97679b5f513b1eb
+      internalID: -170564186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: f95a8758-ef81-4e86-b4b6-e38627f78d4e_2
+      name: parallax_field_2
       rect:
         serializedVersion: 2
-        x: 995
-        y: 954
-        width: 6
-        height: 7
+        x: 641
+        y: 0
+        width: 319
+        height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 058b5849bf76d29f0800000000000000
-      internalID: -491622454087272368
+      spriteID: 4068c9f10c3984828a26db3a93d6b487
+      internalID: 200551013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: f95a8758-ef81-4e86-b4b6-e38627f78d4e_3
+      name: parallax_field_3
       rect:
         serializedVersion: 2
-        x: 1079
-        y: 1
-        width: 426
-        height: 1013
+        x: 961
+        y: 0
+        width: 318
+        height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b05455aa518493710800000000000000
-      internalID: 1673447994434077963
+      spriteID: 89574e012455b4b73b009a5a7dd0caf2
+      internalID: 1715934298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: f95a8758-ef81-4e86-b4b6-e38627f78d4e_4
+      name: parallax_field_4
       rect:
         serializedVersion: 2
-        x: 1514
-        y: 469
-        width: 22
-        height: 116
+        x: 1281
+        y: 0
+        width: 319
+        height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 922f730a167f1aba0800000000000000
-      internalID: -6079306023301549527
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: f95a8758-ef81-4e86-b4b6-e38627f78d4e_5
-      rect:
-        serializedVersion: 2
-        x: 82
-        y: 24
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4c8b0cfc60f2281e0800000000000000
-      internalID: -2197141961901557564
+      spriteID: c79e7069c0f894d4db119dd3522f05da
+      internalID: 2066984572
       vertices: []
       indices: 
       edges: []
@@ -289,7 +252,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e56240586a86805408527041abef86ce
+    spriteID: 97044f1eebdbd43b38863ceedd8b8f9f
     internalID: 0
     vertices: []
     indices: 
@@ -299,12 +262,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      f95a8758-ef81-4e86-b4b6-e38627f78d4e_0: -8246277137709552081
-      f95a8758-ef81-4e86-b4b6-e38627f78d4e_1: 2286388973464911937
-      f95a8758-ef81-4e86-b4b6-e38627f78d4e_2: -491622454087272368
-      f95a8758-ef81-4e86-b4b6-e38627f78d4e_3: 1673447994434077963
-      f95a8758-ef81-4e86-b4b6-e38627f78d4e_4: -6079306023301549527
-      f95a8758-ef81-4e86-b4b6-e38627f78d4e_5: -2197141961901557564
+      parallax_field_0: 567696904
+      parallax_field_1: -170564186
+      parallax_field_2: 200551013
+      parallax_field_3: 1715934298
+      parallax_field_4: 2066984572
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
