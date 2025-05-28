@@ -14,6 +14,7 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
     public EnemyHealthBarDisplay healthBarDisplay;
     [Header("Possible Drops")]
     [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
+    [SerializeField] private GameObject Sonin;
     [SerializeField] private float dropChance = 0.5f; 
     void Start()
     {
@@ -91,6 +92,7 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
             int index = Random.Range(0, dropItems.Length);
             Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
             Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            Instantiate(Sonin, transform.position, Quaternion.identity);
         }
     }
 }

@@ -206,8 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  player1: {fileID: 0}
-  player2: {fileID: 0}
+  player1: {fileID: 1201526842495556030, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
+  player2: {fileID: 1093571156077408059, guid: e03982d7ba93a4437bc9b1531ace74b4, type: 3}
   detectionRange: 4
   normalBulletPrefab: {fileID: 7012351190103006667, guid: 3fac667621162ab41b96dcb2ce3425b9, type: 3}
   fireBulletPrefab: {fileID: 388981467383489509, guid: d0fe6502492f9624ca57ecb072b092db, type: 3}
@@ -217,6 +217,8 @@ MonoBehaviour:
   enragedFireRate: 0.8
   animator: {fileID: 6842580500627669250}
   healthBarDisplay: {fileID: 5158330600532340840}
+  Key: {fileID: 115109503595144896, guid: 843a4c8e4f766504591f5d67e477caf0, type: 3}
+  Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
 --- !u!61 &8413210805025960626
 BoxCollider2D:
   m_ObjectHideFlags: 0

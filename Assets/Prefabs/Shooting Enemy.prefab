@@ -353,6 +353,7 @@ MonoBehaviour:
   dropItems:
   - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
   - {fileID: 3330495594356245476, guid: 8b9af8c2c1a99d44dafdd3e99422150f, type: 3}
+  Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
   dropChance: 0.5
 --- !u!50 &2754030247191435130
 Rigidbody2D:

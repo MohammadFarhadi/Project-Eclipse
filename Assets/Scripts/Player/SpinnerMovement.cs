@@ -34,17 +34,6 @@ public class SpinnerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
-            if (player != null)
-            {
-                int damageAmount = 80;
-                player.HealthSystem(damageAmount, false); // فقط همین پلیر
-            }
-        }
-    }
+    
 
 }

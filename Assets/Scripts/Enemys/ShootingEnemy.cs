@@ -22,6 +22,7 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
     public EnemyHealthBarDisplay healthBarDisplay;
     [Header("Possible Drops")]
     [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
+    [SerializeField] private GameObject Sonin;
     [SerializeField] private float dropChance = 0.5f; // بین ۰ تا ۱ مثلا 0.5 یعنی ۵۰٪ احتمال اسپاون آیتم
 
     void Start()
@@ -149,6 +150,7 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
             int index = Random.Range(0, dropItems.Length);
             Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
             Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            Instantiate(Sonin, transform.position, Quaternion.identity);
         }
     }
 }

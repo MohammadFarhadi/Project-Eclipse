@@ -28,8 +28,9 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
     public Animator animator;
     [Header("Health Bar")]
     public EnemyHealthBarDisplay healthBarDisplay;
-    
-    
+
+    [SerializeField] private GameObject Key;
+    [SerializeField] private GameObject Sonin;
     private BulletPool bulletPool;
 
 
@@ -172,6 +173,9 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
     public void Die()
     {
         Destroy(gameObject);
+        Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
+        Instantiate(Key, spawnPosition, Quaternion.identity);
+        Instantiate(Sonin, transform.position, Quaternion.identity);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
