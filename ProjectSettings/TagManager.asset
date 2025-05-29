@@ -13,6 +13,7 @@ TagManager:
   - Trap
   - PointA
   - PointB
+  - PlayerBullet1
   layers:
   - Default
   - TransparentFX

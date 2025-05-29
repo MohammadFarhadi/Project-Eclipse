@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3464152682065161214}
   - component: {fileID: 1376457021725739116}
   - component: {fileID: 9047733075118358300}
+  - component: {fileID: -3139235020281112563}
   m_Layer: 0
   m_Name: Spinner
   m_TagString: Untagged
@@ -173,3 +174,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.12, y: 5.12}
   m_EdgeRadius: 0
+--- !u!114 &-3139235020281112563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6457207796887954367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6cba3330b80f4f4683c6957cabfe7c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 0}

@@ -1,31 +1,43 @@
 fileFormatVersion: 2
-guid: a4cdb34f0fc5443f88e200b75735a5d9
+guid: 9a4ff41da4b254f42bb7760d894dfa36
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1243598822239544632
-    second: spr_StrikerRun_strip_0
+      213: -5850149586940076555
+    second: spr_StrikerJump_strip_0
   - first:
-      213: 2459576809049293469
-    second: spr_StrikerRun_strip_1
+      213: -4706200429244936234
+    second: spr_StrikerJump_strip_1
   - first:
-      213: 5870025670279501136
-    second: spr_StrikerRun_strip_2
+      213: -108547081368996986
+    second: spr_StrikerJump_strip_2
   - first:
-      213: 7040431338880653927
-    second: spr_StrikerRun_strip_3
+      213: -3195433645247985310
+    second: spr_StrikerJump_strip_3
   - first:
-      213: 730286654037357395
-    second: spr_StrikerRun_strip_4
+      213: 506413119999704933
+    second: spr_StrikerJump_strip_4
   - first:
-      213: 7368732493240177461
-    second: spr_StrikerRun_strip_5
+      213: -960841945580746893
+    second: spr_StrikerJump_strip_5
   - first:
-      213: 4048547496673412078
-    second: spr_StrikerRun_strip_6
+      213: -127232445368504466
+    second: spr_StrikerJump_strip_6
   - first:
-      213: 1664451771327904243
-    second: spr_StrikerRun_strip_7
+      213: 6436705646181104563
+    second: spr_StrikerJump_strip_7
+  - first:
+      213: 1964437885122879621
+    second: spr_StrikerJump_strip_8
+  - first:
+      213: 2739325091602379107
+    second: spr_StrikerJump_strip_9
+  - first:
+      213: 589796880392742272
+    second: spr_StrikerJump_strip_10
+  - first:
+      213: 3543629223152745501
+    second: spr_StrikerJump_strip_11
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +84,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -160,12 +172,34 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_StrikerRun_strip_0
+      name: spr_StrikerJump_strip_0
       rect:
         serializedVersion: 2
-        x: 28
+        x: 14
         y: 27
-        width: 37
+        width: 44
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fdd98332f710dea0800000000000000
+      internalID: -5850149586940076555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerJump_strip_1
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 28
+        width: 38
         height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -175,19 +209,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 835aeaa3a86224110800000000000000
-      internalID: 1243598822239544632
+      spriteID: 6df8015e4a730beb0800000000000000
+      internalID: -4706200429244936234
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerRun_strip_1
+      name: spr_StrikerJump_strip_2
       rect:
         serializedVersion: 2
-        x: 123
-        y: 27
-        width: 37
+        x: 210
+        y: 29
+        width: 34
         height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -197,19 +231,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d920c21931c222220800000000000000
-      internalID: 2459576809049293469
+      spriteID: 683789d210d5e7ef0800000000000000
+      internalID: -108547081368996986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerRun_strip_2
+      name: spr_StrikerJump_strip_3
       rect:
         serializedVersion: 2
-        x: 218
-        y: 31
-        width: 36
+        x: 309
+        y: 32
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -219,18 +253,84 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0551f631f35867150800000000000000
-      internalID: 5870025670279501136
+      spriteID: 26989af970a87a3d0800000000000000
+      internalID: -3195433645247985310
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerRun_strip_3
+      name: spr_StrikerJump_strip_4
       rect:
         serializedVersion: 2
-        x: 315
-        y: 27
+        x: 405
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56ffd2fac04270700800000000000000
+      internalID: 506413119999704933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerJump_strip_5
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3774d5c57576aa2f0800000000000000
+      internalID: -960841945580746893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerJump_strip_6
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 30
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6fe7e9d3cafb3ef0800000000000000
+      internalID: -127232445368504466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerJump_strip_7
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 29
         width: 35
         height: 37
       alignment: 0
@@ -241,19 +341,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 76a528b3003a4b160800000000000000
-      internalID: 7040431338880653927
+      spriteID: 3bb306c9ea5c35950800000000000000
+      internalID: 6436705646181104563
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerRun_strip_4
+      name: spr_StrikerJump_strip_8
       rect:
         serializedVersion: 2
-        x: 410
+        x: 783
+        y: 28
+        width: 38
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 580a11639d5134b10800000000000000
+      internalID: 1964437885122879621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerJump_strip_9
+      rect:
+        serializedVersion: 2
+        x: 882
         y: 27
-        width: 37
+        width: 40
         height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -263,63 +385,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 353fa16b7df722a00800000000000000
-      internalID: 730286654037357395
+      spriteID: 361364148a9040620800000000000000
+      internalID: 2739325091602379107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerRun_strip_5
+      name: spr_StrikerJump_strip_10
       rect:
         serializedVersion: 2
-        x: 502
+        x: 974
         y: 27
-        width: 43
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5339570592ff24660800000000000000
-      internalID: 7368732493240177461
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerRun_strip_6
-      rect:
-        serializedVersion: 2
-        x: 598
-        y: 30
-        width: 43
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ee304838f745f2830800000000000000
-      internalID: 4048547496673412078
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerRun_strip_7
-      rect:
-        serializedVersion: 2
-        x: 695
-        y: 27
-        width: 41
+        width: 44
         height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -329,8 +407,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f9f4cf3112591710800000000000000
-      internalID: 1664451771327904243
+      spriteID: 085617943216f2800800000000000000
+      internalID: 589796880392742272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerJump_strip_11
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 27
+        width: 44
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1c76b5e0008d2130800000000000000
+      internalID: 3543629223152745501
       vertices: []
       indices: 
       edges: []
@@ -349,14 +449,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spr_StrikerRun_strip_0: 1243598822239544632
-      spr_StrikerRun_strip_1: 2459576809049293469
-      spr_StrikerRun_strip_2: 5870025670279501136
-      spr_StrikerRun_strip_3: 7040431338880653927
-      spr_StrikerRun_strip_4: 730286654037357395
-      spr_StrikerRun_strip_5: 7368732493240177461
-      spr_StrikerRun_strip_6: 4048547496673412078
-      spr_StrikerRun_strip_7: 1664451771327904243
+      spr_StrikerJump_strip_0: -5850149586940076555
+      spr_StrikerJump_strip_1: -4706200429244936234
+      spr_StrikerJump_strip_10: 589796880392742272
+      spr_StrikerJump_strip_11: 3543629223152745501
+      spr_StrikerJump_strip_2: -108547081368996986
+      spr_StrikerJump_strip_3: -3195433645247985310
+      spr_StrikerJump_strip_4: 506413119999704933
+      spr_StrikerJump_strip_5: -960841945580746893
+      spr_StrikerJump_strip_6: -127232445368504466
+      spr_StrikerJump_strip_7: 6436705646181104563
+      spr_StrikerJump_strip_8: 1964437885122879621
+      spr_StrikerJump_strip_9: 2739325091602379107
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -149,7 +149,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
                 {
                     if (playersUI != null)
                     {
-                        for (int i = 2; i > 0; i--)
+                        for (int i = 2; i >= 0; i--)
                         {
                             if (playersUI.hearts[i].activeSelf == false)
                             {

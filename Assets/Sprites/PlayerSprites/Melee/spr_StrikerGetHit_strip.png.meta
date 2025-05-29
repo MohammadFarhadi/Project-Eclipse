@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: 538dbe6fdab7344e78f7bd4a809c9699
+guid: 4fe5f0c27b45347919aaa08e6df23f90
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8427497837364295206
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0
+      213: -2550854124190377833
+    second: spr_StrikerGetHit_strip_0
   - first:
-      213: 2725229570159642435
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1
+      213: -2683278654611744306
+    second: spr_StrikerGetHit_strip_1
   - first:
-      213: 3603001128858198988
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2
+      213: 9204500937494646381
+    second: spr_StrikerGetHit_strip_2
   - first:
-      213: -8508884205421288011
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3
-  - first:
-      213: -3236857820199414098
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4
-  - first:
-      213: 3887569809960285775
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5
-  - first:
-      213: 2759062795455432723
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6
-  - first:
-      213: -2213643757955918303
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7
+      213: -5359370597642476426
+    second: spr_StrikerGetHit_strip_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -160,13 +148,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0
+      name: spr_StrikerGetHit_strip_0
       rect:
         serializedVersion: 2
-        x: 96
-        y: 954
-        width: 775
-        height: 175
+        x: 14
+        y: 27
+        width: 44
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad947822e538b0b80800000000000000
-      internalID: -8427497837364295206
+      spriteID: 798dac560bb899cd0800000000000000
+      internalID: -2550854124190377833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1
+      name: spr_StrikerGetHit_strip_1
       rect:
         serializedVersion: 2
-        x: 929
-        y: 954
-        width: 775
-        height: 175
+        x: 111
+        y: 27
+        width: 39
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34781ccead5f1d520800000000000000
-      internalID: 2725229570159642435
+      spriteID: ec99a7eb74413cad0800000000000000
+      internalID: -2683278654611744306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2
+      name: spr_StrikerGetHit_strip_2
       rect:
         serializedVersion: 2
-        x: 96
-        y: 659
-        width: 775
-        height: 175
+        x: 206
+        y: 27
+        width: 40
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +207,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc3aceaef6e600230800000000000000
-      internalID: 3603001128858198988
+      spriteID: d6e4e1ac5d4fcbf70800000000000000
+      internalID: 9204500937494646381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3
+      name: spr_StrikerGetHit_strip_3
       rect:
         serializedVersion: 2
-        x: 929
-        y: 657
-        width: 775
-        height: 177
+        x: 302
+        y: 27
+        width: 42
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,96 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b5aeeca5ee5ae980800000000000000
-      internalID: -8508884205421288011
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 361
-        width: 775
-        height: 178
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ea6919e46fe5413d0800000000000000
-      internalID: -3236857820199414098
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5
-      rect:
-        serializedVersion: 2
-        x: 929
-        y: 361
-        width: 775
-        height: 178
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f46373a152c63f530800000000000000
-      internalID: 3887569809960285775
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 66
-        width: 771
-        height: 177
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3180e1c8ef82a4620800000000000000
-      internalID: 2759062795455432723
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7
-      rect:
-        serializedVersion: 2
-        x: 929
-        y: 66
-        width: 775
-        height: 177
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 126d6c30bbe8741e0800000000000000
-      internalID: -2213643757955918303
+      spriteID: 674e8db26d0bf95b0800000000000000
+      internalID: -5359370597642476426
       vertices: []
       indices: 
       edges: []
@@ -349,14 +249,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0: -8427497837364295206
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1: 2725229570159642435
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2: 3603001128858198988
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3: -8508884205421288011
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4: -3236857820199414098
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5: 3887569809960285775
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6: 2759062795455432723
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7: -2213643757955918303
+      spr_StrikerGetHit_strip_0: -2550854124190377833
+      spr_StrikerGetHit_strip_1: -2683278654611744306
+      spr_StrikerGetHit_strip_2: 9204500937494646381
+      spr_StrikerGetHit_strip_3: -5359370597642476426
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

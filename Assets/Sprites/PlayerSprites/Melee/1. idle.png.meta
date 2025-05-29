@@ -1,31 +1,10 @@
 fileFormatVersion: 2
-guid: eb146ec8bfa3544a7a414a94c9c3f534
+guid: 49f8e2669c9a0134cb413ab6b685475e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2878776438291150895
-    second: spr_StrikerIdle_strip_0
-  - first:
-      213: 3203364070431964461
-    second: spr_StrikerIdle_strip_1
-  - first:
-      213: 8959686590502790556
-    second: spr_StrikerIdle_strip_2
-  - first:
-      213: -5440983359157643148
-    second: spr_StrikerIdle_strip_3
-  - first:
-      213: -4082893085399752493
-    second: spr_StrikerIdle_strip_4
-  - first:
-      213: 9190622102364108476
-    second: spr_StrikerIdle_strip_5
-  - first:
-      213: -8322215239142971479
-    second: spr_StrikerIdle_strip_6
-  - first:
-      213: -6108167506804859572
-    second: spr_StrikerIdle_strip_7
+      213: 8623939804438536664
+    second: 1. idle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,56 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_StrikerIdle_strip_0
+      name: 1. idle_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 27
-        width: 41
-        height: 35
+        x: 0
+        y: 0
+        width: 27
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,162 +115,184 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d744efe4188c08d0800000000000000
-      internalID: -2878776438291150895
+      spriteID: 8d129ef7f836ea770800000000000000
+      internalID: 8623939804438536664
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerIdle_strip_1
+      name: 1. idle_1
       rect:
         serializedVersion: 2
-        x: 113
-        y: 27
-        width: 41
-        height: 36
+        x: 27
+        y: 0
+        width: 27
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d2db85066a2a47c20800000000000000
-      internalID: 3203364070431964461
+      spriteID: 6da8af67d1c3f7b4f9897e91661cb663
+      internalID: 1833211646
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerIdle_strip_2
+      name: 1. idle_2
       rect:
         serializedVersion: 2
-        x: 209
-        y: 27
-        width: 41
-        height: 38
+        x: 54
+        y: 0
+        width: 27
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c95efbdcb73375c70800000000000000
-      internalID: 8959686590502790556
+      spriteID: bbf3b529babb34e43950eb9f9fceb718
+      internalID: 1202356626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerIdle_strip_3
+      name: 1. idle_3
       rect:
         serializedVersion: 2
-        x: 305
-        y: 27
-        width: 41
-        height: 39
+        x: 81
+        y: 0
+        width: 27
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 478d890667ebd74b0800000000000000
-      internalID: -5440983359157643148
+      spriteID: b6df42439e3ea0b478e7d171130d37da
+      internalID: 539775876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerIdle_strip_4
+      name: 1. idle_4
       rect:
         serializedVersion: 2
-        x: 401
-        y: 27
-        width: 41
-        height: 39
+        x: 108
+        y: 0
+        width: 27
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3d069d4fe56a657c0800000000000000
-      internalID: -4082893085399752493
+      spriteID: acf46fe16b34f6e4f9821f8cd28ede4e
+      internalID: 1463807506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerIdle_strip_5
+      name: 1. idle_5
       rect:
         serializedVersion: 2
-        x: 497
-        y: 27
-        width: 41
-        height: 37
+        x: 135
+        y: 0
+        width: 27
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cb6344cab16ab8f70800000000000000
-      internalID: 9190622102364108476
+      spriteID: d8d26c7490a59354f98f17d62cd3106d
+      internalID: -1682148111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerIdle_strip_6
+      name: 1. idle_6
       rect:
         serializedVersion: 2
-        x: 593
-        y: 27
-        width: 41
-        height: 36
+        x: 162
+        y: 0
+        width: 27
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9a76a8e355d818c80800000000000000
-      internalID: -8322215239142971479
+      spriteID: ec47e11e763f7b0479c484c48a5756a7
+      internalID: 535204586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerIdle_strip_7
+      name: 1. idle_7
       rect:
         serializedVersion: 2
-        x: 689
-        y: 27
-        width: 41
-        height: 37
+        x: 189
+        y: 0
+        width: 27
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c4d1058d30e6b3ba0800000000000000
-      internalID: -6108167506804859572
+      spriteID: d5bff46d16691a4489afb3d5b381e675
+      internalID: 1264844379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1. idle_8
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fba3f67c590665e4593a92d23837c82a
+      internalID: 1527752380
       vertices: []
       indices: 
       edges: []
@@ -339,7 +301,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0b6fb4eb21a9cf749b8617481ff6d63b
     internalID: 0
     vertices: []
     indices: 
@@ -349,14 +311,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spr_StrikerIdle_strip_0: -2878776438291150895
-      spr_StrikerIdle_strip_1: 3203364070431964461
-      spr_StrikerIdle_strip_2: 8959686590502790556
-      spr_StrikerIdle_strip_3: -5440983359157643148
-      spr_StrikerIdle_strip_4: -4082893085399752493
-      spr_StrikerIdle_strip_5: 9190622102364108476
-      spr_StrikerIdle_strip_6: -8322215239142971479
-      spr_StrikerIdle_strip_7: -6108167506804859572
+      1. idle_0: 8623939804438536664
+      1. idle_1: 1833211646
+      1. idle_2: 1202356626
+      1. idle_3: 539775876
+      1. idle_4: 1463807506
+      1. idle_5: -1682148111
+      1. idle_6: 535204586
+      1. idle_7: 1264844379
+      1. idle_8: 1527752380
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

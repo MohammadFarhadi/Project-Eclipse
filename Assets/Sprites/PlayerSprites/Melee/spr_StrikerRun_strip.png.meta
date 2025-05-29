@@ -1,43 +1,31 @@
 fileFormatVersion: 2
-guid: 606f6ba3f7bd147a58c295fe017c15af
+guid: a4cdb34f0fc5443f88e200b75735a5d9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1891884887021570966
-    second: spr_StrikerDash_strip_0
+      213: 1243598822239544632
+    second: spr_StrikerRun_strip_0
   - first:
-      213: -8174104727354534690
-    second: spr_StrikerDash_strip_1
+      213: 2459576809049293469
+    second: spr_StrikerRun_strip_1
   - first:
-      213: -40940646441338392
-    second: spr_StrikerDash_strip_2
+      213: 5870025670279501136
+    second: spr_StrikerRun_strip_2
   - first:
-      213: 7670377727281452992
-    second: spr_StrikerDash_strip_3
+      213: 7040431338880653927
+    second: spr_StrikerRun_strip_3
   - first:
-      213: 6350930498693313991
-    second: spr_StrikerDash_strip_4
+      213: 730286654037357395
+    second: spr_StrikerRun_strip_4
   - first:
-      213: -4139439837424765390
-    second: spr_StrikerDash_strip_5
+      213: 7368732493240177461
+    second: spr_StrikerRun_strip_5
   - first:
-      213: 5412679958734541296
-    second: spr_StrikerDash_strip_6
+      213: 4048547496673412078
+    second: spr_StrikerRun_strip_6
   - first:
-      213: -2762627379697588864
-    second: spr_StrikerDash_strip_7
-  - first:
-      213: 4284645808401850633
-    second: spr_StrikerDash_strip_8
-  - first:
-      213: 270600758403180713
-    second: spr_StrikerDash_strip_9
-  - first:
-      213: -1075537398262496340
-    second: spr_StrikerDash_strip_10
-  - first:
-      213: -3603222473789913697
-    second: spr_StrikerDash_strip_11
+      213: 1664451771327904243
+    second: spr_StrikerRun_strip_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -84,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -172,13 +160,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_StrikerDash_strip_0
+      name: spr_StrikerRun_strip_0
       rect:
         serializedVersion: 2
-        x: 14
+        x: 28
         y: 27
-        width: 44
-        height: 33
+        width: 37
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,19 +175,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 69bc9d6f743514a10800000000000000
-      internalID: 1891884887021570966
+      spriteID: 835aeaa3a86224110800000000000000
+      internalID: 1243598822239544632
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDash_strip_1
+      name: spr_StrikerRun_strip_1
       rect:
         serializedVersion: 2
-        x: 113
+        x: 123
         y: 27
-        width: 42
+        width: 37
         height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -209,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ed411390f0fbf8e80800000000000000
-      internalID: -8174104727354534690
+      spriteID: d920c21931c222220800000000000000
+      internalID: 2459576809049293469
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDash_strip_2
+      name: spr_StrikerRun_strip_2
       rect:
         serializedVersion: 2
-        x: 210
-        y: 27
-        width: 38
-        height: 37
+        x: 218
+        y: 31
+        width: 36
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -231,61 +219,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8e93dffe2bc8e6ff0800000000000000
-      internalID: -40940646441338392
+      spriteID: 0551f631f35867150800000000000000
+      internalID: 5870025670279501136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDash_strip_3
+      name: spr_StrikerRun_strip_3
       rect:
         serializedVersion: 2
-        x: 305
-        y: 27
-        width: 38
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0c7ddaf47e7a27a60800000000000000
-      internalID: 7670377727281452992
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDash_strip_4
-      rect:
-        serializedVersion: 2
-        x: 410
-        y: 27
-        width: 30
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7c53fcfc3a9032850800000000000000
-      internalID: 6350930498693313991
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDash_strip_5
-      rect:
-        serializedVersion: 2
-        x: 517
+        x: 315
         y: 27
         width: 35
         height: 37
@@ -297,20 +241,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 23632394661cd86c0800000000000000
-      internalID: -4139439837424765390
+      spriteID: 76a528b3003a4b160800000000000000
+      internalID: 7040431338880653927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDash_strip_6
+      name: spr_StrikerRun_strip_4
       rect:
         serializedVersion: 2
-        x: 606
+        x: 410
         y: 27
-        width: 34
-        height: 37
+        width: 37
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -319,63 +263,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f19f3faeb3bd1b40800000000000000
-      internalID: 5412679958734541296
+      spriteID: 353fa16b7df722a00800000000000000
+      internalID: 730286654037357395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDash_strip_7
+      name: spr_StrikerRun_strip_5
       rect:
         serializedVersion: 2
-        x: 699
+        x: 502
         y: 27
-        width: 42
-        height: 39
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0856b52090d29a9d0800000000000000
-      internalID: -2762627379697588864
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDash_strip_8
-      rect:
-        serializedVersion: 2
-        x: 792
-        y: 27
-        width: 41
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 901a82669ae167b30800000000000000
-      internalID: 4284645808401850633
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDash_strip_9
-      rect:
-        serializedVersion: 2
-        x: 888
-        y: 27
-        width: 41
+        width: 43
         height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -385,20 +285,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a8a290c4fd51c300800000000000000
-      internalID: 270600758403180713
+      spriteID: 5339570592ff24660800000000000000
+      internalID: 7368732493240177461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDash_strip_10
+      name: spr_StrikerRun_strip_6
       rect:
         serializedVersion: 2
-        x: 984
-        y: 27
-        width: 41
-        height: 33
+        x: 598
+        y: 30
+        width: 43
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,20 +307,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ca38ae94f6ce211f0800000000000000
-      internalID: -1075537398262496340
+      spriteID: ee304838f745f2830800000000000000
+      internalID: 4048547496673412078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDash_strip_11
+      name: spr_StrikerRun_strip_7
       rect:
         serializedVersion: 2
-        x: 1079
+        x: 695
         y: 27
         width: 41
-        height: 33
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -429,8 +329,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f954c033048cefdc0800000000000000
-      internalID: -3603222473789913697
+      spriteID: 3f9f4cf3112591710800000000000000
+      internalID: 1664451771327904243
       vertices: []
       indices: 
       edges: []
@@ -449,18 +349,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spr_StrikerDash_strip_0: 1891884887021570966
-      spr_StrikerDash_strip_1: -8174104727354534690
-      spr_StrikerDash_strip_10: -1075537398262496340
-      spr_StrikerDash_strip_11: -3603222473789913697
-      spr_StrikerDash_strip_2: -40940646441338392
-      spr_StrikerDash_strip_3: 7670377727281452992
-      spr_StrikerDash_strip_4: 6350930498693313991
-      spr_StrikerDash_strip_5: -4139439837424765390
-      spr_StrikerDash_strip_6: 5412679958734541296
-      spr_StrikerDash_strip_7: -2762627379697588864
-      spr_StrikerDash_strip_8: 4284645808401850633
-      spr_StrikerDash_strip_9: 270600758403180713
+      spr_StrikerRun_strip_0: 1243598822239544632
+      spr_StrikerRun_strip_1: 2459576809049293469
+      spr_StrikerRun_strip_2: 5870025670279501136
+      spr_StrikerRun_strip_3: 7040431338880653927
+      spr_StrikerRun_strip_4: 730286654037357395
+      spr_StrikerRun_strip_5: 7368732493240177461
+      spr_StrikerRun_strip_6: 4048547496673412078
+      spr_StrikerRun_strip_7: 1664451771327904243
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

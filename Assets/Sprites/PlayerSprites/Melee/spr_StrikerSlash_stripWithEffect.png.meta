@@ -1,64 +1,61 @@
 fileFormatVersion: 2
-guid: 4afbfb35c78b6480485fce415c77245c
+guid: 555c26a5ef4664b608c5e3a89d312fca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -479164716087823096
-    second: spr_StrikerDeath_strip_0
+      213: 8258314228247372054
+    second: spr_StrikerSlash_stripWithEffect_0
   - first:
-      213: 4794941496892381385
-    second: spr_StrikerDeath_strip_1
+      213: 9069769131732061362
+    second: spr_StrikerSlash_stripWithEffect_1
   - first:
-      213: -7249711372055659344
-    second: spr_StrikerDeath_strip_2
+      213: 148446977821340078
+    second: spr_StrikerSlash_stripWithEffect_2
   - first:
-      213: -1240271393379337928
-    second: spr_StrikerDeath_strip_3
+      213: 1498970400426432440
+    second: spr_StrikerSlash_stripWithEffect_3
   - first:
-      213: -8461460540931865339
-    second: spr_StrikerDeath_strip_4
+      213: 3669001086407300145
+    second: spr_StrikerSlash_stripWithEffect_4
   - first:
-      213: 8790851367209421639
-    second: spr_StrikerDeath_strip_5
+      213: -1945689850531190422
+    second: spr_StrikerSlash_stripWithEffect_5
   - first:
-      213: 598979708903437325
-    second: spr_StrikerDeath_strip_6
+      213: -7977489325584590692
+    second: spr_StrikerSlash_stripWithEffect_6
   - first:
-      213: 3057117042486464457
-    second: spr_StrikerDeath_strip_7
+      213: 1578814297237943118
+    second: spr_StrikerSlash_stripWithEffect_7
   - first:
-      213: -2892332229637925208
-    second: spr_StrikerDeath_strip_8
+      213: 7312362940087992259
+    second: spr_StrikerSlash_stripWithEffect_8
   - first:
-      213: -6954518428886506461
-    second: spr_StrikerDeath_strip_9
+      213: -4394666509432945631
+    second: spr_StrikerSlash_stripWithEffect_9
   - first:
-      213: -8807472252515622539
-    second: spr_StrikerDeath_strip_10
+      213: 1577019542024561625
+    second: spr_StrikerSlash_stripWithEffect_10
   - first:
-      213: 163816857922988552
-    second: spr_StrikerDeath_strip_11
+      213: -8900783197407247794
+    second: spr_StrikerSlash_stripWithEffect_11
   - first:
-      213: -6065873878217775119
-    second: spr_StrikerDeath_strip_12
+      213: -1175978125879182084
+    second: spr_StrikerSlash_stripWithEffect_12
   - first:
-      213: -6816440273583673112
-    second: spr_StrikerDeath_strip_13
+      213: -4607177337326594669
+    second: spr_StrikerSlash_stripWithEffect_13
   - first:
-      213: -6106431173254951377
-    second: spr_StrikerDeath_strip_14
+      213: -2069644726638787860
+    second: spr_StrikerSlash_stripWithEffect_14
   - first:
-      213: -1582620575718363833
-    second: spr_StrikerDeath_strip_15
+      213: -5224632935507310964
+    second: spr_StrikerSlash_stripWithEffect_15
   - first:
-      213: 1699235884083458140
-    second: spr_StrikerDeath_strip_16
+      213: -2712224971305321714
+    second: spr_StrikerSlash_stripWithEffect_16
   - first:
-      213: -8280089477672527755
-    second: spr_StrikerDeath_strip_17
-  - first:
-      213: -5854769087378996252
-    second: spr_StrikerDeath_strip_18
+      213: -382029104279647875
+    second: spr_StrikerSlash_stripWithEffect_17
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -105,7 +102,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -193,7 +190,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_0
+      name: spr_StrikerSlash_stripWithEffect_0
       rect:
         serializedVersion: 2
         x: 14
@@ -208,17 +205,193 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8053facba3aa959f0800000000000000
-      internalID: -479164716087823096
+      spriteID: 6112d32490d6b9270800000000000000
+      internalID: 8258314228247372054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_1
+      name: spr_StrikerSlash_stripWithEffect_1
       rect:
         serializedVersion: 2
-        x: 111
+        x: 145
+        y: 27
+        width: 42
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bc41bbb8fa4edd70800000000000000
+      internalID: 9069769131732061362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerSlash_stripWithEffect_2
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 27
+        width: 78
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea175056db36f0200800000000000000
+      internalID: 148446977821340078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerSlash_stripWithEffect_3
+      rect:
+        serializedVersion: 2
+        x: 421
+        y: 27
+        width: 47
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b71e3623a96dc410800000000000000
+      internalID: 1498970400426432440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerSlash_stripWithEffect_4
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 27
+        width: 58
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13454d38c09eae230800000000000000
+      internalID: 3669001086407300145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerSlash_stripWithEffect_5
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 27
+        width: 45
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a696100c3658ff4e0800000000000000
+      internalID: -1945689850531190422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerSlash_stripWithEffect_6
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 27
+        width: 72
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c985f0599b34a4190800000000000000
+      internalID: -7977489325584590692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerSlash_stripWithEffect_7
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 27
+        width: 64
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e43fc290d3319e510800000000000000
+      internalID: 1578814297237943118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerSlash_stripWithEffect_8
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 27
+        width: 40
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cffca8f95bba7560800000000000000
+      internalID: 7312362940087992259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_StrikerSlash_stripWithEffect_9
+      rect:
+        serializedVersion: 2
+        x: 1172
         y: 27
         width: 43
         height: 33
@@ -230,63 +403,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9c8dc0103ed0b8240800000000000000
-      internalID: 4794941496892381385
+      spriteID: 12481f6f7120303c0800000000000000
+      internalID: -4394666509432945631
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_2
+      name: spr_StrikerSlash_stripWithEffect_10
       rect:
         serializedVersion: 2
-        x: 209
+        x: 1294
         y: 27
-        width: 44
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0bc3380fae9d36b90800000000000000
-      internalID: -7249711372055659344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_3
-      rect:
-        serializedVersion: 2
-        x: 305
-        y: 27
-        width: 19
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 839bb8c2dbba9cee0800000000000000
-      internalID: -1240271393379337928
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_4
-      rect:
-        serializedVersion: 2
-        x: 308
-        y: 27
-        width: 41
+        width: 49
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -296,20 +425,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 50585c0087ad29a80800000000000000
-      internalID: -8461460540931865339
+      spriteID: 9d329360be2b2e510800000000000000
+      internalID: 1577019542024561625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_5
+      name: spr_StrikerSlash_stripWithEffect_11
       rect:
         serializedVersion: 2
-        x: 401
+        x: 1422
         y: 27
-        width: 19
-        height: 6
+        width: 49
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,20 +447,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 74b46c71eb06ff970800000000000000
-      internalID: 8790851367209421639
+      spriteID: e4286cf17d01a7480800000000000000
+      internalID: -8900783197407247794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_6
+      name: spr_StrikerSlash_stripWithEffect_12
       rect:
         serializedVersion: 2
-        x: 418
-        y: 27
-        width: 27
-        height: 32
+        x: 1471
+        y: 45
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,20 +469,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d043bd82fd0005800800000000000000
-      internalID: 598979708903437325
+      spriteID: cfc775700261eafe0800000000000000
+      internalID: -1175978125879182084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_7
+      name: spr_StrikerSlash_stripWithEffect_13
       rect:
         serializedVersion: 2
-        x: 497
+        x: 1550
         y: 27
-        width: 19
-        height: 6
+        width: 61
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -362,20 +491,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9cfc23ab0cf0d6a20800000000000000
-      internalID: 3057117042486464457
+      spriteID: 3951b6f1f940010c0800000000000000
+      internalID: -4607177337326594669
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_8
+      name: spr_StrikerSlash_stripWithEffect_14
       rect:
         serializedVersion: 2
-        x: 514
+        x: 1674
         y: 27
-        width: 27
-        height: 32
+        width: 53
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -384,20 +513,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8a69400592f5cd7d0800000000000000
-      internalID: -2892332229637925208
+      spriteID: ce24f6926152743e0800000000000000
+      internalID: -2069644726638787860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_9
+      name: spr_StrikerSlash_stripWithEffect_15
       rect:
         serializedVersion: 2
-        x: 592
-        y: 27
-        width: 45
-        height: 32
+        x: 1727
+        y: 47
+        width: 42
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -406,20 +535,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 324ef46e5569c7f90800000000000000
-      internalID: -6954518428886506461
+      spriteID: c86c745c6006e77b0800000000000000
+      internalID: -5224632935507310964
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_10
+      name: spr_StrikerSlash_stripWithEffect_16
       rect:
         serializedVersion: 2
-        x: 688
+        x: 1798
         y: 27
-        width: 45
-        height: 32
+        width: 52
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -428,20 +557,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 57162bb76a295c580800000000000000
-      internalID: -8807472252515622539
+      spriteID: e0bf66232cd3c5ad0800000000000000
+      internalID: -2712224971305321714
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_StrikerDeath_strip_11
+      name: spr_StrikerSlash_stripWithEffect_17
       rect:
         serializedVersion: 2
-        x: 784
+        x: 1858
         y: 27
-        width: 45
-        height: 31
+        width: 120
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -450,162 +579,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 80a68b8709ef54200800000000000000
-      internalID: 163816857922988552
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_12
-      rect:
-        serializedVersion: 2
-        x: 880
-        y: 27
-        width: 45
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1f7228c98dfa1dba0800000000000000
-      internalID: -6065873878217775119
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_13
-      rect:
-        serializedVersion: 2
-        x: 977
-        y: 27
-        width: 44
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8e0f06cafa32761a0800000000000000
-      internalID: -6816440273583673112
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_14
-      rect:
-        serializedVersion: 2
-        x: 1073
-        y: 27
-        width: 44
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f2e44c08339914ba0800000000000000
-      internalID: -6106431173254951377
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_15
-      rect:
-        serializedVersion: 2
-        x: 1169
-        y: 27
-        width: 44
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 74d2512b8f6690ae0800000000000000
-      internalID: -1582620575718363833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_16
-      rect:
-        serializedVersion: 2
-        x: 1265
-        y: 27
-        width: 44
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c50346c9806e49710800000000000000
-      internalID: 1699235884083458140
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_17
-      rect:
-        serializedVersion: 2
-        x: 1360
-        y: 27
-        width: 45
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 57811e66d76371d80800000000000000
-      internalID: -8280089477672527755
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerDeath_strip_18
-      rect:
-        serializedVersion: 2
-        x: 1456
-        y: 27
-        width: 45
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4e346d0f88eafbea0800000000000000
-      internalID: -5854769087378996252
+      spriteID: d790d81cd82c2baf0800000000000000
+      internalID: -382029104279647875
       vertices: []
       indices: 
       edges: []
@@ -624,25 +599,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spr_StrikerDeath_strip_0: -479164716087823096
-      spr_StrikerDeath_strip_1: 4794941496892381385
-      spr_StrikerDeath_strip_10: -8807472252515622539
-      spr_StrikerDeath_strip_11: 163816857922988552
-      spr_StrikerDeath_strip_12: -6065873878217775119
-      spr_StrikerDeath_strip_13: -6816440273583673112
-      spr_StrikerDeath_strip_14: -6106431173254951377
-      spr_StrikerDeath_strip_15: -1582620575718363833
-      spr_StrikerDeath_strip_16: 1699235884083458140
-      spr_StrikerDeath_strip_17: -8280089477672527755
-      spr_StrikerDeath_strip_18: -5854769087378996252
-      spr_StrikerDeath_strip_2: -7249711372055659344
-      spr_StrikerDeath_strip_3: -1240271393379337928
-      spr_StrikerDeath_strip_4: -8461460540931865339
-      spr_StrikerDeath_strip_5: 8790851367209421639
-      spr_StrikerDeath_strip_6: 598979708903437325
-      spr_StrikerDeath_strip_7: 3057117042486464457
-      spr_StrikerDeath_strip_8: -2892332229637925208
-      spr_StrikerDeath_strip_9: -6954518428886506461
+      spr_StrikerSlash_stripWithEffect_0: 8258314228247372054
+      spr_StrikerSlash_stripWithEffect_1: 9069769131732061362
+      spr_StrikerSlash_stripWithEffect_10: 1577019542024561625
+      spr_StrikerSlash_stripWithEffect_11: -8900783197407247794
+      spr_StrikerSlash_stripWithEffect_12: -1175978125879182084
+      spr_StrikerSlash_stripWithEffect_13: -4607177337326594669
+      spr_StrikerSlash_stripWithEffect_14: -2069644726638787860
+      spr_StrikerSlash_stripWithEffect_15: -5224632935507310964
+      spr_StrikerSlash_stripWithEffect_16: -2712224971305321714
+      spr_StrikerSlash_stripWithEffect_17: -382029104279647875
+      spr_StrikerSlash_stripWithEffect_2: 148446977821340078
+      spr_StrikerSlash_stripWithEffect_3: 1498970400426432440
+      spr_StrikerSlash_stripWithEffect_4: 3669001086407300145
+      spr_StrikerSlash_stripWithEffect_5: -1945689850531190422
+      spr_StrikerSlash_stripWithEffect_6: -7977489325584590692
+      spr_StrikerSlash_stripWithEffect_7: 1578814297237943118
+      spr_StrikerSlash_stripWithEffect_8: 7312362940087992259
+      spr_StrikerSlash_stripWithEffect_9: -4394666509432945631
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

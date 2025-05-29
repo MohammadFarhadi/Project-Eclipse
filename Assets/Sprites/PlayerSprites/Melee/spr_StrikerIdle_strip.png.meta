@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 538dbe6fdab7344e78f7bd4a809c9699
+guid: eb146ec8bfa3544a7a414a94c9c3f534
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8427497837364295206
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0
+      213: -2878776438291150895
+    second: spr_StrikerIdle_strip_0
   - first:
-      213: 2725229570159642435
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1
+      213: 3203364070431964461
+    second: spr_StrikerIdle_strip_1
   - first:
-      213: 3603001128858198988
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2
+      213: 8959686590502790556
+    second: spr_StrikerIdle_strip_2
   - first:
-      213: -8508884205421288011
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3
+      213: -5440983359157643148
+    second: spr_StrikerIdle_strip_3
   - first:
-      213: -3236857820199414098
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4
+      213: -4082893085399752493
+    second: spr_StrikerIdle_strip_4
   - first:
-      213: 3887569809960285775
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5
+      213: 9190622102364108476
+    second: spr_StrikerIdle_strip_5
   - first:
-      213: 2759062795455432723
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6
+      213: -8322215239142971479
+    second: spr_StrikerIdle_strip_6
   - first:
-      213: -2213643757955918303
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7
+      213: -6108167506804859572
+    second: spr_StrikerIdle_strip_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -160,13 +160,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0
+      name: spr_StrikerIdle_strip_0
       rect:
         serializedVersion: 2
-        x: 96
-        y: 954
-        width: 775
-        height: 175
+        x: 17
+        y: 27
+        width: 41
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad947822e538b0b80800000000000000
-      internalID: -8427497837364295206
+      spriteID: 1d744efe4188c08d0800000000000000
+      internalID: -2878776438291150895
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1
+      name: spr_StrikerIdle_strip_1
       rect:
         serializedVersion: 2
-        x: 929
-        y: 954
-        width: 775
-        height: 175
+        x: 113
+        y: 27
+        width: 41
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34781ccead5f1d520800000000000000
-      internalID: 2725229570159642435
+      spriteID: d2db85066a2a47c20800000000000000
+      internalID: 3203364070431964461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2
+      name: spr_StrikerIdle_strip_2
       rect:
         serializedVersion: 2
-        x: 96
-        y: 659
-        width: 775
-        height: 175
+        x: 209
+        y: 27
+        width: 41
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +219,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc3aceaef6e600230800000000000000
-      internalID: 3603001128858198988
+      spriteID: c95efbdcb73375c70800000000000000
+      internalID: 8959686590502790556
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3
+      name: spr_StrikerIdle_strip_3
       rect:
         serializedVersion: 2
-        x: 929
-        y: 657
-        width: 775
-        height: 177
+        x: 305
+        y: 27
+        width: 41
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,20 +241,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b5aeeca5ee5ae980800000000000000
-      internalID: -8508884205421288011
+      spriteID: 478d890667ebd74b0800000000000000
+      internalID: -5440983359157643148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4
+      name: spr_StrikerIdle_strip_4
       rect:
         serializedVersion: 2
-        x: 96
-        y: 361
-        width: 775
-        height: 178
+        x: 401
+        y: 27
+        width: 41
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ea6919e46fe5413d0800000000000000
-      internalID: -3236857820199414098
+      spriteID: 3d069d4fe56a657c0800000000000000
+      internalID: -4082893085399752493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5
+      name: spr_StrikerIdle_strip_5
       rect:
         serializedVersion: 2
-        x: 929
-        y: 361
-        width: 775
-        height: 178
+        x: 497
+        y: 27
+        width: 41
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,20 +285,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f46373a152c63f530800000000000000
-      internalID: 3887569809960285775
+      spriteID: cb6344cab16ab8f70800000000000000
+      internalID: 9190622102364108476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6
+      name: spr_StrikerIdle_strip_6
       rect:
         serializedVersion: 2
-        x: 100
-        y: 66
-        width: 771
-        height: 177
+        x: 593
+        y: 27
+        width: 41
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,20 +307,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3180e1c8ef82a4620800000000000000
-      internalID: 2759062795455432723
+      spriteID: 9a76a8e355d818c80800000000000000
+      internalID: -8322215239142971479
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7
+      name: spr_StrikerIdle_strip_7
       rect:
         serializedVersion: 2
-        x: 929
-        y: 66
-        width: 775
-        height: 177
+        x: 689
+        y: 27
+        width: 41
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,8 +329,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 126d6c30bbe8741e0800000000000000
-      internalID: -2213643757955918303
+      spriteID: c4d1058d30e6b3ba0800000000000000
+      internalID: -6108167506804859572
       vertices: []
       indices: 
       edges: []
@@ -349,14 +349,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0: -8427497837364295206
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1: 2725229570159642435
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2: 3603001128858198988
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3: -8508884205421288011
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4: -3236857820199414098
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5: 3887569809960285775
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6: 2759062795455432723
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7: -2213643757955918303
+      spr_StrikerIdle_strip_0: -2878776438291150895
+      spr_StrikerIdle_strip_1: 3203364070431964461
+      spr_StrikerIdle_strip_2: 8959686590502790556
+      spr_StrikerIdle_strip_3: -5440983359157643148
+      spr_StrikerIdle_strip_4: -4082893085399752493
+      spr_StrikerIdle_strip_5: 9190622102364108476
+      spr_StrikerIdle_strip_6: -8322215239142971479
+      spr_StrikerIdle_strip_7: -6108167506804859572
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

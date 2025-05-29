@@ -390,7 +390,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1030671779
-  m_SortingLayer: 3
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 3244445856464080758, guid: d9b88e74e949445739240b48810f6255, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -426,7 +426,7 @@ MonoBehaviour:
   max_health: 100
   current_health: 100
   Health_gain: 5
-  playersUI: {fileID: 0}
+  playersUI: {fileID: 1102348577761452384, guid: abb9337ca5fee4d6e86761e354fbaac1, type: 3}
   projectilePrefab: {fileID: 7534035931637628498, guid: b39c447b97c694a0ebfbcba480e7142c, type: 3}
   firePoint: {fileID: 2370434172409945705}
   projectileSpeed: 7

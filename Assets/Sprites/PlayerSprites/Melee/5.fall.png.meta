@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 4fe5f0c27b45347919aaa08e6df23f90
+guid: 9d905bb9b70b26f469aa6b7ea0b0d3f3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2550854124190377833
-    second: spr_StrikerGetHit_strip_0
+      213: -6852992188383112292
+    second: 5.fall_0
   - first:
-      213: -2683278654611744306
-    second: spr_StrikerGetHit_strip_1
+      213: 2195111832802801342
+    second: 5.fall_1
   - first:
-      213: 9204500937494646381
-    second: spr_StrikerGetHit_strip_2
+      213: 5224938501692080169
+    second: 5.fall_2
   - first:
-      213: -5359370597642476426
-    second: spr_StrikerGetHit_strip_3
+      213: -8316452526069949094
+    second: 5.fall_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,121 +105,16 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_StrikerGetHit_strip_0
+      name: 5.fall_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 27
-        width: 44
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 798dac560bb899cd0800000000000000
-      internalID: -2550854124190377833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerGetHit_strip_1
-      rect:
-        serializedVersion: 2
-        x: 111
-        y: 27
-        width: 39
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ec99a7eb74413cad0800000000000000
-      internalID: -2683278654611744306
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerGetHit_strip_2
-      rect:
-        serializedVersion: 2
-        x: 206
-        y: 27
-        width: 40
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d6e4e1ac5d4fcbf70800000000000000
-      internalID: 9204500937494646381
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_StrikerGetHit_strip_3
-      rect:
-        serializedVersion: 2
-        x: 302
-        y: 27
-        width: 42
+        x: 0
+        y: 0
+        width: 34
         height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -229,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 674e8db26d0bf95b0800000000000000
-      internalID: -5359370597642476426
+      spriteID: c93d5e2d9e745e0a0800000000000000
+      internalID: -6852992188383112292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 5.fall_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb6b77ce49a967e10800000000000000
+      internalID: 2195111832802801342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 5.fall_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 35
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9204e9662e5b28840800000000000000
+      internalID: 5224938501692080169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 5.fall_3
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 0
+        width: 34
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5d53307d76069c80800000000000000
+      internalID: -8316452526069949094
       vertices: []
       indices: 
       edges: []
@@ -249,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      spr_StrikerGetHit_strip_0: -2550854124190377833
-      spr_StrikerGetHit_strip_1: -2683278654611744306
-      spr_StrikerGetHit_strip_2: 9204500937494646381
-      spr_StrikerGetHit_strip_3: -5359370597642476426
+      5.fall_0: -6852992188383112292
+      5.fall_1: 2195111832802801342
+      5.fall_2: 5224938501692080169
+      5.fall_3: -8316452526069949094
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
