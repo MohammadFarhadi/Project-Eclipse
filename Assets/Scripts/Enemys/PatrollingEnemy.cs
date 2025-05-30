@@ -55,14 +55,7 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
             healthBarDisplay.Show(health);
             healthBarDisplay.UpdateHealthBar(health);
         }
-        if (attacker != null)
-        {
-            float knockbackDistance = 0.5f; // مقدار جابه‌جایی به عقب
-            Vector3 direction = (transform.position - attacker.position).normalized;
-
-            // فقط در محور X جابه‌جا کن
-            transform.position += new Vector3(direction.x, 0f, 0f) * knockbackDistance;
-        }
+        
 
 
         if (health <= 0 && direction == 1)
@@ -85,14 +78,11 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
     public void DropRandomItem()
     {
         if (dropItems.Length == 0) return;
-
-        float rand = Random.value;
-        if (rand <= dropChance)
-        {
+        
             int index = Random.Range(0, dropItems.Length);
             Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
             Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
             Instantiate(Sonin, transform.position, Quaternion.identity);
-        }
+        
     }
 }

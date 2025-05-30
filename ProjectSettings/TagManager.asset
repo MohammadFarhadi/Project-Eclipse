@@ -62,6 +62,9 @@ TagManager:
   - name: Collectible
     uniqueID: 3921709577
     locked: 0
+  - name: Health Bar
+    uniqueID: 2905204923
+    locked: 0
   - name: Bullet
     uniqueID: 4270681407
     locked: 0

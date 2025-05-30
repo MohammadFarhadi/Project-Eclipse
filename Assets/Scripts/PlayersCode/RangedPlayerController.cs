@@ -51,7 +51,7 @@ public class RangedPlayerController: PlayerControllerBase
         animator.SetBool("IsShooting", false);
         if (firePoint && bulletPool != null)
         {
-            GameObject proj = bulletPool.GetBullet("PlayerBullet1");
+            GameObject proj = bulletPool.GetBullet("PlayerBullet");
             if (proj != null)
             {
                 proj.transform.position = firePoint.position;

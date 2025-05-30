@@ -54,6 +54,6 @@ MonoBehaviour:
   - bulletTag: FireBullet
     bulletPrefab: {fileID: 388981467383489509, guid: d0fe6502492f9624ca57ecb072b092db, type: 3}
     poolSize: 5
-  - bulletTag: PlayerBullet
+  - bulletTag: PlayerBullet1
     bulletPrefab: {fileID: 8101427147496249563, guid: ae304e1df3f85d343b2bafeb0823627b, type: 3}
     poolSize: 5

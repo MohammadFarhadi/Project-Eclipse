@@ -158,16 +158,7 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
             Invoke(nameof(Die), 0.2f); 
         }
         
-        //از اینجا
-        if (attacker != null)
-        {
-            float knockbackDistance = 0.5f; // مقدار جابه‌جایی به عقب
-            Vector3 direction = (transform.position - attacker.position).normalized;
-
-            // فقط در محور X جابه‌جا کن
-            transform.position += new Vector3(direction.x, 0f, 0f) * knockbackDistance;
-        }
-        // تا اینجا اضافه شده
+        
     }
 
     public void Die()
