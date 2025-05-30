@@ -135,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 4732776952302863623}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6467762, y: 3.060913, z: -10}
+  m_LocalPosition: {x: -0.07555723, y: 3.21661, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -350,7 +350,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1030671779
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -2878776438291150895, guid: eb146ec8bfa3544a7a414a94c9c3f534, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -488,7 +488,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
-  attackDamage: 1
+  attackDamage: 3
 --- !u!114 &3813160500280276300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +644,7 @@ Transform:
   m_GameObject: {fileID: 7566740747621982445}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.6825, y: -1.3049998, z: 0.024156036}
+  m_LocalPosition: {x: 1.093, y: -0.029, z: 0.024156036}
   m_LocalScale: {x: 1.875, y: 1.875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

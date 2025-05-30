@@ -27,17 +27,22 @@ public class MeleePlayerController : PlayerControllerBase
 
     public override void Attack()
     {
+        Debug.Log("Attacking...");
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Debug.Log("Enemies hit: " + hitEnemies.Length);
+
         foreach (Collider2D enemyCollider in hitEnemies)
         {
+            Debug.Log("Hit enemy: " + enemyCollider.name);
             InterfaceEnemies enemy = enemyCollider.GetComponent<InterfaceEnemies>();
             if (enemy != null)
             {
                 enemy.TakeDamage(attackDamage , this.transform);
             }
         }
-
     }
+
 
     
     

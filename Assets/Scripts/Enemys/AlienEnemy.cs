@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class AlienEnemy : MonoBehaviour, InterfaceEnemies
 {
+    
+    
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
+    private bool isDying = false;
+
+    
+    
     public float moveSpeed = 2f;
     public float detectionRange = 5f;
     public float attackCooldown = 1f;
@@ -10,8 +18,8 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
     [SerializeField] private Animator animator;
     [SerializeField] private int health = 3;
 
-    public Transform pointA;  // نقطه شروع محدوده
-    public Transform pointB;  // نقطه پایان محدوده
+    public Transform pointA;
+    public Transform pointB;
 
     private GameObject currentTarget;
     private float lastAttackTime;
@@ -19,53 +27,60 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+            originalColor = spriteRenderer.color;
+
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        FindClosestPlayer();
+        FindClosestTarget();
 
         if (currentTarget != null)
         {
             Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
 
-            // چرخاندن به سمت پلیر
             if (direction.x > 0.01f)
                 transform.localScale = new Vector3(-0.8f, 0.8f, 1);
             else if (direction.x < -0.01f)
                 transform.localScale = new Vector3(0.8f, 0.8f, 1);
 
-            // حرکت فقط در راستای X
             Vector3 targetPosition = new Vector3(currentTarget.transform.position.x, transform.position.y, transform.position.z);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-            // اجرای انیمیشن راه رفتن
             animator.SetTrigger("IsWalk");
         }
     }
 
-    private void FindClosestPlayer()
+    private void FindClosestTarget()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        List<GameObject> allTargets = new List<GameObject>();
+        allTargets.AddRange(players);
+        allTargets.AddRange(enemies);
+
         float closestDistance = Mathf.Infinity;
         GameObject closest = null;
 
         float minX = Mathf.Min(pointA.position.x, pointB.position.x);
         float maxX = Mathf.Max(pointA.position.x, pointB.position.x);
 
-        foreach (GameObject player in players)
+        foreach (GameObject target in allTargets)
         {
-            float dist = Vector2.Distance(transform.position, player.transform.position);
-            float playerX = player.transform.position.x;
+            float dist = Vector2.Distance(transform.position, target.transform.position);
+            float targetX = target.transform.position.x;
+            float verticalDifference = Mathf.Abs(target.transform.position.y - transform.position.y);
 
-            // فقط اگر پلیر داخل محدوده X بین pointA و pointB باشد
-            if (playerX >= minX && playerX <= maxX)
+            if (targetX >= minX && targetX <= maxX && verticalDifference <= 1f) // 👈 فقط هدف‌هایی که نزدیک به سطح خودشن
             {
-                if (dist < detectionRange && dist < closestDistance)
+                if (dist < detectionRange && dist < closestDistance && target != this.gameObject)
                 {
                     closestDistance = dist;
-                    closest = player;
+                    closest = target;
                 }
             }
         }
@@ -73,9 +88,10 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
         currentTarget = closest;
     }
 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if ((other.CompareTag("Player") || other.CompareTag("Enemy")) && other.gameObject != this.gameObject)
         {
             if (Time.time - lastAttackTime > attackCooldown)
             {
@@ -83,21 +99,33 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
                 if (player != null)
                 {
                     player.HealthSystem(100, false);
-                    lastAttackTime = Time.time;
                 }
+
+                InterfaceEnemies enemy = other.GetComponent<InterfaceEnemies>();
+                if (enemy != null && enemy != this)
+                {
+                    enemy.TakeDamage(3, transform); 
+                }
+
+                lastAttackTime = Time.time;
             }
         }
     }
 
     public void TakeDamage(int damage, Transform attacker)
     {
+        if (isDying) return;
+
         health -= damage;
+        StartCoroutine(FlashRed());
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            isDying = true;
+            StartCoroutine(DeathEffect());
         }
     }
+
 
     private void OnDrawGizmosSelected()
     {
@@ -107,4 +135,48 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
             Gizmos.DrawLine(pointA.position, pointB.position);
         }
     }
+    
+    
+    private System.Collections.IEnumerator FlashRed()
+    {
+        if (spriteRenderer == null) yield break;
+
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = originalColor;
+    }
+
+    
+    
+    
+    
+    private System.Collections.IEnumerator DeathEffect()
+    {
+        float duration = 0.5f;
+        float timer = 0f;
+        Vector3 startScale = transform.localScale;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = timer / duration;
+
+            // Scale down
+            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, t);
+
+            // Fade out
+            if (spriteRenderer != null)
+            {
+                Color c = spriteRenderer.color;
+                c.a = 1f - t;
+                spriteRenderer.color = c;
+            }
+
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
+    
 }
