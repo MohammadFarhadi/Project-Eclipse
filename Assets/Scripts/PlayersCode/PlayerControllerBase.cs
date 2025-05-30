@@ -168,8 +168,14 @@ public abstract class PlayerControllerBase : MonoBehaviour
             }
         }
         else
+            
         {
-            animator.SetTrigger("GetHit");
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MeleeHit"))
+            {
+                animator.SetTrigger("GetHit");
+            }
+            
+
             if (current_health - value <= 0)
             {
                 if (HealthPoint > 1)

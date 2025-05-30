@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6283214351712523338}
   - component: {fileID: 6609332250260858681}
   - component: {fileID: 4004619555703800504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VirtualCam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1413609610317355470}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07555783, y: 3.216611, z: -10}
+  m_LocalPosition: {x: -0.08356647, y: 4.052968, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 0}
+    TrackingTarget: {fileID: 3515283842952120017}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -91,7 +91,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0.0072915554, y: 0.27592176}
+    ScreenPosition: {x: 0.0062499046, y: 0.26944017}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4743829421049991149}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 5498849504641767634}
   - component: {fileID: 3482784093534069207}
   - component: {fileID: 483122228980673239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 7518360351499530406}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07555783, y: 3.216611, z: -10}
+  m_LocalPosition: {x: -0.08356647, y: 4.052968, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 7412878079683976278}
   - component: {fileID: 8359817794261569817}
   - component: {fileID: 4980517831315229453}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Melle1Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ RectTransform:
   m_GameObject: {fileID: 8579872096444119617}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 0.62, y: 0.62, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4743829421049991149}
@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6232b944e9e2d4df8906c364c602cb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 3
   jumpForce: 5
   rb: {fileID: 0}
   animator: {fileID: 0}
@@ -516,7 +516,7 @@ MonoBehaviour:
   max_health: 100
   current_health: 30
   Health_gain: 5
-  playersUI: {fileID: 1202810525566428151, guid: 2f923bf3e8cbc46a2ad5e2bc19687042, type: 3}
+  playersUI: {fileID: 0}
   DashValue: 10
   attackPoint: {fileID: 4743829421049991149}
   attackRange: 0.5

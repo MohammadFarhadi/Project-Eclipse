@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2562884342386105168}
   - component: {fileID: 1435784420389663051}
   - component: {fileID: 1543419597045421332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VirtualCam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 9218070667262757801}
   - component: {fileID: 7595927454408143465}
   - component: {fileID: 5587451088500309874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 4732776952302863623}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07555783, y: 3.216611, z: -10}
+  m_LocalPosition: {x: -1.6467762, y: 3.060913, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 2296402067466247706}
   - component: {fileID: 4212241713352476069}
   - component: {fileID: 3813160500280276300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Melle2Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -481,7 +481,7 @@ MonoBehaviour:
   max_health: 100
   current_health: 100
   Health_gain: 5
-  playersUI: {fileID: 1202810525566428151, guid: 2f923bf3e8cbc46a2ad5e2bc19687042, type: 3}
+  playersUI: {fileID: 0}
   DashValue: 10
   attackPoint: {fileID: 4071749110077882355}
   attackRange: 0.5
@@ -628,7 +628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4071749110077882355}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
