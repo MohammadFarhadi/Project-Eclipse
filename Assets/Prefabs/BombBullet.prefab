@@ -167,8 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   explosionDelay: 1
-  explosionRadius: 2.5
-  explosionForce: 500
+  explosionRadius: 1.5
+  explosionForce: 250
   damage: 50
   playerLayer:
     serializedVersion: 2

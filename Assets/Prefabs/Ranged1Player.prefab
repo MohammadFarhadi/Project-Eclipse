@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6387539523567129340
 Transform:
   m_ObjectHideFlags: 0
@@ -140,10 +140,10 @@ MonoBehaviour:
   max_health: 100
   current_health: 30
   Health_gain: 5
-  playersUI: {fileID: 1102348577761452384, guid: abb9337ca5fee4d6e86761e354fbaac1, type: 3}
-  projectilePrefab: {fileID: 8101427147496249563, guid: ae304e1df3f85d343b2bafeb0823627b, type: 3}
+  playersUI: {fileID: 0}
   firePoint: {fileID: 6275184182572605517}
-  projectileSpeed: 10
+  projectileSpeed: 5
+  bulletTag: PlayerBullet1
   SpriniingCost: 5
   doubleJump: 1
 --- !u!114 &2704959161486657930
@@ -516,7 +516,7 @@ Transform:
   m_GameObject: {fileID: 7781026765832893749}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.027504, y: 15.725508, z: -10}
+  m_LocalPosition: {x: 0.9224949, y: 0.7355067, z: -9.975844}
   m_LocalScale: {x: 0.378428, y: 0.25191164, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -5,10 +5,12 @@ using UnityEngine.InputSystem;
 
 public class RangedPlayerController: PlayerControllerBase
 {
+    
     [Header("Ranged Bullet")]
-    [SerializeField] public GameObject projectilePrefab;
     [SerializeField] public Transform firePoint;
     [SerializeField] private float projectileSpeed = 10f;
+    [SerializeField] private string bulletTag = "PlayerBullet"; 
+
 
     [Header("Stamina")] public float SpriniingCost = 5f;
     
@@ -51,7 +53,7 @@ public class RangedPlayerController: PlayerControllerBase
         animator.SetBool("IsShooting", false);
         if (firePoint && bulletPool != null)
         {
-            GameObject proj = bulletPool.GetBullet("PlayerBullet");
+            GameObject proj = bulletPool.GetBullet(bulletTag);
             if (proj != null)
             {
                 proj.transform.position = firePoint.position;
