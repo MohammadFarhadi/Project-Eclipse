@@ -171,11 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65a46b9942761e42a2faff4f7182f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
-  detectionRange: 5
+  moveSpeed: 1.5
+  detectionRange: 7
   attackCooldown: 1
   animator: {fileID: 4843763516676897347}
-  health: 3
+  health: 6
   pointA: {fileID: 165394643234999649}
   pointB: {fileID: 7264304998160079445}
 --- !u!50 &8552968878404435651
@@ -261,7 +261,7 @@ Transform:
   m_GameObject: {fileID: 6680579860485767143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0.62, z: 0}
+  m_LocalPosition: {x: -2.86, y: 0.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

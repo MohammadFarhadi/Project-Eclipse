@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
 {
@@ -32,11 +34,12 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
     void Update()
     {
+        FindClosestPlayer();
+
         if (currentHealth <= 0) return;
 
         fireTimer += Time.deltaTime;
@@ -132,7 +135,7 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
         if (currentHealth <= 0)
         {
             animator.SetTrigger("Die");
-            Destroy(gameObject, 1f);
+            StartCoroutine(DeathEffect(GetComponent<SpriteRenderer>()));
         }
     }
     
@@ -187,6 +190,48 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
             }
         }
     }
+    
+    void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        float closestDistance = Mathf.Infinity;
+        Transform closest = null;
+
+        foreach (GameObject p in players)
+        {
+            float dist = Vector2.Distance(transform.position, p.transform.position);
+            if (dist < closestDistance)
+            {
+                closestDistance = dist;
+                closest = p.transform;
+            }
+        }
+
+        player = closest;
+    }
+    
+     IEnumerator DeathEffect(SpriteRenderer sr)
+    {
+        Color originalColor = sr.color;
+        sr.color = Color.white; // Flash white
+        yield return new WaitForSeconds(0.1f);
+
+        // Fade out
+        float duration = 0.4f;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            sr.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
+
 
     
     

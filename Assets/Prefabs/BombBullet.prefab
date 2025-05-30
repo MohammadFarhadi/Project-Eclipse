@@ -166,11 +166,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  stopDistance: 0.3
   explosionDelay: 1
-  explosionRadius: 1.5
+  explosionRadius: 1.03
   explosionForce: 250
   damage: 50
-  playerLayer:
+  targetLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 320
   explosionEffect: {fileID: 3606388702487907517, guid: e42ebf44d851449debc986cad8f67c5c, type: 3}
