@@ -97,7 +97,7 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
             if (Time.time - lastAttackTime > attackCooldown)
             {
                 PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
-                if (player != null)
+                if (player != null )
                 {
                     player.HealthSystem(100, false);
                 }
