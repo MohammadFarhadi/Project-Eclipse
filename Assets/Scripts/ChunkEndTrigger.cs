@@ -16,7 +16,9 @@ public class ChunkEndTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (other.name == "RangedPlayer") player1Inside = true;
-            if (other.name == "MeleePlayer") player2Inside = true;
+            if (other.name == "Ranged1Player") player1Inside = true;
+            if (other.name == "Melle2Player") player2Inside = true;
+            if (other.name == "Melee1Player") player2Inside = true;
         }
 
         if (player1Inside && player2Inside && !triggered)
@@ -42,9 +44,9 @@ public class ChunkEndTrigger : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject p in players)
         {
-            if (p.name == "RangedPlayer")
+            if (p.name == "RangedPlayer" || p.name == "Ranged1Player")
                 p.transform.position = nextChunkStartPoint.position + Vector3.left * 1.5f;
-            else if (p.name == "MeleePlayer")
+            else if (p.name == "Melle1Player" || p.name == "Melle2Player")
                 p.transform.position = nextChunkStartPoint.position + Vector3.right * 1.5f;
         }
 
