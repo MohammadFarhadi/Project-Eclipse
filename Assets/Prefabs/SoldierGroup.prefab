@@ -130,6 +130,10 @@ MonoBehaviour:
   bulletTag: SoldierBullet
   grenadeTag: BombBullet
   bulletSpeed: 10
+  dropItems:
+  - {fileID: 3330495594356245476, guid: 8b9af8c2c1a99d44dafdd3e99422150f, type: 3}
+  - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
+  Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
   speed: 2
   leftLimit: {fileID: 7090162893051750735}
   rightLimit: {fileID: 7795469990205801852}

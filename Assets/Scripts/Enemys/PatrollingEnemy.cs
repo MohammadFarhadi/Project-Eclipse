@@ -15,7 +15,7 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
     [Header("Possible Drops")]
     [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
     [SerializeField] private GameObject Sonin;
-    [SerializeField] private float dropChance = 0.5f; 
+    
     void Start()
     {
         if (healthBarDisplay != null)

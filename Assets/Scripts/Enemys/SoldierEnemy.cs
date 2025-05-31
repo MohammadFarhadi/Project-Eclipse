@@ -8,7 +8,8 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
     [SerializeField] private string bulletTag = "SoldierBullet";
     [SerializeField] private string grenadeTag = "BombBullet";
     [SerializeField] private float bulletSpeed = 10f;
-
+    [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
+    [SerializeField] private GameObject Sonin;
     [Header("Patrolling")]
     public float speed = 2f;
     public Transform leftLimit, rightLimit;
@@ -135,6 +136,7 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
         if (currentHealth <= 0)
         {
             animator.SetTrigger("Die");
+            DropRandomItem();
             StartCoroutine(DeathEffect(GetComponent<SpriteRenderer>()));
         }
     }
@@ -227,11 +229,20 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
             elapsed += Time.deltaTime;
             yield return null;
         }
-
+        
         Destroy(gameObject);
     }
 
-
+    public void DropRandomItem()
+    {
+        if (dropItems.Length == 0) return;
+        
+        int index = Random.Range(0, dropItems.Length);
+        Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
+        Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+        Instantiate(Sonin, transform.position, Quaternion.identity);
+        
+    }
 
     
     
