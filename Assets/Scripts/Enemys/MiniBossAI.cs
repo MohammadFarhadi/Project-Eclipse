@@ -168,13 +168,18 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
         Instantiate(Key, spawnPosition, Quaternion.identity);
         Instantiate(Sonin, transform.position, Quaternion.identity);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.CompareTag("PointA") || collision.CompareTag("PointB"))
+        if (other.CompareTag("PointA") || other.CompareTag("PointB"))
         {
             Flip(); // تغییر جهت
-            currentTargetTag = collision.tag;
-            lastPatrolTarget = collision.transform;
+            currentTargetTag = other.tag;
+            lastPatrolTarget = other.transform;
+        }
+        else if (other.CompareTag("Player"))
+        {
+            PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
+            player.HealthSystem(50, false);
         }
     }
 }

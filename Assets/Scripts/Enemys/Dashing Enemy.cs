@@ -12,9 +12,7 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
     [SerializeField] private int maxHealth = 9;
     private int currentHealth;
 
-    [Header("Damage Settings")]
-    [SerializeField] private int damage = 50;
-
+    
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
@@ -100,19 +98,7 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!isDashing) return;
-
-        if (collision.CompareTag("Player"))
-        {
-            PlayerControllerBase player = collision.GetComponent<PlayerControllerBase>();
-            if (player != null)
-            {
-                player.HealthSystem(damage, false);
-            }
-        }
-    }
+    
 
     public void TakeDamage(int damage, Transform attacker)
     {

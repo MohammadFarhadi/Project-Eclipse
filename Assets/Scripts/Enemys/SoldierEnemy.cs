@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 
 public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
@@ -231,7 +233,7 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
         }
         
         Destroy(gameObject);
-    }
+    }   
 
     public void DropRandomItem()
     {
@@ -244,6 +246,13 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
         
     }
 
-    
-    
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
+            player.HealthSystem(50, false);
+            Debug.Log("Player hited ");
+        }
+    }
 }

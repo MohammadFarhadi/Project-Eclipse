@@ -16,6 +16,8 @@ TagManager:
   - PlayerBullet1
   - SoldierBullet
   - BombBullet
+  - ShopUI
+  - FadePanel
   layers:
   - Default
   - TransparentFX
@@ -27,8 +29,8 @@ TagManager:
   - DetectionZone
   - Player
   - Enemy1
-  - 
-  - 
+  - ShopUI
+  - FadePanel
   - 
   - 
   - 

@@ -29,17 +29,19 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
         transform.position += new Vector3(direction * speed * Time.deltaTime, 0, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("TurnPoint"))
+        if (other.gameObject.CompareTag("TurnPoint"))
         {
             direction *= -1;
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
         }
-        else if (collision.gameObject.CompareTag("Player"))
+        else if (other.gameObject.CompareTag("Player"))
         {
+            PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
+            player.HealthSystem(50, false);
             animator.SetTrigger("Attack");
             Debug.Log("Player hited ");
         }
