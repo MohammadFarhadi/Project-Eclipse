@@ -5,9 +5,7 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerControllerBase : MonoBehaviour
 {
-    [SerializeField] private float knockbackForce = 10f;
-    [SerializeField] private float knockbackDuration = 0.2f;
-    private bool isKnockedBack = false;
+    
     [Header("Movement")]
     [SerializeField] protected float moveSpeed = 1.5f;
     [SerializeField] protected float jumpForce = 100f;
@@ -142,6 +140,12 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     public  virtual void HealthSystem(int value, bool status)
     {
+        if (IsInvincible())
+        {
+            return;
+        }
+
+        value = ModifyDamage(value);
         if (status == true)
         {
             if (current_health + value > max_health)
@@ -273,24 +277,15 @@ public abstract class PlayerControllerBase : MonoBehaviour
         return interactTimer > 0;
 
     }
-    public void ApplyKnockback(Vector2 sourcePosition)
+    protected virtual bool IsInvincible()
     {
-        if (isKnockedBack) return;
-
-        isKnockedBack = true;
-
-        // جهت نیرو از دشمن به سمت پلیر
-        Vector2 direction = (transform.position - (Vector3)sourcePosition).normalized;
-
-        rb.linearVelocity = Vector2.zero; // توقف حرکت قبلی
-        rb.AddForce(direction * knockbackForce, ForceMode2D.Impulse);
-
-        // پایان Knockback بعد از مدت مشخص
-        Invoke(nameof(EndKnockback), knockbackDuration);
+        return false;
+    }
+    protected virtual int ModifyDamage(int value)
+    {
+        return value; // پیش‌فرض: هیچ تغییری در دمیج اعمال نمی‌کنه
     }
 
-    private void EndKnockback()
-    {
-        isKnockedBack = false;
-    }
+
+   
 }

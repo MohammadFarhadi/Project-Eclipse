@@ -423,6 +423,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6929972898864609666, guid: da8317ce2edd14c46b9c72829b6526ca, type: 3}
+      propertyPath: m_TagString
+      value: FadePanel
+      objectReference: {fileID: 0}
     - target: {fileID: 8206074845874376535, guid: da8317ce2edd14c46b9c72829b6526ca, type: 3}
       propertyPath: m_Name
       value: Transition
@@ -537,6 +541,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e2b0c136b674740a6e0d67d3432351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &879036376 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6567019070233465305, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
+  m_PrefabInstance: {fileID: 4360356076341061989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &988699471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1646,6 +1655,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7230754502432272723, guid: 0fb6ba939be352a49b26032798d78a38, type: 3}
+      propertyPath: fadePanel
+      value: 
+      objectReference: {fileID: 879036376}
+    - target: {fileID: 7230754502432272723, guid: 0fb6ba939be352a49b26032798d78a38, type: 3}
       propertyPath: 'shopItems.Array.data[0]'
       value: 
       objectReference: {fileID: 740778743}
@@ -1741,7 +1754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7072678040399192025, guid: e84b790cd988309428223ea7af312c25, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8675671341297182583, guid: e84b790cd988309428223ea7af312c25, type: 3}
       propertyPath: m_LocalPosition.x

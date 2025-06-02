@@ -5231,7 +5231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b5f502a9b5bd645a0bd0aaf559ea16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadePanel: {fileID: 4728670898352985516, guid: c1944a4231ceec541b72906794544f96, type: 3}
+  fadePanel: {fileID: 0}
   fadeDuration: 1
 --- !u!1 &890005274256129647
 GameObject:
@@ -36599,6 +36599,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7301160360236713828, guid: 0e2fce146d48448fba15762b8c4b9a5a, type: 3}
+      propertyPath: shopManager
+      value: 
+      objectReference: {fileID: 7230754502432272723, guid: 0fb6ba939be352a49b26032798d78a38, type: 3}
     - target: {fileID: 8205507276703258369, guid: 0e2fce146d48448fba15762b8c4b9a5a, type: 3}
       propertyPath: m_Name
       value: Cafe

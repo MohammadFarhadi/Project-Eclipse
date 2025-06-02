@@ -7,7 +7,22 @@ public class ShopTrigger : MonoBehaviour
 
     private void Awake()
     {
-        // مقداردهی خودکار به shopUI اگر null باشد
+        shopUI = ShopManager.Instance.GetShopUI();
+
+        if (shopUI == null)
+        {
+            Debug.LogWarning("FadePanel is null in FadeManager.");
+            return;
+        }
+
+        if (shopUI.GetComponent<CanvasGroup>() == null)
+        {
+            shopUI.AddComponent<CanvasGroup>();
+        }
+
+        shopUI.SetActive(false);
+        /*
+         * // مقداردهی خودکار به shopUI اگر null باشد
         if (shopUI == null)
         {
             shopUI = GameObject.Find("ShopCanvas");
@@ -26,6 +41,7 @@ public class ShopTrigger : MonoBehaviour
         // غیرفعال کردن UI در شروع
         if (shopUI != null)
             shopUI.SetActive(false);
+         */
     }
 
     private void OnTriggerEnter2D(Collider2D other)

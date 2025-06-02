@@ -5,7 +5,8 @@ public class ShopManager : MonoBehaviour
     private PlayerControllerBase currentPlayer;
 
     public ShopItem[] shopItems;  // آرایه آیتم‌های شاپ
-
+    public static ShopManager Instance;
+    public GameObject ShopUI;
     public void SetCurrentPlayer(PlayerControllerBase player)
     {
         currentPlayer = player;
@@ -27,5 +28,28 @@ public class ShopManager : MonoBehaviour
         }
 
         shopItems[itemIndex].BuyItem(currentPlayer);
+    }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // اختیاری
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (ShopUI == null)
+        {
+            ShopUI = GameObject.FindWithTag("ShopUI");
+        }
+    }
+
+    public GameObject GetShopUI()
+    {
+        return ShopUI;
     }
 }

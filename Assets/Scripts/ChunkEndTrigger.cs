@@ -9,39 +9,51 @@ public class ChunkEndTrigger : MonoBehaviour
 
     private bool player1Inside = false;
     private bool player2Inside = false;
+    private bool isTransitioning = false;
 
     private ChunkManager chunkManager;
     private GameObject currentChunk;
 
-    private void Start()
+    private void Awake()
     {
         // پیدا کردن FadePanel حتی اگر غیرفعال باشد
         if (fadePanel == null)
         {
             fadePanel = GameObject.FindWithTag("FadePanel");
-            fadePanel.SetActive(false);
             if (fadePanel == null)
             {
-                Debug.LogWarning("FadePanel not found in the scene. Please assign it manually or tag it as 'FadePanel'.");
+                Debug.LogWarning("FadePanel not found. Please assign it manually or tag it as 'FadePanel'.");
+                return;
             }
         }
 
+        // اطمینان از وجود CanvasGroup
+        if (fadePanel.GetComponent<CanvasGroup>() == null)
+        {
+            fadePanel.AddComponent<CanvasGroup>();
+        }
 
+        
         chunkManager = FindObjectOfType<ChunkManager>();
-        currentChunk = transform.parent.gameObject; // پدر = چانک فعلی
+        currentChunk = transform.parent.gameObject;
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            if (other.name == "RangedPlayer" || other.name == "Ranged1Player") player1Inside = true;
-            if (other.name == "Melle2Player" || other.name == "Melle1Player") player2Inside = true;
+            if (other.name == "RangedPlayer" || other.name == "Ranged1Player")
+                player1Inside = true;
+            else if (other.name == "Melle1Player" || other.name == "Melle2Player")
+                player2Inside = true;
         }
+    }
 
-        if (player1Inside && player2Inside)
+    private void Update()
+    {
+        if (!isTransitioning && player1Inside && player2Inside)
         {
+            isTransitioning = true;
             StartCoroutine(TransitionToNextChunk());
         }
     }
@@ -54,9 +66,17 @@ public class ChunkEndTrigger : MonoBehaviour
             yield break;
         }
 
-        // Fade Out
         CanvasGroup canvasGroup = fadePanel.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            Debug.LogError("FadePanel does not have a CanvasGroup component.");
+            yield break;
+        }
+
         fadePanel.SetActive(true);
+        canvasGroup.alpha = 0;
+
+        // Fade Out
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
             canvasGroup.alpha = t / fadeDuration;
@@ -80,8 +100,7 @@ public class ChunkEndTrigger : MonoBehaviour
             yield break;
         }
 
-
-        // جابجایی بازیکن‌ها
+        // انتقال بازیکن‌ها
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject p in players)
         {
@@ -100,8 +119,8 @@ public class ChunkEndTrigger : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 0;
-        fadePanel.SetActive(false);
 
-        gameObject.SetActive(false); // غیرفعال کردن تریگر
+        // غیرفعال کردن تریگر برای جلوگیری از اجرای مجدد
+        gameObject.SetActive(false);
     }
 }

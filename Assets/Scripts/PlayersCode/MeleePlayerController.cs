@@ -123,4 +123,14 @@ public class MeleePlayerController : PlayerControllerBase
     {
         animator.SetBool("IsFalling", false);
     }
+    protected override bool IsInvincible()
+    {
+        return isDashing;
+    }
+    protected override int ModifyDamage(int value)
+    {
+        return Mathf.CeilToInt(value / 2f); // نصف دمیج (گرد به بالا)
+    }
+
+
 }
