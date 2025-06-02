@@ -5,44 +5,42 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerControllerBase : MonoBehaviour
 {
-    
-    [Header("Movement")]
-    [SerializeField] protected float moveSpeed = 1.5f;
+
+    [Header("Movement")] [SerializeField] protected float moveSpeed = 1.5f;
     [SerializeField] protected float jumpForce = 100f;
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Animator animator;
-    public bool HasKey = false ;
-    
-    [Header("Stamina")]
-    [SerializeField]protected  float Stamina = 50;
-    [SerializeField]protected float Stamina_gain = 5f;
-    [SerializeField]protected float Stamina_max = 50;
+    public bool HasKey = false;
 
-    [Header("Health")] 
-    private int HealthPoint = 3;
+    [Header("Stamina")] [SerializeField] protected float Stamina = 50;
+    [SerializeField] protected float Stamina_gain = 5f;
+    [SerializeField] protected float Stamina_max = 50;
+
+    [Header("Health")] private int HealthPoint = 3;
     [SerializeField] protected float max_health = 100f;
     [SerializeField] protected float current_health = 30;
     [SerializeField] protected float Health_gain = 5f;
-    
-    
+
+
     //player interaction
     protected bool Interacting = false;
     private float interactBufferTime = 0.2f;
     private float interactTimer = 0f;
 
 
-    
-    
+
+
     [SerializeField] private PlayersUI playersUI;
-    
+
     private Vector3 originalScale;
 
     protected SpriteRenderer Sprite;
     protected bool isGrounded = true;
     protected Vector2 move_input;
+
     protected virtual void Start()
     {
-        Sprite  = GetComponent<SpriteRenderer>();
+        Sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         originalScale = Sprite.transform.localScale;
@@ -61,7 +59,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
         {
             animator.SetFloat("IsRunning", Mathf.Abs(move_input.x));
         }
-        
+
         if (interactTimer > 0f)
         {
             interactTimer -= Time.deltaTime;
@@ -84,6 +82,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
             isGrounded = false;
         }
     }
+
     protected virtual void FlipDirection(float horizontalInput)
     {
         if (horizontalInput > 0.01f)
@@ -96,7 +95,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
         }
     }
 
-    
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -104,7 +103,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
             animator?.SetBool("IsJumping", false);
             HandleLanding();
             isGrounded = true;
-            HandleLanding(); 
+            HandleLanding();
         }
     }
 
@@ -113,7 +112,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     }
 
     public abstract void Attack();
-    
+
     protected virtual float GetMoveSpeed()
     {
         return moveSpeed;
@@ -128,6 +127,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     {
         // Nothing here in base
     }
+
     protected virtual bool CanApplyMovement()
     {
         return true;
@@ -135,10 +135,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     protected virtual void HealthGain()
     {
-        
+
     }
 
-    public  virtual void HealthSystem(int value, bool status)
+    public virtual void HealthSystem(int value, bool status)
     {
         if (IsInvincible())
         {
@@ -151,8 +151,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
             if (current_health + value > max_health)
             {
                 if (HealthPoint == 3)
-                { current_health = max_health;
-                }else if (HealthPoint < 3)
+                {
+                    current_health = max_health;
+                }
+                else if (HealthPoint < 3)
                 {
                     if (playersUI != null)
                     {
@@ -165,6 +167,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
                             }
                         }
                     }
+
                     HealthPoint++;
                     current_health = current_health + value - max_health;
                 }
@@ -175,20 +178,16 @@ public abstract class PlayerControllerBase : MonoBehaviour
             }
         }
         else
-            
+
         {
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("MeleeHit"))
-            {
-                animator.SetTrigger("GetHit");
-            }
-            
+            animator.SetTrigger("GetHit");
 
             if (current_health - value <= 0)
             {
                 if (HealthPoint > 1)
                 {
                     HealthPoint--;
-                    
+
                     if (playersUI != null)
                     {
                         for (int i = 0; i < 3; i++)
@@ -198,8 +197,9 @@ public abstract class PlayerControllerBase : MonoBehaviour
                                 playersUI.hearts[i].SetActive(false);
                                 break;
                             }
-                        }    
+                        }
                     }
+
                     current_health = max_health;
                 }
                 else
@@ -215,9 +215,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
                 current_health -= value;
             }
         }
+
         playersUI?.SetHealthBar(current_health, max_health);
     }
-    
+
     public virtual void StaminaSystem(float value, bool status)
     {
         if (status == true)
@@ -248,6 +249,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
     public virtual void Respawn(Vector3 position)
     {
         transform.position = position;
@@ -257,6 +259,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
             rb.angularVelocity = 0f;
         }
     }
+
     public void SetStamina(float value)
     {
         Stamina += value;
@@ -277,15 +280,14 @@ public abstract class PlayerControllerBase : MonoBehaviour
         return interactTimer > 0;
 
     }
+
     protected virtual bool IsInvincible()
     {
         return false;
     }
+
     protected virtual int ModifyDamage(int value)
     {
         return value; // پیش‌فرض: هیچ تغییری در دمیج اعمال نمی‌کنه
     }
-
-
-   
 }

@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02129916a0874405e9abf39392e7d687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 382927989430616622, guid: dca37c6647617184d83a705f1003023b, type: 3}
+  bulletPool: {fileID: 0}
   bulletTag: SoldierBullet
   grenadeTag: BombBullet
   bulletSpeed: 10

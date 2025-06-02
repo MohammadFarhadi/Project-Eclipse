@@ -38,6 +38,18 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
     }
+    void Awake()
+    {
+        if (bulletPool == null)
+        {
+            bulletPool = FindObjectOfType<BulletPool>();
+            if (bulletPool == null)
+            {
+                Debug.LogError("BulletPool not found in the scene!");
+            }
+        }
+    }
+
 
     void Update()
     {
