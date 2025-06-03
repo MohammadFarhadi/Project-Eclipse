@@ -40,9 +40,9 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
         }
         else if (other.gameObject.CompareTag("Player"))
         {
+            animator.SetTrigger("Attack");
             PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
             player.HealthSystem(50, false);
-            animator.SetTrigger("Attack");
             Debug.Log("Player hited ");
         }
     }

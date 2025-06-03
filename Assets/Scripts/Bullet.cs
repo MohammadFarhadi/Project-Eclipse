@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
             var targetPlayer = other.GetComponent<PlayerControllerBase>();
             if (targetPlayer != null)
             {
-                targetPlayer.HealthSystem(10, false);
+                targetPlayer.HealthSystem(30, false);
                 Debug.Log($"{targetPlayer.name} got hit by bullet from {attacker?.name}");
             }
 

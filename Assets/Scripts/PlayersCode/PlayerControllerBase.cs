@@ -180,7 +180,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
         else
 
         {
-            animator.SetTrigger("GetHit");
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("GetHit")) {
+                animator.SetTrigger("GetHit");
+            }
+            
 
             if (current_health - value <= 0)
             {
@@ -214,6 +217,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
             {
                 current_health -= value;
             }
+
         }
 
         playersUI?.SetHealthBar(current_health, max_health);
