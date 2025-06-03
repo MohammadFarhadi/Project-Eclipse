@@ -908,6 +908,10 @@ PrefabInstance:
       propertyPath: playersUI
       value: 
       objectReference: {fileID: 1425520778}
+    - target: {fileID: 2891891217537916507, guid: 3abe0f2085b5ca145a00f76881da4f79, type: 3}
+      propertyPath: current_health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6275184182572605517, guid: 3abe0f2085b5ca145a00f76881da4f79, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -1085,6 +1089,10 @@ PrefabInstance:
       propertyPath: playersUI
       value: 
       objectReference: {fileID: 1736162539}
+    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 576
+      objectReference: {fileID: 0}
     - target: {fileID: 8579872096444119617, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_Name
       value: Melle1Player

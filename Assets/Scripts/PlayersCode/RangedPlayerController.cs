@@ -50,7 +50,6 @@ public class RangedPlayerController: PlayerControllerBase
     
     public override void Attack()
     {
-        animator.SetBool("IsShooting", false);
         if (firePoint && bulletPool != null)
         {
             GameObject proj = bulletPool.GetBullet(bulletTag);
@@ -75,6 +74,7 @@ public class RangedPlayerController: PlayerControllerBase
                     // تا اینجا اضافه شده
                 }
             }
+        animator.SetBool("IsShooting", false);
         }
     }
     public void OnMove(InputAction.CallbackContext context)

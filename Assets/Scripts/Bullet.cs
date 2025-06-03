@@ -28,11 +28,7 @@ public class Bullet : MonoBehaviour
         }
         else if (other.CompareTag("Player"))
         {
-            // Prevent friendly fire این مشکل حل نشد هنوز پلیر می تونه تیر بزنه به خودی
-            // if (attacker.root.CompareTag("Player"))
-            // {
-            //     return;
-            // }
+            
 
             var targetPlayer = other.GetComponent<PlayerControllerBase>();
             if (targetPlayer != null)

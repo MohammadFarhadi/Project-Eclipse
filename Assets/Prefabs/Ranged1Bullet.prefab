@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7682340525457245967}
   - component: {fileID: -4306568076221849417}
   - component: {fileID: 3587830303040996923}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ranged1Bullet
   m_TagString: PlayerBullet1
   m_Icon: {fileID: 0}
