@@ -135,7 +135,7 @@ Transform:
   m_GameObject: {fileID: 4732776952302863623}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07555723, y: 3.21661, z: -10}
+  m_LocalPosition: {x: -6.343515, y: 2.992301, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -289,7 +289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3267062107418703815
 Transform:
   m_ObjectHideFlags: 0
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6232b944e9e2d4df8906c364c602cb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 2
   jumpForce: 5
   rb: {fileID: 0}
   animator: {fileID: 0}
@@ -487,8 +487,8 @@ MonoBehaviour:
   attackRange: 0.5
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 64
-  attackDamage: 3
+    m_Bits: 576
+  attackDamage: 1
 --- !u!114 &3813160500280276300
 MonoBehaviour:
   m_ObjectHideFlags: 0

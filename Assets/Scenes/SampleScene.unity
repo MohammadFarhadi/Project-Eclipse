@@ -1081,57 +1081,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3891246626070763834, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.08356647
-      objectReference: {fileID: 0}
-    - target: {fileID: 3891246626070763834, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.0529685
-      objectReference: {fileID: 0}
-    - target: {fileID: 4743829421049991149, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4743829421049991149, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 6150266836590626094, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: fb115159655384d5bb48c18df2bc95be, type: 2}
-    - target: {fileID: 6283214351712523338, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.08356647
-      objectReference: {fileID: 0}
-    - target: {fileID: 6283214351712523338, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.0529685
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: playersUI
       value: 
       objectReference: {fileID: 1736162539}
-    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: attackRange
-      value: 0.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: current_health
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 8579872096444119617, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_Name
       value: Melle1Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8579872096444119617, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1491,6 +1447,10 @@ PrefabInstance:
     - target: {fileID: 4212241713352476069, guid: bc7e97b548a6dd44097a9860f3178eaf, type: 3}
       propertyPath: attackDamage
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212241713352476069, guid: bc7e97b548a6dd44097a9860f3178eaf, type: 3}
+      propertyPath: enemyLayers.m_Bits
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 6633855387645751984, guid: bc7e97b548a6dd44097a9860f3178eaf, type: 3}
       propertyPath: m_LocalPosition.x

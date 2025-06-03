@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1413609610317355470}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08356647, y: 4.052968, z: -10}
+  m_LocalPosition: {x: -0.08356647, y: 4.0529685, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 3572671379975723266}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.98, y: 0.02, z: 0.024156036}
+  m_LocalPosition: {x: 0.98, y: 0.11, z: 0.024156036}
   m_LocalScale: {x: 1.875, y: 1.875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -166,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 7518360351499530406}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08356647, y: 4.052968, z: -10}
+  m_LocalPosition: {x: -0.08356647, y: 4.0529685, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -385,7 +385,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1030671779
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 8623939804438536664, guid: 49f8e2669c9a0134cb413ab6b685475e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -408,7 +408,7 @@ Animator:
   m_GameObject: {fileID: 8579872096444119617}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ab3dfa229bf464a4f8fba29f396e016e, type: 2}
+  m_Controller: {fileID: 9100000, guid: fb115159655384d5bb48c18df2bc95be, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -505,7 +505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6232b944e9e2d4df8906c364c602cb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2
   jumpForce: 5
   rb: {fileID: 0}
   animator: {fileID: 0}
@@ -514,15 +514,15 @@ MonoBehaviour:
   Stamina_gain: 5
   Stamina_max: 50
   max_health: 100
-  current_health: 30
+  current_health: 100
   Health_gain: 5
   playersUI: {fileID: 0}
   DashValue: 10
   attackPoint: {fileID: 4743829421049991149}
-  attackRange: 0.5
+  attackRange: 0.55
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   attackDamage: 1
 --- !u!114 &4980517831315229453
 MonoBehaviour:
