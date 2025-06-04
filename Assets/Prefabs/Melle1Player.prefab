@@ -166,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 7518360351499530406}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08356647, y: 4.0529685, z: -10}
+  m_LocalPosition: {x: -0.08356649, y: 4.052969, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -340,7 +340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.22, y: -3.86}
+  m_AnchoredPosition: {x: -3, y: -4}
   m_SizeDelta: {x: 0.84375, y: 1.0625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &4475745122218437513
@@ -505,6 +505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6232b944e9e2d4df8906c364c602cb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpClip: {fileID: 8300000, guid: 30bba22ac4c38594e98b416fc800cddf, type: 3}
+  deathClip: {fileID: 8300000, guid: edfc91887d2bcb046841b4aaf8a3ffbb, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   moveSpeed: 2
   jumpForce: 5
   rb: {fileID: 0}
@@ -516,7 +519,11 @@ MonoBehaviour:
   max_health: 100
   current_health: 100
   Health_gain: 5
+  baseDamage: 1
+  boostedDamage: 2
+  boostedHitsRemaining: 0
   playersUI: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: 310f6209e786c414ba5e55e7409eb512, type: 3}
   DashValue: 10
   attackPoint: {fileID: 4743829421049991149}
   attackRange: 0.55

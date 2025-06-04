@@ -205,9 +205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76c3a49e83e8d74b9c63374ed72707c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   moveSpeed: 2
-  player1: {fileID: 1201526842495556030, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
-  player2: {fileID: 1093571156077408059, guid: e03982d7ba93a4437bc9b1531ace74b4, type: 3}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   detectionRange: 4
   normalBulletPrefab: {fileID: 7012351190103006667, guid: 3fac667621162ab41b96dcb2ce3425b9, type: 3}
   fireBulletPrefab: {fileID: 388981467383489509, guid: d0fe6502492f9624ca57ecb072b092db, type: 3}

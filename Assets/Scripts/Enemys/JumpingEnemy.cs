@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
 {
+    [Header("Sounds")]
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+    public GameObject oneShotAudioPrefab;
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float horizontalForce = 3f;
@@ -87,7 +91,13 @@ public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
     private void Die()
     {
         if (animator != null)
+        {
+            GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+            deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
             animator.SetTrigger("IsDead");
+            
+        }
+            
 
         Destroy(gameObject, 0.5f);
     }

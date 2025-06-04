@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class RangedPlayerController: PlayerControllerBase
 {
-    
+    [Header("Sound Clips")]
+    public AudioClip attackClip;
     [Header("Ranged Bullet")]
     [SerializeField] public Transform firePoint;
     [SerializeField] private float projectileSpeed = 10f;
@@ -54,6 +55,7 @@ public class RangedPlayerController: PlayerControllerBase
     {
         if (firePoint && bulletPool != null)
         {
+            PlaySound(attackClip);
             GameObject proj = bulletPool.GetBullet(bulletTag);
             if (proj != null)
             {
@@ -78,8 +80,8 @@ public class RangedPlayerController: PlayerControllerBase
                     }
                     // تا اینجا اضافه شده
                 }
-            }
-        animator.SetBool("IsShooting", false);
+            } 
+            animator.SetBool("IsShooting", false);
         }
     }
     public void OnMove(InputAction.CallbackContext context)
@@ -109,6 +111,7 @@ public class RangedPlayerController: PlayerControllerBase
     {
         if (!isGrounded && doubleJump)
         {
+            PlaySound(jumpClip);
             animator.SetBool("IsJumping", true);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f); // پاک کردن سرعت عمودی فعلی
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // تعیین سرعت پرش دوم
@@ -140,6 +143,7 @@ public class RangedPlayerController: PlayerControllerBase
     {
         doubleJump = true;
     }
+   
     
 
 }

@@ -35,21 +35,24 @@ public class AudioManager : MonoBehaviour
 
     public void SetMasterVolume(float value)
     {
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20);
+        float dB = Mathf.Lerp(-80f, 10f, value); // Max +10dB
+        audioMixer.SetFloat("MasterVolume", dB);
         lastMasterVolume = value;
         if (!isMasterMuted) PlayerPrefs.SetFloat("MasterVolume", value);
     }
 
     public void SetFXVolume(float value)
     {
-        audioMixer.SetFloat("FXVolume", Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20);
+        float dB = Mathf.Lerp(-80f, 10f, value); // Max +10dB
+        audioMixer.SetFloat("FXVolume", dB);
         lastFXVolume = value;
         if (!isFXMuted) PlayerPrefs.SetFloat("FXVolume", value);
     }
 
     public void SetMusicVolume(float value)
     {
-        audioMixer.SetFloat("MusicVolume", Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20);
+        float dB = Mathf.Lerp(-80f, -10f, value); // Max -10dB
+        audioMixer.SetFloat("MusicVolume", dB);
         lastMusicVolume = value;
         if (!isMusicMuted) PlayerPrefs.SetFloat("MusicVolume", value);
     }

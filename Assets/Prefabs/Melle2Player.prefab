@@ -299,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 6728571528844971204}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.31, y: -2.8, z: 0}
+  m_LocalPosition: {x: -3, y: -4, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -470,6 +470,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6232b944e9e2d4df8906c364c602cb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpClip: {fileID: 8300000, guid: 30bba22ac4c38594e98b416fc800cddf, type: 3}
+  deathClip: {fileID: 8300000, guid: edfc91887d2bcb046841b4aaf8a3ffbb, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   moveSpeed: 2
   jumpForce: 5
   rb: {fileID: 0}
@@ -481,7 +484,11 @@ MonoBehaviour:
   max_health: 100
   current_health: 100
   Health_gain: 5
+  baseDamage: 1
+  boostedDamage: 2
+  boostedHitsRemaining: 0
   playersUI: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: 310f6209e786c414ba5e55e7409eb512, type: 3}
   DashValue: 10
   attackPoint: {fileID: 4071749110077882355}
   attackRange: 0.5

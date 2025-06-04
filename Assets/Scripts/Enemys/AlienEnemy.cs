@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class AlienEnemy : MonoBehaviour, InterfaceEnemies
 {
-    
+    [Header("Sounds")]
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+    public GameObject oneShotAudioPrefab;
     
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -99,6 +102,8 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
                 PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
                 if (player != null )
                 {
+                    GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+                    attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
                     player.HealthSystem(100, false);
                 }
 
@@ -176,6 +181,8 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
             yield return null;
         }
         DropRandomItem();
+        GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+        deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
         Destroy(gameObject);
     }
     public void DropRandomItem()

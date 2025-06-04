@@ -343,6 +343,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1a44649b4eb1c488510a1a085b5295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   bulletPrefab: {fileID: 7012351190103006667, guid: 3fac667621162ab41b96dcb2ce3425b9, type: 3}
   firePoint: {fileID: 2646313651745766439}
   fireRate: 1.5

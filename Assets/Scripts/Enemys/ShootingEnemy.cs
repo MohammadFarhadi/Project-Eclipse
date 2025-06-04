@@ -3,7 +3,10 @@ using System.Collections.Generic;
 
 public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 {
-    
+    [Header("Sounds")]
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+    public GameObject oneShotAudioPrefab;
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 1.5f;
@@ -64,13 +67,13 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
         if (target == null || firePoint == null || bulletPool == null) return;
 
         Vector2 dir = (target.transform.position - firePoint.position).normalized;
-        animator.SetTrigger("Attack");
 
         GameObject bullet = bulletPool.GetBullet("Bullet"); 
         if (bullet != null)
         {
             bullet.transform.position = firePoint.position;
             bullet.transform.rotation = Quaternion.identity;
+                animator.SetTrigger("Attack");  
 
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             if (rb != null)
@@ -87,6 +90,8 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
                 bulletScript.SetAttacker(this.transform);
             }
         }
+        GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+        attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
     }
 
 
@@ -130,6 +135,8 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 
     public void Die()
     {
+        GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+        deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
         DropRandomItem();
         Destroy(gameObject);
     }

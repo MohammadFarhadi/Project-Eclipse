@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2704959161486657930}
   - component: {fileID: 1746945698021206273}
   - component: {fileID: 2738394505454236568}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ranged1Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 491233909087113261}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.6, y: -48.6, z: 0}
+  m_LocalPosition: {x: -2, y: -4, z: 0}
   m_LocalScale: {x: 2, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -129,8 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5351c9a1d0ec44ab78a768d8b0b9d507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 10
-  knockbackDuration: 0.2
+  jumpClip: {fileID: 8300000, guid: 30bba22ac4c38594e98b416fc800cddf, type: 3}
+  deathClip: {fileID: 8300000, guid: edfc91887d2bcb046841b4aaf8a3ffbb, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   moveSpeed: 1.5
   jumpForce: 5
   rb: {fileID: 0}
@@ -140,9 +141,13 @@ MonoBehaviour:
   Stamina_gain: 5
   Stamina_max: 50
   max_health: 100
-  current_health: 30
+  current_health: 100
   Health_gain: 5
+  baseDamage: 1
+  boostedDamage: 2
+  boostedHitsRemaining: 0
   playersUI: {fileID: 0}
+  attackClip: {fileID: 8300000, guid: b1bd65040de39174bba77bf0d8fffe8e, type: 3}
   firePoint: {fileID: 6275184182572605517}
   projectileSpeed: 5
   bulletTag: PlayerBullet1
@@ -360,7 +365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6275184182572605517}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -375,7 +380,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2522182856779549169}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.24877433, z: -0, w: 0.96856153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.489, y: 0.029, z: -0.23584396}
   m_LocalScale: {x: 0.8021505, y: 0.5038233, z: 0.9305733}
   m_ConstrainProportionsScale: 0
@@ -393,7 +398,7 @@ GameObject:
   - component: {fileID: 851485529192656172}
   - component: {fileID: 7632052357562444117}
   - component: {fileID: 5534854386415752325}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: VirtualCam2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +507,7 @@ GameObject:
   - component: {fileID: 1792802120854203382}
   - component: {fileID: 8893911461143254964}
   - component: {fileID: 849805925317942312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cam2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -518,7 +523,7 @@ Transform:
   m_GameObject: {fileID: 7781026765832893749}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9224949, y: 0.7355067, z: -9.975844}
+  m_LocalPosition: {x: 0.04749489, y: 0.80884045, z: -10}
   m_LocalScale: {x: 0.378428, y: 0.25191164, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

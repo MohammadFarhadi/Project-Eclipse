@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class DashingEnemy : MonoBehaviour, InterfaceEnemies
 {
+    [Header("Sounds")]
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+    public GameObject oneShotAudioPrefab;
     [Header("General Settings")]
     [SerializeField] private float dashSpeed = 10f;
     [SerializeField] private float dashDuration = 1f;
@@ -112,6 +116,8 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
 
     private void Die()
     {
+        GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+        deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
         Destroy(gameObject, 0.5f);
     }
 

@@ -5,6 +5,12 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerControllerBase : MonoBehaviour
 {
+    [Header("Sound Clips")]
+    public AudioClip jumpClip;
+    public AudioClip deathClip;
+
+    [Header("One Shot Prefab")]
+    public GameObject oneShotAudioPrefab;
     [Header("Movement")] [SerializeField] protected float moveSpeed = 1.5f;
     [SerializeField] protected float jumpForce = 100f;
     [SerializeField] protected Rigidbody2D rb;
@@ -84,6 +90,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
         if (isGrounded)
         {
             animator.SetBool("IsJumping", true);
+            PlaySound(jumpClip);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         }
@@ -257,6 +264,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     protected virtual void OnDestory()
     {
+        PlaySound(deathClip);
         Destroy(gameObject);
     }
 
@@ -331,7 +339,14 @@ public abstract class PlayerControllerBase : MonoBehaviour
         reducedHitsRemaining = 5;
         currentDamageMultiplier = baseDamageMultiplier / 2f; // یعنی نصف مقدار معمول خود پلیر
     }
-    
+    protected void PlaySound(AudioClip clip)
+    {
+        if (clip != null && oneShotAudioPrefab != null)
+        {
+            GameObject soundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+            soundObj.GetComponent<OneShotSound>().Play(clip);
+        }
+    }
 
     
 }

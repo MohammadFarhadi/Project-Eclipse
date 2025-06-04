@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class MeleePlayerController : PlayerControllerBase
 {
+    [Header("Sound Clips")]
+    public AudioClip attackClip;
   //متغیر ها برای dash زدن  
     bool isDashing = false;
     private float addforceSync = 1f;
@@ -32,6 +34,7 @@ public class MeleePlayerController : PlayerControllerBase
 
     public override void Attack()
     {
+        PlaySound(attackClip);
         Debug.Log("Attacking...");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);

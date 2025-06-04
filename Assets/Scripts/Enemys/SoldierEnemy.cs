@@ -6,6 +6,10 @@ using Random = UnityEngine.Random;
 
 public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
 {
+    [Header("Sounds")]
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+    public GameObject oneShotAudioPrefab;
     [SerializeField] private BulletPool bulletPool;
     [SerializeField] private string bulletTag = "SoldierBullet";
     [SerializeField] private string grenadeTag = "BombBullet";
@@ -149,6 +153,8 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
 
         if (currentHealth <= 0)
         {
+            GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+            deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
             animator.SetTrigger("Die");
             DropRandomItem();
             StartCoroutine(DeathEffect(GetComponent<SpriteRenderer>()));
@@ -163,7 +169,8 @@ public class SoldierEnemy : MonoBehaviour, InterfaceEnemies
         {
             bullet.transform.position = firePoint.position;
             bullet.transform.rotation = Quaternion.identity;
-
+            GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+            attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             if (rb != null)
             {

@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 {
+    [Header("Sounds")]
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+    public GameObject oneShotAudioPrefab;
     [Header("Movement")]
     public float moveSpeed = 2f;
     private string currentTargetTag = "PointB";
@@ -37,6 +41,26 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     void Start()
     {
+        GameObject playerObj = GameObject.Find("RangedPlayer");
+        if (playerObj != null)
+        {
+            player1 = playerObj.transform;
+        }
+        else
+        {
+            playerObj = GameObject.Find("Ranged1Player");
+            player1 = playerObj.transform;
+        }
+        GameObject playerObj1 = GameObject.Find("Melle1Player");
+        if (playerObj != null)
+        {
+            player2 = playerObj1.transform;
+        }
+        else
+        {
+            playerObj1 = GameObject.Find("Melle2Player");
+            player2 = playerObj1.transform;
+        }
         healthBarDisplay.gameObject.SetActive(false);
         currentHealth = maxHealth;
 
@@ -107,6 +131,8 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
     {
         if (Time.time >= nextFireTime && bulletPool != null)
         {
+            GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+            attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
             bool isEnraged = currentHealth <= maxHealth / 2;
             string bulletTag = isEnraged ? "FireBullet" : "Bullet";
             float fireRate = isEnraged ? enragedFireRate : normalFireRate;
@@ -163,6 +189,8 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     public void Die()
     {
+        GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+        deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
         Destroy(gameObject);
         Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
         Instantiate(Key, spawnPosition, Quaternion.identity);

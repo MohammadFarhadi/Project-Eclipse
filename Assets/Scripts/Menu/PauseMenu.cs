@@ -1,9 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI; // پنل UI مربوط به Pause
     private bool isPaused = false;
+
+    private void Start()
+    {
+        pauseMenuUI.SetActive(false);
+    }
 
     void Update()
     {

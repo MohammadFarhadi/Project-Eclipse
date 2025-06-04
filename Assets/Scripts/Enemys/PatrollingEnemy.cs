@@ -1,9 +1,13 @@
 using UnityEngine;
 public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
 {
+    [Header("Sounds")]
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+    public GameObject oneShotAudioPrefab;
+
     public float speed = 2f;
     private int direction = -1;
-
     public GameObject leftSensor;
     public GameObject rightSensor;
     [SerializeField] private Animator animator;
@@ -40,6 +44,8 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
         }
         else if (other.gameObject.CompareTag("Player"))
         {
+            GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+            attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
             animator.SetTrigger("Attack");
             PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
             player.HealthSystem(50, false);
@@ -62,18 +68,23 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
 
         if (health <= 0 && direction == 1)
         {
+            
             animator.SetTrigger("Die");
-            Invoke(nameof(Die), 0.5f); 
+            Invoke(nameof(Die), 0.5f);
         }
         else if (health <= 0 && direction == -1)
         {
+           
             animator.SetTrigger("Die1");
-            Invoke(nameof(Die), 0.5f); 
+            Invoke(nameof(Die), 0.5f);
         }
+
     }
 
     public void Die()
     {
+        GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+        deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
         DropRandomItem();
         Destroy(gameObject);
     }
