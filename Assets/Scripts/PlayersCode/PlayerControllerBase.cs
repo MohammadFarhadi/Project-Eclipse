@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public abstract class PlayerControllerBase : MonoBehaviour
 {
-
     [Header("Movement")] [SerializeField] protected float moveSpeed = 1.5f;
     [SerializeField] protected float jumpForce = 100f;
     [SerializeField] protected Rigidbody2D rb;
@@ -21,12 +20,17 @@ public abstract class PlayerControllerBase : MonoBehaviour
     [SerializeField] protected float current_health = 30;
     [SerializeField] protected float Health_gain = 5f;
 
+    protected float baseDamageMultiplier = 1f; // مقدار اولیه هر کلاس (1f برای Ranged، 0.5f برای Melee)
+    protected float currentDamageMultiplier = 1f;
+    protected int reducedHitsRemaining = 0;
 
     //player interaction
     protected bool Interacting = false;
     private float interactBufferTime = 0.2f;
     private float interactTimer = 0f;
-
+    public int baseDamage = 1;         // دمیج پیش‌فرض
+    public int boostedDamage = 2;      // دمیج تقویت‌شده
+    public int boostedHitsRemaining = 0;
 
 
 
@@ -45,6 +49,8 @@ public abstract class PlayerControllerBase : MonoBehaviour
         animator = GetComponent<Animator>();
         originalScale = Sprite.transform.localScale;
         playersUI?.SetHealthBar(current_health, max_health);
+        currentDamageMultiplier = baseDamageMultiplier;
+
     }
 
     // Update is called once per frame
@@ -292,6 +298,40 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     protected virtual int ModifyDamage(int value)
     {
-        return value; // پیش‌فرض: هیچ تغییری در دمیج اعمال نمی‌کنه
+        if (reducedHitsRemaining > 0)
+        {
+            reducedHitsRemaining--;
+            Debug.Log("Reduced damage applied!");
+            return Mathf.CeilToInt(value * currentDamageMultiplier);
+        }
+
+        return Mathf.CeilToInt(value * baseDamageMultiplier);
     }
+    public virtual int GetAttackDamage()
+    {
+        if (boostedHitsRemaining > 0)
+        {
+            boostedHitsRemaining--;
+            if (boostedHitsRemaining == 0)
+            {
+                Debug.Log("Boosted melee damage expired.");
+            }
+            return boostedDamage;
+        }
+
+        return baseDamage;
+    }
+
+    public void IncreaseMeleeDamageTemporarily(int hitCount)
+    {
+        boostedHitsRemaining = hitCount;
+    }
+    public void ActivateDamageResetItem()
+    {
+        reducedHitsRemaining = 5;
+        currentDamageMultiplier = baseDamageMultiplier / 2f; // یعنی نصف مقدار معمول خود پلیر
+    }
+    
+
+    
 }

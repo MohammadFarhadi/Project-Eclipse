@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     //اینجا رو اضافه کردم
     private Transform attacker;
-
+    public int damage = 1;
     public void SetAttacker(Transform attacker)
     {
         this.attacker = attacker;
@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         // فقط به Enemy آسیب بزن، نه به میدان دید
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<InterfaceEnemies>().TakeDamage(1, attacker);
+            other.GetComponent<InterfaceEnemies>().TakeDamage(damage, attacker);
             gameObject.SetActive(false); // غیرفعال کردن گلوله به‌جای حذف
         }
         else if (other.CompareTag("Player"))

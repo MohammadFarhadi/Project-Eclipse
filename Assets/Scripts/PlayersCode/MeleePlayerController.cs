@@ -18,7 +18,12 @@ public class MeleePlayerController : PlayerControllerBase
     [SerializeField] private int attackDamage = 1;
     
     
-    
+    protected override void Start()
+    {
+        baseDamageMultiplier = 0.5f;
+        base.Start();
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {   
         PlayerMove(context);
@@ -38,7 +43,8 @@ public class MeleePlayerController : PlayerControllerBase
             InterfaceEnemies enemy = enemyCollider.GetComponent<InterfaceEnemies>();
             if (enemy != null)
             {
-                enemy.TakeDamage(attackDamage , this.transform);
+                int currentDamage = GetAttackDamage();
+                enemy.TakeDamage(currentDamage , this.transform);
             }
         }
     }
@@ -131,6 +137,7 @@ public class MeleePlayerController : PlayerControllerBase
     {
         return Mathf.CeilToInt(value / 2f); // نصف دمیج (گرد به بالا)
     }
+    
 
 
 }

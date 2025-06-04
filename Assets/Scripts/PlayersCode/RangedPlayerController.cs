@@ -20,8 +20,10 @@ public class RangedPlayerController: PlayerControllerBase
 
     protected override void Start()
     {
+        baseDamageMultiplier = 1f;
         base.Start();
         bulletPool = FindFirstObjectByType<BulletPool>();
+        
         
         Debug.Log($"[TEST] Rigidbody موجوده؟ {rb != null}");
         Debug.Log($"[TEST] Rigidbody simulated: {rb.simulated}");
@@ -70,6 +72,9 @@ public class RangedPlayerController: PlayerControllerBase
                     if (bulletScript != null)
                     {
                         bulletScript.SetAttacker(this.transform);
+                        int currentDamage = GetAttackDamage();
+                        bulletScript.damage = currentDamage;
+
                     }
                     // تا اینجا اضافه شده
                 }
@@ -135,4 +140,6 @@ public class RangedPlayerController: PlayerControllerBase
     {
         doubleJump = true;
     }
+    
+
 }
