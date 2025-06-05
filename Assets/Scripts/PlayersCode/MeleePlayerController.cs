@@ -57,15 +57,19 @@ public class MeleePlayerController : PlayerControllerBase
     
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!context.performed) return;
+
+        if (isGrounded)
         {
-            if (isGrounded)
-            {
-                animator.SetBool("IsJumping", true);
-                PlayerJump(context); // استفاده از AddForce در پرش اول اوکیه
-            }
+            animator.SetBool("IsJumping", true);
+            PlayerJump(context);
+        }
+        else
+        {
+            TryWallJump();   // ⬅️ single call does the trick
         }
     }
+
 
     public void OnAttack()
     {
