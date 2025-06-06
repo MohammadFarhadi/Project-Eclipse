@@ -7,6 +7,7 @@ public class ShopTrigger : MonoBehaviour
 
     private void Awake()
     {
+        shopManager = GameObject.Find("ShopManager").GetComponent<ShopManager>();
         shopUI = ShopManager.Instance.GetShopUI();
 
         if (shopUI == null)
@@ -51,7 +52,7 @@ public class ShopTrigger : MonoBehaviour
             if (shopUI != null) shopUI.SetActive(true);
 
             var player = other.GetComponent<PlayerControllerBase>();
-            if (shopManager != null) shopManager.SetCurrentPlayer(player);
+            shopManager.SetCurrentPlayer(player);
         }
     }
 

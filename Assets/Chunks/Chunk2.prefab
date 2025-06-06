@@ -7750,6 +7750,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02129916a0874405e9abf39392e7d687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   bulletPool: {fileID: 0}
   bulletTag: SoldierBullet
   grenadeTag: BombBullet
@@ -8309,6 +8312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02129916a0874405e9abf39392e7d687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   bulletPool: {fileID: 0}
   bulletTag: SoldierBullet
   grenadeTag: BombBullet
@@ -26854,6 +26860,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65a46b9942761e42a2faff4f7182f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   dropItems:
   - {fileID: 3330495594356245476, guid: 8b9af8c2c1a99d44dafdd3e99422150f, type: 3}
   - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
@@ -28431,6 +28440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02129916a0874405e9abf39392e7d687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   bulletPool: {fileID: 0}
   bulletTag: SoldierBullet
   grenadeTag: BombBullet
@@ -30923,6 +30935,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02129916a0874405e9abf39392e7d687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   bulletPool: {fileID: 0}
   bulletTag: SoldierBullet
   grenadeTag: BombBullet
