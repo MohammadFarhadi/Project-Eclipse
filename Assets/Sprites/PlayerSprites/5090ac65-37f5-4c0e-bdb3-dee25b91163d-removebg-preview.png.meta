@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 831a43822d0f84adb9129b2531d013c4
+guid: ee8c1f4faf3da98429a9269923d7d6c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5194475832026805983
-    second: tramplin_0
-  - first:
-      213: -7253860646733561692
-    second: tramplin_1
-  - first:
-      213: 6524902657696688161
-    second: tramplin_2
+      213: 3366080486046319698
+    second: 5090ac65-37f5-4c0e-bdb3-dee25b91163d-removebg-preview_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -102,56 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tramplin_0
+      name: 5090ac65-37f5-4c0e-bdb3-dee25b91163d-removebg-preview_0
       rect:
         serializedVersion: 2
-        x: 56
-        y: 324
-        width: 260
-        height: 272
+        x: 0
+        y: 0
+        width: 500
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,52 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd63f4a6f3c761840800000000000000
-      internalID: 5194475832026805983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tramplin_1
-      rect:
-        serializedVersion: 2
-        x: 390
-        y: 324
-        width: 262
-        height: 306
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4a0c245ac2c155b90800000000000000
-      internalID: -7253860646733561692
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tramplin_2
-      rect:
-        serializedVersion: 2
-        x: 720
-        y: 324
-        width: 262
-        height: 362
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1286302956c1d8a50800000000000000
-      internalID: 6524902657696688161
+      spriteID: 2544a282e58b6be20800000000000000
+      internalID: 3366080486046319698
       vertices: []
       indices: 
       edges: []
@@ -223,10 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      tramplin_0: 5194475832026805983
-      tramplin_1: -7253860646733561692
-      tramplin_2: 6524902657696688161
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

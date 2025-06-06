@@ -3768,8 +3768,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5216288954044240771}
   - component: {fileID: 6099684216487585002}
+  - component: {fileID: 793816060648356439}
+  - component: {fileID: 14190380026762721}
   m_Layer: 0
-  m_Name: End Of Chunk
+  m_Name: EndTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3845,6 +3847,66 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &793816060648356439
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415329442947249103}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.18, y: 0.24}
+    newSize: {x: 0.18, y: 0.24}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.18, y: 0.24}
+  m_EdgeRadius: 0
+--- !u!114 &14190380026762721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415329442947249103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b5f502a9b5bd645a0bd0aaf559ea16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadePanel: {fileID: 0}
+  fadeDuration: 1
 --- !u!1 &5451985981523445137
 GameObject:
   m_ObjectHideFlags: 0
@@ -4008,7 +4070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5463023843832298970}
   m_Layer: 0
-  m_Name: Chnk5Start
+  m_Name: StartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -12912,6 +12974,14 @@ CompositeCollider2D:
         Y: -410000000
       - X: 440000000
         Y: -410000000
+    - - X: -370000000
+        Y: -350000000
+      - X: -400000000
+        Y: -350000000
+      - X: -400000000
+        Y: -450000000
+      - X: -370000000
+        Y: -450000000
     - - X: -220000000
         Y: -390000000
       - X: -230000000
@@ -12924,14 +12994,6 @@ CompositeCollider2D:
         Y: -420000000
       - X: -220000000
         Y: -420000000
-    - - X: -370000000
-        Y: -350000000
-      - X: -400000000
-        Y: -350000000
-      - X: -400000000
-        Y: -450000000
-      - X: -370000000
-        Y: -450000000
     - - X: -200000000
         Y: -350000000
       - X: -220000000
@@ -13019,20 +13081,20 @@ CompositeCollider2D:
       - {x: 24.999989, y: -34}
       - {x: 18, y: -34.00003}
       - {x: 18.000029, y: -41}
+    - - {x: -37.00003, y: -45}
+      - {x: -37.00003, y: -35}
+      - {x: -40, y: -35.00003}
+      - {x: -39.999973, y: -45}
+    - - {x: -20.000029, y: -37}
+      - {x: -20.000029, y: -35}
+      - {x: -22, y: -35.00003}
+      - {x: -21.999971, y: -37}
     - - {x: -22.000029, y: -42}
       - {x: -22.000029, y: -39}
       - {x: -23.000008, y: -38.999992}
       - {x: -27.00001, y: -35}
       - {x: -34, y: -35.00003}
       - {x: -33.999973, y: -42}
-    - - {x: -20.000029, y: -37}
-      - {x: -20.000029, y: -35}
-      - {x: -22, y: -35.00003}
-      - {x: -21.999971, y: -37}
-    - - {x: -37.00003, y: -45}
-      - {x: -37.00003, y: -35}
-      - {x: -40, y: -35.00003}
-      - {x: -39.999973, y: -45}
     - - {x: -16.000029, y: -41}
       - {x: -16.000029, y: -39}
       - {x: -21, y: -39.00003}
