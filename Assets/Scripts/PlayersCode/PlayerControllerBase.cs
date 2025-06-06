@@ -16,6 +16,18 @@ public abstract class PlayerControllerBase : MonoBehaviour
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Animator animator;
     public bool HasKey = false;
+    /* --- Wall-jump settings --------------------------------- */
+    [Header("Wall Jump Settings")]
+    [SerializeField] private Transform wallCheckLeft;
+    [SerializeField] private Transform wallCheckRight;
+    [SerializeField] private float   wallCheckDistance = 0.15f;
+    [SerializeField] private LayerMask wallLayer;
+
+    protected bool  isTouchingWall { get; private set; }
+    private   bool  canWallJump    = true;
+    private   float wallJumpForce  => jumpForce;   // reuse the normal jump force
+/* -------------------------------------------------------- */
+
 
     [Header("Stamina")] [SerializeField] protected float Stamina = 50;
     [SerializeField] protected float Stamina_gain = 5f;
@@ -45,7 +57,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     private Vector3 originalScale;
 
     protected SpriteRenderer Sprite;
-    protected bool isGrounded = true;
+    public bool isGrounded = true;
     protected Vector2 move_input;
 
     protected virtual void Start()
@@ -62,10 +74,20 @@ public abstract class PlayerControllerBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
+
         if (CanApplyMovement())
         {
             rb.linearVelocity = new Vector2(move_input.x * GetMoveSpeed(), rb.linearVelocity.y);
         }
+        // ── Wall detection ───────────────────────────────────────
+        bool leftHit  = Physics2D.Raycast(wallCheckLeft.position,  Vector2.left,  wallCheckDistance, wallLayer);
+        bool rightHit = Physics2D.Raycast(wallCheckRight.position, Vector2.right, wallCheckDistance, wallLayer);
+        isTouchingWall = (leftHit || rightHit);
+
+        if (!isGrounded && !isTouchingWall)      // reset once player leaves wall
+            canWallJump = true;
+    // ─────────────────────────────────────────────────────────
+
 
         if (animator != null)
         {
@@ -95,6 +117,24 @@ public abstract class PlayerControllerBase : MonoBehaviour
             isGrounded = false;
         }
     }
+    
+    protected bool TryWallJump()
+    {
+        if (!isGrounded && isTouchingWall && canWallJump)
+        {
+            PlaySound(jumpClip);
+            animator.SetBool("IsJumping", true);
+
+            // cancel current vertical velocity then launch upward
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.AddForce(Vector2.up * wallJumpForce, ForceMode2D.Impulse);
+
+            canWallJump = false;   // prevent spamming
+            return true;
+        }
+        return false;
+    }
+
 
     protected virtual void FlipDirection(float horizontalInput)
     {
@@ -111,13 +151,20 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (!collision.gameObject.CompareTag("Ground")) return;
+    
+        foreach (ContactPoint2D c in collision.contacts)
         {
-            animator?.SetBool("IsJumping", false);
-            HandleLanding();
-            isGrounded = true;
-            HandleLanding();
+            // Is the surface mostly horizontal?  (normal pointing upward)
+            if (c.normal.y >= 0.5f)
+            {
+                animator?.SetBool("IsJumping", false);
+                if (!isGrounded) HandleLanding();
+                isGrounded = true;
+                break;                      // one good contact is enough
+            }
         }
+    
     }
 
     public virtual void HanleFalling()

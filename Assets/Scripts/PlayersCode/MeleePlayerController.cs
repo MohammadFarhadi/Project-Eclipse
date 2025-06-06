@@ -11,7 +11,7 @@ public class MeleePlayerController : PlayerControllerBase
   //متغیر ها برای dash زدن  
     bool isDashing = false;
     private float addforceSync = 1f;
-    [SerializeField] private float DashValue = 100;
+    [SerializeField] private float DashValue = 80f;
     
     //متغیر ها برای تعریف حمله کردن
     [SerializeField] private Transform attackPoint;
@@ -57,15 +57,19 @@ public class MeleePlayerController : PlayerControllerBase
     
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (!context.performed) return;
+
+        if (isGrounded)
         {
-            if (isGrounded)
-            {
-                animator.SetBool("IsJumping", true);
-                PlayerJump(context); // استفاده از AddForce در پرش اول اوکیه
-            }
+            animator.SetBool("IsJumping", true);
+            PlayerJump(context);
+        }
+        else
+        {
+            TryWallJump();   // ⬅️ single call does the trick
         }
     }
+
 
     public void OnAttack()
     {

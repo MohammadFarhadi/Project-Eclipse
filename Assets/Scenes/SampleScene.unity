@@ -1573,11 +1573,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3515283842952120017, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3
+      value: -8.82
       objectReference: {fileID: 0}
     - target: {fileID: 3515283842952120017, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4
+      value: -44.17
       objectReference: {fileID: 0}
     - target: {fileID: 3515283842952120017, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1590,6 +1590,14 @@ PrefabInstance:
     - target: {fileID: 3515283842952120017, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891246626070763834, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.08356647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891246626070763834, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.052968
       objectReference: {fileID: 0}
     - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: jumpForce
@@ -2671,11 +2679,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1201526842495556030, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -31.4
       objectReference: {fileID: 0}
     - target: {fileID: 1201526842495556030, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -44.7
       objectReference: {fileID: 0}
     - target: {fileID: 1201526842495556030, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2713,6 +2721,22 @@ PrefabInstance:
       propertyPath: playersUI
       value: 
       objectReference: {fileID: 1425520778}
+    - target: {fileID: 3785878453738866839, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.18997955
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785878453738866839, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.8530426
+      objectReference: {fileID: 0}
+    - target: {fileID: 3785878453738866839, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440642823520045032, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 47c24092a42d84916bd34c0d15f4deaf, type: 2}
     - target: {fileID: 7961597926439823908, guid: 4203fb18ffb334995b2807299d2326d8, type: 3}
       propertyPath: m_Name
       value: RangedPlayer

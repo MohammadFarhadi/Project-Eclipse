@@ -91,20 +91,22 @@ public class RangedPlayerController: PlayerControllerBase
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        
-        if (context.performed)
-        {
+        if (!context.performed) return;
 
-            if (isGrounded)
-            {
-                PlayerJump(context); // استفاده از AddForce در پرش اول اوکیه
-            }
-            else
-            {
-                DoubleJump(); // استفاده از velocity در پرش دوم
-            }
+        if (isGrounded)
+        {
+            PlayerJump(context);
+        }
+        else if (TryWallJump())       // ⬅️ first priority: wall-jump
+        {
+            // nothing more; handled inside base
+        }
+        else
+        {
+            DoubleJump();             // ⬅️ otherwise do regular double-jump
         }
     }
+
 
 
     void DoubleJump()
