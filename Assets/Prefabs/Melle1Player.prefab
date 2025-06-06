@@ -500,7 +500,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 47c24092a42d84916bd34c0d15f4deaf, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
   wallCheckDistance: 0.15
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   Stamina: 50
   Stamina_gain: 5
   Stamina_max: 50

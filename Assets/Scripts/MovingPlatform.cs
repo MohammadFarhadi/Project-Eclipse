@@ -2,43 +2,76 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public float moveDistance = 2f;      // فاصله حرکت به بالا و پایین
-    public float moveSpeed = 2f;         // سرعت حرکت
-    public float waitTime = 1f;          // زمان توقف در نقاط بالا/پایین
+    [Header("Point References")]
+    [Tooltip("The first point the platform moves to.")]
+    public Transform pointA;
+    [Tooltip("The second point the platform moves to.")]
+    public Transform pointB;
 
-    private Vector2 startPosition;
-    private Vector2 targetPosition;
-    private bool movingDown = true;
-    private bool waiting = false;
-    private float waitTimer = 0f;
+    [Header("Movement Settings")]
+    [Tooltip("Speed at which the platform moves.")]
+    public float moveSpeed = 2f;
+    [Tooltip("Time (in seconds) to wait when the platform reaches a point.")]
+    public float waitTime = 1f;
+
+    private Vector2 _targetPosition;
+    private bool _waiting = false;
+    private float _waitTimer = 0f;
+    private bool _goingToB = true;
 
     void Start()
     {
-        startPosition = transform.position;
-        targetPosition = startPosition + Vector2.down * moveDistance;
+        if (pointA == null || pointB == null)
+        {
+            Debug.LogError("MovingPlatform: Please assign both Point A and Point B in the Inspector.");
+            enabled = false;
+            return;
+        }
+
+        // Initially, move toward point B
+        _targetPosition = pointB.position;
+        _goingToB = true;
     }
 
     void Update()
     {
-        if (waiting)
+        if (_waiting)
         {
-            waitTimer -= Time.deltaTime;
-            if (waitTimer <= 0f)
+            _waitTimer -= Time.deltaTime;
+            if (_waitTimer <= 0f)
             {
-                waiting = false;
-                // تعویض جهت حرکت
-                movingDown = !movingDown;
-                targetPosition = startPosition + (movingDown ? Vector2.down : Vector2.up) * moveDistance;
+                _waiting = false;
+                // Swap direction
+                _goingToB = !_goingToB;
+                _targetPosition = _goingToB ? pointB.position : pointA.position;
             }
             return;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        // Move toward the current target
+        Vector2 currentPos = transform.position;
+        Vector2 newPos = Vector2.MoveTowards(currentPos, _targetPosition, moveSpeed * Time.deltaTime);
+        transform.position = newPos;
 
-        if (Vector2.Distance(transform.position, targetPosition) < 0.01f)
+        // Check if we've reached the target (within a small tolerance)
+        if (Vector2.Distance(newPos, _targetPosition) < 0.01f)
         {
-            waiting = true;
-            waitTimer = waitTime;
+            // Start waiting
+            _waiting = true;
+            _waitTimer = waitTime;
+        }
+    }
+
+    // Draw gizmos in the Scene view to visualize the two points and a line between them
+    void OnDrawGizmos()
+    {
+        if (pointA != null && pointB != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(pointA.position, 0.1f);
+            Gizmos.DrawSphere(pointB.position, 0.1f);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(pointA.position, pointB.position);
         }
     }
 }

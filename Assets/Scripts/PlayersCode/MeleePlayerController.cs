@@ -11,7 +11,7 @@ public class MeleePlayerController : PlayerControllerBase
   //متغیر ها برای dash زدن  
     bool isDashing = false;
     private float addforceSync = 1f;
-    [SerializeField] private float DashValue = 100;
+    [SerializeField] private float DashValue = 80f;
     
     //متغیر ها برای تعریف حمله کردن
     [SerializeField] private Transform attackPoint;

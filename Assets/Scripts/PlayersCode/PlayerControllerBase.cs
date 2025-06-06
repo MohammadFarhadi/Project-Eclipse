@@ -74,6 +74,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
+
         if (CanApplyMovement())
         {
             rb.linearVelocity = new Vector2(move_input.x * GetMoveSpeed(), rb.linearVelocity.y);
@@ -151,7 +152,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Ground")) return;
-
+    
         foreach (ContactPoint2D c in collision.contacts)
         {
             // Is the surface mostly horizontal?  (normal pointing upward)
@@ -163,7 +164,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
                 break;                      // one good contact is enough
             }
         }
-
+    
     }
 
     public virtual void HanleFalling()

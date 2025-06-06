@@ -492,7 +492,7 @@ MonoBehaviour:
   wallCheckDistance: 0.15
   wallLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   Stamina: 50
   Stamina_gain: 2.5
   Stamina_max: 50
