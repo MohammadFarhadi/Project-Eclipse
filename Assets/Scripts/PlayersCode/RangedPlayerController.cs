@@ -33,8 +33,9 @@ public class RangedPlayerController: PlayerControllerBase
 
     public void Update()
     {
-        if (Is_Sprinting && Stamina > 0)
+        if (Is_Sprinting && Stamina > 0 && isGrounded)
         {
+            
             SetMoveSpeed(3);
             Debug.Log(moveSpeed);
             StaminaSystem(Mathf.RoundToInt(SpriniingCost * Time.deltaTime), false);
