@@ -8,6 +8,10 @@ public class MenuController : MonoBehaviour
     public GameObject optionValue;
     public GameObject quitValue;
 
+    void Start()
+    {
+        optionValue.SetActive(false);
+    }
     public void ShowHome()
     {
         DeactivateAll();
