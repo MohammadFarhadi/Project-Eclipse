@@ -109,17 +109,10 @@ public class DialogueTree : MonoBehaviour
             player2 = GameObject.Find("Melle2Player");
         }
 
-        if (player1 != null)
-        {
-            player1.GetComponent<RangedPlayerController>().enabled = true;
-            player1.GetComponent<PlayerControllerBase>().enabled = true;
-        }
-
-        if (player2 != null)
-        {
-            player2.GetComponent<MeleePlayerController>().enabled = true;
-            player2.GetComponent<PlayerControllerBase>().enabled = true;
-        }
+        player1.GetComponent<RangedPlayerController>().enabled = true; // غیرفعال‌کردن حرکت
+        player2.GetComponent<MeleePlayerController>().enabled = true;
+        player2.GetComponent<PlayerControllerBase>().enabled = true;
+        player1.GetComponent<PlayerControllerBase>().enabled = true;
 
         dialoguePanel.SetActive(false);
     }

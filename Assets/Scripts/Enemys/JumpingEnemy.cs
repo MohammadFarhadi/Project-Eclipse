@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
 {
+    [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
+    [SerializeField] private GameObject Sonin;
     [Header("Sounds")]
     public AudioClip attackClip;
     public AudioClip deathClip;
@@ -98,8 +100,18 @@ public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
             
         }
             
-
+        DropRandomItem();
         Destroy(gameObject, 0.5f);
+    }
+    public void DropRandomItem()
+    {
+        if (dropItems.Length == 0) return;
+        
+        int index = Random.Range(0, dropItems.Length);
+        Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
+        Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+        Instantiate(Sonin, transform.position, Quaternion.identity);
+        
     }
     
 

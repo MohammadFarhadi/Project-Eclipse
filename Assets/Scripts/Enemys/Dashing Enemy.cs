@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DashingEnemy : MonoBehaviour, InterfaceEnemies
 {
+    [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
+    [SerializeField] private GameObject Sonin;
     [Header("Sounds")]
     public AudioClip attackClip;
     public AudioClip deathClip;
@@ -118,9 +120,20 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
     {
         GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
         deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
+        DropRandomItem();
         Destroy(gameObject, 0.5f);
     }
 
     public void DetectPlayer(GameObject p) { }
     public void LosePlayer() { }
+    public void DropRandomItem()
+    {
+        if (dropItems.Length == 0) return;
+        
+        int index = Random.Range(0, dropItems.Length);
+        Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
+        Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+        Instantiate(Sonin, transform.position, Quaternion.identity);
+        
+    }
 }

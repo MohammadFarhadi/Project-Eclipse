@@ -9,7 +9,7 @@ public class KillPlayerOnTouch : MonoBehaviour
             PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
             if (player != null)
             {
-                player.HealthSystem(100, false);
+                player.HealthSystem(30, false);
             }
         }
     }
