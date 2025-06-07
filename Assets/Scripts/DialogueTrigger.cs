@@ -9,6 +9,19 @@ public class DialogueTrigger : MonoBehaviour
 
     private bool triggered = false;
 
+    void Start()
+    {
+        player1 = GameObject.Find("Ranged1Player");
+        if (player1 == null)
+        {
+            player1 = GameObject.Find("RangedPlayer");
+        }
+        player2 = GameObject.Find("Melle1Player");
+        if (player2 == null)
+        {
+            player2 = GameObject.Find("Melle2Player");
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (triggered) return;

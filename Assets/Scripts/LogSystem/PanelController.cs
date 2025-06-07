@@ -12,12 +12,9 @@ public class PanelController : MonoBehaviour
 
     void Start()
     {
-        panel1 = GameObject.Find("MatrixPanel");
-        panel2 = GameObject.Find("LogPanel");
-        panel3 = GameObject.Find("StoryPanel");
-        panel1.SetActive(false);
-        panel2.SetActive(false);
-        panel3.SetActive(false);
+        panel1 = PanelManager.Instance.panel1;
+        panel2 = PanelManager.Instance.panel2;
+        panel3 = PanelManager.Instance.panel3;
     }
 
     void Update()
@@ -32,23 +29,18 @@ public class PanelController : MonoBehaviour
     {
         isCoroutineRunning = true;
 
-        // فعال کردن پنل اول
         panel1.SetActive(true);
         panel2.SetActive(false);
         panel3.SetActive(false);
 
         yield return new WaitForSeconds(5f);
 
-        // پنل اول خاموش، پنل دوم روشن
         panel1.SetActive(false);
         panel2.SetActive(true);
-
-        // می‌تونی اینجا هم پنل سوم رو اضافه کنی یا هر کاری که می‌خوای
 
         isCoroutineRunning = false;
     }
 
-    // فرض کنیم این تابع وقتی پلیر وارد منطقه می‌شود فراخوانی می‌شود
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -57,7 +49,6 @@ public class PanelController : MonoBehaviour
         }
     }
 
-    // وقتی پلیر خارج شد
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

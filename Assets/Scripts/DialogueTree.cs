@@ -96,8 +96,18 @@ public class DialogueTree : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        GameObject player1 = GameObject.Find("RangedPlayer");
-        GameObject player2 = GameObject.Find("MeleePlayer");
+        GameObject player1;
+        GameObject player2;
+        player1 = GameObject.Find("Ranged1Player");
+        if (player1 == null)
+        {
+            player1 = GameObject.Find("RangedPlayer");
+        }
+        player2 = GameObject.Find("Melle1Player");
+        if (player2 == null)
+        {
+            player2 = GameObject.Find("Melle2Player");
+        }
 
         if (player1 != null)
         {
