@@ -26,15 +26,13 @@ public class RangedPlayerController: PlayerControllerBase
         bulletPool = FindFirstObjectByType<BulletPool>();
         
         
-        Debug.Log($"[TEST] Rigidbody موجوده؟ {rb != null}");
-        Debug.Log($"[TEST] Rigidbody simulated: {rb.simulated}");
-        Debug.Log($"[TEST] BodyType: {rb.bodyType}");
     }
 
     public void Update()
     {
-        if (Is_Sprinting && Stamina > 0)
+        if (Is_Sprinting && Stamina > 0 && isGrounded)
         {
+            
             SetMoveSpeed(3);
             Debug.Log(moveSpeed);
             StaminaSystem(Mathf.RoundToInt(SpriniingCost * Time.deltaTime), false);

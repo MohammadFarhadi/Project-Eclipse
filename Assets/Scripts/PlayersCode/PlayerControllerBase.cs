@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public abstract class PlayerControllerBase : MonoBehaviour
 {
@@ -102,7 +103,6 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     protected virtual void PlayerMove(InputAction.CallbackContext context)
     {
-        Debug.Log("Move input: " + move_input);
         move_input = context.ReadValue<Vector2>();
         FlipDirection(move_input.x);
     }
@@ -267,6 +267,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
                 }
                 else
                 {
+                    SceneManager.LoadScene("Game Over");
                     current_health = 0;
                     playersUI.hearts[2].SetActive(false);
                     animator.SetTrigger("IsDead");
