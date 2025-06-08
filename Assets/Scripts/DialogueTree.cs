@@ -6,6 +6,8 @@ using System.Collections;
 
 public class DialogueTree : MonoBehaviour
 {
+    GameObject player1;
+    GameObject player2;
     public TextMeshProUGUI npcText;
     public Button[] optionButtons;
 
@@ -25,6 +27,19 @@ public class DialogueTree : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        player1 = GameObject.Find("Ranged1Player");
+        if (player1 == null)
+        {
+            player1 = GameObject.Find("RangedPlayer");
+        }
+        player2 = GameObject.Find("Melle1Player");
+        if (player2 == null)
+        {
+            player2 = GameObject.Find("Melle2Player");
+        }
+    }
     public void StartDialogue()
     {
         BuildTree();
@@ -95,20 +110,6 @@ public class DialogueTree : MonoBehaviour
     IEnumerator EndDialogueWithDelay()
     {
         yield return new WaitForSeconds(1f);
-
-        GameObject player1;
-        GameObject player2;
-        player1 = GameObject.Find("Ranged1Player");
-        if (player1 == null)
-        {
-            player1 = GameObject.Find("RangedPlayer");
-        }
-        player2 = GameObject.Find("Melle1Player");
-        if (player2 == null)
-        {
-            player2 = GameObject.Find("Melle2Player");
-        }
-
         player1.GetComponent<RangedPlayerController>().enabled = true; // غیرفعال‌کردن حرکت
         player2.GetComponent<MeleePlayerController>().enabled = true;
         player2.GetComponent<PlayerControllerBase>().enabled = true;
