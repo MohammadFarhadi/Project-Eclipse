@@ -117,5 +117,14 @@ public class DialogueTree : MonoBehaviour
 
         dialoguePanel.SetActive(false);
     }
+    public void ShowCustomDialogue(string customText)
+    {
+        npcText.text = customText;
+        foreach (var btn in optionButtons)
+            btn.gameObject.SetActive(false);
+
+        StartCoroutine(EndDialogueWithDelay());
+    }
+
 
 }

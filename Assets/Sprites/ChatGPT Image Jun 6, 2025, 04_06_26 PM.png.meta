@@ -1,31 +1,49 @@
 fileFormatVersion: 2
-guid: 538dbe6fdab7344e78f7bd4a809c9699
+guid: 4a1f4199b3bc844008cd4d1f3afb1837
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8427497837364295206
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0
+      213: 3847097089402453861
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_0
   - first:
-      213: 2725229570159642435
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1
+      213: 3022861931887930264
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_1
   - first:
-      213: 3603001128858198988
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2
+      213: 6350562958510494923
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_2
   - first:
-      213: -8508884205421288011
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3
+      213: 975020625583375893
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_3
   - first:
-      213: -3236857820199414098
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4
+      213: -4681802645212503324
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_4
   - first:
-      213: 3887569809960285775
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5
+      213: 1802490057251618480
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_5
   - first:
-      213: 2759062795455432723
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6
+      213: -8705478302272551917
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_6
   - first:
-      213: -2213643757955918303
-    second: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7
+      213: 5402609411099835575
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_7
+  - first:
+      213: -2688785576654975763
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_8
+  - first:
+      213: -4812949077550732156
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_9
+  - first:
+      213: -8854011949519195051
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_10
+  - first:
+      213: -1940406634011569723
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_11
+  - first:
+      213: -6650172259127394157
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_12
+  - first:
+      213: -7700640593252378468
+    second: ChatGPT Image Jun 6, 2025, 04_06_26 PM_13
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -67,7 +85,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -160,13 +178,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_0
       rect:
         serializedVersion: 2
-        x: 97
-        y: 955
-        width: 773
-        height: 173
+        x: 60
+        y: 13
+        width: 962
+        height: 998
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +193,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad947822e538b0b80800000000000000
-      internalID: -8427497837364295206
+      spriteID: 56fb5468b62a36530800000000000000
+      internalID: 3847097089402453861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_1
       rect:
         serializedVersion: 2
-        x: 930
-        y: 955
-        width: 773
-        height: 173
+        x: 726
+        y: 752
+        width: 17
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +215,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34781ccead5f1d520800000000000000
-      internalID: 2725229570159642435
+      spriteID: 89b2b3749ec53f920800000000000000
+      internalID: 3022861931887930264
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_2
       rect:
         serializedVersion: 2
-        x: 97
-        y: 660
-        width: 773
-        height: 173
+        x: 270
+        y: 641
+        width: 11
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -219,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc3aceaef6e600230800000000000000
-      internalID: 3603001128858198988
+      spriteID: bc495c13d5bb12850800000000000000
+      internalID: 6350562958510494923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_3
       rect:
         serializedVersion: 2
-        x: 930
-        y: 658
-        width: 773
-        height: 175
+        x: 760
+        y: 535
+        width: 6
+        height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,20 +259,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5b5aeeca5ee5ae980800000000000000
-      internalID: -8508884205421288011
+      spriteID: 5168394d718f78d00800000000000000
+      internalID: 975020625583375893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_4
       rect:
         serializedVersion: 2
-        x: 97
-        y: 362
-        width: 773
-        height: 176
+        x: 768
+        y: 533
+        width: 8
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +281,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ea6919e46fe5413d0800000000000000
-      internalID: -3236857820199414098
+      spriteID: 4e2ef97ac45e60fb0800000000000000
+      internalID: -4681802645212503324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_5
       rect:
         serializedVersion: 2
-        x: 940
-        y: 371
-        width: 112
-        height: 160
+        x: 726
+        y: 481
+        width: 9
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,20 +303,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f46373a152c63f530800000000000000
-      internalID: 3887569809960285775
+      spriteID: 0bef7a5382bb30910800000000000000
+      internalID: 1802490057251618480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_6
       rect:
         serializedVersion: 2
-        x: 101
-        y: 67
-        width: 769
-        height: 175
+        x: 735
+        y: 487
+        width: 10
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,20 +325,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3180e1c8ef82a4620800000000000000
-      internalID: 2759062795455432723
+      spriteID: 3148c219b9def2780800000000000000
+      internalID: -8705478302272551917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_7
       rect:
         serializedVersion: 2
-        x: 930
-        y: 67
-        width: 773
-        height: 175
+        x: 269
+        y: 263
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -329,118 +347,140 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 126d6c30bbe8741e0800000000000000
-      internalID: -2213643757955918303
+      spriteID: 7bcb9c892ace9fa40800000000000000
+      internalID: 5402609411099835575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_8
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_8
       rect:
         serializedVersion: 2
-        x: 1068
-        y: 372
-        width: 112
-        height: 160
+        x: 275
+        y: 264
+        width: 10
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 24dea47484dc84fdcab486f07f10b1b9
-      internalID: 770214570
+      spriteID: dec494a83c38faad0800000000000000
+      internalID: -2688785576654975763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_9
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_9
       rect:
         serializedVersion: 2
-        x: 1196
-        y: 371
-        width: 112
-        height: 160
+        x: 278
+        y: 253
+        width: 9
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a7a127540ee6f435d8e6fd5f7f3b3739
-      internalID: 1598148296
+      spriteID: 48c6b866058f43db0800000000000000
+      internalID: -4812949077550732156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_10
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_10
       rect:
         serializedVersion: 2
-        x: 1324
-        y: 371
-        width: 112
-        height: 160
+        x: 727
+        y: 237
+        width: 10
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c74ffc3dd65204edca286e77c1fb3fe1
-      internalID: -1318430319
+      spriteID: 55438dfda0b302580800000000000000
+      internalID: -8854011949519195051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_11
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_11
       rect:
         serializedVersion: 2
-        x: 1452
-        y: 371
-        width: 112
-        height: 160
+        x: 710
+        y: 156
+        width: 19
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 72f1ebb1b5760419cb7bd29a1e23897f
-      internalID: 1672268971
+      spriteID: 5c1dde3727a4215e0800000000000000
+      internalID: -1940406634011569723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_12
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_12
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 371
-        width: 112
-        height: 160
+        x: 440
+        y: 79
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d7d2498ce019948b9b9b62fa7274803b
-      internalID: -1000257380
+      spriteID: 3900e8f7097d5b3a0800000000000000
+      internalID: -6650172259127394157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ChatGPT Image Jun 6, 2025, 04_06_26 PM_13
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 82
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c981d302e24d12590800000000000000
+      internalID: -7700640593252378468
       vertices: []
       indices: 
       edges: []
@@ -449,7 +489,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6513645cfd00e4cf4a2c8fe418857d6a
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -459,19 +499,20 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_0: -8427497837364295206
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_1: 2725229570159642435
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_10: -1318430319
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_11: 1672268971
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_12: -1000257380
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_2: 3603001128858198988
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_3: -8508884205421288011
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_4: -3236857820199414098
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_5: 3887569809960285775
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_6: 2759062795455432723
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_7: -2213643757955918303
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_8: 770214570
-      Doors-and-Portals-Pixel-Art-Asset-Pack2 Background Removed_9: 1598148296
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_0: 3847097089402453861
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_1: 3022861931887930264
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_10: -8854011949519195051
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_11: -1940406634011569723
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_12: -6650172259127394157
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_13: -7700640593252378468
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_2: 6350562958510494923
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_3: 975020625583375893
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_4: -4681802645212503324
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_5: 1802490057251618480
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_6: -8705478302272551917
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_7: 5402609411099835575
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_8: -2688785576654975763
+      ChatGPT Image Jun 6, 2025, 04_06_26 PM_9: -4812949077550732156
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
