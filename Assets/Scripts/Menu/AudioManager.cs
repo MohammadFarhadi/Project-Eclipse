@@ -25,8 +25,8 @@ public class AudioManager : MonoBehaviour
         lastMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
 
         masterSlider.value = lastMasterVolume;
-        fxSlider.value = lastFXVolume;
-        musicSlider.value = lastMusicVolume;
+        fxSlider.value = Mathf.Min(lastFXVolume, lastMasterVolume); // وابستگی به master
+        musicSlider.value = Mathf.Min(lastMusicVolume, lastMasterVolume); // وابستگی به master
 
         SetMasterVolume(masterSlider.value);
         SetFXVolume(fxSlider.value);
@@ -35,26 +35,49 @@ public class AudioManager : MonoBehaviour
 
     public void SetMasterVolume(float value)
     {
-        float dB = Mathf.Lerp(-80f, 10f, value); // Max +10dB
+        float dB = Mathf.Lerp(-50f, 0f, value);
         audioMixer.SetFloat("MasterVolume", dB);
         lastMasterVolume = value;
-        if (!isMasterMuted) PlayerPrefs.SetFloat("MasterVolume", value);
+
+        if (!isMasterMuted)
+            PlayerPrefs.SetFloat("MasterVolume", value);
+
+        // Force FX and Music sliders to not exceed Master
+        if (fxSlider.value > value)
+        {
+            fxSlider.value = value;
+            SetFXVolume(value);
+        }
+
+        if (musicSlider.value > value)
+        {
+            musicSlider.value = value;
+            SetMusicVolume(value);
+        }
     }
 
     public void SetFXVolume(float value)
     {
-        float dB = Mathf.Lerp(-80f, 10f, value); // Max +10dB
+        // محدود کردن مقدار به master
+        float clampedValue = Mathf.Min(value, masterSlider.value);
+        float dB = Mathf.Lerp(-50f, 10f, clampedValue);
         audioMixer.SetFloat("FXVolume", dB);
-        lastFXVolume = value;
-        if (!isFXMuted) PlayerPrefs.SetFloat("FXVolume", value);
+        lastFXVolume = clampedValue;
+
+        if (!isFXMuted)
+            PlayerPrefs.SetFloat("FXVolume", clampedValue);
     }
 
     public void SetMusicVolume(float value)
     {
-        float dB = Mathf.Lerp(-80f, -10f, value); // Max -10dB
+        // محدود کردن مقدار به master
+        float clampedValue = Mathf.Min(value, masterSlider.value);
+        float dB = Mathf.Lerp(-50f, 0f, clampedValue);
         audioMixer.SetFloat("MusicVolume", dB);
-        lastMusicVolume = value;
-        if (!isMusicMuted) PlayerPrefs.SetFloat("MusicVolume", value);
+        lastMusicVolume = clampedValue;
+
+        if (!isMusicMuted)
+            PlayerPrefs.SetFloat("MusicVolume", clampedValue);
     }
 
     public void ToggleMuteMaster()
@@ -62,7 +85,7 @@ public class AudioManager : MonoBehaviour
         isMasterMuted = !isMasterMuted;
         if (isMasterMuted)
         {
-            audioMixer.SetFloat("MasterVolume", -80f);
+            audioMixer.SetFloat("MasterVolume", -50f);
             masterSlider.value = 0;
         }
         else
@@ -77,13 +100,13 @@ public class AudioManager : MonoBehaviour
         isFXMuted = !isFXMuted;
         if (isFXMuted)
         {
-            audioMixer.SetFloat("FXVolume", -80f);
+            audioMixer.SetFloat("FXVolume", -50f);
             fxSlider.value = 0;
         }
         else
         {
-            SetFXVolume(lastFXVolume);
             fxSlider.value = lastFXVolume;
+            SetFXVolume(lastFXVolume);
         }
     }
 
@@ -92,13 +115,13 @@ public class AudioManager : MonoBehaviour
         isMusicMuted = !isMusicMuted;
         if (isMusicMuted)
         {
-            audioMixer.SetFloat("MusicVolume", -80f);
+            audioMixer.SetFloat("MusicVolume", -50f);
             musicSlider.value = 0;
         }
         else
         {
-            SetMusicVolume(lastMusicVolume);
             musicSlider.value = lastMusicVolume;
+            SetMusicVolume(lastMusicVolume);
         }
     }
 }
