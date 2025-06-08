@@ -19,7 +19,6 @@ public class MeleePlayerController : PlayerControllerBase
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private int attackDamage = 1;
     
-    
     protected override void Start()
     {
         baseDamageMultiplier = 0.5f;
