@@ -1,27 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EchoPuzzleController : MonoBehaviour
 {
-    [Tooltip("Your three orbs in their starting order (must match Slot0 → Slot1 → Slot2)")]
+    public PlayerControllerBase player1;
+    public PlayerControllerBase player2;
+
     public List<EchoOrb> orbList;
-
-    [Tooltip("Empty GameObject slots that sit at the three world-positions")]
     public List<Transform> positions;
-
-    [Tooltip("The correct target sequence")]
     public List<EchoOrb> correctOrder;
-
-    [Tooltip("How long (in seconds) the swap animation should take")]
     public float swapDuration = 0.4f;
+    public GameObject guardianBarrier;
 
     private EchoOrb currentOrb = null;
+    private GameObject interactingPlayer = null; // 🔥 چه کسی وارد گوی شده؟
     private bool isSwapping = false;
 
-    void Update()
+
+    void Start()
     {
-        if (!isSwapping && currentOrb != null && Input.GetKeyDown(KeyCode.X))
+        var players = FindObjectsOfType<PlayerControllerBase>();
+        foreach (var p in players)
+        {
+            if (p.CompareTag("Player") && player1 == null)
+                player1 = p;
+            else if (p.CompareTag("Player"))
+                player2 = p;
+        }
+    }
+
+
+
+
+void Update()
+    {
+        if (isSwapping || currentOrb == null || interactingPlayer == null)
+            return;
+
+        bool player1Active = interactingPlayer == player1.gameObject && player1.IsInteracting();
+        bool player2Active = interactingPlayer == player2.gameObject && player2.IsInteracting();
+
+        if (player1Active || player2Active)
         {
             int i = orbList.IndexOf(currentOrb);
             if (i >= 0)
@@ -32,10 +53,12 @@ public class EchoPuzzleController : MonoBehaviour
         }
     }
 
-    public void SetCurrentOrb(EchoOrb orb)
+    public void SetCurrentOrb(EchoOrb orb, GameObject player)
     {
         currentOrb = orb;
+        interactingPlayer = player;
     }
+
 
     private IEnumerator AnimateSwap(int i, int j)
     {
@@ -81,7 +104,6 @@ public class EchoPuzzleController : MonoBehaviour
 
         isSwapping = false;
     }
-    public GameObject guardianBarrier;  // Assign this in inspector
 
     private void CheckCorrectness()
     {
