@@ -15201,14 +15201,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4860970744435280083, guid: eac74815384184d9b946a234f6054844, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2592450118386936293, guid: eac74815384184d9b946a234f6054844, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2482394257759926440}
   m_SourcePrefab: {fileID: 100100000, guid: eac74815384184d9b946a234f6054844, type: 3}
+--- !u!1 &90208532147632698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2592450118386936293, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 2502391206055580639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2482394257759926440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90208532147632698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341aef5c0a990c7449201a4b1f384613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonObject: {fileID: 5237467145013806513}
+  buttonPressedOffset: {x: 0, y: -0.1, z: 0}
+  moveDuration: 0.3
+  trampolinePrefab: {fileID: 7563660206532580583, guid: f47a4f21df3944e2bbecee11b4df4e9c, type: 3}
+  spawnLocation: {fileID: 641888254305637252}
+  riseOffsetBelow: 1
+  riseDuration: 0.3
+  hightOffsetBelow: 0.5
 --- !u!4 &446344201256270416 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2633475640915814799, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 2502391206055580639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &641888254305637252 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3049559805118316635, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 2502391206055580639}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5237467145013806513 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7644155672100263534, guid: eac74815384184d9b946a234f6054844, type: 3}
   m_PrefabInstance: {fileID: 2502391206055580639}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2723762378543978501
@@ -15461,14 +15500,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4860970744435280083, guid: eac74815384184d9b946a234f6054844, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2592450118386936293, guid: eac74815384184d9b946a234f6054844, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1953354161957757684}
   m_SourcePrefab: {fileID: 100100000, guid: eac74815384184d9b946a234f6054844, type: 3}
+--- !u!4 &475559474778126588 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3049559805118316635, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 3227867822849505447}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &594559307873636648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2633475640915814799, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 3227867822849505447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1094809065508622658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2592450118386936293, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 3227867822849505447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1953354161957757684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094809065508622658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341aef5c0a990c7449201a4b1f384613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonObject: {fileID: 5106747431723822793}
+  buttonPressedOffset: {x: 0, y: -0.1, z: 0}
+  moveDuration: 0.3
+  trampolinePrefab: {fileID: 7563660206532580583, guid: f47a4f21df3944e2bbecee11b4df4e9c, type: 3}
+  spawnLocation: {fileID: 475559474778126588}
+  riseOffsetBelow: 1
+  riseDuration: 0.3
+  hightOffsetBelow: 0.5
+--- !u!4 &5106747431723822793 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7644155672100263534, guid: eac74815384184d9b946a234f6054844, type: 3}
   m_PrefabInstance: {fileID: 3227867822849505447}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3253325455195359446
@@ -16839,16 +16917,55 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4860970744435280083, guid: eac74815384184d9b946a234f6054844, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2592450118386936293, guid: eac74815384184d9b946a234f6054844, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1173458770926609463}
   m_SourcePrefab: {fileID: 100100000, guid: eac74815384184d9b946a234f6054844, type: 3}
+--- !u!4 &3867439123924896719 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7644155672100263534, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 6899119293778042273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8497357970379382266 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3049559805118316635, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 6899119293778042273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8878112558104540206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2633475640915814799, guid: eac74815384184d9b946a234f6054844, type: 3}
   m_PrefabInstance: {fileID: 6899119293778042273}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8954462091741262916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2592450118386936293, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 6899119293778042273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1173458770926609463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8954462091741262916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341aef5c0a990c7449201a4b1f384613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonObject: {fileID: 3867439123924896719}
+  buttonPressedOffset: {x: 0, y: -0.1, z: 0}
+  moveDuration: 0.3
+  trampolinePrefab: {fileID: 7563660206532580583, guid: f47a4f21df3944e2bbecee11b4df4e9c, type: 3}
+  spawnLocation: {fileID: 8497357970379382266}
+  riseOffsetBelow: 1
+  riseDuration: 0.3
+  hightOffsetBelow: 0.5
 --- !u!1001 &7282022323667931981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17569,11 +17686,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4860970744435280083, guid: eac74815384184d9b946a234f6054844, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2592450118386936293, guid: eac74815384184d9b946a234f6054844, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4757490437206046818}
   m_SourcePrefab: {fileID: 100100000, guid: eac74815384184d9b946a234f6054844, type: 3}
+--- !u!4 &1289176378978734474 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7644155672100263534, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 8931038297443583972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5882645039849129919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3049559805118316635, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 8931038297443583972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6344260874833210881 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2592450118386936293, guid: eac74815384184d9b946a234f6054844, type: 3}
+  m_PrefabInstance: {fileID: 8931038297443583972}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4757490437206046818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344260874833210881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341aef5c0a990c7449201a4b1f384613, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonObject: {fileID: 1289176378978734474}
+  buttonPressedOffset: {x: 0, y: -0.1, z: 0}
+  moveDuration: 0.3
+  trampolinePrefab: {fileID: 7563660206532580583, guid: f47a4f21df3944e2bbecee11b4df4e9c, type: 3}
+  spawnLocation: {fileID: 5882645039849129919}
+  riseOffsetBelow: 1
+  riseDuration: 0.3
+  hightOffsetBelow: 0.5
 --- !u!4 &6879969881427979883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2633475640915814799, guid: eac74815384184d9b946a234f6054844, type: 3}
