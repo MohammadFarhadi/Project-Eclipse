@@ -26,9 +26,6 @@ public class RangedPlayerController: PlayerControllerBase
         bulletPool = FindFirstObjectByType<BulletPool>();
         
         
-        Debug.Log($"[TEST] Rigidbody موجوده؟ {rb != null}");
-        Debug.Log($"[TEST] Rigidbody simulated: {rb.simulated}");
-        Debug.Log($"[TEST] BodyType: {rb.bodyType}");
     }
 
     public void Update()

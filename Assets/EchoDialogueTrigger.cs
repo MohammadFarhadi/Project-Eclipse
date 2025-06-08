@@ -4,46 +4,60 @@ using TMPro;
 public class EchoDialogueTrigger : MonoBehaviour
 {
     private EchoTextDisplay echoDisplayScript;
+    private EchoOrb attachedOrb;
+    private EchoPuzzleController controller;
+
     public GameObject dialogueCanvas;
     public TextMeshProUGUI npcText;
     public string echoText;
-    public Color echoColor = Color.white;  // ← اضافه کن برای هر گوی
-
+    public Color echoColor = Color.white;
     public float verticalOffset = 1.2f;
+
+    private bool dialogueDisabled = false;
+
     void Start()
     {
         echoDisplayScript = dialogueCanvas.GetComponentInChildren<EchoTextDisplay>();
+        attachedOrb      = GetComponent<EchoOrb>();
+        controller       = FindObjectOfType<EchoPuzzleController>();
     }
+
 
 
     public void ShowDialogue()
     {
-        dialogueCanvas.transform.position = transform.position + new Vector3(0, verticalOffset, 0);
+        if (dialogueDisabled) return;
 
+        dialogueCanvas.transform.position = transform.position + Vector3.up * verticalOffset;
         dialogueCanvas.SetActive(true);
-        npcText.text = echoText;
 
-        // تنظیم رنگ face
+        npcText.text  = echoText;
         npcText.color = echoColor;
 
-        // تنظیم رنگ Outline و Underlay
-        Material mat = npcText.fontMaterial;
-
-        // ست کردن outline
+        var mat = npcText.fontMaterial;
         if (mat.HasProperty("_OutlineColor"))
-            mat.SetColor("_OutlineColor", new Color(echoColor.r, echoColor.g, echoColor.b, 1f));
-
-        // ست کردن underlay
+            mat.SetColor("_OutlineColor", echoColor);
         if (mat.HasProperty("_UnderlayColor"))
-            mat.SetColor("_UnderlayColor", new Color(echoColor.r * 0.2f, echoColor.g * 0.2f, echoColor.b * 0.2f, 0.5f));
-        echoDisplayScript.ShowStreamText(echoText);
+            mat.SetColor("_UnderlayColor", echoColor * 0.2f);
 
+        echoDisplayScript?.ShowStreamText(echoText);
     }
-
 
     public void HideDialogue()
     {
+        echoDisplayScript?.ForceHide();
         npcText.text = "";
         dialogueCanvas.SetActive(false);
+    }
+
+    public void DisableDialogue()
+    {
+        dialogueDisabled = true;
+        HideDialogue();
+    }
+
+    public void EnableDialogue()
+    {
+        dialogueDisabled = false;
     }
 }

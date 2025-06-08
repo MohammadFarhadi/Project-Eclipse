@@ -103,7 +103,6 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     protected virtual void PlayerMove(InputAction.CallbackContext context)
     {
-        Debug.Log("Move input: " + move_input);
         move_input = context.ReadValue<Vector2>();
         FlipDirection(move_input.x);
     }

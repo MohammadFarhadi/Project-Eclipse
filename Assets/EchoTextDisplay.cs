@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class EchoTextDisplay : MonoBehaviour
 {
     public TextMeshProUGUI npcText;
-    public float typeSpeed = 0.05f;
-    public int maxVisibleChars = 30; // حداکثر تعداد حروف روی صفحه
+    public float typeSpeed = 0.03f;
+    public float lineDelay = 1f;
 
     private Coroutine activeRoutine;
 
@@ -15,37 +16,25 @@ public class EchoTextDisplay : MonoBehaviour
         if (activeRoutine != null)
             StopCoroutine(activeRoutine);
 
-        activeRoutine = StartCoroutine(StreamEffect(message));
+        activeRoutine = StartCoroutine(TypeLineByLine(message));
     }
 
-    IEnumerator StreamEffect(string message)
+    IEnumerator TypeLineByLine(string message)
     {
         npcText.text = "";
-        npcText.alpha = 1f;
 
-        string visible = "";
-
-        for (int i = 0; i < message.Length; i++)
+        string[] lines = message.Split('\n');
+        foreach (string line in lines)
         {
-            visible += message[i];
+            string current = "";
+            foreach (char c in line)
+            {
+                current += c;
+                npcText.text = current;
+                yield return new WaitForSeconds(typeSpeed);
+            }
 
-            if (visible.Length > maxVisibleChars)
-                visible = visible.Substring(1); // پاک کردن اولین کاراکتر
-
-            npcText.text = visible;
-
-            yield return new WaitForSeconds(typeSpeed);
-        }
-
-        yield return new WaitForSeconds(1.5f); // مکث پایانی
-
-        // پاک شدن نهایی مثل شن
-        for (int j = 0; j < maxVisibleChars; j++)
-        {
-            if (npcText.text.Length > 0)
-                npcText.text = npcText.text.Substring(1);
-
-            yield return new WaitForSeconds(typeSpeed * 0.8f);
+            yield return new WaitForSeconds(lineDelay);
         }
 
         npcText.text = "";
@@ -57,6 +46,9 @@ public class EchoTextDisplay : MonoBehaviour
             StopCoroutine(activeRoutine);
 
         npcText.text = "";
-        npcText.alpha = 0f;
+    }
+    public void SetColor(Color newColor)
+    {
+        npcText.color = newColor;
     }
 }

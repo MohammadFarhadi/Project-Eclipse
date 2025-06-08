@@ -1,25 +1,61 @@
+// EchoOrb.cs
+
+using System;
 using UnityEngine;
 
 public class EchoOrb : MonoBehaviour
 {
+    public AudioClip whisperClip;
+    public float whisperRange = 3f;
+    public float whisperCooldown = 4f;
+
+    private float whisperTimer = 0f;
+    private GameObject player;
+
+    
+    public AudioClip solvedClip; // صدا وقتی درست سرجاشه
+    private AudioSource audioSource;
+
+    [Tooltip("Visual color when unsolved")]
     public Color orbColor;
-    private EchoPuzzleController puzzleController;
-    private EchoDialogueTrigger dialogueTrigger;
+    public GameObject particleSystemObject;
+    public EchoDialogueTrigger dialogueTrigger;
+
+    private EchoPuzzleController controller;
     private bool playerInside = false;
 
     void Start()
     {
-        puzzleController = FindObjectOfType<EchoPuzzleController>();
-        dialogueTrigger = GetComponent<EchoDialogueTrigger>();
+        audioSource = GetComponent<AudioSource>();
+        player = GameObject.FindGameObjectWithTag("Player"); // یا هر تگی که داری برای پلیر
+
+        audioSource = GetComponent<AudioSource>();
+        controller = FindObjectOfType<EchoPuzzleController>();
         GetComponent<SpriteRenderer>().color = orbColor;
+    }
+
+    private void Update()
+    {
+        if (player != null && whisperClip != null && audioSource != null)
+        {
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+
+            if (distance < whisperRange && Time.time > whisperTimer)
+            {
+                audioSource.PlayOneShot(whisperClip);
+                whisperTimer = Time.time + whisperCooldown;
+            }
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            playerInside = true;
-            dialogueTrigger.ShowDialogue(); // نمایش دیالوگ
+            Debug.Log($"SetCurrentOrb({name})");
+            controller.SetCurrentOrb(this);
+            dialogueTrigger?.ShowDialogue();
         }
     }
 
@@ -27,9 +63,29 @@ public class EchoOrb : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInside = false;
-            dialogueTrigger.HideDialogue(); // بستن دیالوگ
-            puzzleController.OrbActivated(orbColor); // فعال شدن پازل بعد از خروج
+            Debug.Log($"ClearCurrentOrb({name})");
+            controller.SetCurrentOrb(null);
+            dialogueTrigger?.HideDialogue();
         }
+    }
+
+
+    public void SetSolvedState(bool isSolved)
+    {
+        if (isSolved)
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+
+            if (particleSystemObject != null)
+                particleSystemObject.SetActive(false);
+
+            if (dialogueTrigger != null)
+                dialogueTrigger.DisableDialogue();
+
+            // 🔊 پخش صدای درست
+            if (solvedClip != null && audioSource != null)
+                audioSource.PlayOneShot(solvedClip);
+        }
+
     }
 }
