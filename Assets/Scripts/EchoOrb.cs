@@ -8,7 +8,7 @@ public class EchoOrb : MonoBehaviour
     public AudioClip whisperClip;
     public float whisperRange = 3f;
     public float whisperCooldown = 4f;
-
+    public GameObject oneShotAudioPrefab;
     private float whisperTimer = 0f;
     private GameObject player;
 
@@ -42,7 +42,8 @@ public class EchoOrb : MonoBehaviour
 
             if (distance < whisperRange && Time.time > whisperTimer)
             {
-                audioSource.PlayOneShot(whisperClip);
+                GameObject WisperClipobj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+                WisperClipobj.GetComponent<OneShotSound>().Play(whisperClip);
                 whisperTimer = Time.time + whisperCooldown;
             }
         }
@@ -84,7 +85,12 @@ public class EchoOrb : MonoBehaviour
 
             // 🔊 پخش صدای درست
             if (solvedClip != null && audioSource != null)
-                audioSource.PlayOneShot(solvedClip);
+            {
+                GameObject WisperClipobj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+                WisperClipobj.GetComponent<OneShotSound>().Play(solvedClip);
+                
+            }
+                
         }
 
     }

@@ -12977,6 +12977,7 @@ MonoBehaviour:
   whisperClip: {fileID: 8300000, guid: f81658c5796db4cf8873c8d5d61098fe, type: 3}
   whisperRange: 3
   whisperCooldown: 4
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   solvedClip: {fileID: 8300000, guid: 0b582ad042bcb464bbe07c8373fe0c67, type: 3}
   orbColor: {r: 0.003921569, g: 0.6431373, b: 0.99607843, a: 1}
   particleSystemObject: {fileID: 6922027137421328535}
@@ -19429,6 +19430,7 @@ MonoBehaviour:
   whisperClip: {fileID: 8300000, guid: f81658c5796db4cf8873c8d5d61098fe, type: 3}
   whisperRange: 3
   whisperCooldown: 4
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   solvedClip: {fileID: 8300000, guid: 0b582ad042bcb464bbe07c8373fe0c67, type: 3}
   orbColor: {r: 0.79607844, g: 0.9764706, b: 0.5254902, a: 0.6745098}
   particleSystemObject: {fileID: 2197415222912242501}
@@ -20538,6 +20540,7 @@ MonoBehaviour:
   whisperClip: {fileID: 8300000, guid: f81658c5796db4cf8873c8d5d61098fe, type: 3}
   whisperRange: 3
   whisperCooldown: 4
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   solvedClip: {fileID: 8300000, guid: 0b582ad042bcb464bbe07c8373fe0c67, type: 3}
   orbColor: {r: 1, g: 1, b: 1, a: 1}
   particleSystemObject: {fileID: 3666379614424781355}
