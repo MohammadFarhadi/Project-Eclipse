@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_Parent: {fileID: 2100000, guid: e12773babfc614504b9247ffcdcc5db3, type: 2}
   m_ModifiedSerializedProperties: 2
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - GLOW_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -29,6 +30,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _GlowInner: 0.26
+    - _GlowOffset: 1
+    - _GlowOuter: 0
+    - _GlowPower: 1
     - _GradientScale: 10
     - _OutlineWidth: 0
     - _ScaleRatioA: 0.9
