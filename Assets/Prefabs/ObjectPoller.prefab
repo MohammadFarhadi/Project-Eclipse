@@ -63,3 +63,9 @@ MonoBehaviour:
   - bulletTag: BombBullet
     bulletPrefab: {fileID: 6126515302202280583, guid: 5a6715611e82649fdba8d5ccfa642e51, type: 3}
     poolSize: 2
+  - bulletTag: BombBullet
+    bulletPrefab: {fileID: 6126515302202280583, guid: 5a6715611e82649fdba8d5ccfa642e51, type: 3}
+    poolSize: 2
+  - bulletTag: LightBullet
+    bulletPrefab: {fileID: 7397742461965355799, guid: 8ce2ea5c83d3748ca8f99bfe81e67ff5, type: 3}
+    poolSize: 5

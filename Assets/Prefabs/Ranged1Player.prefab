@@ -156,6 +156,10 @@ MonoBehaviour:
   boostedHitsRemaining: 0
   playersUI: {fileID: 0}
   isGrounded: 1
+  lightBulletTag: LightBullet
+  lightBulbfirePoint: {fileID: 0}
+  fireprojectileSpeed: 10
+  launchAngle: 45
   attackClip: {fileID: 8300000, guid: b1bd65040de39174bba77bf0d8fffe8e, type: 3}
   firePoint: {fileID: 6275184182572605517}
   projectileSpeed: 5
@@ -287,6 +291,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 19058f40-0021-438a-86ee-16554ac6ecc7
     m_ActionName: 'Player2/InterAction[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2891891217537916507}
+        m_TargetAssemblyTypeName: RangedPlayerController, Assembly-CSharp
+        m_MethodName: OnFireLight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bf60004d-ea9d-4dd2-b973-8eb7be81605d
+    m_ActionName: 'Player1/LightBulb[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 59dcd141-c77c-45b2-8c4f-2d92093a1513
+    m_ActionName: 'Player2/FlashLight[/Keyboard/alt]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1

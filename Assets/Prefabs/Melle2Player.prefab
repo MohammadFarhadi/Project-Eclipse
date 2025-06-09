@@ -567,6 +567,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   attackDamage: 1
+  staminaDrainRate: 5
+  flashIntensity: 1.2
+  flashInnerRadius: 0.2
+  flashOuterRadius: 6
 --- !u!114 &3813160500280276300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,6 +696,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 19058f40-0021-438a-86ee-16554ac6ecc7
     m_ActionName: 'Player2/InterAction[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bf60004d-ea9d-4dd2-b973-8eb7be81605d
+    m_ActionName: 'Player1/LightBulb[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4212241713352476069}
+        m_TargetAssemblyTypeName: MeleePlayerController, Assembly-CSharp
+        m_MethodName: OnFlash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 59dcd141-c77c-45b2-8c4f-2d92093a1513
+    m_ActionName: 'Player2/FlashLight[/Keyboard/alt]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player2

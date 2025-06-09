@@ -1,11 +1,25 @@
+using System;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.Universal;
 
 public abstract class PlayerControllerBase : MonoBehaviour
 {
+    
+    
+    
+    [Header("Light")]
+    protected Light2D AuraLight;
+    // این چهار property را می‌توانید در مشتقات override کنید
+    [SerializeField]protected virtual Color AuraColor => Color.white;
+    [SerializeField]protected virtual float AuraIntensity => 0.8f;
+    [SerializeField]protected virtual float AuraInnerRadius => 0.5f;
+    [SerializeField]protected virtual float AuraOuterRadius => 3f;
+    
+    
     [Header("Sound Clips")]
     public AudioClip jumpClip;
     public AudioClip deathClip;
@@ -61,6 +75,15 @@ public abstract class PlayerControllerBase : MonoBehaviour
     public bool isGrounded = true;
     protected Vector2 move_input;
 
+    protected virtual void Awake()
+    {
+        // ساخت Light2D
+        AuraLight = gameObject.AddComponent<Light2D>();
+        AuraLight.lightType = Light2D.LightType.Point;
+        AuraLight.shadowIntensity = 0f;
+        AuraLight.falloffIntensity = 1f;
+    }
+
     protected virtual void Start()
     {
         Sprite = GetComponent<SpriteRenderer>();
@@ -69,6 +92,15 @@ public abstract class PlayerControllerBase : MonoBehaviour
         originalScale = Sprite.transform.localScale;
         playersUI?.SetHealthBar(current_health, max_health);
         currentDamageMultiplier = baseDamageMultiplier;
+        
+        // کانفیگ اولیه‌ی نور براساس propertyها
+        if (AuraLight != null)
+        {
+            AuraLight.color = AuraColor;
+            AuraLight.intensity = AuraIntensity;
+            AuraLight.pointLightInnerRadius = AuraInnerRadius;
+            AuraLight.pointLightOuterRadius = AuraOuterRadius;
+        }
 
     }
 

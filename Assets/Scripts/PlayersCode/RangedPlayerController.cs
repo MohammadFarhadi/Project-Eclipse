@@ -5,6 +5,13 @@ using UnityEngine.InputSystem;
 
 public class RangedPlayerController: PlayerControllerBase
 {
+    
+    [Header("Light Projectile (Pooling)")]
+    [SerializeField] private string lightBulletTag = "LightBullet";
+    [SerializeField] private Transform lightBulbfirePoint;
+    [SerializeField] private float fireprojectileSpeed = 10f;
+    [SerializeField, Range(0f, 90f)] private float launchAngle = 45f;
+    
     [Header("Sound Clips")]
     public AudioClip attackClip;
     [Header("Ranged Bullet")]
@@ -18,6 +25,12 @@ public class RangedPlayerController: PlayerControllerBase
     public bool doubleJump = true;
     private bool Is_Sprinting = false;
     private BulletPool bulletPool;
+    
+    // light system
+    [SerializeField]protected override Color AuraColor => Color.cyan;
+    [SerializeField]protected override float AuraIntensity => 0.6f;
+    [SerializeField]protected override float AuraInnerRadius => 0.3f;
+    [SerializeField]protected override float AuraOuterRadius => 4f;
 
     protected override void Start()
     {
@@ -124,6 +137,32 @@ public class RangedPlayerController: PlayerControllerBase
     public void OnAttack(InputAction.CallbackContext context)
     {
         animator.SetBool("IsShooting", true);
+    }
+    
+    public void OnFireLight(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed || bulletPool == null || firePoint == null) return;
+
+        GameObject proj = bulletPool.GetBullet(lightBulletTag);
+        if (proj == null) return;
+
+        // قرار دادن توپ در نقطهٔ شلیک
+        proj.transform.position = firePoint.position;
+        proj.transform.rotation = firePoint.rotation;
+
+        // محاسبه بردار پرتاب با زاویه
+        float facing = Mathf.Sign(transform.localScale.x);              // +1 یا -1 بسته به جهت پلیر
+        float angleRad = launchAngle * Mathf.Deg2Rad;                  // تبدیل به رادیان
+        Vector2 launchDir = new Vector2(Mathf.Cos(angleRad) * facing, Mathf.Sin(angleRad));
+        launchDir.Normalize();
+
+        // اعمال سرعت اولیه
+        Rigidbody2D rb = proj.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = launchDir * projectileSpeed;
+            // مطمئن شوید gravityScale روی prefab تنظیم شده است
+        }
     }
 
 
