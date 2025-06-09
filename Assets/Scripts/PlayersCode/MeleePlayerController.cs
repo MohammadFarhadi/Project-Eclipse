@@ -3,27 +3,101 @@ using UnityEngine;
 using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class MeleePlayerController : PlayerControllerBase
 {
     [Header("Sound Clips")]
     public AudioClip attackClip;
+    
+    
+    [Header("Dash Settings")]
   //متغیر ها برای dash زدن  
     bool isDashing = false;
     private float addforceSync = 1f;
     [SerializeField] private float DashValue = 80f;
     
+    [Header("Attack Settings")]
     //متغیر ها برای تعریف حمله کردن
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private int attackDamage = 1;
     
+    
+    [Header("AuraLight")]
+    // light system
+    [SerializeField]protected override Color AuraColor => new Color(1f, 0.9f, 0.6f);
+    [SerializeField]protected override float AuraIntensity => 0.8f;
+    [SerializeField]protected override float AuraInnerRadius => 0.5f;
+    [SerializeField]protected override float AuraOuterRadius => 5f;
+    
+    [Header("Flashlight Settings")]
+    [SerializeField] private float staminaDrainRate     = 5f;
+    [SerializeField] private float flashIntensityOn    = 1.2f;
+    [SerializeField] private float flashInnerRadius    = 0.2f;
+    [SerializeField] private float flashOuterRadius    = 6f;
+    [SerializeField, Range(1, 179)] private float flashInnerAngle = 30f;
+    [SerializeField, Range(1, 179)] private float flashOuterAngle = 60f;
+    [SerializeField] private Vector3  flashlightOffset  = new Vector3(0.5f, 0f, 0f);
+    private float    rotationOffset; 
+    private Transform spotlightT;
+
+    
+    private Light2D spotlight;
+    private bool    isFlashOn;
+
+    
+    protected override void Awake()
+    {
+        base.Awake();
+
+        var go = new GameObject("Spotlight");
+        go.transform.SetParent(transform, false);
+        go.transform.localPosition = flashlightOffset;
+
+        // rotate the empty so its Y‐axis (the light’s “forward”) now points along +X
+        float initialZ = -90f;
+        go.transform.localRotation = Quaternion.Euler(0,0, initialZ);
+        rotationOffset = initialZ;
+        spotlightT = go.transform;
+
+        spotlight = go.AddComponent<Light2D>();
+        spotlight.lightType             = Light2D.LightType.Point;
+        spotlight.pointLightInnerRadius = flashInnerRadius;
+        spotlight.pointLightOuterRadius = flashOuterRadius;
+        spotlight.pointLightInnerAngle  = flashInnerAngle;
+        spotlight.pointLightOuterAngle  = flashOuterAngle;
+        spotlight.intensity             = 0f;
+        spotlight.color                 = Color.white;
+        spotlight.shadowIntensity       = 0f;
+        spotlight.falloffIntensity      = 1f;
+    }
     protected override void Start()
     {
         baseDamageMultiplier = 0.5f;
         base.Start();
+        // شعاع‌ها و زاویه‌ها
+        spotlight.pointLightInnerRadius = flashInnerRadius;
+        spotlight.pointLightOuterRadius = flashOuterRadius;
+        spotlight.pointLightInnerAngle  = flashInnerAngle;
+        spotlight.pointLightOuterAngle  = flashOuterAngle;
     }
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();      // حرکت و physics پایه
+        HandleFlashlight();
+    }
+    void Update()
+    {
+        // Flip light cone when player flips
+        float facing = Mathf.Sign(transform.localScale.x);
+        spotlightT.localEulerAngles = new Vector3(0f, 0f, facing < 0f ? 90f : -90f);
+
+        // Toggle on/off and drain/recover stamina
+        HandleFlashlight();
+    }
+
 
     public void OnMove(InputAction.CallbackContext context)
     {   
@@ -143,7 +217,31 @@ public class MeleePlayerController : PlayerControllerBase
     {
         return Mathf.CeilToInt(value / 2f); // نصف دمیج (گرد به بالا)
     }
-    
+
+    private void HandleFlashlight()
+    {
+        if (isFlashOn && Current_Stamina > 0f)
+        {
+            spotlight.intensity = flashIntensityOn;
+            StaminaSystem(staminaDrainRate * Time.deltaTime, false);
+        }
+        else
+            {
+            spotlight.intensity = 0f;
+            if (Current_Stamina < Stamina_max)
+            {
+                StaminaSystem(Stamina_gain * Time.deltaTime, true); 
+            }
+         }
+    }
+
+    public void OnFlash(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+        // toggle on each press
+        isFlashOn = !isFlashOn;
+    }
+
 
 
 }
