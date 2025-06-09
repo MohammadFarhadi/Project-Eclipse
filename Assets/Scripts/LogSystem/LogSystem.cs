@@ -23,9 +23,9 @@ public class LogSystem : MonoBehaviour
 
     private void Start()
     {
-        directory1Button.onClick.AddListener(() => ShowStory("This is a placeholder story for Directory 1. Real content will be added soon."));
-        directory2Button.onClick.AddListener(() => ShowStory("This is a sample story for Directory 2. Currently just dummy text."));
-        directory3Button.onClick.AddListener(() => ShowStory("Directory 3 also has its own story, but it’s empty for now."));
+        directory1Button.onClick.AddListener(() => ShowStory("People are dying here, we need to avacuavate them as fast as possible"));
+        directory2Button.onClick.AddListener(() => ShowStory("there have been mutation in infected poeple we quantied them"));
+        directory3Button.onClick.AddListener(() => ShowStory("okay this is a valid statement: i hate niggers nigga nigga wigga ogo wiga."));
 
         backButton.onClick.AddListener(BackToLogPanel);
         exitButton.onClick.AddListener(CloseLogPanel);
