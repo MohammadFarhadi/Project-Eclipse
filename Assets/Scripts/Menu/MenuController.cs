@@ -38,7 +38,7 @@ public class MenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("SampleScene"); // 👈 اسم دقیق Scene رو بذار اینجا
+        SceneManager.LoadScene("Starting Scene"); // 👈 اسم دقیق Scene رو بذار اینجا
     }
 
     private void DeactivateAll()
