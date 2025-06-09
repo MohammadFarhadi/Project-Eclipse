@@ -37,7 +37,8 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
     [SerializeField] private GameObject Sonin;
     private BulletPool bulletPool;
 
-
+    public Animator targetAnimator; // Animator مربوط به شیء دیگر
+    public string triggerBoolName = "Boss Is Dead"; 
 
     void Start()
     {
@@ -191,6 +192,10 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
     {
         GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
         deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
+        if (targetAnimator != null)
+        {
+            targetAnimator.SetBool(triggerBoolName, true);
+        }
         Destroy(gameObject);
         Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
         Instantiate(Key, spawnPosition, Quaternion.identity);

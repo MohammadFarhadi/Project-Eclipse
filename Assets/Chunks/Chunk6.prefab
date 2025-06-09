@@ -14196,6 +14196,7 @@ GameObject:
   - component: {fileID: 8606849375018559321}
   - component: {fileID: 7191830031008445826}
   - component: {fileID: 5902545178873725978}
+  - component: {fileID: 4309562260323127352}
   m_Layer: 0
   m_Name: EndOfChunk6
   m_TagString: Untagged
@@ -14341,6 +14342,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.12, y: 1.6}
   m_EdgeRadius: 0
+--- !u!114 &4309562260323127352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553176661159512899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f62ef1c6a7ae3f43a346dcc6fd8aa28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorAnimator: {fileID: 7191830031008445826}
 --- !u!1 &6607008761013544794
 GameObject:
   m_ObjectHideFlags: 0
@@ -14592,6 +14606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23fac0cfeb19545daaeb8ec824ba0e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
   orbList:
   - {fileID: 1261444715962695415}
   - {fileID: 4985793286495263091}
@@ -20894,6 +20910,14 @@ PrefabInstance:
     - target: {fileID: 3120842794588637404, guid: 2f6a81ed96164a748b9a7ff46cd960bb, type: 3}
       propertyPath: m_Name
       value: Assasin Group
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218516399875059002, guid: 2f6a81ed96164a748b9a7ff46cd960bb, type: 3}
+      propertyPath: targetAnimator
+      value: 
+      objectReference: {fileID: 7191830031008445826}
+    - target: {fileID: 3218516399875059002, guid: 2f6a81ed96164a748b9a7ff46cd960bb, type: 3}
+      propertyPath: triggerBoolName
+      value: Boss Is Dead
       objectReference: {fileID: 0}
     - target: {fileID: 3433119779265553396, guid: 2f6a81ed96164a748b9a7ff46cd960bb, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1554,7 +1554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5531324167858068288, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5913363322461124832, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Sprite
@@ -3053,7 +3053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 717001063638134935, guid: 4af74d7a8b69bf4468e7b3213c0066ba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1546649119026461148, guid: 4af74d7a8b69bf4468e7b3213c0066ba, type: 3}
       propertyPath: m_SortingOrder
@@ -3575,13 +3575,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -57.036
       objectReference: {fileID: 0}
+    - target: {fileID: 5887015747086653898, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -20.64746
+      objectReference: {fileID: 0}
     - target: {fileID: 6567019070233465305, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
       propertyPath: m_Name
       value: ShopCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 6567019070233465305, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7491052034746356487, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -4354,7 +4358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6668730270236559479, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6954889286890287351, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_Transition
