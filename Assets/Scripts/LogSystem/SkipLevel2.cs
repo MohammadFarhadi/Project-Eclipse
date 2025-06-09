@@ -14,8 +14,6 @@ public class SkipLevel2 : MonoBehaviour
     {
         // assume this script lives on the same GameObject as your PlayerControllerBase
         player = GetComponent<PlayerControllerBase>();
-        if (player == null)
-            Debug.LogError("SkipLevel2 requires a PlayerControllerBase on the same GameObject.");
     }
 
     private void Update()

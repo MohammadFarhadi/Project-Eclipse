@@ -13,6 +13,7 @@ public class GameInitializer : MonoBehaviour
     void Start()
     {   
         int rangedIndex = PlayerSelectionData.Instance.selectedRangedIndex;
+        int rangedIndex = PlayerSelectionData.Instance.selectedRangedIndex;
         int meleeIndex = PlayerSelectionData.Instance.selectedMeleeIndex;
 
         // ابتدا همه پلیرها غیرفعال می‌شن
