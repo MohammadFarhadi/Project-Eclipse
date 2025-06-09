@@ -7,7 +7,7 @@ public class DialogueTrigger : MonoBehaviour
     public DialogueTree dialogueTreeScript;    // اسکریپت درخت دیالوگ
     public GameObject player1; // پلیر برای خاموش کردن حرکت
     public GameObject player2;
-    public GameObject triggerTarget;  
+    
 
     private bool triggered = false;
 
@@ -39,15 +39,7 @@ public class DialogueTrigger : MonoBehaviour
             player2.GetComponent<MeleePlayerController>().enabled = false;
             player2.GetComponent<PlayerControllerBase>().enabled = false;
             player1.GetComponent<PlayerControllerBase>().enabled = false;
-            if (triggerTarget != null)
-            {
-                var tileCollider = triggerTarget.GetComponent<TilemapCollider2D>();
-                if (tileCollider != null)
-                {
-                    tileCollider.enabled = true;
-                    tileCollider.isTrigger = true;
-                }
-            }
+            
         }
     }
 }

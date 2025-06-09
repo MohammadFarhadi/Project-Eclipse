@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -30,13 +31,19 @@ public abstract class PlayerControllerBase : MonoBehaviour
 /* -------------------------------------------------------- */
 
 
-    [Header("Stamina")] [SerializeField] protected float Stamina = 50;
+    [Header("Stamina")] 
+    [SerializeField] protected float Current_Stamina = 50;
     [SerializeField] protected float Stamina_gain = 5f;
     [SerializeField] protected float Stamina_max = 50;
+    [SerializeField] private float staminaRegenDelay = 2f; // تاخیر پر شدن
+    [SerializeField] private float staminaRegenRate = 5f;  // نرخ بازیابی در ثانیه
+    private bool isRegeneratingStamina = false;
+    private Coroutine regenCoroutine;
+
 
     [Header("Health")] private int HealthPoint = 3;
     [SerializeField] protected float max_health = 100f;
-    [SerializeField] protected float current_health = 30;
+    [SerializeField] protected float current_health = 100;
     [SerializeField] protected float Health_gain = 5f;
 
     protected float baseDamageMultiplier = 1f; // مقدار اولیه هر کلاس (1f برای Ranged، 0.5f برای Melee)
@@ -68,6 +75,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
         animator = GetComponent<Animator>();
         originalScale = Sprite.transform.localScale;
         playersUI?.SetHealthBar(current_health, max_health);
+        playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
         currentDamageMultiplier = baseDamageMultiplier;
 
     }
@@ -205,7 +213,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
             return;
         }
 
-        value = ModifyDamage(value);
+        
         if (status == true)
         {
             if (current_health + value > max_health)
@@ -240,6 +248,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
         else
 
         {
+            value = ModifyDamage(value);
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("GetHit")) {
                 animator.SetTrigger("GetHit");
             }
@@ -288,26 +297,38 @@ public abstract class PlayerControllerBase : MonoBehaviour
     {
         if (status == true)
         {
-            if (Stamina + value > Stamina_max)
+            if (Current_Stamina + value > Stamina_max)
             {
-                Stamina = Stamina_max;
+                Current_Stamina = Stamina_max;
             }
             else
             {
-                Stamina += value;
+                Current_Stamina += value;
             }
+            Current_Stamina = Mathf.Min(Current_Stamina + value, Stamina_max);
+
         }
         else
         {
-            if (Stamina - value <= 0)
+            if (Current_Stamina - value <= 0)
             {
-                Stamina = 0;
+                Current_Stamina = 0;
             }
             else
             {
-                Stamina -= value;
+                Current_Stamina -= value;
+            }
+            Current_Stamina = Mathf.Max(Current_Stamina - value, 0f);
+
+            if (Current_Stamina <= 0 && !isRegeneratingStamina)
+            {
+                if (regenCoroutine != null)
+                    StopCoroutine(regenCoroutine);
+
+                regenCoroutine = StartCoroutine(RegenerateStamina());
             }
         }
+        playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
     }
 
     protected virtual void OnDestory()
@@ -328,7 +349,6 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     public void SetStamina(float value)
     {
-        Stamina += value;
         Stamina_max += value;
     }
 
@@ -395,6 +415,23 @@ public abstract class PlayerControllerBase : MonoBehaviour
             soundObj.GetComponent<OneShotSound>().Play(clip);
         }
     }
+    private IEnumerator RegenerateStamina()
+    {
+        isRegeneratingStamina = true;
+        yield return new WaitForSeconds(staminaRegenDelay);
+
+        while (Current_Stamina < Stamina_max)
+        {
+            Current_Stamina += staminaRegenRate * Time.deltaTime;
+            if (Current_Stamina > Stamina_max)
+                Current_Stamina = Stamina_max;
+            playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
+            yield return null;
+        }
+
+        isRegeneratingStamina = false;
+    }
+
 
     
 }

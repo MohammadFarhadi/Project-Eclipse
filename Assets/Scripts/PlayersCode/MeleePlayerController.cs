@@ -77,13 +77,13 @@ public class MeleePlayerController : PlayerControllerBase
     }
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing)
+        if (context.performed && !isDashing && Current_Stamina >= 15f)
         {
+            StaminaSystem(15f, false);
             isDashing = true;
             animator.SetTrigger("IsDashing");
             StartCoroutine(DelayedDashForce());
-
-                addforceSync = 1f;
+            addforceSync = 1f;
         }
     }
 

@@ -16,7 +16,11 @@ public class RangedPlayerController: PlayerControllerBase
     [Header("Stamina")] public float SpriniingCost = 5f;
     
     public bool doubleJump = true;
-    private bool Is_Sprinting = false;
+    [Header("Sprinting Settings")]
+    public float sprintingCostPerSecond = 5f; // مقدار مصرف در ثانیه
+    private bool isSprinting = false;
+    private Coroutine sprintCoroutine;        // ✅ آیا در حال دویدن هست؟
+
     private BulletPool bulletPool;
 
     protected override void Start()
@@ -30,22 +34,23 @@ public class RangedPlayerController: PlayerControllerBase
 
     public void Update()
     {
-        if (Is_Sprinting && Stamina > 0 && isGrounded)
+        
+        if (isSprinting  && isGrounded && Current_Stamina > 0)
         {
-            
+            StaminaSystem(sprintingCostPerSecond * Time.deltaTime, false);
             SetMoveSpeed(3);
             Debug.Log(moveSpeed);
-            StaminaSystem(Mathf.RoundToInt(SpriniingCost * Time.deltaTime), false);
-            animator.SetBool("IsSprinting", true);
+            animator.SetBool("IsSprinting", true); 
+
         }
         else
         {
+            if (Current_Stamina < Stamina_max)
+            {
+                StaminaSystem(sprintingCostPerSecond * Time.deltaTime, true);
+            }
             SetMoveSpeed(1.5f);
             animator.SetBool("IsSprinting", false);
-            if (Stamina < Stamina_max)
-            {
-                StaminaSystem(Mathf.RoundToInt(Stamina_gain * Time.deltaTime), true);
-            }
         }
     }
     
@@ -131,11 +136,11 @@ public class RangedPlayerController: PlayerControllerBase
     {
         if (context.performed)
         {
-            Is_Sprinting = true;
+            isSprinting = true;
         }
-        else
+        else if (context.canceled)
         {
-            Is_Sprinting = false;
+            isSprinting = false;
         }
         
     }
@@ -143,6 +148,7 @@ public class RangedPlayerController: PlayerControllerBase
     {
         doubleJump = true;
     }
+    
    
     
 

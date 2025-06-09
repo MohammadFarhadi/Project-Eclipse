@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.Tilemaps;
 
 
 public class DialogueTree : MonoBehaviour
@@ -10,7 +11,7 @@ public class DialogueTree : MonoBehaviour
     GameObject player2;
     public TextMeshProUGUI npcText;
     public Button[] optionButtons;
-
+    public GameObject triggerTarget;  
     private DialogueNode currentNode;
     public GameObject dialoguePanel; // ← اینو بالای کلاس اضافه کن
     public class DialogueNode
@@ -114,6 +115,15 @@ public class DialogueTree : MonoBehaviour
         player2.GetComponent<MeleePlayerController>().enabled = true;
         player2.GetComponent<PlayerControllerBase>().enabled = true;
         player1.GetComponent<PlayerControllerBase>().enabled = true;
+        if (triggerTarget != null)
+        {
+            var tileCollider = triggerTarget.GetComponent<BoxCollider2D>();
+            if (tileCollider != null)
+            {
+                tileCollider.enabled = true;
+                tileCollider.isTrigger = true;
+            }
+        }
 
         dialoguePanel.SetActive(false);
     }
