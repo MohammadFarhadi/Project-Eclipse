@@ -439,6 +439,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6695668738364897498, guid: da8317ce2edd14c46b9c72829b6526ca, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695668738364897498, guid: da8317ce2edd14c46b9c72829b6526ca, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695668738364897498, guid: da8317ce2edd14c46b9c72829b6526ca, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 6929972898864609666, guid: da8317ce2edd14c46b9c72829b6526ca, type: 3}
       propertyPath: m_TagString
       value: FadePanel
@@ -1304,6 +1316,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -6764512337217443360, guid: dd85325e643fcd0438e92efe577ad18f, type: 3}
+    - target: {fileID: 6349643475925229968, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349643475925229968, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349643475925229968, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923403619862459696, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6923403619862459696, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -2321,6 +2349,18 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3131535418946765138, guid: 4af74d7a8b69bf4468e7b3213c0066ba, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131535418946765138, guid: 4af74d7a8b69bf4468e7b3213c0066ba, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131535418946765138, guid: 4af74d7a8b69bf4468e7b3213c0066ba, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 5221605351408199591, guid: 4af74d7a8b69bf4468e7b3213c0066ba, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2785,6 +2825,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1034627838}
+    - target: {fileID: 4237912966619513112, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237912966619513112, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237912966619513112, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 4900383424817239687, guid: e0c4d43e1ecdde04aa6f1bd8a4d21580, type: 3}
       propertyPath: m_SizeDelta.x
       value: 391.8618
@@ -3572,7 +3624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6668730270236559479, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6954889286890287351, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_Transition
