@@ -145,9 +145,11 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 4096
-  Stamina: 50
+  Current_Stamina: 50
   Stamina_gain: 5
   Stamina_max: 50
+  staminaRegenDelay: 2
+  staminaRegenRate: 5
   max_health: 100
   current_health: 100
   Health_gain: 5
@@ -156,16 +158,18 @@ MonoBehaviour:
   boostedHitsRemaining: 0
   playersUI: {fileID: 0}
   isGrounded: 1
-  lightBulletTag: LightBullet
-  lightBulbfirePoint: {fileID: 0}
-  fireprojectileSpeed: 10
-  launchAngle: 45
-  attackClip: {fileID: 8300000, guid: b1bd65040de39174bba77bf0d8fffe8e, type: 3}
+  attackClip: {fileID: 8300000, guid: 9e72840d880c63245a2dc14a775776b9, type: 3}
   firePoint: {fileID: 6275184182572605517}
   projectileSpeed: 5
   bulletTag: PlayerBullet1
+  lightBulletFirePoint: {fileID: 6275184182572605517}
+  lightBulletTag: LightBullet
+  lightBulletSpeed: 8
+  launchAngle: 45
   SpriniingCost: 5
+  lightThrowCost: 8
   doubleJump: 1
+  sprintingCostPerSecond: 5
 --- !u!114 &2704959161486657930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,7 +513,7 @@ Transform:
   m_GameObject: {fileID: 7060316486502098656}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.04749489, y: 0.80884045, z: -10}
+  m_LocalPosition: {x: 0.040741384, y: 0.6938257, z: -10}
   m_LocalScale: {x: 0.6142114, y: 0.5038233, z: 1.13137}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -540,7 +544,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 50
-    OrthographicSize: 10
+    OrthographicSize: 4
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -658,8 +662,8 @@ Camera:
   near clip plane: 0.1
   far clip plane: 5000
   field of view: 50
-  orthographic: 0
-  orthographic size: 10
+  orthographic: 1
+  orthographic size: 4
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
