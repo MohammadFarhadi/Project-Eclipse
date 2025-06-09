@@ -39,6 +39,10 @@ public class Bullet : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+        else if (other.CompareTag("Ground"))
+        {
+            gameObject.SetActive(false);
+        }
 
     }
     private void OnEnable()
