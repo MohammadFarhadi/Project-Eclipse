@@ -728,8 +728,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -6167551246194430091, guid: a22045d70f2102147a4481c4c43e71c9, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1835,7 +1835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4640788671041987630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2530,7 +2530,6 @@ MonoBehaviour:
   dialogueTreeScript: {fileID: 4369458877522168755}
   player1: {fileID: 0}
   player2: {fileID: 0}
-  triggerTarget: {fileID: 0}
 --- !u!1 &3193309584612620310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2685,8 +2684,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -6167551246194430091, guid: a22045d70f2102147a4481c4c43e71c9, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2819,6 +2818,7 @@ MonoBehaviour:
   - {fileID: 3156135426134705844}
   - {fileID: 7219429489285803218}
   - {fileID: 6620377718655308802}
+  triggerTarget: {fileID: 0}
   dialoguePanel: {fileID: 1946844934265383716}
 --- !u!1 &3780170077496533191
 GameObject:
@@ -4569,8 +4569,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -6167551246194430091, guid: a22045d70f2102147a4481c4c43e71c9, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
