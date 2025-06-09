@@ -20,8 +20,7 @@ public class RangedPlayerController: PlayerControllerBase
     [SerializeField] private string bulletTag = "PlayerBullet"; 
 
 
-    [Header("Stamina")] public float SpriniingCost = 5f;
-    
+    public float sprintingCostPerSecond = 5f; // مقدار مصرف در ثانیه    
     public bool doubleJump = true;
     private bool Is_Sprinting = false;
     private BulletPool bulletPool;
@@ -43,22 +42,23 @@ public class RangedPlayerController: PlayerControllerBase
 
     public void Update()
     {
-        if (Is_Sprinting && Stamina > 0 && isGrounded)
+        
+        if ( Is_Sprinting && isGrounded && Current_Stamina > 0)
         {
-            
+            StaminaSystem(sprintingCostPerSecond * Time.deltaTime, false);
             SetMoveSpeed(3);
             Debug.Log(moveSpeed);
-            StaminaSystem(Mathf.RoundToInt(SpriniingCost * Time.deltaTime), false);
-            animator.SetBool("IsSprinting", true);
+            animator.SetBool("IsSprinting", true); 
+
         }
         else
         {
+            if (Current_Stamina < Stamina_max)
+            {
+                StaminaSystem(sprintingCostPerSecond * Time.deltaTime, true);
+            }
             SetMoveSpeed(1.5f);
             animator.SetBool("IsSprinting", false);
-            if (Stamina < Stamina_max)
-            {
-                StaminaSystem(Mathf.RoundToInt(Stamina_gain * Time.deltaTime), true);
-            }
         }
     }
     

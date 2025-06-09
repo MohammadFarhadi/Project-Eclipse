@@ -151,13 +151,13 @@ public class MeleePlayerController : PlayerControllerBase
     }
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing)
+        if (context.performed && !isDashing && Current_Stamina >= 15f)
         {
+            StaminaSystem(15f, false);
             isDashing = true;
             animator.SetTrigger("IsDashing");
             StartCoroutine(DelayedDashForce());
-
-                addforceSync = 1f;
+            addforceSync = 1f;
         }
     }
 
@@ -220,7 +220,7 @@ public class MeleePlayerController : PlayerControllerBase
 
     private void HandleFlashlight()
     {
-        if (isFlashOn && Stamina > 0f)
+        if (isFlashOn && Current_Stamina > 0f)
         {
             spotlight.intensity = flashIntensityOn;
             StaminaSystem(staminaDrainRate * Time.deltaTime, false);
@@ -228,7 +228,7 @@ public class MeleePlayerController : PlayerControllerBase
         else
             {
             spotlight.intensity = 0f;
-            if (Stamina < Stamina_max)
+            if (Current_Stamina < Stamina_max)
             {
                 StaminaSystem(Stamina_gain * Time.deltaTime, true); 
             }

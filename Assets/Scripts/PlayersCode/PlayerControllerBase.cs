@@ -1,10 +1,11 @@
 using System;
-using Unity.VisualScripting;
-using UnityEditor;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.Universal;
+using System.Collections;
+
 
 public abstract class PlayerControllerBase : MonoBehaviour
 {
@@ -44,9 +45,14 @@ public abstract class PlayerControllerBase : MonoBehaviour
 /* -------------------------------------------------------- */
 
 
-    [Header("Stamina")] [SerializeField] protected float Stamina = 50;
+    [Header("Stamina")] 
+    [SerializeField] protected float Current_Stamina = 50;
     [SerializeField] protected float Stamina_gain = 5f;
     [SerializeField] protected float Stamina_max = 50;
+    [SerializeField] private float staminaRegenDelay = 2f; // تاخیر پر شدن
+    [SerializeField] private float staminaRegenRate = 5f;  // نرخ بازیابی در ثانیه
+    private bool isRegeneratingStamina = false;
+    private Coroutine regenCoroutine;
 
     [Header("Health")] private int HealthPoint = 3;
     [SerializeField] protected float max_health = 100f;
@@ -91,6 +97,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
         animator = GetComponent<Animator>();
         originalScale = Sprite.transform.localScale;
         playersUI?.SetHealthBar(current_health, max_health);
+        playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
         currentDamageMultiplier = baseDamageMultiplier;
         
         // کانفیگ اولیه‌ی نور براساس propertyها
@@ -320,31 +327,44 @@ public abstract class PlayerControllerBase : MonoBehaviour
     {
         if (status == true)
         {
-            if (Stamina + value > Stamina_max)
+            if (Current_Stamina + value > Stamina_max)
             {
-                Stamina = Stamina_max;
+                Current_Stamina = Stamina_max;
             }
             else
             {
-                Stamina += value;
+                Current_Stamina += value;
             }
+            Current_Stamina = Mathf.Min(Current_Stamina + value, Stamina_max);
+
         }
         else
         {
-            if (Stamina - value <= 0)
+            if (Current_Stamina - value <= 0)
             {
-                Stamina = 0;
+                Current_Stamina = 0;
             }
             else
             {
-                Stamina -= value;
+                Current_Stamina -= value;
+            }
+            Current_Stamina = Mathf.Max(Current_Stamina - value, 0f);
+
+            if (Current_Stamina <= 0 && !isRegeneratingStamina)
+            {
+                if (regenCoroutine != null)
+                    StopCoroutine(regenCoroutine);
+
+                regenCoroutine = StartCoroutine(RegenerateStamina());
             }
         }
+        playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
     }
 
     protected virtual void OnDestory()
     {
         PlaySound(deathClip);
+        SceneManager.LoadScene("Game Over");
         Destroy(gameObject);
     }
 
@@ -360,9 +380,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     public void SetStamina(float value)
     {
-        Stamina += value;
+        Current_Stamina += value;
         Stamina_max += value;
     }
+    
 
     public virtual void OnInteracting(InputAction.CallbackContext context)
     {
@@ -428,5 +449,20 @@ public abstract class PlayerControllerBase : MonoBehaviour
         }
     }
 
-    
+    private IEnumerator RegenerateStamina()
+    {
+        isRegeneratingStamina = true;
+        yield return new WaitForSeconds(staminaRegenDelay);
+
+        while (Current_Stamina < Stamina_max)
+        {
+            Current_Stamina += staminaRegenRate * Time.deltaTime;
+            if (Current_Stamina > Stamina_max)
+                Current_Stamina = Stamina_max;
+            playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
+            yield return null;
+        }
+
+        isRegeneratingStamina = false;
+    }
 }
