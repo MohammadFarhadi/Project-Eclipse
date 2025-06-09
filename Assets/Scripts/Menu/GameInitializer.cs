@@ -11,10 +11,10 @@ public class GameInitializer : MonoBehaviour
     [SerializeField] private GameObject meleePlayer2;
 
     void Start()
-    {   
+    {
+        // only declare rangedIndex once
         int rangedIndex = PlayerSelectionData.Instance.selectedRangedIndex;
-        int rangedIndex = PlayerSelectionData.Instance.selectedRangedIndex;
-        int meleeIndex = PlayerSelectionData.Instance.selectedMeleeIndex;
+        int meleeIndex  = PlayerSelectionData.Instance.selectedMeleeIndex;
 
         // ابتدا همه پلیرها غیرفعال می‌شن
         rangedPlayer1.SetActive(false);
