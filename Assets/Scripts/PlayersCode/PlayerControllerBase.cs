@@ -276,7 +276,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadScene("Game Over");
+                    
                     current_health = 0;
                     playersUI.hearts[2].SetActive(false);
                     animator.SetTrigger("IsDead");
@@ -334,6 +334,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     protected virtual void OnDestory()
     {
         PlaySound(deathClip);
+        SceneManager.LoadScene("Game Over");
         Destroy(gameObject);
     }
 

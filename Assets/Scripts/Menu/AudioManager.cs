@@ -60,7 +60,7 @@ public class AudioManager : MonoBehaviour
     {
         // محدود کردن مقدار به master
         float clampedValue = Mathf.Min(value, masterSlider.value);
-        float dB = Mathf.Lerp(-50f, 10f, clampedValue);
+        float dB = Mathf.Lerp(-50f, 0F, clampedValue);
         audioMixer.SetFloat("FXVolume", dB);
         lastFXVolume = clampedValue;
 
