@@ -2,24 +2,39 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Bullet
+  - Enemy
+  - DetectionZone
+  - TurnPoint
+  - Ground
+  - PlayerBullet
+  - Trap
+  - PointA
+  - PointB
+  - PlayerBullet1
+  - SoldierBullet
+  - BombBullet
+  - ShopUI
+  - FadePanel
+  - LightBullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullet
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - DetectionZone
+  - Player
+  - Enemy1
+  - ShopUI
+  - FadePanel
+  - Wall
+  - Ground
+  - LightProjectile
   - 
   - 
   - 
@@ -41,3 +56,26 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround
+    uniqueID: 1260704639
+    locked: 0
+  - name: Ground
+    uniqueID: 1027895571
+    locked: 0
+  - name: Collectible
+    uniqueID: 3921709577
+    locked: 0
+  - name: Health Bar
+    uniqueID: 2905204923
+    locked: 0
+  - name: Bullet
+    uniqueID: 4270681407
+    locked: 0
+  - name: Enemy
+    uniqueID: 2855032491
+    locked: 0
+  - name: Player
+    uniqueID: 3264295517
+    locked: 0
+  m_RenderingLayers:
+  - Default
