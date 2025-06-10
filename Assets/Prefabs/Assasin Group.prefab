@@ -222,6 +222,8 @@ MonoBehaviour:
   healthBarDisplay: {fileID: 5158330600532340840}
   Key: {fileID: 115109503595144896, guid: 843a4c8e4f766504591f5d67e477caf0, type: 3}
   Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+  targetAnimator: {fileID: 0}
+  triggerBoolName: Boss Is Dead
 --- !u!61 &8413210805025960626
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -232,7 +234,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7eb9553abff359d4186a1705dd77101a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -284,7 +286,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7eb9553abff359d4186a1705dd77101a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
