@@ -465,4 +465,9 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
         isRegeneratingStamina = false;
     }
+    public void RefreshUI()
+    {
+        playersUI?.SetHealthBar(current_health, max_health);
+        playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
+    }
 }

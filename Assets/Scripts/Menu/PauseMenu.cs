@@ -3,11 +3,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenuUI; // پنل UI مربوط به Pause
+    public GameObject pauseMenuUI; 
+    public GameObject shopCanvas; // پنل UI مربوط به Pause
     private bool isPaused = false;
 
     private void Start()
     {
+        shopCanvas.SetActive(false);
         pauseMenuUI.SetActive(false);
     }
 
