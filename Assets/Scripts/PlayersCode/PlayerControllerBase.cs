@@ -1,12 +1,26 @@
-using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.Universal;
+using System.Collections;
+
 
 public abstract class PlayerControllerBase : MonoBehaviour
 {
+    
+    
+    
+    [Header("Light")]
+    protected Light2D AuraLight;
+    // این چهار property را می‌توانید در مشتقات override کنید
+    [SerializeField]protected virtual Color AuraColor => Color.white;
+    [SerializeField]protected virtual float AuraIntensity => 0.8f;
+    [SerializeField]protected virtual float AuraInnerRadius => 0.5f;
+    [SerializeField]protected virtual float AuraOuterRadius => 3f;
+    
+    
     [Header("Sound Clips")]
     public AudioClip jumpClip;
     public AudioClip deathClip;
@@ -40,10 +54,9 @@ public abstract class PlayerControllerBase : MonoBehaviour
     private bool isRegeneratingStamina = false;
     private Coroutine regenCoroutine;
 
-
     [Header("Health")] private int HealthPoint = 3;
     [SerializeField] protected float max_health = 100f;
-    [SerializeField] protected float current_health = 100;
+    [SerializeField] protected float current_health = 30;
     [SerializeField] protected float Health_gain = 5f;
 
     protected float baseDamageMultiplier = 1f; // مقدار اولیه هر کلاس (1f برای Ranged، 0.5f برای Melee)
@@ -68,6 +81,15 @@ public abstract class PlayerControllerBase : MonoBehaviour
     public bool isGrounded = true;
     protected Vector2 move_input;
 
+    protected virtual void Awake()
+    {
+        // ساخت Light2D
+        AuraLight = gameObject.AddComponent<Light2D>();
+        AuraLight.lightType = Light2D.LightType.Point;
+        AuraLight.shadowIntensity = 0f;
+        AuraLight.falloffIntensity = 1f;
+    }
+
     protected virtual void Start()
     {
         Sprite = GetComponent<SpriteRenderer>();
@@ -77,6 +99,15 @@ public abstract class PlayerControllerBase : MonoBehaviour
         playersUI?.SetHealthBar(current_health, max_health);
         playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
         currentDamageMultiplier = baseDamageMultiplier;
+        
+        // کانفیگ اولیه‌ی نور براساس propertyها
+        if (AuraLight != null)
+        {
+            AuraLight.color = AuraColor;
+            AuraLight.intensity = AuraIntensity;
+            AuraLight.pointLightInnerRadius = AuraInnerRadius;
+            AuraLight.pointLightOuterRadius = AuraOuterRadius;
+        }
 
     }
 
@@ -213,7 +244,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
             return;
         }
 
-        
+        value = ModifyDamage(value);
         if (status == true)
         {
             if (current_health + value > max_health)
@@ -248,7 +279,6 @@ public abstract class PlayerControllerBase : MonoBehaviour
         else
 
         {
-            value = ModifyDamage(value);
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("GetHit")) {
                 animator.SetTrigger("GetHit");
             }
@@ -276,7 +306,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
                 }
                 else
                 {
-                    
+                    SceneManager.LoadScene("Game Over");
                     current_health = 0;
                     playersUI.hearts[2].SetActive(false);
                     animator.SetTrigger("IsDead");
@@ -350,8 +380,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     public void SetStamina(float value)
     {
+        Current_Stamina += value;
         Stamina_max += value;
     }
+    
 
     public virtual void OnInteracting(InputAction.CallbackContext context)
     {
@@ -416,6 +448,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
             soundObj.GetComponent<OneShotSound>().Play(clip);
         }
     }
+
     private IEnumerator RegenerateStamina()
     {
         isRegeneratingStamina = true;
@@ -432,7 +465,4 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
         isRegeneratingStamina = false;
     }
-
-
-    
 }

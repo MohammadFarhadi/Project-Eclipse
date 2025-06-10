@@ -18,6 +18,7 @@ TagManager:
   - BombBullet
   - ShopUI
   - FadePanel
+  - LightBullet
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - FadePanel
   - Wall
   - Ground
-  - 
+  - LightProjectile
   - 
   - 
   - 

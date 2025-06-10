@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LightBulb",
+                    "type": "Button",
+                    "id": "bf60004d-ea9d-4dd2-b973-8eb7be81605d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -128,6 +137,17 @@
                     "action": "InterAction",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33255a73-87e0-4f08-b5ca-61347ab8e55d",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LightBulb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -175,6 +195,15 @@
                     "name": "InterAction",
                     "type": "Button",
                     "id": "19058f40-0021-438a-86ee-16554ac6ecc7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FlashLight",
+                    "type": "Button",
+                    "id": "59dcd141-c77c-45b2-8c4f-2d92093a1513",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -256,6 +285,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "InterAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "543bc584-213e-4465-be15-e857152c34a7",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlashLight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
