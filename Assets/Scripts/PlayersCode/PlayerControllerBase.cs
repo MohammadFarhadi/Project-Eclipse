@@ -355,8 +355,9 @@ public abstract class PlayerControllerBase : MonoBehaviour
                 if (regenCoroutine != null)
                     StopCoroutine(regenCoroutine);
 
-                regenCoroutine = StartCoroutine(RegenerateStamina());
+               
             }
+            regenCoroutine = StartCoroutine(RegenerateStamina());
         }
         playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
     }
