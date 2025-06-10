@@ -224,23 +224,31 @@ public class MeleePlayerController : PlayerControllerBase
         {
             spotlight.intensity = flashIntensityOn;
             StaminaSystem(staminaDrainRate * Time.deltaTime, false);
+
+            // اگر بعد از کم شدن استامینا رسید صفر، خودکار خاموشش کن
+            if (Current_Stamina <= 0f)
+                isFlashOn = false;
         }
         else
-            {
+        {
             spotlight.intensity = 0f;
             if (Current_Stamina < Stamina_max)
             {
-                StaminaSystem(Stamina_gain * Time.deltaTime, true); 
+                StaminaSystem(Stamina_gain * Time.deltaTime, true);
             }
-         }
+        }
     }
+
 
     public void OnFlash(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
-        // toggle on each press
-        isFlashOn = !isFlashOn;
+
+        // فقط اگر استامینا بیشتر از مصرف لحظه‌ای (مثلاً staminaDrainRate) داشت مجوز بده
+        if (Current_Stamina > staminaDrainRate * Time.deltaTime)
+            isFlashOn = !isFlashOn;
     }
+
 
 
 
