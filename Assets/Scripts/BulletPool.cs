@@ -5,7 +5,7 @@ public class BulletPool : MonoBehaviour
 {  
     //می خوام یه دیکشنری درست کنم که این دیکشنری از مدل های مختلف تیر درست شده که هر کدوم از این مدل ها خودشون یه آراین.
     [System.Serializable]
-    public class BulletType
+    public class BulletType 
     {
         public string bulletTag;
         public GameObject bulletPrefab;
