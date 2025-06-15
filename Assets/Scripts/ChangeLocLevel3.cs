@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ChangeLocLevel3 : MonoBehaviour
 {
+    [SerializeField] private float camearaSize = 8.5f; // تنظیم اندازه دوربین
     private GameObject[] players;
     [SerializeField] private GameObject Player1, Player2, Camera;
     public Transform player1_Pos, player2_Pos, CameraPos;
@@ -29,7 +30,7 @@ public class ChangeLocLevel3 : MonoBehaviour
             Player1.transform.position = player1_Pos.position;
             Player2.transform.position = player2_Pos.position;
             Camera.transform.position = CameraPos.position;
-            Camera.GetComponent<Camera>().orthographicSize = 5.9f;
+            Camera.GetComponent<Camera>().orthographicSize = camearaSize;
         }
     }
 }
