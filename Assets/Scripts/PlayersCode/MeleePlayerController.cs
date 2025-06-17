@@ -20,7 +20,7 @@ public class MeleePlayerController : PlayerControllerBase
     [Header("Attack Settings")]
     //متغیر ها برای تعریف حمله کردن
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private float attackRange = 0.5f;    
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private int attackDamage = 1;
     
