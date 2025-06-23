@@ -228,7 +228,7 @@ Transform:
   m_GameObject: {fileID: 7518360351499530406}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08356649, y: 4.052969, z: -10}
+  m_LocalPosition: {x: -0.083578795, y: 4.052932, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -583,9 +583,11 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 4096
-  Stamina: 50
+  Current_Stamina: 50
   Stamina_gain: 5
   Stamina_max: 50
+  staminaRegenDelay: 2
+  staminaRegenRate: 5
   max_health: 100
   current_health: 100
   Health_gain: 5
@@ -602,6 +604,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 576
   attackDamage: 1
+  staminaDrainRate: 5
+  flashIntensityOn: 6
+  flashInnerRadius: 1
+  flashOuterRadius: 30
+  flashInnerAngle: 15
+  flashOuterAngle: 30
+  flashlightOffset: {x: 0.5, y: 0, z: 0}
 --- !u!114 &4980517831315229453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,6 +736,42 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 19058f40-0021-438a-86ee-16554ac6ecc7
     m_ActionName: 'Player2/InterAction[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bf60004d-ea9d-4dd2-b973-8eb7be81605d
+    m_ActionName: 'Player1/LightBulb[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8359817794261569817}
+        m_TargetAssemblyTypeName: MeleePlayerController, Assembly-CSharp
+        m_MethodName: OnFlash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 59dcd141-c77c-45b2-8c4f-2d92093a1513
+    m_ActionName: 'Player2/FlashLight[/Keyboard/alt]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: edbd19ac-0442-41c2-90ac-3da435021bc4
+    m_ActionName: 'Player1TopDown/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fbfc3649-4d2d-4dae-ad46-e9f9b77d9b5d
+    m_ActionName: 'Player1TopDown/Attack[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 294e4715-4190-4bb9-b5aa-b92c015466a9
+    m_ActionName: 'Player2TopDown/Movement[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 671820ba-9ebd-457b-8404-f9e0b0c0923f
+    m_ActionName: 'Player2TopDown/Attack[/Keyboard/rightShift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player2

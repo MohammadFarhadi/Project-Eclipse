@@ -47,8 +47,8 @@ public class Bullet : MonoBehaviour
     }
     private void OnEnable()
     {
-        // هر بار که فعال شد، بعد از ۱۰ ثانیه خودش خاموش بشه
-        Invoke(nameof(Disable), 10f);
+        // هر بار که فعال شد، بعد از 3 ثانیه خودش خاموش بشه
+        Invoke(nameof(Disable), 3f);
     }
 
     private void OnDisable()
