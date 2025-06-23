@@ -1,53 +1,22 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
-
-public abstract class PlayerControllerBase : MonoBehaviour
+public abstract class TopDownController : MonoBehaviour
 {
-    
-    
-    
-    [Header("Light")]
-    protected Light2D AuraLight;
-    // این چهار property را می‌توانید در مشتقات override کنید
-    [SerializeField]protected virtual Color AuraColor => Color.white;
-    [SerializeField]protected virtual float AuraIntensity => 0.8f;
-    [SerializeField]protected virtual float AuraInnerRadius => 0.5f;
-    [SerializeField]protected virtual float AuraOuterRadius => 3f;
-    
-    
     [Header("Sound Clips")]
-    public AudioClip jumpClip;
     public AudioClip deathClip;
 
     [Header("One Shot Prefab")]
     public GameObject oneShotAudioPrefab;
     [Header("Movement")] [SerializeField] protected float moveSpeed = 1.5f;
-    [SerializeField] protected float jumpForce = 100f;
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Animator animator;
-    public bool HasKey = false;
     
-    /* --- Wall-jump settings --------------------------------- */
     
-    [Header("Wall Jump Settings")]
-    [SerializeField] private Transform wallCheckLeft;
-    [SerializeField] private Transform wallCheckRight;
-    [SerializeField] private float   wallCheckDistance = 0.15f;
-    [SerializeField] private LayerMask wallLayer;
-
-    protected bool  isTouchingWall { get; private set; }
-    private   bool  canWallJump    = true;
-    private   float wallJumpForce  => jumpForce;   // reuse the normal jump force
-/* -------------------------------------------------------- */
-
-
     [Header("Stamina")] 
     [SerializeField] protected float Current_Stamina = 50;
     [SerializeField] protected float Stamina_gain = 5f;
@@ -65,8 +34,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     protected float baseDamageMultiplier = 1f; // مقدار اولیه هر کلاس (1f برای Ranged، 0.5f برای Melee)
     protected float currentDamageMultiplier = 1f;
     protected int reducedHitsRemaining = 0;
-
-    //player interaction
+    
     protected bool Interacting = false;
     private float interactBufferTime = 0.2f;
     private float interactTimer = 0f;
@@ -74,8 +42,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     public int boostedDamage = 2;      // دمیج تقویت‌شده
     public int boostedHitsRemaining = 0;
 
-
-
+    
     [SerializeField] private PlayersUI playersUI;
 
     private Vector3 originalScale;
@@ -87,17 +54,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     protected virtual void Awake()
     {
         
-        //برای اینکه وقتی لول ۲ بودیم light 2d درست کنه
-        if (SceneManager.GetActiveScene().buildIndex == 4)
-        {
-            // ساخت Light2D
-            AuraLight = gameObject.AddComponent<Light2D>();
-            AuraLight.lightType = Light2D.LightType.Point;
-            AuraLight.shadowIntensity = 0f;
-            AuraLight.falloffIntensity = 1f;
-        }
     }
-
     protected virtual void Start()
     {
         Sprite = GetComponent<SpriteRenderer>();
@@ -107,44 +64,21 @@ public abstract class PlayerControllerBase : MonoBehaviour
         playersUI?.SetHealthBar(current_health, max_health);
         playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
         currentDamageMultiplier = baseDamageMultiplier;
-        
-        // کانفیگ اولیه‌ی نور براساس propertyها
-        if (AuraLight != null)
-        {
-            AuraLight.color = AuraColor;
-            AuraLight.intensity = AuraIntensity;
-            AuraLight.pointLightInnerRadius = AuraInnerRadius;
-            AuraLight.pointLightOuterRadius = AuraOuterRadius;
-        }
-
     }
 
-    // Update is called once per frame
-    protected virtual void FixedUpdate()
+      protected virtual void FixedUpdate()
     {
 
         if (CanApplyMovement())
         {
-            rb.linearVelocity = new Vector2(move_input.x * GetMoveSpeed(), rb.linearVelocity.y);
+            Debug.Log( move_input.x + " " + move_input.y);
+            
+            transform.Translate(move_input * GetMoveSpeed() * Time.fixedDeltaTime);
         }
-        // ── Wall detection ───────────────────────────────────────
-        bool leftHit  = Physics2D.Raycast(wallCheckLeft.position,  Vector2.left,  wallCheckDistance, wallLayer);
-        bool rightHit = Physics2D.Raycast(wallCheckRight.position, Vector2.right, wallCheckDistance, wallLayer);
-        isTouchingWall = (leftHit || rightHit);
-
-        if (!isGrounded && !isTouchingWall)      // reset once player leaves wall
-            canWallJump = true;
-    // ─────────────────────────────────────────────────────────
-
 
         if (animator != null)
         {
             animator.SetFloat("IsRunning", Mathf.Abs(move_input.x));
-        }
-
-        if (interactTimer > 0f)
-        {
-            interactTimer -= Time.deltaTime;
         }
     }
 
@@ -152,36 +86,8 @@ public abstract class PlayerControllerBase : MonoBehaviour
     {
         move_input = context.ReadValue<Vector2>();
         FlipDirection(move_input.x);
+        FlipDirection(move_input.y);
     }
-
-    protected virtual void PlayerJump(InputAction.CallbackContext context)
-    {
-        if (isGrounded)
-        {
-            animator.SetBool("IsJumping", true);
-            PlaySound(jumpClip);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            isGrounded = false;
-        }
-    }
-    
-    protected bool TryWallJump()
-    {
-        if (!isGrounded && isTouchingWall && canWallJump)
-        {
-            PlaySound(jumpClip);
-            animator.SetBool("IsJumping", true);
-
-            // cancel current vertical velocity then launch upward
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-            rb.AddForce(Vector2.up * wallJumpForce, ForceMode2D.Impulse);
-
-            canWallJump = false;   // prevent spamming
-            return true;
-        }
-        return false;
-    }
-
 
     protected virtual void FlipDirection(float horizontalInput)
     {
@@ -205,7 +111,6 @@ public abstract class PlayerControllerBase : MonoBehaviour
             // Is the surface mostly horizontal?  (normal pointing upward)
             if (c.normal.y >= 0.5f)
             {
-                animator?.SetBool("IsJumping", false);
                 if (!isGrounded) HandleLanding();
                 isGrounded = true;
                 break;                      // one good contact is enough
@@ -214,11 +119,13 @@ public abstract class PlayerControllerBase : MonoBehaviour
     
     }
 
-    public virtual void HanleFalling()
-    {
-    }
 
-    public abstract void Attack();
+    public virtual void OnAttack()
+    {
+        
+    }
+    
+    
 
     protected virtual float GetMoveSpeed()
     {
@@ -381,22 +288,23 @@ public abstract class PlayerControllerBase : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void Respawn(Vector3 position)
-    {
-        transform.position = position;
-        if (rb != null)
-        {
-            rb.linearVelocity = Vector2.zero;
-            rb.angularVelocity = 0f;
-        }
-    }
+    // public virtual void Respawn(Vector3 position)
+    // {
+    //     transform.position = position;
+    //     if (rb != null)
+    //     {
+    //         rb.linearVelocity = Vector2.zero;
+    //         rb.angularVelocity = 0f;
+    //     }
+    // }
 
     public void SetStamina(float value)
     {
         Current_Stamina += value;
         Stamina_max += value;
     }
-    
+
+    public virtual void Attack(){}
 
     public virtual void OnInteracting(InputAction.CallbackContext context)
     {
@@ -484,3 +392,5 @@ public abstract class PlayerControllerBase : MonoBehaviour
         playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
     }
 }
+    
+// End of TopDownController.cs

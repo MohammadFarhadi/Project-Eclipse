@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class RangedPlayerController : PlayerControllerBase
 {
@@ -91,7 +92,7 @@ public class RangedPlayerController : PlayerControllerBase
     // ← ADDED: new Input callback to throw a light‐emitting projectile
     public void OnFireLight(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed || bulletPool == null || lightBulletFirePoint == null) 
+        if (!ctx.performed || bulletPool == null || lightBulletFirePoint == null || SceneManager.GetActiveScene().buildIndex != 4) 
             return;
 
         // pull from pool

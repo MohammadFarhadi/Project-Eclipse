@@ -4,6 +4,7 @@ using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class MeleePlayerController : PlayerControllerBase
 {
@@ -77,11 +78,15 @@ public class MeleePlayerController : PlayerControllerBase
     {
         baseDamageMultiplier = 0.5f;
         base.Start();
-        // شعاع‌ها و زاویه‌ها
-        spotlight.pointLightInnerRadius = flashInnerRadius;
-        spotlight.pointLightOuterRadius = flashOuterRadius;
-        spotlight.pointLightInnerAngle  = flashInnerAngle;
-        spotlight.pointLightOuterAngle  = flashOuterAngle;
+
+        if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            // شعاع‌ها و زاویه‌ها
+            spotlight.pointLightInnerRadius = flashInnerRadius;
+            spotlight.pointLightOuterRadius = flashOuterRadius;
+            spotlight.pointLightInnerAngle  = flashInnerAngle;
+            spotlight.pointLightOuterAngle  = flashOuterAngle;
+        }
     }
     protected override void FixedUpdate()
     {
@@ -92,7 +97,7 @@ public class MeleePlayerController : PlayerControllerBase
     {
         // Flip light cone when player flips
         float facing = Mathf.Sign(transform.localScale.x);
-        spotlightT.localEulerAngles = new Vector3(0f, 0f, facing < 0f ? 90f : -90f);
+        spotlightT.localScale = new Vector3(-1f, 0f, 0f);
 
         // Toggle on/off and drain/recover stamina
         HandleFlashlight();
