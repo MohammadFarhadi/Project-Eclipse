@@ -17,6 +17,7 @@ public class OnlineController : MonoBehaviour
 
     void OpenPanel()
     {
+        GameModeManager.Instance.CurrentMode = GameMode.Online;
         panel.SetActive(true); // باز کردن پنل
     }
 

@@ -45,13 +45,15 @@ public class PlayfabManager : MonoBehaviour
         PlayerPrefs.SetString("user_email", email.text);
         PlayerPrefs.Save();
         Debug.Log("Signup Successful");
+        
         SceneManager.LoadScene("Lobby");
     }
 
     void OnLoginSuccess(LoginResult result)
     {
         PlayerPrefs.SetString("user_email", email.text);
-        PlayerPrefs.Save();
+        PlayerPrefs.Save();  
+        
         SceneManager.LoadScene("Lobby");
     }
 
