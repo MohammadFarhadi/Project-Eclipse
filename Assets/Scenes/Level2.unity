@@ -1795,7 +1795,7 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.85660374, g: 0.7224564, b: 0.7224564, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
@@ -3063,108 +3063,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3891246626070763834, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.083578795
+      value: -0.08357878
       objectReference: {fileID: 0}
     - target: {fileID: 3891246626070763834, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.052932
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
-      value: bf60004d-ea9d-4dd2-b973-8eb7be81605d
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
-      value: 59dcd141-c77c-45b2-8c4f-2d92093a1513
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
-      value: 'Player1/LightBulb[/Keyboard/f]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
-      value: 'Player2/FlashLight[/Keyboard/alt]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 850012800}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnFlash
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MeleePlayerController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980517831315229453, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 4.052931
       objectReference: {fileID: 0}
     - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: playersUI
       value: 
       objectReference: {fileID: 961981388}
-    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: beamPrefab
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: beamOffset.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: flashInnerRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: flashIntensityOn
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: flashOuterRadius
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 8579872096444119617, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
       propertyPath: m_Name
       value: Melle1Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8579872096444119617, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
---- !u!114 &850012800 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8359817794261569817, guid: 969300facf9250d43be23beacd0bcafb, type: 3}
-  m_PrefabInstance: {fileID: 848581887}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2000085863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6232b944e9e2d4df8906c364c602cb88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &852249411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6707066146726391122, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
@@ -8036,11 +7953,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562884342386105168, guid: bc7e97b548a6dd44097a9860f3178eaf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.06481379
+      value: -0.07556915
       objectReference: {fileID: 0}
     - target: {fileID: 2562884342386105168, guid: bc7e97b548a6dd44097a9860f3178eaf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7592177
+      value: 3.216629
       objectReference: {fileID: 0}
     - target: {fileID: 3267062107418703815, guid: bc7e97b548a6dd44097a9860f3178eaf, type: 3}
       propertyPath: m_LocalPosition.x
