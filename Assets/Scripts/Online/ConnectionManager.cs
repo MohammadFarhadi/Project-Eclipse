@@ -1,5 +1,3 @@
-// Scripts/ConnectionManager.cs
-
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,19 +6,32 @@ using Unity.Netcode.Transports.UTP;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
 public class ConnectionManager : MonoBehaviour
 {
-    public TMP_InputField ipInputField; // تنظیمش کن از Inspector
-    public string gameSceneName = "GameScene";
+    public TMP_InputField ipInputField;
+    public string gameSceneName = "SelectionScene";
+
+    void OnEnable()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnClientSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+        NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
+        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnClientSceneLoaded;
+    }
 
     public void OnHostClicked()
     {
-        NetworkInfo.DetectHostIP(); // آی‌پی هاست گرفته میشه
+        NetworkInfo.DetectHostIP();
         Debug.Log("Host IP: " + NetworkInfo.HostIP);
 
         NetworkManager.Singleton.StartHost();
-        SceneManager.LoadScene(gameSceneName);
+        NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
     }
 
     public void OnClientClicked()
@@ -29,17 +40,23 @@ public class ConnectionManager : MonoBehaviour
         transport.ConnectionData.Address = ipInputField.text;
 
         NetworkManager.Singleton.StartClient();
-        NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnClientSceneLoaded;
+    }
+
+    private void OnClientConnected(ulong clientId)
+    {
+        Debug.Log($"Client connected with ID: {clientId}");
+    }
+
+    private void OnClientDisconnected(ulong clientId)
+    {
+        Debug.Log($"Client disconnected with ID: {clientId}");
     }
 
     private void OnClientSceneLoaded(string sceneName, LoadSceneMode mode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
         if (sceneName == gameSceneName)
         {
-            // مطمئن شدیم وارد همون سین شد
             Debug.Log("Client joined game scene successfully.");
-            // فقط یک بار نیاز داریم
-            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnClientSceneLoaded;
         }
     }
 }

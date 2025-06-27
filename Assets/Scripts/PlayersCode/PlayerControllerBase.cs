@@ -84,6 +84,10 @@ public abstract class PlayerControllerBase : MonoBehaviour
     public bool isGrounded = true;
     protected Vector2 move_input;
 
+    public void SetPlayerUI(PlayersUI playerUI)
+    {
+        this.playersUI = playerUI;
+    }
     protected virtual void Awake()
     {
         

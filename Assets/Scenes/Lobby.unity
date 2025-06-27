@@ -6001,7 +6001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ipInputField: {fileID: 1172299761}
-  gameSceneName: SampleScene
+  gameSceneName: SelectionScene
 --- !u!1 &1533124413
 GameObject:
   m_ObjectHideFlags: 0

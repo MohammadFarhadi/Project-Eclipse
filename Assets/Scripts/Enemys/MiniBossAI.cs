@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -42,31 +43,36 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     void Start()
     {
-        GameObject playerObj = GameObject.Find("RangedPlayer");
-        if (playerObj != null)
+        StartCoroutine(InitializePlayers());
+    }
+
+    IEnumerator InitializePlayers()
+    {
+        // منتظر بمون تا پلیرها در صحنه پیدا بشن (مثلاً حداکثر ۵ ثانیه)
+        float timeout = 5f;
+        float timer = 0f;
+
+        while ((player1 == null || player2 == null) && timer < timeout)
         {
-            player1 = playerObj.transform;
+            GameObject p1 = GameObject.Find("RangedPlayer(Clone)") ?? GameObject.Find("Ranged1Player(Clone)");
+            GameObject p2 = GameObject.Find("Melle1Player(Clone)") ?? GameObject.Find("Melle2Player(Clone)");
+
+            if (p1 != null) player1 = p1.transform;
+            if (p2 != null) player2 = p2.transform;
+
+            timer += Time.deltaTime;
+            yield return null; // یک فریم صبر کن
         }
-        else
-        {
-            playerObj = GameObject.Find("Ranged1Player");
-            player1 = playerObj.transform;
-        }
-        GameObject playerObj1 = GameObject.Find("Melle1Player");
-        if (playerObj != null)
-        {
-            player2 = playerObj1.transform;
-        }
-        else
-        {
-            playerObj1 = GameObject.Find("Melle2Player");
-            player2 = playerObj1.transform;
-        }
+
+        // اگه هنوز نال بودن، یک هشدار لاگ کن
+        if (player1 == null || player2 == null)
+            Debug.LogWarning("Players could not be found within the timeout!");
+
         healthBarDisplay.gameObject.SetActive(false);
         currentHealth = maxHealth;
-
         bulletPool = FindFirstObjectByType<BulletPool>();
     }
+
 
 
     void Update()

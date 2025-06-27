@@ -29,6 +29,8 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/Starting Scene.unity
   - m_enabled: 1
+    m_path: Assets/Scenes/SelectionScene.unity
+  - m_enabled: 1
     m_path: Assets/Scenes/SampleScene.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Level2.unity

@@ -15,13 +15,14 @@ GameObject:
   - component: {fileID: 2704959161486657930}
   - component: {fileID: 1746945698021206273}
   - component: {fileID: 2738394505454236568}
+  - component: {fileID: 8875042997737306238}
   m_Layer: 8
   m_Name: Ranged1Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6387539523567129340
 Transform:
   m_ObjectHideFlags: 0
@@ -393,6 +394,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &8875042997737306238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491233909087113261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &2522182856779549169
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +539,7 @@ Transform:
   m_GameObject: {fileID: 7060316486502098656}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.040741384, y: 0.6938257, z: -10}
+  m_LocalPosition: {x: 0.050926745, y: 0.86728215, z: -10}
   m_LocalScale: {x: 0.6142114, y: 0.5038233, z: 1.13137}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -544,7 +570,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 50
-    OrthographicSize: 4
+    OrthographicSize: 5
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -622,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 7781026765832893749}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.04749489, y: 0.80884045, z: -10}
+  m_LocalPosition: {x: 0.050926745, y: 0.86728215, z: -10}
   m_LocalScale: {x: 0.378428, y: 0.25191164, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -663,7 +689,7 @@ Camera:
   far clip plane: 5000
   field of view: 50
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
