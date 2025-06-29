@@ -11,7 +11,7 @@ public class ConnectionManager : MonoBehaviour
     public TMP_InputField ipInputField;
     public string gameSceneName = "SelectionScene";
 
-    void OnEnable()
+    void Awake()
     {
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;

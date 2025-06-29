@@ -85,14 +85,14 @@ public class ChunkEndTrigger : MonoBehaviour
         canvasGroup.alpha = 1;
 
         // پیدا کردن چانک بعدی
-        int currentIndex = chunkManager.instantiatedChunks.IndexOf(currentChunk);
-        if (currentIndex + 1 >= chunkManager.instantiatedChunks.Count)
+        int currentIndex = chunkManager.activeChunks.IndexOf(currentChunk);
+        if (currentIndex + 1 >= chunkManager.activeChunks.Count)
         {
             Debug.Log("چانک بعدی وجود ندارد");
             yield break;
         }
 
-        GameObject nextChunk = chunkManager.instantiatedChunks[currentIndex + 1];
+        GameObject nextChunk = chunkManager.activeChunks[currentIndex + 1];
         Transform nextStartPoint = nextChunk.transform.Find("StartPoint");
         if (nextStartPoint == null)
         {

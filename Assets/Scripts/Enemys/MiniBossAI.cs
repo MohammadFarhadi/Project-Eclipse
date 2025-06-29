@@ -41,13 +41,11 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
     public Animator targetAnimator; // Animator مربوط به شیء دیگر
     public string triggerBoolName = "Boss Is Dead"; 
 
-    void Start()
-    {
-        StartCoroutine(InitializePlayers());
-    }
+  
 
-    IEnumerator InitializePlayers()
+    public void  InitializePlayers()
     {
+        if (player1 != null && player2 != null) return;
         // منتظر بمون تا پلیرها در صحنه پیدا بشن (مثلاً حداکثر ۵ ثانیه)
         float timeout = 5f;
         float timer = 0f;
@@ -61,7 +59,7 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
             if (p2 != null) player2 = p2.transform;
 
             timer += Time.deltaTime;
-            yield return null; // یک فریم صبر کن
+
         }
 
         // اگه هنوز نال بودن، یک هشدار لاگ کن
@@ -77,6 +75,7 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     void Update()
     {
+        InitializePlayers();
         currentTargetPlayer = GetClosestPlayer();
 
         if (currentTargetPlayer != null)
@@ -98,6 +97,7 @@ public class MiniBossAI : MonoBehaviour, InterfaceEnemies
 
     Transform GetClosestPlayer()
     {
+       
         float distance1 = Vector2.Distance(transform.position, player1.position);
         float distance2 = Vector2.Distance(transform.position, player2.position);
 
