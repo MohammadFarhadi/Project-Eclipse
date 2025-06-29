@@ -139,7 +139,18 @@ public class MeleePlayerController : PlayerControllerBase
 
         if (isGrounded)
         {
-            animator.SetBool("IsJumping", true);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsJumping", true);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    networkAnimator.Animator.SetBool("IsJumping", true);
+                }
+            }
             PlayerJump(context);
         }
         else
@@ -151,16 +162,40 @@ public class MeleePlayerController : PlayerControllerBase
 
     public void OnAttack()
     {
-        animator.SetBool("IsAttacking", true);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsAttacking", true);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                networkAnimator.Animator.SetBool("IsAttacking", true);
+            }
+        }
+        
         StartCoroutine(ResetAttackBool());
     }
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing && Current_Stamina >= 15f)
+        if (context.performed && !isDashing && Current_Stamina.Value >= 15f)
         {
             StaminaSystem(15f, false);
             isDashing = true;
-            animator.SetTrigger("IsDashing");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("IsDashing");
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    networkAnimator.SetTrigger("IsDashing");
+                }
+            }
+            
             StartCoroutine(DelayedDashForce());
             addforceSync = 1f;
         }
@@ -188,7 +223,18 @@ public class MeleePlayerController : PlayerControllerBase
 
         if (!isGrounded && rb.linearVelocity.y < 0)
         {
-            animator.SetBool("IsFalling", true);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsFalling", true);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    networkAnimator.Animator.SetBool("IsFalling", true);
+                }
+            }
         }
     }
 
@@ -207,13 +253,35 @@ public class MeleePlayerController : PlayerControllerBase
     {
         //چقدر طول میکشه که انیمیشن اتکمون اجرا بشه.
         yield return new WaitForSeconds(0.2f); 
-        animator.SetBool("IsAttacking", false);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsAttacking", false);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                networkAnimator.Animator.SetBool("IsAttacking", false);
+            }
+        }
+       
     }
     
     protected override void HandleLanding()
     {
-        animator.SetBool("IsFalling", false);
-    }
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsFalling", false);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                networkAnimator.Animator.SetBool("IsFalling", false);
+            }
+        }    }
     protected override bool IsInvincible()
     {
         return isDashing;
@@ -225,19 +293,19 @@ public class MeleePlayerController : PlayerControllerBase
 
     private void HandleFlashlight()
     {
-        if (isFlashOn && Current_Stamina > 0f)
+        if (isFlashOn && Current_Stamina.Value > 0f)
         {
             spotlight.intensity = flashIntensityOn;
             StaminaSystem(staminaDrainRate * Time.deltaTime, false);
 
             // اگر بعد از کم شدن استامینا رسید صفر، خودکار خاموشش کن
-            if (Current_Stamina <= 0f)
+            if (Current_Stamina.Value <= 0f)
                 isFlashOn = false;
         }
         else
         {
             spotlight.intensity = 0f;
-            if (Current_Stamina < Stamina_max)
+            if (Current_Stamina.Value < Stamina_max)
             {
                 StaminaSystem(Stamina_gain * Time.deltaTime, true);
             }
@@ -250,7 +318,7 @@ public class MeleePlayerController : PlayerControllerBase
         if (!ctx.performed) return;
 
         // فقط اگر استامینا بیشتر از مصرف لحظه‌ای (مثلاً staminaDrainRate) داشت مجوز بده
-        if (Current_Stamina > staminaDrainRate * Time.deltaTime)
+        if (Current_Stamina.Value > staminaDrainRate * Time.deltaTime)
             isFlashOn = !isFlashOn;
     }
 

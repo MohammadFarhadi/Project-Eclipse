@@ -79,19 +79,8 @@ public class PlayerSpawnerManager : NetworkBehaviour
             {
                 GameObject playerObj = Instantiate(characterPrefabs[player.characterID], spawnPoints[spawnIndex].position, Quaternion.identity);
                 playerObj.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.clientID);
-                PlayersUI p; 
-                if (player.characterID < 2)
-                {
-                    p = GameObject.Find("MeleeUIManager  ").GetComponent<PlayersUI>();
-                }
-                else 
-                {
-                    p = GameObject.Find("RangedUIManager  ").GetComponent<PlayersUI>();  
-                }
-                playerObj.GetComponent<PlayerControllerBase>().SetPlayerUI(p);
-                playerObj.GetComponent<PlayerControllerBase>().RefreshUI();
-               
-                
+                bool isMelee = player.characterID < 2;
+                playerObj.GetComponent<PlayerControllerBase>().SetPlayerUIClientRpc(isMelee);
                 Debug.Log($"Online player {player.clientID} spawned with characterID: {player.characterID}");
                 spawnIndex++;
             }

@@ -42,18 +42,41 @@ public class RangedPlayerController : PlayerControllerBase
     public void Update()
     {
         // … your sprint logic unchanged …
-        if (isSprinting  && isGrounded && Current_Stamina > 0)
+        if (isSprinting  && isGrounded && Current_Stamina.Value > 0)
         {
             StaminaSystem(sprintingCostPerSecond * Time.deltaTime, false);
             SetMoveSpeed(3);
-            animator.SetBool("IsSprinting", true);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsSprinting", true);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    networkAnimator.Animator.SetBool("IsSprinting", true);
+                }
+            }
+            
         }
         else
         {
-            if (Current_Stamina < Stamina_max)
+            if (Current_Stamina.Value < Stamina_max)
                 StaminaSystem(sprintingCostPerSecond * Time.deltaTime, true);
             SetMoveSpeed(1.5f);
-            animator.SetBool("IsSprinting", false);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsSprinting", false);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    networkAnimator.Animator.SetBool("IsSprinting", false);
+                }
+            }
         }
     }
 
@@ -85,7 +108,19 @@ public class RangedPlayerController : PlayerControllerBase
                     }
                 }
             }
-            animator.SetBool("IsShooting", false);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsShooting", false);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    networkAnimator.Animator.SetBool("IsShooting", false);
+                }
+            }
+            
         }
     }
 
@@ -99,7 +134,7 @@ public class RangedPlayerController : PlayerControllerBase
         GameObject lightProj = bulletPool.GetBullet(lightBulletTag);
         if (lightProj == null) return;
         
-        if (Current_Stamina < lightThrowCost) return;                  // need enough stamina
+        if (Current_Stamina.Value < lightThrowCost) return;                  // need enough stamina
         StaminaSystem(lightThrowCost, false);                          // subtract cost
 
         // position & rotation
@@ -143,7 +178,18 @@ public class RangedPlayerController : PlayerControllerBase
         if (!isGrounded && doubleJump)
         {
             PlaySound(jumpClip);
-            animator.SetBool("IsJumping", true);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsJumping", true);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    networkAnimator.Animator.SetBool("IsJumping", true);
+                }
+            }
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             doubleJump = false;
         }
@@ -151,7 +197,18 @@ public class RangedPlayerController : PlayerControllerBase
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        animator.SetBool("IsShooting", true);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsShooting", true);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                networkAnimator.Animator.SetBool("IsShooting", true);
+            }
+        }
     }
 
     public void Sprinting(InputAction.CallbackContext context)

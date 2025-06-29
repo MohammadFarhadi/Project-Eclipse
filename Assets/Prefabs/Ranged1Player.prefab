@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 6387539523567129340}
   - component: {fileID: 3249290154337465177}
   - component: {fileID: 9073297928403538519}
+  - component: {fileID: 8875042997737306238}
   - component: {fileID: 2891891217537916507}
   - component: {fileID: 2704959161486657930}
   - component: {fileID: 1746945698021206273}
   - component: {fileID: 2738394505454236568}
-  - component: {fileID: 8875042997737306238}
   - component: {fileID: -1344633328037670630}
+  - component: {fileID: 7005566396253193864}
   m_Layer: 8
   m_Name: Ranged1Player
   m_TagString: Player
@@ -121,6 +122,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8875042997737306238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491233909087113261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1126614042
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &2891891217537916507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5351c9a1d0ec44ab78a768d8b0b9d507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   jumpClip: {fileID: 8300000, guid: 30bba22ac4c38594e98b416fc800cddf, type: 3}
   deathClip: {fileID: 8300000, guid: edfc91887d2bcb046841b4aaf8a3ffbb, type: 3}
   oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
@@ -147,13 +174,17 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 4096
-  Current_Stamina: 50
+  Current_Stamina:
+    m_InternalValue: 50
   Stamina_gain: 5
   Stamina_max: 50
   staminaRegenDelay: 2
   staminaRegenRate: 5
+  HealthPoint:
+    m_InternalValue: 3
   max_health: 100
-  current_health: 100
+  current_health:
+    m_InternalValue: 100
   Health_gain: 5
   baseDamage: 1
   boostedDamage: 2
@@ -411,31 +442,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8875042997737306238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 491233909087113261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1126614042
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!114 &-1344633328037670630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,6 +488,21 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &7005566396253193864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491233909087113261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 9073297928403538519}
 --- !u!1 &2522182856779549169
 GameObject:
   m_ObjectHideFlags: 0

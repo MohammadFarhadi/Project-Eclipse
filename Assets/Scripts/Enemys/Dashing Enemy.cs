@@ -87,7 +87,7 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
         rb.linearVelocity = Vector2.zero;
 
         if (animator != null)
-            animator.SetTrigger("Idle"); // فقط انیمیشن Idle
+            //animator.SetTrigger("Idle"); // فقط انیمیشن Idle
 
         currentDirection *= -1;
         FlipGraphics(); // فقط بعد از دش flip می‌شه
