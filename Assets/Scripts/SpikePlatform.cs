@@ -11,11 +11,13 @@ public class SpikePlatform : MonoBehaviour
     private bool movingDown = false;    // شروع حرکت به بالا
     private bool isWaiting = false;
     private float waitTimer = 0f;
+    private float initialZ;             // ذخیره z اولیه
 
     void Start()
     {
         startPosition = transform.position;
         targetPosition = startPosition + Vector2.up * moveDistance;
+        initialZ = transform.position.z;
     }
 
     void Update()
@@ -26,16 +28,16 @@ public class SpikePlatform : MonoBehaviour
             if (waitTimer <= 0f)
             {
                 isWaiting = false;
-                // تغییر جهت حرکت تیغ
                 movingDown = !movingDown;
                 targetPosition = startPosition + (movingDown ? Vector2.down : Vector2.up) * moveDistance;
             }
             return;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        Vector2 newPosition = Vector2.MoveTowards((Vector2)transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        transform.position = new Vector3(newPosition.x, newPosition.y, initialZ);
 
-        if (Vector2.Distance(transform.position, targetPosition) < 0.01f)
+        if (Vector2.Distance((Vector2)transform.position, targetPosition) < 0.01f)
         {
             isWaiting = true;
             waitTimer = waitTime;
