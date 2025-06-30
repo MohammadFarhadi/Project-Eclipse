@@ -2,45 +2,95 @@ using UnityEngine;
 
 public class SpikePlatform : MonoBehaviour
 {
+    [Header("Movement Settings")]
     public float moveDistance = 2f;     // فاصله حرکت به بالا
     public float moveSpeed = 3f;        // سرعت حرکت تیغ
     public float waitTime = 2f;         // زمان مکث در بالا یا پایین
+    public float initialDelay = 15f;    // تأخیر اولیه قبل از شروع حرکت
 
-    private Vector2 startPosition;
-    private Vector2 targetPosition;
-    private bool movingDown = false;    // شروع حرکت به بالا
-    private bool isWaiting = false;
-    private float waitTimer = 0f;
-    private float initialZ;             // ذخیره z اولیه
+    private Vector2 _startPosition2D;
+    private Vector2 _upDirection2D;
+    private Vector2 _targetPosition2D;
+    private bool _movingUp = true;
+    private bool _waiting = false;
+    private float _waitTimer = 0f;
+    private float _initialZ;
+    private bool _firstCycle = true;
 
     void Start()
     {
-        startPosition = transform.position;
-        targetPosition = startPosition + Vector2.up * moveDistance;
-        initialZ = transform.position.z;
+        // ذخیره موقعیت اولیه دوبعدی
+        Vector3 startPos3D = transform.position;
+        _startPosition2D = new Vector2(startPos3D.x, startPos3D.y);
+        _initialZ = startPos3D.z;
+
+        // محاسبه جهت up محلی
+        _upDirection2D = new Vector2(transform.up.x, transform.up.y).normalized;
+
+        // هدف اولیه حرکت به بالا است
+        _movingUp = true;
+        _targetPosition2D = _startPosition2D + _upDirection2D * moveDistance;
+
+        if (initialDelay > 0f)
+        {
+            _waiting = true;
+            _waitTimer = initialDelay;
+        }
     }
 
     void Update()
     {
-        if (isWaiting)
+        if (_waiting)
         {
-            waitTimer -= Time.deltaTime;
-            if (waitTimer <= 0f)
+            _waitTimer -= Time.deltaTime;
+            if (_waitTimer <= 0f)
             {
-                isWaiting = false;
-                movingDown = !movingDown;
-                targetPosition = startPosition + (movingDown ? Vector2.down : Vector2.up) * moveDistance;
+                _waiting = false;
+
+                if (_firstCycle)
+                {
+                    _firstCycle = false;
+                    // هدف اولیه همان بالا رفتن است
+                }
+                else
+                {
+                    _movingUp = !_movingUp;
+                    _targetPosition2D = _startPosition2D +
+                        (_movingUp ? _upDirection2D : -_upDirection2D) * moveDistance;
+                }
             }
             return;
         }
 
-        Vector2 newPosition = Vector2.MoveTowards((Vector2)transform.position, targetPosition, moveSpeed * Time.deltaTime);
-        transform.position = new Vector3(newPosition.x, newPosition.y, initialZ);
+        // محاسبه موقعیت جدید دوبعدی
+        Vector2 currentPos2D = new Vector2(transform.position.x, transform.position.y);
+        Vector2 newPos2D = Vector2.MoveTowards(
+            currentPos2D,
+            _targetPosition2D,
+            moveSpeed * Time.deltaTime
+        );
 
-        if (Vector2.Distance((Vector2)transform.position, targetPosition) < 0.01f)
+        transform.position = new Vector3(newPos2D.x, newPos2D.y, _initialZ);
+
+        if (Vector2.Distance(newPos2D, _targetPosition2D) < 0.01f)
         {
-            isWaiting = true;
-            waitTimer = waitTime;
+            _waiting = true;
+            _waitTimer = waitTime;
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Vector2 upDir2D = Application.isPlaying
+            ? _upDirection2D
+            : new Vector2(transform.up.x, transform.up.y).normalized;
+
+        Vector3 basePos = transform.position;
+        Vector3 topPos = basePos + new Vector3(upDir2D.x, upDir2D.y, 0f) * moveDistance;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(basePos, topPos);
+        Gizmos.DrawSphere(basePos, 0.1f);
+        Gizmos.DrawSphere(topPos, 0.1f);
     }
 }
