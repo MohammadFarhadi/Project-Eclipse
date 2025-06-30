@@ -87,7 +87,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
 
 
 
-    [SerializeField] private PlayersUI playersUI;
+    [SerializeField] protected PlayersUI playersUI;
     
 
     private Vector3 originalScale;
@@ -100,6 +100,8 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
     {
         this.playersUI = playerUI;
     }
+
+    
     protected virtual void Awake()
     {
         networkAnimator = GetComponent<NetworkAnimator>();
@@ -164,7 +166,8 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetFloat("IsRunning", Mathf.Abs(move_input.x));
+                    UpdateAnimatorFloatParameterServerRpc("IsRunning", Mathf.Abs(move_input.x));
+                    
                 }
             }
             
@@ -195,7 +198,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetBool("IsJumping", true);
+                    UpdateAnimatorBoolParameterServerRpc("IsJumping", true);
                 }
             }
            
@@ -219,7 +222,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetBool("IsJumping", true);
+                    UpdateAnimatorBoolParameterServerRpc("IsJumping", true);
                 }
             }
 
@@ -265,7 +268,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
                 {
                     if (IsOwner)
                     {
-                        networkAnimator.Animator.SetBool("IsJumping", false);
+                        UpdateAnimatorBoolParameterServerRpc("IsJumping", false);
                     }
                 }
                 if (!isGrounded) HandleLanding();
@@ -378,7 +381,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
                 {
                     if (IsOwner)
                     {
-                        networkAnimator.SetTrigger("GetHit");
+                        UpdateAnimatorTriggerParameterServerRpc("GetHit");
                     }
                 }
             }
@@ -418,7 +421,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
                     {
                         if (IsOwner)
                         {
-                            networkAnimator.SetTrigger("IsDead");
+                            UpdateAnimatorTriggerParameterServerRpc("IsDead");
                         }
                     }
                     Invoke(nameof(OnDestory), 1f);
@@ -629,14 +632,13 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
 
     private void OnStaminaChanged(float previous, float current)
     {
-        Debug.Log("OnStaminaChanged");
         if (playersUI != null)
             playersUI.SetStaminaBar(current, Stamina_max);
     }
 
     private void OnHealthChanged(float previous, float current)
     {
-        Debug.Log("OnHealthChanged");
+        
         if (playersUI != null)
             playersUI.SetHealthBar(current, max_health);
     }
@@ -650,5 +652,21 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
 
         RefreshUI();
     }
+    [ServerRpc]
+    protected void UpdateAnimatorBoolParameterServerRpc(string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc]
+    protected void UpdateAnimatorFloatParameterServerRpc(string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc]
+    protected void UpdateAnimatorTriggerParameterServerRpc(string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
+    }
+
 
 }

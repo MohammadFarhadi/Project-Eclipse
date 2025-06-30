@@ -74,6 +74,7 @@ public class MeleePlayerController : PlayerControllerBase
         spotlight.shadowIntensity       = 0f;
         spotlight.falloffIntensity      = 1f;
     }
+    
     protected override void Start()
     {
         baseDamageMultiplier = 0.5f;
@@ -95,6 +96,12 @@ public class MeleePlayerController : PlayerControllerBase
     }
     void Update()
     {
+        if (playersUI == null)
+        {
+            playersUI = GameObject.Find("MeleeUIManager  ").GetComponent<PlayersUI>();
+            RefreshUI();
+        }
+
         // Flip light cone when player flips
         float facing = Mathf.Sign(transform.localScale.x);
         spotlightT.localScale = new Vector3(-1f, 0f, 0f);
@@ -148,7 +155,7 @@ public class MeleePlayerController : PlayerControllerBase
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetBool("IsJumping", true);
+                    UpdateAnimatorBoolParameterServerRpc("IsJumping", true);
                 }
             }
             PlayerJump(context);
@@ -171,7 +178,7 @@ public class MeleePlayerController : PlayerControllerBase
         {
             if (IsOwner)
             {
-                networkAnimator.Animator.SetBool("IsAttacking", true);
+                UpdateAnimatorBoolParameterServerRpc("IsAttacking", true);
             }
         }
         
@@ -192,7 +199,7 @@ public class MeleePlayerController : PlayerControllerBase
             {
                 if (IsOwner)
                 {
-                    networkAnimator.SetTrigger("IsDashing");
+                    UpdateAnimatorTriggerParameterServerRpc("IsDashing");
                 }
             }
             
@@ -232,7 +239,7 @@ public class MeleePlayerController : PlayerControllerBase
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetBool("IsFalling", true);
+                    UpdateAnimatorBoolParameterServerRpc("IsFalling", true);
                 }
             }
         }
@@ -262,7 +269,7 @@ public class MeleePlayerController : PlayerControllerBase
         {
             if (IsOwner)
             {
-                networkAnimator.Animator.SetBool("IsAttacking", false);
+                UpdateAnimatorBoolParameterServerRpc("IsAttacking", false);
             }
         }
        
@@ -279,9 +286,10 @@ public class MeleePlayerController : PlayerControllerBase
         {
             if (IsOwner)
             {
-                networkAnimator.Animator.SetBool("IsFalling", false);
+                UpdateAnimatorBoolParameterServerRpc("IsFalling", false);
             }
-        }    }
+        }
+    }
     protected override bool IsInvincible()
     {
         return isDashing;

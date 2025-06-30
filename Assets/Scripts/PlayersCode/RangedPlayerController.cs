@@ -41,6 +41,11 @@ public class RangedPlayerController : PlayerControllerBase
 
     public void Update()
     {
+        if (playersUI == null)
+        {
+            playersUI = GameObject.Find("RangedUIManager  ").GetComponent<PlayersUI>();
+            RefreshUI();
+        }
         // … your sprint logic unchanged …
         if (isSprinting  && isGrounded && Current_Stamina.Value > 0)
         {
@@ -55,7 +60,7 @@ public class RangedPlayerController : PlayerControllerBase
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetBool("IsSprinting", true);
+                    UpdateAnimatorBoolParameterServerRpc("IsSprinting", true);
                 }
             }
             
@@ -74,7 +79,7 @@ public class RangedPlayerController : PlayerControllerBase
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetBool("IsSprinting", false);
+                    UpdateAnimatorBoolParameterServerRpc("IsSprinting", false);
                 }
             }
         }
@@ -117,7 +122,7 @@ public class RangedPlayerController : PlayerControllerBase
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetBool("IsShooting", false);
+                    UpdateAnimatorBoolParameterServerRpc("IsShooting", false);
                 }
             }
             
@@ -187,7 +192,7 @@ public class RangedPlayerController : PlayerControllerBase
             {
                 if (IsOwner)
                 {
-                    networkAnimator.Animator.SetBool("IsJumping", true);
+                    UpdateAnimatorBoolParameterServerRpc("IsJumping", true);
                 }
             }
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -206,7 +211,7 @@ public class RangedPlayerController : PlayerControllerBase
         {
             if (IsOwner)
             {
-                networkAnimator.Animator.SetBool("IsShooting", true);
+                UpdateAnimatorBoolParameterServerRpc("IsShooting", true);
             }
         }
     }
