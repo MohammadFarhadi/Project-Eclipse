@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6411964876705860889}
-  - component: {fileID: 5506444116953283029}
+  - component: {fileID: 7665472408146375406}
   m_Layer: 0
   m_Name: TrapsGroup
   m_TagString: Untagged
@@ -170,7 +170,7 @@ Transform:
   - {fileID: 8508281719144496980}
   m_Father: {fileID: 2000689862982375849}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5506444116953283029
+--- !u!114 &7665472408146375406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,12 +179,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5794190833956422596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbabd738aafbf0948b6a4b3f8c29e78f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fde2f4cf17054b7286184ba9f812ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 0.5
-  moveSpeed: 1
-  waitTime: 2
+  moveDistance: 2
+  moveSpeed: 2
+  waitTime: 1
+  initialDelay: 15
 --- !u!1001 &5629745443295221486
 PrefabInstance:
   m_ObjectHideFlags: 0

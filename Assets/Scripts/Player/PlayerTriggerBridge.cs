@@ -125,6 +125,7 @@ public class PlayerTriggerBridge : NetworkBehaviour
     [ClientRpc]
     private void PlayBridgeAnimationClientRpc()
     {
+        bridgeCollider.isTrigger = false;
         Animator animator = bridgeObject.GetComponentInChildren<Animator>();
         if (animator != null)
         {

@@ -1,8 +1,9 @@
 
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : NetworkBehaviour
 {
     //اینجا رو اضافه کردم
     private Transform attacker;

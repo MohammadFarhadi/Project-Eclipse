@@ -42,9 +42,9 @@ public class ChunkEndTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (other.name == "RangedPlayer" || other.name == "Ranged1Player")
+            if (other.name == "RangedPlayer(Clone)" || other.name == "Ranged1Player(Clone)")
                 player1Inside = true;
-            else if (other.name == "Melle1Player" || other.name == "Melle2Player")
+            else if (other.name == "Melle1Player(Clone)" || other.name == "Melle2Player(Clone)")
                 player2Inside = true;
         }
     }
@@ -104,9 +104,9 @@ public class ChunkEndTrigger : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject p in players)
         {
-            if (p.name == "RangedPlayer" || p.name == "Ranged1Player")
+            if (p.name == "RangedPlayer(Clone)" || p.name == "Ranged1Player(Clone)")
                 p.transform.position = nextStartPoint.position + Vector3.left * 1.5f;
-            else if (p.name == "Melle1Player" || p.name == "Melle2Player")
+            else if (p.name == "Melle1Player(Clone)" || p.name == "Melle2Player(Clone)")
                 p.transform.position = nextStartPoint.position + Vector3.right * 1.5f;
         }
 

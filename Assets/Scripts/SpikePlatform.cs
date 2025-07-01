@@ -3,10 +3,10 @@ using UnityEngine;
 public class SpikePlatform : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float moveDistance = 2f;     // فاصله حرکت به بالا
-    public float moveSpeed = 3f;        // سرعت حرکت تیغ
-    public float waitTime = 2f;         // زمان مکث در بالا یا پایین
-    public float initialDelay = 15f;    // تأخیر اولیه قبل از شروع حرکت
+    public float moveDistance = 2f;
+    public float moveSpeed = 3f;
+    public float waitTime = 2f;
+    public float initialDelay = 15f;
 
     private Vector2 _startPosition2D;
     private Vector2 _upDirection2D;
@@ -19,15 +19,12 @@ public class SpikePlatform : MonoBehaviour
 
     void Start()
     {
-        // ذخیره موقعیت اولیه دوبعدی
-        Vector3 startPos3D = transform.position;
+        Vector3 startPos3D = transform.localPosition;
         _startPosition2D = new Vector2(startPos3D.x, startPos3D.y);
         _initialZ = startPos3D.z;
 
-        // محاسبه جهت up محلی
         _upDirection2D = new Vector2(transform.up.x, transform.up.y).normalized;
 
-        // هدف اولیه حرکت به بالا است
         _movingUp = true;
         _targetPosition2D = _startPosition2D + _upDirection2D * moveDistance;
 
@@ -50,7 +47,7 @@ public class SpikePlatform : MonoBehaviour
                 if (_firstCycle)
                 {
                     _firstCycle = false;
-                    // هدف اولیه همان بالا رفتن است
+                    // ادامه حرکت به سمت بالا
                 }
                 else
                 {
@@ -62,15 +59,14 @@ public class SpikePlatform : MonoBehaviour
             return;
         }
 
-        // محاسبه موقعیت جدید دوبعدی
-        Vector2 currentPos2D = new Vector2(transform.position.x, transform.position.y);
+        Vector2 currentPos2D = new Vector2(transform.localPosition.x, transform.localPosition.y);
         Vector2 newPos2D = Vector2.MoveTowards(
             currentPos2D,
             _targetPosition2D,
             moveSpeed * Time.deltaTime
         );
 
-        transform.position = new Vector3(newPos2D.x, newPos2D.y, _initialZ);
+        transform.localPosition = new Vector3(newPos2D.x, newPos2D.y, _initialZ);
 
         if (Vector2.Distance(newPos2D, _targetPosition2D) < 0.01f)
         {
@@ -85,7 +81,7 @@ public class SpikePlatform : MonoBehaviour
             ? _upDirection2D
             : new Vector2(transform.up.x, transform.up.y).normalized;
 
-        Vector3 basePos = transform.position;
+        Vector3 basePos = transform.localPosition;
         Vector3 topPos = basePos + new Vector3(upDir2D.x, upDir2D.y, 0f) * moveDistance;
 
         Gizmos.color = Color.red;

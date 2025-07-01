@@ -30,15 +30,15 @@ public class DialogueTree : MonoBehaviour
 
     void Start()
     {
-        player1 = GameObject.Find("Ranged1Player");
+        player1 = GameObject.Find("Ranged1Player(Clone)");
         if (player1 == null)
         {
-            player1 = GameObject.Find("RangedPlayer");
+            player1 = GameObject.Find("RangedPlayer(Clone)");
         }
-        player2 = GameObject.Find("Melle1Player");
+        player2 = GameObject.Find("Melle1Player(Clone)");
         if (player2 == null)
         {
-            player2 = GameObject.Find("Melle2Player");
+            player2 = GameObject.Find("Melle2Player(Clone)");
         }
     }
     public void StartDialogue()

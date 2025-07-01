@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -84,8 +85,22 @@ public class RangedPlayerController : PlayerControllerBase
             }
         }
     }
-
     public override void Attack()
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            // مستقیم تیر را لوکال شلیک کن
+            ShootBullet();
+        }
+        else
+        {
+            // در حالت آنلاین، تیر را با ServerRpc شلیک کن
+            if (IsOwner)
+                AttackServerRpc();
+        }
+    }
+
+    public  void ShootBullet()
     {
         // ← THIS REMAINS YOUR NORMAL BULLET CODE
         if (firePoint && bulletPool != null)
@@ -128,13 +143,25 @@ public class RangedPlayerController : PlayerControllerBase
             
         }
     }
-
-    // ← ADDED: new Input callback to throw a light‐emitting projectile
     public void OnFireLight(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed || bulletPool == null || lightBulletFirePoint == null || SceneManager.GetActiveScene().buildIndex != 4) 
+        if (!ctx.performed || bulletPool == null || lightBulletFirePoint == null)
             return;
 
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            ShootLightBullet();
+        }
+        else
+        {
+            if (IsOwner)
+                FireLightServerRpc();
+        }
+    }
+
+    // ← ADDED: new Input callback to throw a light‐emitting projectile
+    public void ShootLightBullet()
+    {
         // pull from pool
         GameObject lightProj = bulletPool.GetBullet(lightBulletTag);
         if (lightProj == null) return;
@@ -225,4 +252,19 @@ public class RangedPlayerController : PlayerControllerBase
     {
         doubleJump = true;
     }
+    [ServerRpc]
+    private void AttackServerRpc()
+    {
+        ShootBullet();
+    }
+    [ServerRpc]
+    private void FireLightServerRpc()
+    {
+        ShootLightBullet();
+    }
+
+   
+
+    
+ 
 }

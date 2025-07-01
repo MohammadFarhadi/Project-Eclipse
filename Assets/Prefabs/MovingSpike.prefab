@@ -97,7 +97,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6707066146726391122}
   - component: {fileID: 5605202784744880932}
-  - component: {fileID: 5880666875771724289}
   m_Layer: 0
   m_Name: MovingSpike
   m_TagString: Untagged
@@ -169,22 +168,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.66923773, y: 0.609141}
   m_EdgeRadius: 0
---- !u!114 &5880666875771724289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2194788725447739816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fde2f4cf17054b7286184ba9f812ea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDistance: 1
-  moveSpeed: 2
-  waitTime: 1
-  initialDelay: 0
 --- !u!1 &5512210141170805211
 GameObject:
   m_ObjectHideFlags: 0
