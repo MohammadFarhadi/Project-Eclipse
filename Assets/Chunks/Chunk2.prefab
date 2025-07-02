@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2439232367
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -27029,6 +27029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5678622c468503c498616219132b7227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   platform: {fileID: 1529144880929582441}
   startPoint: {fileID: 8897036418291082273}
   endPoint: {fileID: 8754137525115991005}
@@ -32020,6 +32021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5678622c468503c498616219132b7227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   platform: {fileID: 1529144880929582441}
   startPoint: {fileID: 8897036418291082273}
   endPoint: {fileID: 8754137525115991005}

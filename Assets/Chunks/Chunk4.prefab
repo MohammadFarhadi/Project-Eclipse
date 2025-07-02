@@ -25574,7 +25574,6 @@ Transform:
   - {fileID: 1125931001149929111}
   - {fileID: 7557790093708857312}
   - {fileID: 9107273122336252310}
-  - {fileID: 8686680473468207101}
   - {fileID: 4589157088255532996}
   - {fileID: 2185305305316637767}
   - {fileID: 2912456621137612870}
@@ -35596,76 +35595,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8741044532947792248, guid: b816203151c524742b04a9f970127060, type: 3}
   m_PrefabInstance: {fileID: 1556058459223170468}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1879937841710117326
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8952664072137728762}
-    m_Modifications:
-    - target: {fileID: 613003051460715735, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 47c24092a42d84916bd34c0d15f4deaf, type: 2}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.988892
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.989746
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8.330633
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7569411130819736169, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: moveDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9020944774474058395, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-      propertyPath: m_Name
-      value: Moving Platformer
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
---- !u!4 &8686680473468207101 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7105457952019369523, guid: cd3e159b942738749941cd413aebfbe2, type: 3}
-  m_PrefabInstance: {fileID: 1879937841710117326}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2458588249122704111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36197,6 +36126,10 @@ PrefabInstance:
     - target: {fileID: 225076134685435282, guid: ef2421096a570954195b4b6bc5d0306f, type: 3}
       propertyPath: m_Name
       value: Dashing Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054966684161455179, guid: ef2421096a570954195b4b6bc5d0306f, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3579777064
       objectReference: {fileID: 0}
     - target: {fileID: 7517852397221743831, guid: ef2421096a570954195b4b6bc5d0306f, type: 3}
       propertyPath: m_LocalScale.x
@@ -36842,6 +36775,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5304766548791653185, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3258173900
+      objectReference: {fileID: 0}
     - target: {fileID: 7200234467213938067, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       propertyPath: m_Name
       value: Moving Platformer (1)
@@ -36855,7 +36792,7 @@ PrefabInstance:
       addedObject: {fileID: 2473485369730548140}
     - targetCorrespondingSourceObject: {fileID: 7200234467213938067, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 106636486587994905}
+      addedObject: {fileID: 7101353760017152484}
   m_SourcePrefab: {fileID: 100100000, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
 --- !u!1 &3063705208342285069 stripped
 GameObject:
@@ -36878,7 +36815,7 @@ MonoBehaviour:
   moveDuration: 2.5
   waitTime: 1
   startDelay: 15
---- !u!114 &106636486587994905
+--- !u!114 &7101353760017152484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -36903,7 +36840,7 @@ MonoBehaviour:
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 0
-  TickSyncChildren: 0
+  TickSyncChildren: 1
   UseUnreliableDeltas: 0
   SyncPositionX: 1
   SyncPositionY: 1
@@ -36920,8 +36857,8 @@ MonoBehaviour:
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  SwitchTransformSpaceWhenParented: 0
+  InLocalSpace: 1
+  SwitchTransformSpaceWhenParented: 1
   Interpolate: 1
   SlerpPosition: 0
 --- !u!4 &7604438313534102356 stripped
