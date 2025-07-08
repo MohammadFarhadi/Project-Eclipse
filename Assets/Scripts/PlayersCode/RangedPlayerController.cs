@@ -32,12 +32,14 @@ public class RangedPlayerController : PlayerControllerBase
     private bool isSprinting = false;
 
     private BulletPool bulletPool;
+    private BulletPoolNGO bulletPoolNGO;
 
     protected override void Start()
     {
         baseDamageMultiplier = 1f;
         base.Start();
         bulletPool = FindFirstObjectByType<BulletPool>();
+        bulletPoolNGO = FindObjectOfType<BulletPoolNGO>();
     }
 
     public void Update()
@@ -94,55 +96,57 @@ public class RangedPlayerController : PlayerControllerBase
         }
         else
         {
+            Debug.Log("Shooting Rpc ");
             // در حالت آنلاین، تیر را با ServerRpc شلیک کن
-            if (IsOwner)
-                AttackServerRpc();
+            if (IsOwner) ShootBullet();
         }
     }
 
-    public  void ShootBullet()
+    public void ShootBullet()
     {
-        // ← THIS REMAINS YOUR NORMAL BULLET CODE
-        if (firePoint && bulletPool != null)
-        {
             PlaySound(attackClip);
-            GameObject proj = bulletPool.GetBullet(bulletTag);
-            if (proj != null)
-            {
-                proj.transform.position = firePoint.position;
-                proj.transform.rotation = firePoint.rotation;
-
-                Rigidbody2D rbProj = proj.GetComponent<Rigidbody2D>();
-                if (rbProj != null)
-                {
-                    Vector3 bulletScale = rbProj.transform.localScale;
-                    bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
-                    rbProj.linearVelocity = new Vector2(transform.localScale.x * projectileSpeed, 0f);
-                    rbProj.transform.localScale = bulletScale;
-
-                    Bullet bulletScript = proj.GetComponent<Bullet>();
-                    if (bulletScript != null)
-                    {
-                        bulletScript.SetAttacker(this.transform);
-                        bulletScript.damage = GetAttackDamage();
-                    }
-                }
-            }
             if (GameModeManager.Instance.CurrentMode == GameMode.Local)
             {
-                animator.SetBool("IsShooting", false);
+                if (firePoint && bulletPool != null)
+                {
+                    GameObject proj = bulletPool.GetBullet(bulletTag);
+                    if (proj != null)
+                    {
+                        proj.transform.position = firePoint.position;
+                        proj.transform.rotation = firePoint.rotation;
+
+                        Rigidbody2D rbProj = proj.GetComponent<Rigidbody2D>();
+                        if (rbProj != null)
+                        {
+                            Vector3 bulletScale = rbProj.transform.localScale;
+                            bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                            rbProj.linearVelocity = new Vector2(transform.localScale.x * projectileSpeed, 0f);
+                            rbProj.transform.localScale = bulletScale;
+
+                            Bullet bulletScript = proj.GetComponent<Bullet>();
+                            if (bulletScript != null)
+                            {
+                                bulletScript.SetAttacker(this.transform);
+                                bulletScript.damage = GetAttackDamage();
+                            }
+                        }
+                    }
+            
+                    animator.SetBool("IsShooting", false); 
+                }
                 
             }
             else
             {
                 if (IsOwner)
                 {
-                    UpdateAnimatorBoolParameterServerRpc("IsShooting", false);
+                    Debug.Log("Shooting in pool ");
+                    ShootBulletServerRpc();
                 }
             }
-            
-        }
+        
     }
+
     public void OnFireLight(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed || bulletPool == null || lightBulletFirePoint == null)
@@ -162,8 +166,17 @@ public class RangedPlayerController : PlayerControllerBase
     // ← ADDED: new Input callback to throw a light‐emitting projectile
     public void ShootLightBullet()
     {
+        GameObject lightProj;
         // pull from pool
-        GameObject lightProj = bulletPool.GetBullet(lightBulletTag);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+             lightProj = bulletPool.GetBullet(lightBulletTag);
+        }
+        else
+        {
+            lightProj = bulletPoolNGO.GetBullet(lightBulletTag);
+        }
+        
         if (lightProj == null) return;
         
         if (Current_Stamina.Value < lightThrowCost) return;                  // need enough stamina
@@ -252,15 +265,96 @@ public class RangedPlayerController : PlayerControllerBase
     {
         doubleJump = true;
     }
-    [ServerRpc]
-    private void AttackServerRpc()
-    {
-        ShootBullet();
-    }
+    
+   
     [ServerRpc]
     private void FireLightServerRpc()
     {
         ShootLightBullet();
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    public void ShootBulletServerRpc()
+    {
+        Debug.Log("We Are Here Bro");
+
+        GameObject proj = bulletPoolNGO.GetBullet(bulletTag);
+        Debug.Log(proj);
+        if (proj != null)
+        {
+            // در سرور گلوله رو در جای درست بذار
+            proj.transform.position = firePoint.position;
+            proj.transform.rotation = firePoint.rotation;
+
+            NetworkObject netObj = proj.GetComponent<NetworkObject>();
+            Rigidbody2D rbProj = proj.GetComponent<Rigidbody2D>();
+
+            Vector2 bulletVelocity = Vector2.zero;
+            float bulletScaleX = 1f;
+
+            if (rbProj != null)
+            {
+                Vector3 bulletScale = rbProj.transform.localScale;
+                bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                bulletVelocity = new Vector2(transform.localScale.x * projectileSpeed, 0f);
+                rbProj.linearVelocity = bulletVelocity;
+                rbProj.transform.localScale = bulletScale;
+
+                Bullet bulletScript = proj.GetComponent<Bullet>();
+                if (bulletScript != null)
+                {
+                    bulletScript.SetAttacker(this.transform);
+                    bulletScript.damage = GetAttackDamage();
+                }
+
+                bulletScaleX = bulletScale.x;
+            }
+
+            // کلاینت‌ها رو هم sync کن
+            InitBulletClientRpc(
+                netObj.NetworkObjectId,
+                firePoint.position,
+                bulletVelocity,
+                bulletScaleX,
+                this.GetComponent<NetworkObject>().NetworkObjectId,
+                GetAttackDamage()
+            );
+        }
+
+        // بعد از شلیک، به همه کلاینت‌ها بگو انیمیشن قطع شه
+        UpdateAnimatorBoolParameterServerRpc("IsShooting", false);
+    }
+
+
+    [ClientRpc]
+    void InitBulletClientRpc(ulong bulletNetId, Vector3 spawnPosition, Vector2 velocity, float scaleX, ulong attackerNetId, int damage)
+    {
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(bulletNetId, out NetworkObject spawnedBullet))
+        {
+            spawnedBullet.transform.position = spawnPosition;
+
+            Rigidbody2D rb = spawnedBullet.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = velocity;
+
+                Vector3 scale = spawnedBullet.transform.localScale;
+                scale.x = scaleX;
+                spawnedBullet.transform.localScale = scale;
+            }
+
+            Bullet bulletScript = spawnedBullet.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                Transform attacker = null;
+                if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(attackerNetId, out NetworkObject attackerObj))
+                {
+                    attacker = attackerObj.transform;
+                }
+                bulletScript.SetAttacker(attacker);
+                bulletScript.damage = damage;
+            }
+        }
     }
 
    

@@ -667,17 +667,20 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
 
         RefreshUI();
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
+
     protected void UpdateAnimatorBoolParameterServerRpc(string parameterName, bool value)
     {
         networkAnimator.Animator.SetBool(parameterName, value);
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
+
     protected void UpdateAnimatorFloatParameterServerRpc(string parameterName, float value)
     {
         networkAnimator.Animator.SetFloat(parameterName, value);
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
+
     protected void UpdateAnimatorTriggerParameterServerRpc(string parameterName)
     {
         networkAnimator.Animator.SetTrigger(parameterName);

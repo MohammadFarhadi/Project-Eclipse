@@ -243,8 +243,8 @@ MonoBehaviour:
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
   AuthorityMode: 0
-  TickSyncChildren: 0
-  UseUnreliableDeltas: 0
+  TickSyncChildren: 1
+  UseUnreliableDeltas: 1
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 4150096572
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1

@@ -35903,6 +35903,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 7665472408146375406, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665472408146375406, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+      propertyPath: moveDistance
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5506444116953283029, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
     m_RemovedGameObjects: []
@@ -35914,7 +35922,225 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5794190833956422596, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7926385206622000622}
+    - targetCorrespondingSourceObject: {fileID: 616132187011423018, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7430895519809232630}
+    - targetCorrespondingSourceObject: {fileID: 3127587113463200325, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3951474407475957244}
+    - targetCorrespondingSourceObject: {fileID: 3127587113463200325, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2823330141955966101}
+    - targetCorrespondingSourceObject: {fileID: 4491606767490823375, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4395090093445144194}
+    - targetCorrespondingSourceObject: {fileID: 4491606767490823375, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1273663025962399269}
   m_SourcePrefab: {fileID: 100100000, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+--- !u!1 &1084097791517916200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3127587113463200325, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+  m_PrefabInstance: {fileID: 2624497808998516333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3951474407475957244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084097791517916200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 0
+  TickSyncChildren: 1
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 1
+  SwitchTransformSpaceWhenParented: 1
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!114 &2823330141955966101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084097791517916200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!1 &1889667226246722210 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4491606767490823375, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+  m_PrefabInstance: {fileID: 2624497808998516333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4395090093445144194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889667226246722210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &1273663025962399269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889667226246722210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 0
+  TickSyncChildren: 1
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 1
+  SwitchTransformSpaceWhenParented: 1
+  Interpolate: 1
+  SlerpPosition: 0
+--- !u!1 &3233837624383102279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 616132187011423018, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}
+  m_PrefabInstance: {fileID: 2624497808998516333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7430895519809232630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3233837624383102279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 0
+  AutoOwnerAuthorityTickOffset: 1
+  PositionInterpolationType: 0
+  RotationInterpolationType: 0
+  ScaleInterpolationType: 0
+  PositionLerpSmoothing: 1
+  PositionMaxInterpolationTime: 0.1
+  RotationLerpSmoothing: 1
+  RotationMaxInterpolationTime: 0.1
+  ScaleLerpSmoothing: 1
+  ScaleMaxInterpolationTime: 0.1
+  AuthorityMode: 0
+  TickSyncChildren: 1
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 1
+  SwitchTransformSpaceWhenParented: 1
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!4 &4589157088255532996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2000689862982375849, guid: 6fa5ebb52645201469c7a624c157af9f, type: 3}

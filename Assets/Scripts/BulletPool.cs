@@ -15,16 +15,19 @@ public class BulletPool : MonoBehaviour
     private Dictionary<string, List<GameObject>> BulletPools;
     void Start()
     {
-        BulletPools = new Dictionary<string, List<GameObject>>();
-        for (int i = 0; i < bulletTypes.Count; i++)
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
         {
-            List<GameObject> pool = new List<GameObject>();
-            BulletPools[bulletTypes[i].bulletTag] = pool;
-            for (int j = 1; j < bulletTypes[i].poolSize; j++)
+            BulletPools = new Dictionary<string, List<GameObject>>();
+            for (int i = 0; i < bulletTypes.Count; i++)
             {
-                GameObject obj = Instantiate(bulletTypes[i].bulletPrefab);
-                obj.SetActive(false);
-                pool.Add(obj);
+                List<GameObject> pool = new List<GameObject>();
+                BulletPools[bulletTypes[i].bulletTag] = pool;
+                for (int j = 1; j < bulletTypes[i].poolSize; j++)
+                {
+                    GameObject obj = Instantiate(bulletTypes[i].bulletPrefab);
+                    obj.SetActive(false);
+                    pool.Add(obj);
+                }
             }
         }
     }

@@ -133,7 +133,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   damage: 1
+  bulletTag: SoldierBullet
 --- !u!50 &3055669939268530559
 Rigidbody2D:
   serializedVersion: 5

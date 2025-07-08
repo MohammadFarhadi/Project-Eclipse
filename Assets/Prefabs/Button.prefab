@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6306655635225054480}
   - component: {fileID: 4025275102701505086}
+  - component: {fileID: 5831514384869579200}
   - component: {fileID: 8155891409126373822}
   - component: {fileID: 693117859995399858}
   m_Layer: 0
@@ -122,6 +123,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5831514384869579200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7980510444684524817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &8155891409126373822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5678622c468503c498616219132b7227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   platform: {fileID: 0}
   startPoint: {fileID: 5553844839505114050}
   endPoint: {fileID: 5699119226545382462}

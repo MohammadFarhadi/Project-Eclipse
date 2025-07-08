@@ -1,36 +1,40 @@
-
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : NetworkBehaviour
 {
-    //اینجا رو اضافه کردم
     private Transform attacker;
     public int damage = 1;
+    [Header("Pool Config")]
+    public string bulletTag; // تگ این گلوله در pool
+
+    private BulletPoolNGO pool;
+    private void Awake()
+    {
+        // پیدا کردن pool در صحنه (یا میتوان dependency injection کرد)
+        pool = FindObjectOfType<BulletPoolNGO>();
+    }
     public void SetAttacker(Transform attacker)
     {
         this.attacker = attacker;
     }
-    // تا اینجا
-    
-    PlayerControllerBase player;
-    private void Awake()
-    {
-        player = FindFirstObjectByType<PlayerControllerBase>();
-    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // فقط به Enemy آسیب بزن، نه به میدان دید
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online && !IsServer) return;
+
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<InterfaceEnemies>().TakeDamage(damage, attacker);
-            gameObject.SetActive(false); // غیرفعال کردن گلوله به‌جای حذف
+            var enemy = other.GetComponent<InterfaceEnemies>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage, attacker);
+            }
+
+            HandleBulletEnd();
         }
         else if (other.CompareTag("Player"))
         {
-            
-
             var targetPlayer = other.GetComponent<PlayerControllerBase>();
             if (targetPlayer != null)
             {
@@ -38,27 +42,46 @@ public class Bullet : NetworkBehaviour
                 Debug.Log($"{targetPlayer.name} got hit by bullet from {attacker?.name}");
             }
 
-            gameObject.SetActive(false);
+            HandleBulletEnd();
         }
         else if (other.CompareTag("Ground"))
         {
-            gameObject.SetActive(false);
+            HandleBulletEnd();
         }
-
     }
+
     private void OnEnable()
     {
-        // هر بار که فعال شد، بعد از 3 ثانیه خودش خاموش بشه
-        Invoke(nameof(Disable), 3f);
+        Invoke(nameof(HandleBulletEnd), 3f);
     }
 
     private void OnDisable()
     {
-        CancelInvoke(); // اگه تیر زودتر غیرفعال شد، تایمر قطع شه
+        CancelInvoke();
     }
 
-    private void Disable()
+    private void HandleBulletEnd()
     {
-        gameObject.SetActive(false);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                pool.ReturnBullet(bulletTag, gameObject);
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        if (IsClient)
+        {
+            // چون هنوز Instantiate شده ولی هنوز اکتیو نیست
+            gameObject.SetActive(false);
+        }
     }
 }
