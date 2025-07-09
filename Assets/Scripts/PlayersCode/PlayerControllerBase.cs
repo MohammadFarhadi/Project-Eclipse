@@ -352,7 +352,14 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
                         {
                             if (playersUI.hearts[i].activeSelf == false)
                             {
-                                playersUI.hearts[i].gameObject.SetActive(true);
+                                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                                {
+                                    playersUI.hearts[i].gameObject.SetActive(true);
+                                }
+                                else
+                                {
+                                    UpdateHeartsClientRpc(true, i);
+                                }
                                 break;
                             }
                         }
@@ -398,7 +405,14 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
                         {
                             if (playersUI.hearts[i].activeSelf == true)
                             {
-                                playersUI.hearts[i].SetActive(false);
+                                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                                {
+                                    playersUI.hearts[i].gameObject.SetActive(false);
+                                }
+                                else
+                                {
+                                    UpdateHeartsClientRpc(false , i);
+                                }
                                 break;
                             }
                         }
@@ -615,47 +629,14 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
         playersUI?.SetHealthBar(current_health.Value, max_health);
         playersUI?.SetStaminaBar(Current_Stamina.Value, Stamina_max);
     }
-    public override void OnNetworkSpawn()
-    {
-        // پیدا کردن کامپوننت UI (مثلا روی Canvas یا یه GameObject خاص)
-       
-
-        // Subscribe به تغییرات NetworkVariable
-        Current_Stamina.OnValueChanged += OnStaminaChanged;
-        current_health.OnValueChanged += OnHealthChanged;
-
-        // مقدار اولیه UI رو هم ست کن
-        OnStaminaChanged(0, Current_Stamina.Value);
-        OnHealthChanged(0, current_health.Value);
-        OnHealthPointChanged(HealthPoint.Value, HealthPoint.Value);
-
-    }
-
-    private void OnStaminaChanged(float previous, float current)
-    {
-        if (playersUI != null)
-            playersUI.SetStaminaBar(current, Stamina_max);
-    }
-
-    private void OnHealthChanged(float previous, float current)
+    [ClientRpc]
+    private void UpdateHeartsClientRpc(bool status , int i)
     {
         
-        if (playersUI != null)
-            playersUI.SetHealthBar(current, max_health);
+            playersUI.hearts[i].SetActive(status);
+        
     }
-    private void OnHealthPointChanged(int previousValue, int newValue)
-    {
-        if (playersUI == null)
-            return;
 
-        for (int i = 0; i < playersUI.hearts.Length; i++)
-        {
-            if (i < newValue)
-                playersUI.hearts[i].SetActive(true);
-            else
-                playersUI.hearts[i].SetActive(false);
-        }
-    }
 
     [ClientRpc]
     public void SetPlayerUIClientRpc(bool isMelee)

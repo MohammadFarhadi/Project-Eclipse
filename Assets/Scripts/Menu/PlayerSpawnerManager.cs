@@ -56,6 +56,7 @@ public class PlayerSpawnerManager : NetworkBehaviour
                 }
                 obj.GetComponent<PlayerControllerBase>().SetPlayerUI(p);
                 obj.GetComponent<PlayerControllerBase>().RefreshUI();
+                
                 Debug.Log($"Local player {i + 1} spawned with characterID: {characterID}");
             }
             else

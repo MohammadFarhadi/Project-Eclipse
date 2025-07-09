@@ -273,7 +273,6 @@ public class RangedPlayerController : PlayerControllerBase
         ShootLightBullet();
     }
     [ServerRpc(RequireOwnership = false)]
-
     public void ShootBulletServerRpc()
     {
         Debug.Log("We Are Here Bro");
