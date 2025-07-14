@@ -312,9 +312,6 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
     {
         if (IsInvincible())
             return;
-
-        value = ModifyDamage(value);
-
         if (GameModeManager.Instance.CurrentMode == GameMode.Local)
         {
             HandleHealthLocally(value, status);
@@ -335,7 +332,6 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
             return;
         }
 
-        value = ModifyDamage(value);
         if (status == true)
         {
             if (current_health.Value + value > max_health)
@@ -377,6 +373,8 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
         else
 
         {
+            value = ModifyDamage(value);
+            Debug.Log(value);
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("GetHit")) {
                 if (GameModeManager.Instance.CurrentMode == GameMode.Local)
                 {
@@ -447,7 +445,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
 
         }
 
-        playersUI?.SetHealthBar(current_health.Value, max_health);
+        RefreshUI();
 
     }
 
@@ -512,7 +510,8 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
             }
            
         }
-        playersUI?.SetStaminaBar(Current_Stamina.Value, Stamina_max);
+
+        RefreshUI();
     }
 
     [ServerRpc]
@@ -665,6 +664,33 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
     protected void UpdateAnimatorTriggerParameterServerRpc(string parameterName)
     {
         networkAnimator.Animator.SetTrigger(parameterName);
+    }
+    public override void OnNetworkSpawn()
+    {
+        // پیدا کردن کامپوننت UI (مثلا روی Canvas یا یه GameObject خاص)
+       
+
+        // Subscribe به تغییرات NetworkVariable
+        Current_Stamina.OnValueChanged += OnStaminaChanged;
+        current_health.OnValueChanged += OnHealthChanged;
+
+        // مقدار اولیه UI رو هم ست کن
+        OnStaminaChanged(0, Current_Stamina.Value);
+        OnHealthChanged(0, current_health.Value);
+
+    }
+
+    private void OnStaminaChanged(float previous, float current)
+    {
+        if (playersUI != null)
+            playersUI.SetStaminaBar(current, Stamina_max);
+    }
+
+    private void OnHealthChanged(float previous, float current)
+    {
+        
+        if (playersUI != null)
+            playersUI.SetHealthBar(current, max_health);
     }
 
 

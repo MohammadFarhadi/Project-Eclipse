@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Netcode;
 
-public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
+public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
 {
     [Header("Sounds")]
     public AudioClip attackClip;
@@ -10,7 +11,7 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 1.5f;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 30f;
     public int health = 3;
 
     [SerializeField] private Animator animator;
@@ -19,6 +20,7 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
     private float timer = 0f;
     
     private BulletPool bulletPool;
+    private BulletPoolNGO bulletPoolNGO;
 
 
     // 🩸 نمایش نوار سلامتی
@@ -31,16 +33,17 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
     void Start()
     {
         bulletPool = FindFirstObjectByType<BulletPool>();
-
         if (healthBarDisplay != null)
         {
             healthBarDisplay.UpdateHealthBar(health);
         }
-
-        
-        if (healthBarDisplay != null)
+        if (bulletPoolNGO == null)
         {
-            healthBarDisplay.UpdateHealthBar(health);
+            bulletPoolNGO = FindObjectOfType<BulletPoolNGO>();
+            if (bulletPoolNGO == null)
+            {
+                Debug.LogError("BulletPoolNGO not found in the scene!");
+            }
         }
     }
 
@@ -64,34 +67,49 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
 
     void ShootAt(GameObject target)
     {
-        if (target == null || firePoint == null || bulletPool == null) return;
-
-        Vector2 dir = (target.transform.position - firePoint.position).normalized;
-
-        GameObject bullet = bulletPool.GetBullet("Bullet"); 
-        if (bullet != null)
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
         {
-            bullet.transform.position = firePoint.position;
-            bullet.transform.rotation = Quaternion.identity;
+            if (target == null || firePoint == null || bulletPool == null) return;
+
+            Vector2 dir = (target.transform.position - firePoint.position).normalized;
+            GameObject bullet;
+        
+            bullet = bulletPool.GetBullet("Bullet");
+
+        
+        
+            if (bullet != null) 
+            {
+                bullet.transform.position = firePoint.position;
+                bullet.transform.rotation = Quaternion.identity;
                 animator.SetTrigger("Attack");  
 
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                Vector3 bulletScale = rb.transform.localScale;
-                bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
-                rb.transform.localScale = bulletScale;
-                rb.linearVelocity = dir * bulletSpeed;
-            }
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    Vector3 bulletScale = rb.transform.localScale;
+                    bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                    rb.transform.localScale = bulletScale;
+                    rb.linearVelocity = dir * bulletSpeed;
+                }
 
-            Bullet bulletScript = bullet.GetComponent<Bullet>();
-            if (bulletScript != null)
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                if (bulletScript != null)
+                {
+                    bulletScript.SetAttacker(this.transform);
+                }
+            }
+            GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+            attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
+        }
+        else
+        {
+            if (IsServer)
             {
-                bulletScript.SetAttacker(this.transform);
+                ShootAtServerRpc(target);
             }
         }
-        GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
-        attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
+        
     }
 
 
@@ -138,15 +156,160 @@ public class ShootingEnemy : MonoBehaviour , InterfaceEnemies
         GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
         deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
         DropRandomItem();
-        Destroy(gameObject);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject);
+            }
+            
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public void DropRandomItem()
     {
         if (dropItems.Length == 0) return;
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (!IsServer) return;
+
             int index = Random.Range(0, dropItems.Length);
-            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
-            Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f);
+            GameObject dropped = Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            if (dropped.TryGetComponent(out NetworkObject netObj))
+            {
+                netObj.Spawn();
+            }
+
+            GameObject soninDrop = Instantiate(Sonin, transform.position, Quaternion.identity);
+            if (soninDrop.TryGetComponent(out NetworkObject soninNet))
+            {
+                soninNet.Spawn();
+            }
+        }
+        else
+        {
+            int index = Random.Range(0, dropItems.Length);
+            Instantiate(dropItems[index], transform.position + Vector3.up, Quaternion.identity);
             Instantiate(Sonin, transform.position, Quaternion.identity);
-        
+        }
     }
+    [ClientRpc]
+    private void DestroyObjectClientRpc()
+    {
+        Destroy(gameObject);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ShootAtServerRpc(NetworkObjectReference targetRef)
+    {
+        if (targetRef.TryGet(out NetworkObject targetObj))
+        {
+            Transform target = targetObj.transform;
+            Vector2 dir = (target.position - firePoint.position).normalized;
+
+            GameObject bullet = bulletPoolNGO.GetBullet("Bullet");
+            if (bullet != null)
+            {
+                bullet.transform.position = firePoint.position;
+                bullet.transform.rotation = Quaternion.identity;
+                animator.SetTrigger("Attack");
+
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                float scaleX = 1f;
+
+                if (rb != null)
+                {
+                    Vector3 bulletScale = rb.transform.localScale;
+                    bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                    rb.transform.localScale = bulletScale;
+                    rb.linearVelocity = dir * bulletSpeed;
+
+                    scaleX = bulletScale.x;
+                }
+
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                if (bulletScript != null)
+                {
+                    bulletScript.SetAttacker(this.transform);
+                }
+
+                // صدای حمله روی سرور
+                GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+                attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
+
+                NetworkObject bulletNetObj = bullet.GetComponent<NetworkObject>();
+
+                // ارسال اطلاعات به کلاینت‌ها
+                InitShootAtClientRpc(
+                    bulletNetObj.NetworkObjectId,
+                    firePoint.position,
+                    dir,
+                    bulletSpeed,
+                    scaleX,
+                    this.GetComponent<NetworkObject>().NetworkObjectId,
+                    targetRef
+                );
+            }
+        }
+    }
+    [ClientRpc]
+    void InitShootAtClientRpc(
+        ulong bulletNetId,
+        Vector3 spawnPosition,
+        Vector2 dir,
+        float bulletSpeed,
+        float scaleX,
+        ulong attackerNetId,
+        NetworkObjectReference targetRef)
+    {
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(bulletNetId, out NetworkObject spawnedBullet))
+        {
+            spawnedBullet.transform.position = spawnPosition;
+
+            Rigidbody2D rb = spawnedBullet.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = dir * bulletSpeed;
+
+                Vector3 scale = spawnedBullet.transform.localScale;
+                scale.x = scaleX;
+                spawnedBullet.transform.localScale = scale;
+            }
+
+            Transform attacker = null;
+            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(attackerNetId, out NetworkObject attackerObj))
+            {
+                attacker = attackerObj.transform;
+            }
+
+            Bullet bulletScript = spawnedBullet.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                bulletScript.SetAttacker(attacker);
+            }
+        }
+
+        // انیمیشن اتک روی کلاینت‌ها
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(attackerNetId, out NetworkObject attackerNetObj))
+        {
+            Animator attackerAnimator = attackerNetObj.GetComponent<Animator>();
+            if (attackerAnimator != null)
+            {
+                attackerAnimator.SetTrigger("Attack");
+            }
+        }
+
+        // صدای حمله روی کلاینت
+        GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, spawnPosition, Quaternion.identity);
+        attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
+    }
+
+
+
 }

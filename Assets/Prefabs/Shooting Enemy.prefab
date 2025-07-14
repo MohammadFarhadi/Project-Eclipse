@@ -226,10 +226,10 @@ GameObject:
   - component: {fileID: 3858121104689249625}
   - component: {fileID: 851938295781937004}
   - component: {fileID: 2391082511744118761}
+  - component: {fileID: 8501091025738221246}
   - component: {fileID: 8428888455564641739}
   - component: {fileID: 2754030247191435130}
   - component: {fileID: 2822361977368637040}
-  - component: {fileID: 8501091025738221246}
   - component: {fileID: 3372283686873621330}
   m_Layer: 6
   m_Name: Shooting Enemy
@@ -333,6 +333,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8501091025738221246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8217969350922546701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3733484594
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &8428888455564641739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,13 +370,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1a44649b4eb1c488510a1a085b5295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
   deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
   oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   bulletPrefab: {fileID: 7012351190103006667, guid: 3fac667621162ab41b96dcb2ce3425b9, type: 3}
   firePoint: {fileID: 2646313651745766439}
   fireRate: 1.5
-  bulletSpeed: 5
+  bulletSpeed: 30
   health: 3
   animator: {fileID: 2391082511744118761}
   healthBarDisplay: {fileID: 8705040711575572019}
@@ -443,31 +469,6 @@ PolygonCollider2D:
       - {x: 0.28, y: 0.45}
       - {x: 0.17999999, y: 0.53}
   m_UseDelaunayMesh: 0
---- !u!114 &8501091025738221246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8217969350922546701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!114 &3372283686873621330
 MonoBehaviour:
   m_ObjectHideFlags: 0

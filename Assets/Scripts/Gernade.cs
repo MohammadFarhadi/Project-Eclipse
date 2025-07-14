@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Grenade : NetworkBehaviour
 {
     [Header("Movement & Explosion")]
     [SerializeField] private float moveSpeed = 2f;
@@ -11,11 +12,16 @@ public class Grenade : MonoBehaviour
     [SerializeField] private int damage = 20;
     [SerializeField] private LayerMask targetLayers; // Can be Player + Enemy
     [SerializeField] private ParticleSystem explosionEffect;
-
+    public string bulletTag;
     private Vector2 targetPosition;
     private bool moving = false;
     private Transform attacker;
-
+    private BulletPoolNGO pool;
+    private void Awake()
+    {
+        // پیدا کردن pool در صحنه (یا میتوان dependency injection کرد)
+        pool = FindObjectOfType<BulletPoolNGO>();
+    }
     public void SetAttacker(Transform attacker)
     {
         this.attacker = attacker;
@@ -92,7 +98,7 @@ public class Grenade : MonoBehaviour
         }
 
 
-        gameObject.SetActive(false); // return to pool
+        HandleBulletEnd(); // return to pool
     }
 
     private void OnDisable()
@@ -104,5 +110,19 @@ public class Grenade : MonoBehaviour
     {
         Gizmos.color = new Color(1f, 0.3f, 0.1f, 0.3f);
         Gizmos.DrawSphere(transform.position, explosionRadius);
+    }
+    private void HandleBulletEnd()
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                pool.ReturnBullet(bulletTag, gameObject);
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

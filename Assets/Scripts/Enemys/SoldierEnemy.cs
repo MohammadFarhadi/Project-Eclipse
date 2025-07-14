@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using Random = UnityEngine.Random;
 
 
@@ -15,7 +16,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
     [SerializeField] private BulletPoolNGO bulletPoolNGO;
     [SerializeField] private string bulletTag = "SoldierBullet";
     [SerializeField] private string grenadeTag = "BombBullet";
-    [SerializeField] private float bulletSpeed = 10f;
+    [SerializeField] private float bulletSpeed = 60f;
     [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
     [SerializeField] private GameObject Sonin;
     [Header("Patrolling")]
@@ -38,6 +39,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
 
     private Transform player;
     private Animator animator;
+    protected NetworkAnimator networkAnimator;
 
     void Start()
     {
@@ -46,6 +48,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
     }
     void Awake()
     {
+        networkAnimator = GetComponent<NetworkAnimator>();
         if (bulletPool == null)
         {
             bulletPool = FindObjectOfType<BulletPool>();
@@ -160,13 +163,28 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
     public void TakeDamage(int damage , Transform attacker)  
     {
         currentHealth -= damage;
-        animator.SetTrigger("Hit");
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetTrigger("Hit");
+        }
+        else
+        {
+            UpdateAnimatorTriggerParameterServerRpc("Hit");
+        }
+        
 
         if (currentHealth <= 0)
         {
             GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
             deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
-            animator.SetTrigger("Die");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("Die");
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Die");
+            }
             DropRandomItem();
             StartCoroutine(DeathEffect(GetComponent<SpriteRenderer>()));
         }
@@ -184,7 +202,11 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
         }
         else
         {
-            GameObject bullet = bulletPool.GetBullet(bulletTag);
+            GameObject bullet;
+           
+                bullet = bulletPool.GetBullet(bulletTag);
+
+            
             if (bullet != null)
             {
                 bullet.transform.position = firePoint.position;
@@ -224,7 +246,16 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
         }
         else
         {
-            GameObject grenade = bulletPool.GetBullet(grenadeTag); // اول تعریف کن
+            GameObject grenade;
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                grenade = bulletPoolNGO.GetBullet(grenadeTag);
+            }
+            else
+            {
+                grenade = bulletPool.GetBullet(grenadeTag);
+
+            } // اول تعریف کن
             if (grenade != null)
             {
                 grenade.transform.position = firePoint.position;
@@ -489,7 +520,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
                 Vector3 scale = spawnedBullet.transform.localScale;
                 scale.x = scaleX;
                 spawnedBullet.transform.localScale = scale;
-            }
+            }   
 
             Transform attacker = null;
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(attackerNetId, out NetworkObject attackerObj))
@@ -503,6 +534,11 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
                 bScript.SetAttacker(attacker);
             }
         }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorTriggerParameterServerRpc(string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
     }
 
 

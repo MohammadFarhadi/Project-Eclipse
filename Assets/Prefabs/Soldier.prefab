@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 244941055348308537}
   - component: {fileID: 7395372946808813158}
   - component: {fileID: 6031801408531004227}
+  - component: {fileID: 6958069835638517269}
   m_Layer: 6
   m_Name: Soldier
   m_TagString: Enemy
@@ -160,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2723120913
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -193,7 +194,7 @@ MonoBehaviour:
   bulletPoolNGO: {fileID: 0}
   bulletTag: SoldierBullet
   grenadeTag: BombBullet
-  bulletSpeed: 75
+  bulletSpeed: 60
   dropItems:
   - {fileID: 3330495594356245476, guid: 8b9af8c2c1a99d44dafdd3e99422150f, type: 3}
   - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
@@ -342,3 +343,46 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &6958069835638517269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8733727942342434940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -594122622
+    DestinationState: 506415236
+    TransitionDuration: 0.25
+    TriggerNameHash: -1316629574
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -594122622
+    DestinationState: -1922158630
+    TransitionDuration: 0.25
+    TriggerNameHash: 1098733163
+    TransitionIndex: 2
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -492096576
+    DestinationState: 506415236
+    TransitionDuration: 0.25
+    TriggerNameHash: -1316629574
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -492096576
+    DestinationState: -1922158630
+    TransitionDuration: 0.25
+    TriggerNameHash: 1098733163
+    TransitionIndex: 2
+  m_Animator: {fileID: 5656351013448198009}

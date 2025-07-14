@@ -1,8 +1,9 @@
 using System.Collections;
 using NUnit.Framework.Constraints;
+using Unity.Netcode;
 using UnityEngine;
 
-public class CrumblePlatform : MonoBehaviour
+public class CrumblePlatform : NetworkBehaviour
 {
     public float shakeDuration = 0.5f;
     public float fallDelay = 0.25f;
@@ -50,7 +51,19 @@ public class CrumblePlatform : MonoBehaviour
         rb.gravityScale = fallGravityScale;
         boxCollider.isTrigger = true;
         
-        Destroy(gameObject, destroyDelay);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject , destroyDelay);
+            }
+            
+        }
+        else
+        {
+            Destroy(gameObject , destroyDelay);
+        }
     }
 
     private IEnumerator Shake(float duration)
@@ -80,5 +93,10 @@ public class CrumblePlatform : MonoBehaviour
             spriteRenderer.color = originalColor;
             yield return new WaitForSeconds(0.1f);
         }
+    }
+    [ClientRpc]
+    private void DestroyObjectClientRpc()
+    {
+        Destroy(gameObject , destroyDelay);
     }
 }
