@@ -21,8 +21,11 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
     public float attackCooldown = 1f;
 
     [SerializeField] private Animator animator;
-    [SerializeField] private int health = 3;
-
+    [SerializeField] private NetworkVariable<int> health = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
     public Transform pointA;
     public Transform pointB;
 
@@ -123,10 +126,24 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
     {
         if (isDying) return;
 
-        health -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                health.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            health.Value -= damage;
+        }
         StartCoroutine(FlashRed());
 
-        if (health <= 0)
+        if (health.Value <= 0)
         {
             isDying = true;
             StartCoroutine(DeathEffect());
@@ -231,6 +248,11 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
     private void DestroyObjectClientRpc()
     {
         Destroy(gameObject);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        health.Value -= damageAmount;
     }
     
 }

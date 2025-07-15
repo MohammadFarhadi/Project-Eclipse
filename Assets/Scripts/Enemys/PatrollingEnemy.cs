@@ -13,7 +13,11 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
     public GameObject rightSensor;
     [SerializeField] private Animator animator;
 
-    public int health = 3;
+    private NetworkVariable<int> health = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
     // 👇 اضافه کن:
     public EnemyHealthBarDisplay healthBarDisplay;
@@ -23,12 +27,26 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
     
     void Start()
     {
+        health.OnValueChanged += OnHealthChanged;
+
         if (healthBarDisplay != null)
         {
-            healthBarDisplay.UpdateHealthBar(health);
+            healthBarDisplay.UpdateHealthBar(health.Value);
+        }
+    }
+    private void OnHealthChanged(int oldValue, int newValue)
+    {
+        if (healthBarDisplay != null)
+        {
+            healthBarDisplay.Show(newValue);
+            healthBarDisplay.UpdateHealthBar(newValue);
         }
     }
 
+    private void OnDestroy()
+    {
+        health.OnValueChanged -= OnHealthChanged;
+    }
     void Update()
     {
         transform.position += new Vector3(direction * speed * Time.deltaTime, 0, 0);
@@ -56,24 +74,38 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
 
     public void TakeDamage(int damage , Transform attacker)
     {
-        health -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                health.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            health.Value -= damage;
+        }
 
         // 👇 بروز رسانی نوار سلامتی
         if (healthBarDisplay != null)
         {
-            healthBarDisplay.Show(health);
-            healthBarDisplay.UpdateHealthBar(health);
+            healthBarDisplay.Show(health.Value);
+            healthBarDisplay.UpdateHealthBar(health.Value);
         }
         
 
 
-        if (health <= 0 && direction == 1)
+        if (health.Value <= 0 && direction == 1)
         {
             
             animator.SetTrigger("Die");
             Invoke(nameof(Die), 0.5f);
         }
-        else if (health <= 0 && direction == -1)
+        else if (health.Value <= 0 && direction == -1)
         {
            
             animator.SetTrigger("Die1");
@@ -134,6 +166,11 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
     private void DestroyObjectClientRpc()
     {
         Destroy(gameObject);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        health.Value -= damageAmount;
     }
     
 }

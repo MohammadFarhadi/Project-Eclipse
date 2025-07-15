@@ -12,7 +12,12 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
     public Transform firePoint;
     public float fireRate = 1.5f;
     public float bulletSpeed = 30f;
-    public int health = 3;
+    private NetworkVariable<int> health = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+
 
     [SerializeField] private Animator animator;
     private List<GameObject> playersInRange = new List<GameObject>();
@@ -33,10 +38,14 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
     void Start()
     {
         bulletPool = FindFirstObjectByType<BulletPool>();
+
+        health.OnValueChanged += OnHealthChanged;
+
         if (healthBarDisplay != null)
         {
-            healthBarDisplay.UpdateHealthBar(health);
+            healthBarDisplay.UpdateHealthBar(health.Value);
         }
+
         if (bulletPoolNGO == null)
         {
             bulletPoolNGO = FindObjectOfType<BulletPoolNGO>();
@@ -46,6 +55,21 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
             }
         }
     }
+
+    private void OnHealthChanged(int oldValue, int newValue)
+    {
+        if (healthBarDisplay != null)
+        {
+            healthBarDisplay.Show(newValue);
+            healthBarDisplay.UpdateHealthBar(newValue);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        health.OnValueChanged -= OnHealthChanged;
+    }
+
 
     void Update()
     {
@@ -135,16 +159,31 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
 
     public void TakeDamage(int damage , Transform attacker)
     {
-        health -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                health.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            health.Value -= damage;
+        }
+        
         if (healthBarDisplay != null)
         {
-            healthBarDisplay.Show(health);
-            healthBarDisplay.UpdateHealthBar(health);
+            healthBarDisplay.Show(health.Value);
+            healthBarDisplay.UpdateHealthBar(health.Value);
         }
        
 
 
-        if (health <= 0)
+        if (health.Value <= 0)
         {
             animator.SetTrigger("Die");
             Invoke(nameof(Die), 0.5f); 
@@ -309,7 +348,10 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
         GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, spawnPosition, Quaternion.identity);
         attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
     }
-
-
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        health.Value -= damageAmount;
+    }
 
 }

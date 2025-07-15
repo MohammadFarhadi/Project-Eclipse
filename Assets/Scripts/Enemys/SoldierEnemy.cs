@@ -29,8 +29,12 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
     public float fireRate = 1.2f;
     public Transform firePoint;
     public int maxHealth = 3;
-
-    private int currentHealth;
+    private NetworkVariable<int> currentHealth = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+    
     private bool movingRight = true;
     private bool isWaiting = false;
     private float waitTimer = 0f;
@@ -43,7 +47,17 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
 
     void Start()
     {
-        currentHealth = maxHealth;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                currentHealth.Value = maxHealth;
+            }
+        }
+        else
+        {
+            currentHealth.Value = maxHealth;
+        }
         animator = GetComponent<Animator>();
     }
     void Awake()
@@ -73,7 +87,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
     {
         FindClosestPlayer();
 
-        if (currentHealth <= 0) return;
+        if (currentHealth.Value <= 0) return;
 
         fireTimer += Time.deltaTime;
 
@@ -162,7 +176,21 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
 
     public void TakeDamage(int damage , Transform attacker)  
     {
-        currentHealth -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                currentHealth.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            currentHealth.Value -= damage;
+        }
         if (GameModeManager.Instance.CurrentMode == GameMode.Local)
         {
             animator.SetTrigger("Hit");
@@ -173,7 +201,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
         }
         
 
-        if (currentHealth <= 0)
+        if (currentHealth.Value <= 0)
         {
             GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
             deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
@@ -539,6 +567,11 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
     protected void UpdateAnimatorTriggerParameterServerRpc(string parameterName)
     {
         networkAnimator.Animator.SetTrigger(parameterName);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        currentHealth.Value -= damageAmount;
     }
 
 

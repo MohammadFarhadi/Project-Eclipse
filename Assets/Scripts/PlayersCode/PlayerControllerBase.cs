@@ -692,6 +692,12 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
         if (playersUI != null)
             playersUI.SetHealthBar(current, max_health);
     }
+    public void TakeDamageFromServer(int value, bool status)
+    {
+        HandleHealthLocally(value, status);
+    }
+
+
 
 
 }

@@ -38,7 +38,15 @@ public class Bullet : NetworkBehaviour
             var targetPlayer = other.GetComponent<PlayerControllerBase>();
             if (targetPlayer != null)
             {
-                targetPlayer.HealthSystem(30, false);
+                if (GameModeManager.Instance.CurrentMode == GameMode.Online && IsServer)
+                {
+                    targetPlayer.TakeDamageFromServer(30, false);
+                }
+                else
+                {
+                    targetPlayer.HealthSystem(30, false);
+                }
+
                 Debug.Log($"{targetPlayer.name} got hit by bullet from {attacker?.name}");
             }
 

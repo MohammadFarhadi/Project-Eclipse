@@ -15,8 +15,11 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
 
     [Header("Health")]
     [SerializeField] private int maxHealthPoints = 3;
-    private int currentHealthPoints;
-
+    private NetworkVariable<int> currentHealthPoints = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
@@ -27,7 +30,18 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
 
     private void Start()
     {
-        currentHealthPoints = maxHealthPoints;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                currentHealthPoints.Value = maxHealthPoints;
+            }
+        }
+        else
+        {
+            currentHealthPoints.Value = maxHealthPoints;
+        }
+       
     }
 
     private void Update()
@@ -78,9 +92,23 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
 
     public void TakeDamage(int damage, Transform attacker)
     {
-        currentHealthPoints -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                currentHealthPoints.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            currentHealthPoints.Value -= damage;
+        }
 
-        if (currentHealthPoints <= 0)
+        if (currentHealthPoints.Value <= 0)
         {
             Die();
         }
@@ -149,6 +177,11 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
     private void DestroyObjectClientRpc()
     {
         Destroy(gameObject);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        currentHealthPoints.Value -= damageAmount;
     }
     
 
