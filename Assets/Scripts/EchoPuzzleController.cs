@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class EchoPuzzleController : MonoBehaviour
+public class EchoPuzzleController : NetworkBehaviour
 {
-    public PlayerControllerBase player1;
-    public PlayerControllerBase player2;
+    public GameObject player1;
+    public GameObject player2;
 
     public List<EchoOrb> orbList;
     public List<Transform> positions;
@@ -17,46 +18,73 @@ public class EchoPuzzleController : MonoBehaviour
     private EchoOrb currentOrb = null;
     private GameObject interactingPlayer = null; // 🔥 چه کسی وارد گوی شده؟
     private bool isSwapping = false;
-
-
-    void Start()
-    {
-        var players = FindObjectsOfType<PlayerControllerBase>();
-        foreach (var p in players)
-        {
-            if (p.CompareTag("Player") && player1 == null)
-                player1 = p;
-            else if (p.CompareTag("Player"))
-                player2 = p;
-        }
-    }
-
-
-
-
 void Update()
     {
-        if (isSwapping || currentOrb == null || interactingPlayer == null)
-            return;
-
-        bool player1Active = interactingPlayer == player1.gameObject && player1.IsInteracting();
-        bool player2Active = interactingPlayer == player2.gameObject && player2.IsInteracting();
-
-        if (player1Active || player2Active)
+        if (player1 == null || player2 == null)
         {
-            int i = orbList.IndexOf(currentOrb);
-            if (i >= 0)
-            {
-                int j = (i < orbList.Count - 1) ? i + 1 : i - 1;
-                StartCoroutine(AnimateSwap(i, j));
-            }
+            player1 = GameObject.Find("RangedPlayer(Clone)") ?? GameObject.Find("Ranged1Player(Clone)");
+            player2 = GameObject.Find("Melle1Player(Clone)") ?? GameObject.Find("Melle2Player(Clone)");
         }
+       
+        
+            if (isSwapping || currentOrb == null || interactingPlayer == null)
+                return;
+
+            bool player1Active = interactingPlayer == player1.gameObject && player1.GetComponent<PlayerControllerBase>().IsInteracting();
+            bool player2Active = interactingPlayer == player2.gameObject && player2.GetComponent<PlayerControllerBase>().IsInteracting();
+
+            if (player1Active || player2Active)
+            {
+                int i = orbList.IndexOf(currentOrb);
+                if (i >= 0)
+                {
+                    if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+                    {
+                        ulong playerId = interactingPlayer.GetComponent<NetworkObject>().OwnerClientId;
+                        RequestSwapServerRpc(i, playerId);
+                    }
+                    else
+                    {
+                        int j = (i < orbList.Count - 1) ? i + 1 : i - 1;
+                        StartCoroutine(AnimateSwap(i, j));
+                    }
+                   
+                }
+            }
+        
+        
     }
 
     public void SetCurrentOrb(EchoOrb orb, GameObject player)
     {
         currentOrb = orb;
-        interactingPlayer = player;
+        interactingPlayer = player; 
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestSwapServerRpc(int orbIndex, ulong playerId)
+    {
+        int j = (orbIndex < orbList.Count - 1) ? orbIndex + 1 : orbIndex - 1;
+
+        // Swap لیست روی سرور
+        var temp = orbList[orbIndex];
+        orbList[orbIndex] = orbList[j];
+        orbList[j] = temp;
+
+        // به کلاینت‌ها اطلاع بده
+        BroadcastSwapClientRpc(orbIndex, j);
+
+        CheckCorrectness();
+    }
+
+    [ClientRpc]
+    private void BroadcastSwapClientRpc(int i, int j)
+    {
+      
+        var temp = orbList[i];
+        orbList[i] = orbList[j];
+        orbList[j] = temp;
+        StartCoroutine(AnimateSwap(i, j));
+        
     }
 
 
@@ -120,8 +148,29 @@ void Update()
         {
             Debug.Log("Puzzle solved! Deactivating guardian barrier.");
             if (guardianBarrier != null)
-                guardianBarrier.SetActive(false);
+            {
+                if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+                {
+                    if (IsServer)
+                    {
+                        DestroyObjectClientRpc();
+                        Destroy(guardianBarrier);
+                    }
+            
+                }
+                else
+                {
+                    Destroy(guardianBarrier);
+                }
+            }
+           
         }
+    }   
+    [ClientRpc]
+    private void DestroyObjectClientRpc()
+    {
+        Destroy(guardianBarrier);
     }
-
+    
 }
+//87,103,126

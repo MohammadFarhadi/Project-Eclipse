@@ -7,17 +7,17 @@ public class LoadinLvl2 : MonoBehaviour
     private bool player1Inside = false;
     private bool player2Inside = false;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "RangedPlayer")
+        if (other.gameObject.name == "RangedPlayer(Clone)")
             player1Inside = true;
-        else if (other.gameObject.name == "Ranged1Player")
+        else if (other.gameObject.name == "Ranged1Player(Clone)")
         {
             player1Inside = true;
         }
-        if (other.gameObject.name == "Melle1player")
+        if (other.gameObject.name == "Melle1Player(Clone)")
             player2Inside = true;
-        else if (other.gameObject.name == "Melle2Player")
+        else if (other.gameObject.name == "Melle2Player(Clone)")
         {
             player2Inside = true;
         }
@@ -25,17 +25,17 @@ public class LoadinLvl2 : MonoBehaviour
         CheckIfBothPlayersInside();
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.name == "RangedPlayer")
+        if (other.gameObject.name == "RangedPlayer(Clone)")
             player1Inside = false;
-        else if (other.gameObject.name == "Ranged1Player")
+        else if (other.gameObject.name == "Ranged1Player(Clone)")
         {
             player1Inside = false;
         }
-        if (other.gameObject.name == "Melle1player")
+        if (other.gameObject.name == "Melle1player(Clone)")
             player2Inside = false;
-        else if (other.gameObject.name == "Melle2Player")
+        else if (other.gameObject.name == "Melle2Player(Clone)")
         {
             player2Inside = false ;
         }

@@ -187,7 +187,7 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
                     Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                     Vector3 bulletScale = rb.transform.localScale;
                     bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
-                    float bulletSpeed = 5f;
+                    float bulletSpeed = 60f;
                     rb.transform.localScale = bulletScale;
                     rb.linearVelocity = direction * bulletSpeed;
                     Bullet bulletScript = bullet.GetComponent<Bullet>();
@@ -248,19 +248,6 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
         {
             targetAnimator.SetBool(triggerBoolName, true);
         }
-        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
-        {
-            if (IsServer)
-            {
-                DestroyObjectClientRpc();
-                Destroy(gameObject);
-            }
-            
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
         Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
         GameObject soninDrop = Instantiate(Key, spawnPosition, Quaternion.identity);
         GameObject dropped = Instantiate(Sonin, transform.position, Quaternion.identity);
@@ -277,6 +264,20 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
                 soninNet.Spawn();
             }
         }
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject);
+            }
+            
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+       
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -320,7 +321,7 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 Vector3 bulletScale = rb.transform.localScale;
                 bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
-                float bulletSpeed = 5f;
+                float bulletSpeed = 60f;
                 rb.transform.localScale = bulletScale;
 
                 rb.linearVelocity = direction * bulletSpeed;

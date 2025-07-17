@@ -2,18 +2,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine.Tilemaps;
 
 
 public class DialogueTree : MonoBehaviour
 {
-    GameObject player1;
-    GameObject player2;
+   
     public TextMeshProUGUI npcText;
     public Button[] optionButtons;
     public GameObject triggerTarget;  
     private DialogueNode currentNode;
     public GameObject dialoguePanel; // ← اینو بالای کلاس اضافه کن
+    public BoxCollider2D boxCollider;
     public class DialogueNode
     {
         public string text;                   // NPC dialogue
@@ -27,20 +28,17 @@ public class DialogueTree : MonoBehaviour
             choices = new DialogueNode[this.playerChoicesText.Length];
         }
     }
-
-    void Start()
+    private void Awake()
     {
-        player1 = GameObject.Find("Ranged1Player(Clone)");
-        if (player1 == null)
+        if (triggerTarget != null)
         {
-            player1 = GameObject.Find("RangedPlayer(Clone)");
+            if (boxCollider == null )
+                boxCollider = triggerTarget.GetComponent<BoxCollider2D>();
         }
-        player2 = GameObject.Find("Melle1Player(Clone)");
-        if (player2 == null)
-        {
-            player2 = GameObject.Find("Melle2Player(Clone)");
-        }
+        
     }
+
+    
     public void StartDialogue()
     {
         BuildTree();
@@ -111,19 +109,24 @@ public class DialogueTree : MonoBehaviour
     IEnumerator EndDialogueWithDelay()
     {
         yield return new WaitForSeconds(1f);
-        player1.GetComponent<RangedPlayerController>().enabled = true; // غیرفعال‌کردن حرکت
-        player2.GetComponent<MeleePlayerController>().enabled = true;
-        player2.GetComponent<PlayerControllerBase>().enabled = true;
-        player1.GetComponent<PlayerControllerBase>().enabled = true;
-        if (triggerTarget != null)
+      
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
         {
-            var tileCollider = triggerTarget.GetComponent<BoxCollider2D>();
-            if (tileCollider != null)
+            EnableColliderServerRpc();
+        }
+        else
+        {
+            if (triggerTarget != null)
             {
-                tileCollider.enabled = true;
-                tileCollider.isTrigger = true;
+                var tileCollider = triggerTarget.GetComponent<BoxCollider2D>();
+                if (tileCollider != null)
+                {
+                    tileCollider.enabled = true;
+                    tileCollider.isTrigger = true;
+                }
             }
         }
+        
 
         dialoguePanel.SetActive(false);
     }
@@ -134,6 +137,21 @@ public class DialogueTree : MonoBehaviour
             btn.gameObject.SetActive(false);
 
         StartCoroutine(EndDialogueWithDelay());
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void EnableColliderServerRpc()
+    {
+        EnableColliderClientRpc();
+    }
+
+    [ClientRpc]
+    private void EnableColliderClientRpc()
+    {
+        if (boxCollider != null)
+        {
+            boxCollider.enabled = true;
+            boxCollider.isTrigger = true;
+        }
     }
 
 
