@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
+using Unity.Netcode;
 
 [RequireComponent(typeof(Light2D))]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -67,12 +68,14 @@ public class LightProjectileController : MonoBehaviour
         hasCollided = false;
         // pick random color
         Color rand = Random.ColorHSV(0f,1f,0.7f,1f,0.8f,1f);
-
+// اعمال در سرور
+        ApplyColor(rand);
+// ارسال به همه کلاینت‌ها
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            SetProjectileColorClientRpc(rand);
+        }
         // sprite tint
-        spriteRend.color = rand;
-
-        // setup light
-        projLight.color                   = rand;
         projLight.intensity               = initialIntensity;
         projLight.pointLightInnerRadius  = innerRadius;
         projLight.pointLightOuterRadius  = outerRadius;
@@ -126,4 +129,17 @@ public class LightProjectileController : MonoBehaviour
             ps.Play();
         }
     }
+    private void ApplyColor(Color rand)
+    {
+        spriteRend.color = rand;
+        projLight.color = rand;
+
+        // تنظیمات دیگر هم می‌تونی اضافه کنی
+    }
+    [ClientRpc]
+    void SetProjectileColorClientRpc(Color color)
+    {
+        ApplyColor(color);
+    }
+
 }

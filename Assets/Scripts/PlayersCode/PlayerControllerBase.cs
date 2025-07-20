@@ -13,7 +13,8 @@ using UnityEngine.SceneManagement;
 public abstract class PlayerControllerBase : NetworkBehaviour{
 
     
-    
+    public NetworkVariable<int> CharacterID = new NetworkVariable<int>();
+
     
     [Header("Light")]
     protected Light2D AuraLight;
@@ -107,7 +108,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
         networkAnimator = GetComponent<NetworkAnimator>();
 
         //برای اینکه وقتی لول ۲ بودیم light 2d درست کنه
-        if (SceneManager.GetActiveScene().buildIndex == 4)
+        if (SceneManager.GetActiveScene().name == "Level2")
         {
             // ساخت Light2D
             AuraLight = gameObject.AddComponent<Light2D>();
@@ -677,6 +678,8 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
         // مقدار اولیه UI رو هم ست کن
         OnStaminaChanged(0, Current_Stamina.Value);
         OnHealthChanged(0, current_health.Value);
+        
+        
 
     }
 
@@ -696,6 +699,30 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
     {
         HandleHealthLocally(value, status);
     }
+    [ClientRpc]
+    public void SetupCameraClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        if (!IsOwner) return;
+
+        CameraManager camManager = FindObjectOfType<CameraManager>();
+        Camera cam = GetComponentInChildren<Camera>();
+
+        if (CharacterID.Value < 2)
+        {
+            camManager.player2 = gameObject;
+            camManager.camera2 = cam;
+        }
+        else
+        {
+            camManager.player1 = gameObject;
+            camManager.camera1 = cam;
+        }
+
+        Debug.Log($"[Camera RPC] Camera set for player with CharacterID {CharacterID.Value}");
+    }
+
+   
+
 
 
 

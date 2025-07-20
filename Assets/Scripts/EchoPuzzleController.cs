@@ -1,135 +1,134 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
 using UnityEngine;
+using Unity.Netcode;  // یادت نره
 
 public class EchoPuzzleController : NetworkBehaviour
 {
-    public GameObject player1;
-    public GameObject player2;
-
-    public List<EchoOrb> orbList;
-    public List<Transform> positions;
-    public List<EchoOrb> correctOrder;
+    public List<EchoOrb> orbList;              // لیست فعلی گوی‌ها
+    public List<Transform> positions;          // موقعیت‌های هدف
+    public List<EchoOrb> correctOrder;         // ترتیب درست
     public float swapDuration = 0.4f;
     public GameObject guardianBarrier;
-
     private EchoOrb currentOrb = null;
-    private GameObject interactingPlayer = null; // 🔥 چه کسی وارد گوی شده؟
+    private GameObject interactingPlayer = null;
     private bool isSwapping = false;
-void Update()
+
+    void Start()
     {
-        if (player1 == null || player2 == null)
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestSwapServerRpc(int i, int j)
+    {
+        if (isSwapping) return;
+        StartCoroutine(SwapOrbs(i, j));
+    }
+    
+    void Update()
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
         {
-            player1 = GameObject.Find("RangedPlayer(Clone)") ?? GameObject.Find("Ranged1Player(Clone)");
-            player2 = GameObject.Find("Melle1Player(Clone)") ?? GameObject.Find("Melle2Player(Clone)");
-        }
-       
-        
             if (isSwapping || currentOrb == null || interactingPlayer == null)
                 return;
 
-            bool player1Active = interactingPlayer == player1.gameObject && player1.GetComponent<PlayerControllerBase>().IsInteracting();
-            bool player2Active = interactingPlayer == player2.gameObject && player2.GetComponent<PlayerControllerBase>().IsInteracting();
-
-            if (player1Active || player2Active)
+            PlayerControllerBase controller = interactingPlayer.GetComponent<PlayerControllerBase>();
+            if (controller != null && controller.IsInteracting())
             {
                 int i = orbList.IndexOf(currentOrb);
                 if (i >= 0)
                 {
-                    if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+                    int j = (i < orbList.Count - 1) ? i + 1 : i - 1;
+
+                    if (IsServer) // اگر این کد روی هاست اجرا میشه، مستقیم عملیات جابه‌جایی
                     {
-                        ulong playerId = interactingPlayer.GetComponent<NetworkObject>().OwnerClientId;
-                        RequestSwapServerRpc(i, playerId);
+                        StartCoroutine(SwapOrbs(i, j));
                     }
-                    else
+                    else // اگر روی کلاینت اجرا میشه، درخواست رو به سرور بفرست
                     {
-                        int j = (i < orbList.Count - 1) ? i + 1 : i - 1;
-                        StartCoroutine(AnimateSwap(i, j));
+                        RequestSwapServerRpc(i, j);
                     }
-                   
+
+                    currentOrb = null; // از تکرار جلوگیری می‌کنه
+                    interactingPlayer = null;
                 }
             }
+        }
+        else
+        {
+            if (isSwapping || currentOrb == null || interactingPlayer == null)
+                return;
+
+            PlayerControllerBase controller = interactingPlayer.GetComponent<PlayerControllerBase>();
+            if (controller != null && controller.IsInteracting())
+            {
+                int i = orbList.IndexOf(currentOrb);
+                if (i >= 0)
+                {
+                    int j = (i < orbList.Count - 1) ? i + 1 : i - 1;
+                    StartCoroutine(SwapOrbs(i, j));
+                    currentOrb = null; // از تکرار جلوگیری می‌کنه
+                    interactingPlayer = null;
+                }
+            }
+        }
         
-        
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void SwapOrbsServerRpc(int i, int j)
+    {
+        StartCoroutine(SwapOrbs(i, j));
+        SwapOrbsClientRpc(i, j); // همه‌ی کلاینت‌ها هم این انیمیشن رو ببینن
+    }
+
+    [ClientRpc]
+    private void SwapOrbsClientRpc(int i, int j)
+    {
+        if (IsServer) return; // سرور خودش قبلاً اجرا کرده
+        StartCoroutine(SwapOrbs(i, j));
     }
 
     public void SetCurrentOrb(EchoOrb orb, GameObject player)
     {
+        if (isSwapping) return;
         currentOrb = orb;
-        interactingPlayer = player; 
-    }
-    [ServerRpc(RequireOwnership = false)]
-    private void RequestSwapServerRpc(int orbIndex, ulong playerId)
-    {
-        int j = (orbIndex < orbList.Count - 1) ? orbIndex + 1 : orbIndex - 1;
-
-        // Swap لیست روی سرور
-        var temp = orbList[orbIndex];
-        orbList[orbIndex] = orbList[j];
-        orbList[j] = temp;
-
-        // به کلاینت‌ها اطلاع بده
-        BroadcastSwapClientRpc(orbIndex, j);
-
-        CheckCorrectness();
+        interactingPlayer = player;
     }
 
-    [ClientRpc]
-    private void BroadcastSwapClientRpc(int i, int j)
+    private IEnumerator SwapOrbs(int i, int j)
     {
-      
-        var temp = orbList[i];
-        orbList[i] = orbList[j];
-        orbList[j] = temp;
-        StartCoroutine(AnimateSwap(i, j));
         
-    }
-
-
-    private IEnumerator AnimateSwap(int i, int j)
-    {
         isSwapping = true;
 
-        // 1) grab orbs and their start/target positions
-        var orbA = orbList[i];
-        var orbB = orbList[j];
+        EchoOrb orbA = orbList[i];
+        EchoOrb orbB = orbList[j];
+
+        Vector3 posA = positions[j].position;
+        Vector3 posB = positions[i].position;
+
+        float t = 0f;
         Vector3 startA = orbA.transform.position;
         Vector3 startB = orbB.transform.position;
-        Vector3 targetA = positions[j].position;
-        Vector3 targetB = positions[i].position;
+ 
 
-        // 2) temporarily un-parent so worldPositionStays
-        orbA.transform.SetParent(null, worldPositionStays: true);
-        orbB.transform.SetParent(null, worldPositionStays: true);
-
-        // 3) animate LERP
-        float t = 0f;
         while (t < swapDuration)
         {
             t += Time.deltaTime;
             float f = t / swapDuration;
-            orbA.transform.position = Vector3.Lerp(startA, targetA, f);
-            orbB.transform.position = Vector3.Lerp(startB, targetB, f);
+            orbA.transform.position = Vector3.Lerp(startA, posA, f);
+            orbB.transform.position = Vector3.Lerp(startB, posB, f);
             yield return null;
         }
 
-        // 4) snap to final
-        orbA.transform.position = targetA;
-        orbB.transform.position = targetB;
+        orbA.GetComponent<FloatingMotion>().startPos = posA;
+        orbB.GetComponent<FloatingMotion>().startPos = posB;
+        orbA.transform.position = posA;
+        orbB.transform.position = posB;
 
-        // 5) swap list order
+        // بروزرسانی لیست
         orbList[i] = orbB;
         orbList[j] = orbA;
 
-        // 6) re-parent under the correct slot
-        orbA.transform.SetParent(positions[j], worldPositionStays: false);
-        orbB.transform.SetParent(positions[i], worldPositionStays: false);
-
-        // 7) check for solved state
         CheckCorrectness();
-
         isSwapping = false;
     }
 
@@ -137,40 +136,29 @@ void Update()
     {
         bool allCorrect = true;
 
-        for (int k = 0; k < orbList.Count; k++)
+        for (int i = 0; i < orbList.Count; i++)
         {
-            bool correct = orbList[k] == correctOrder[k];
-            orbList[k].SetSolvedState(correct);
+            bool correct = orbList[i] == correctOrder[i];
+            orbList[i].SetSolvedState(correct);
             if (!correct) allCorrect = false;
         }
 
         if (allCorrect)
         {
-            Debug.Log("Puzzle solved! Deactivating guardian barrier.");
+            Debug.Log("Puzzle Solved!");
             if (guardianBarrier != null)
             {
                 if (GameModeManager.Instance.CurrentMode == GameMode.Online)
                 {
-                    if (IsServer)
-                    {
-                        DestroyObjectClientRpc();
-                        Destroy(guardianBarrier);
-                    }
-            
+                    DestroyObjectClientRpc();
                 }
-                else
-                {
-                    Destroy(guardianBarrier);
-                }
+                Destroy(guardianBarrier);
             }
-           
         }
-    }   
+    }
     [ClientRpc]
     private void DestroyObjectClientRpc()
     {
         Destroy(guardianBarrier);
     }
-    
 }
-//87,103,126

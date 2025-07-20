@@ -66,7 +66,6 @@ public class EchoOrb : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log($"ClearCurrentOrb({name})");
-            controller.SetCurrentOrb(this, other.gameObject);
             dialogueTrigger?.HideDialogue();
         }
     }

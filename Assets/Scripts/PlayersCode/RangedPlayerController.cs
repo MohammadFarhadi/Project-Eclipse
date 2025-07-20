@@ -149,8 +149,14 @@ public class RangedPlayerController : PlayerControllerBase
 
     public void OnFireLight(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed || bulletPool == null || lightBulletFirePoint == null)
+        Debug.Log("ON FIRE LIGHT");
+        if (!ctx.performed)
+        {
+            Debug.Log("Wo go To return !!");
             return;
+            
+        }
+            
 
         if (GameModeManager.Instance.CurrentMode == GameMode.Local)
         {
@@ -159,7 +165,14 @@ public class RangedPlayerController : PlayerControllerBase
         else
         {
             if (IsOwner)
-                FireLightServerRpc();
+            {
+                Debug.Log("Shooting Light Bullet ...");
+                ShootLightBulletServerRpc();
+            }
+            else
+            {
+                Debug.Log(("It's Not owner"));
+            }
         }
     }
 
@@ -171,38 +184,45 @@ public class RangedPlayerController : PlayerControllerBase
         if (GameModeManager.Instance.CurrentMode == GameMode.Local)
         {
              lightProj = bulletPool.GetBullet(lightBulletTag);
+             if (lightProj == null) return;
+        
+             if (Current_Stamina.Value < lightThrowCost) return;                  // need enough stamina
+             StaminaSystem(lightThrowCost, false);                          // subtract cost
+
+             // position & rotation
+             lightProj.transform.position = lightBulletFirePoint.position;
+             lightProj.transform.rotation = Quaternion.identity;
+
+             // compute launch direction at angle
+             float dirSign = Mathf.Sign(transform.localScale.x);
+             float angleRad = launchAngle * Mathf.Deg2Rad;
+             Vector2 launchDir = new Vector2(Mathf.Cos(angleRad) * dirSign, Mathf.Sin(angleRad)).normalized;
+
+             // apply velocity
+             var rb2d = lightProj.GetComponent<Rigidbody2D>();
+             if (rb2d != null)
+                 rb2d.linearVelocity = launchDir * lightBulletSpeed;
+
+             // set damage and attacker
+             var bulletScript = lightProj.GetComponent<Bullet>();
+             if (bulletScript != null)
+             {
+                 bulletScript.SetAttacker(this.transform);
+                 bulletScript.damage = GetAttackDamage();
+             }
         }
+
         else
         {
-            lightProj = bulletPoolNGO.GetBullet(lightBulletTag);
+            if (IsOwner)
+            {
+                Debug.Log("Shooting in pool ");
+                ShootLightBulletServerRpc();
+            }
         }
-        
-        if (lightProj == null) return;
-        
-        if (Current_Stamina.Value < lightThrowCost) return;                  // need enough stamina
-        StaminaSystem(lightThrowCost, false);                          // subtract cost
 
-        // position & rotation
-        lightProj.transform.position = lightBulletFirePoint.position;
-        lightProj.transform.rotation = Quaternion.identity;
 
-        // compute launch direction at angle
-        float dirSign = Mathf.Sign(transform.localScale.x);
-        float angleRad = launchAngle * Mathf.Deg2Rad;
-        Vector2 launchDir = new Vector2(Mathf.Cos(angleRad) * dirSign, Mathf.Sin(angleRad)).normalized;
 
-        // apply velocity
-        var rb2d = lightProj.GetComponent<Rigidbody2D>();
-        if (rb2d != null)
-            rb2d.linearVelocity = launchDir * lightBulletSpeed;
-
-        // set damage and attacker
-        var bulletScript = lightProj.GetComponent<Bullet>();
-        if (bulletScript != null)
-        {
-            bulletScript.SetAttacker(this.transform);
-            bulletScript.damage = GetAttackDamage();
-        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -267,11 +287,7 @@ public class RangedPlayerController : PlayerControllerBase
     }
     
    
-    [ServerRpc]
-    private void FireLightServerRpc()
-    {
-        ShootLightBullet();
-    }
+   
     [ServerRpc(RequireOwnership = false)]
     public void ShootBulletServerRpc()
     {
@@ -355,6 +371,100 @@ public class RangedPlayerController : PlayerControllerBase
             }
         }
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void ShootLightBulletServerRpc()
+    {
+        Debug.Log("We Are Here Again...");
+        GameObject lightProj;
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            lightProj = bulletPoolNGO.GetBullet(lightBulletTag);
+            if (lightProj == null) return;
+
+            if (Current_Stamina.Value < lightThrowCost) return;
+            StaminaSystem(lightThrowCost, false);
+
+            // position & rotation
+            lightProj.transform.position = lightBulletFirePoint.position;
+            lightProj.transform.rotation = Quaternion.identity;
+
+            // launch direction
+            float dirSign = Mathf.Sign(transform.localScale.x);
+            float angleRad = launchAngle * Mathf.Deg2Rad;
+            Vector2 launchDir = new Vector2(Mathf.Cos(angleRad) * dirSign, Mathf.Sin(angleRad)).normalized;
+            Vector2 velocity = launchDir * lightBulletSpeed;
+
+            // apply velocity
+            Rigidbody2D rb2d = lightProj.GetComponent<Rigidbody2D>();
+            if (rb2d != null)
+            {
+                rb2d.linearVelocity = velocity;
+
+                // set proper scale based on direction
+                Vector3 scale = rb2d.transform.localScale;
+                scale.x = Mathf.Abs(scale.x) * dirSign;
+                rb2d.transform.localScale = scale;
+            }
+
+            // set attacker & damage
+            Bullet bulletScript = lightProj.GetComponent<Bullet>();
+            int dmg = GetAttackDamage();
+            if (bulletScript != null)
+            {
+                bulletScript.SetAttacker(this.transform);
+                bulletScript.damage = dmg;
+            }
+
+            // get NetObj
+            NetworkObject netObj = lightProj.GetComponent<NetworkObject>();
+            float scaleX = lightProj.transform.localScale.x;
+
+            // Send info to all clients
+            InitLightBulletClientRpc(
+                netObj.NetworkObjectId,
+                lightBulletFirePoint.position,
+                velocity,
+                scaleX,
+                this.GetComponent<NetworkObject>().NetworkObjectId,
+                dmg
+            );
+        }
+    }
+    [ClientRpc]
+    void InitLightBulletClientRpc(ulong bulletNetId, Vector3 spawnPosition, Vector2 velocity, float scaleX, ulong attackerNetId, int damage)
+    {
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(bulletNetId, out NetworkObject spawnedBullet))
+        {
+            spawnedBullet.transform.position = spawnPosition;
+
+            Rigidbody2D rb = spawnedBullet.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = velocity;
+
+                Vector3 scale = spawnedBullet.transform.localScale;
+                scale.x = scaleX;
+                spawnedBullet.transform.localScale = scale;
+            }
+
+            Bullet bulletScript = spawnedBullet.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                Transform attacker = null;
+                if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(attackerNetId, out NetworkObject attackerObj))
+                {
+                    attacker = attackerObj.transform;
+                }
+                bulletScript.SetAttacker(attacker);
+                bulletScript.damage = damage;
+            }
+        }
+    }
+
+
+
 
    
 

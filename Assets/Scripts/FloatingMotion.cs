@@ -4,9 +4,10 @@ public class FloatingMotion : MonoBehaviour
 {
     public float floatSpeed = 1f;
     public float floatHeight = 0.15f;
+    [HideInInspector]
 
     
-    private Vector3 startPos;
+    public  Vector3 startPos;
 
     private SpriteRenderer spriteRenderer;
     public float pulseSpeed = 2f;
@@ -21,6 +22,7 @@ public class FloatingMotion : MonoBehaviour
     void Update()
     {
         // Float
+
         float newY = Mathf.Sin(Time.time * floatSpeed) * floatHeight;
         transform.localPosition = startPos + new Vector3(0, newY, 0);
 

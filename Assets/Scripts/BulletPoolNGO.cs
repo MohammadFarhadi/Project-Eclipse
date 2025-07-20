@@ -134,6 +134,28 @@ public class BulletPoolNGO : NetworkBehaviour
             Debug.LogWarning($"Bullet with id {netId} not found on client.");
         }
     }
+    public void DespawnAllBullets()
+    {
+        if (!IsServer) return;
+
+        foreach (var pool in bulletPools.Values)
+        {
+            foreach (var bullet in pool)
+            {
+                if (bullet != null && bullet.activeInHierarchy)
+                {
+                    bullet.GetComponent<NetworkObject>().Despawn(true); // با destroy=true حذف کامل میشه
+                }
+            }
+            pool.Clear();
+        }
+
+        bulletPools.Clear();
+        bulletPrefabs.Clear();
+
+        Debug.Log("🧹 All bullets despawned before scene change.");
+    }
+
 
 
 

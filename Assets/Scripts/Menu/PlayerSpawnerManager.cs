@@ -38,6 +38,8 @@ public class PlayerSpawnerManager : NetworkBehaviour
     private void SpawnLocalPlayers()
     {
         int[] selectedChars = LocalCharacterSelectionManager.Instance.GetSelectedCharacters();
+        GameObject selectedRangedPlayer = null;
+        GameObject selectedMeleePlayer = null;
 
         for (int i = 0; i < selectedChars.Length; i++)
         {
@@ -45,18 +47,22 @@ public class PlayerSpawnerManager : NetworkBehaviour
             if (characterID >= 0 && characterID < characterPrefabs.Length)
             {
                 GameObject obj = Instantiate(characterPrefabs[characterID], spawnPoints[i].position, Quaternion.identity);
-                PlayersUI p; 
+
+                PlayersUI p;
                 if (characterID < 2)
                 {
                     p = GameObject.Find("MeleeUIManager  ").GetComponent<PlayersUI>();
+                    selectedMeleePlayer = obj;
                 }
                 else
                 {
-                    p = GameObject.Find("RangedUIManager  ").GetComponent<PlayersUI>();  
+                    p = GameObject.Find("RangedUIManager  ").GetComponent<PlayersUI>();
+                    selectedRangedPlayer = obj;
                 }
+
                 obj.GetComponent<PlayerControllerBase>().SetPlayerUI(p);
                 obj.GetComponent<PlayerControllerBase>().RefreshUI();
-                
+
                 Debug.Log($"Local player {i + 1} spawned with characterID: {characterID}");
             }
             else
@@ -64,7 +70,19 @@ public class PlayerSpawnerManager : NetworkBehaviour
                 Debug.LogError($"Invalid characterID {characterID} for player {i + 1}");
             }
         }
+
+        // تنظیم دوربین‌ها در CameraManager فقط در حالت Local
+        if (selectedMeleePlayer != null && selectedRangedPlayer != null)
+        {
+            CameraManager camManager = FindObjectOfType<CameraManager>();
+            camManager.player1 = selectedRangedPlayer;
+            camManager.player2 = selectedMeleePlayer;
+
+            camManager.camera1 = selectedRangedPlayer.GetComponentInChildren<Camera>();
+            camManager.camera2 = selectedMeleePlayer.GetComponentInChildren<Camera>();
+        }
     }
+
 
     // آنلاین با توجه به انتخاب بازیکنان، آنها را با NetworkObject اسپان می‌کند
     private void SpawnAllOnlinePlayers()
@@ -80,6 +98,19 @@ public class PlayerSpawnerManager : NetworkBehaviour
             {
                 GameObject playerObj = Instantiate(characterPrefabs[player.characterID], spawnPoints[spawnIndex].position, Quaternion.identity);
                 playerObj.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.clientID);
+                var baseCtrl = playerObj.GetComponent<PlayerControllerBase>();
+                baseCtrl.CharacterID.Value = player.characterID;
+
+// صدا زدن RPC فقط برای پلیر مربوطه
+                ClientRpcParams rpcParams = new ClientRpcParams
+                {
+                    Send = new ClientRpcSendParams
+                    {
+                        TargetClientIds = new ulong[] { player.clientID }
+                    }
+                };
+                baseCtrl.SetupCameraClientRpc(rpcParams);
+
                 bool isMelee = player.characterID < 2;
                 playerObj.GetComponent<PlayerControllerBase>().SetPlayerUIClientRpc(isMelee);
                 Debug.Log($"Online player {player.clientID} spawned with characterID: {player.characterID}");

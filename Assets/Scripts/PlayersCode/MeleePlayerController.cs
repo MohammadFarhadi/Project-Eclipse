@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Security.Cryptography.X509Certificates;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -43,6 +44,11 @@ public class MeleePlayerController : PlayerControllerBase
     [SerializeField] private Vector3  flashlightOffset  = new Vector3(0.5f, 0f, 0f);
     private float    rotationOffset; 
     private Transform spotlightT;
+    private NetworkVariable<bool> isFlashOnNet = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner // فقط صاحب می‌تونه تغییر بده
+    );
 
     
     private Light2D spotlight;
@@ -301,14 +307,25 @@ public class MeleePlayerController : PlayerControllerBase
 
     private void HandleFlashlight()
     {
-        if (isFlashOn && Current_Stamina.Value > 0f)
+        if ((isFlashOn || isFlashOnNet.Value) && Current_Stamina.Value > 0f)
         {
             spotlight.intensity = flashIntensityOn;
             StaminaSystem(staminaDrainRate * Time.deltaTime, false);
 
             // اگر بعد از کم شدن استامینا رسید صفر، خودکار خاموشش کن
             if (Current_Stamina.Value <= 0f)
-                isFlashOn = false;
+            {
+                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                {
+                    isFlashOn = false;
+                }
+                else
+                {
+                    isFlashOnNet.Value = false;
+                }
+            }
+
+   
         }
         else
         {
@@ -323,12 +340,40 @@ public class MeleePlayerController : PlayerControllerBase
 
     public void OnFlash(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed) return;
+        if (!IsOwner) return; // فقط صاحب اجرا می‌کنه
 
+        if (!ctx.performed) return;
+        Debug.Log("On flashlight called");
         // فقط اگر استامینا بیشتر از مصرف لحظه‌ای (مثلاً staminaDrainRate) داشت مجوز بده
         if (Current_Stamina.Value > staminaDrainRate * Time.deltaTime)
-            isFlashOn = !isFlashOn;
+        {
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                isFlashOn = !isFlashOn;
+
+            }
+            else
+            {
+                isFlashOnNet.Value = !isFlashOnNet.Value;
+
+            }
+        }
     }
+    private void OnEnable()
+    {
+        isFlashOnNet.OnValueChanged += OnFlashlightChanged;
+    }
+
+    private void OnDisable()
+    {
+        isFlashOnNet.OnValueChanged -= OnFlashlightChanged;
+    }
+
+    private void OnFlashlightChanged(bool prev, bool current)
+    {
+        spotlight.intensity = current ? flashIntensityOn : 0f;
+    }
+
 
 
 
