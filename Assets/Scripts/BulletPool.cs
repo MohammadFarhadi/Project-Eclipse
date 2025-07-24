@@ -15,8 +15,8 @@ public class BulletPool : MonoBehaviour
     private Dictionary<string, List<GameObject>> BulletPools;
     void Start()
     {
-        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
-        {
+//        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+  //      {
             BulletPools = new Dictionary<string, List<GameObject>>();
             for (int i = 0; i < bulletTypes.Count; i++)
             {
@@ -29,7 +29,7 @@ public class BulletPool : MonoBehaviour
                     pool.Add(obj);
                 }
             }
-        }
+  //      }
     }
     public GameObject GetBullet(string bulletTag)
     {

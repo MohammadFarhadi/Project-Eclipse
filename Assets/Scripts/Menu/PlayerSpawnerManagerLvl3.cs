@@ -1,0 +1,117 @@
+using Unity.Netcode;
+using UnityEngine;
+
+public class PlayerSpawnerManagerLvl3 : NetworkBehaviour
+{
+    public static PlayerSpawnerManagerLvl3 Instance;
+
+    public GameObject[] characterPrefabs; // باید از قبل در Inspector پر بشه
+    public Transform[] spawnPoints;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online && IsServer)
+        {
+            Debug.Log("Spawning players for online mode...");
+            SpawnAllOnlinePlayers();
+        }
+    }
+
+    private void Start()
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            Debug.Log("Spawning players for local mode...");
+            SpawnLocalPlayers();
+        }
+    }
+
+    // لوکال دو بازیکن را طبق انتخابشان اسپان می‌کند
+    private void SpawnLocalPlayers()
+    {
+        int[] selectedChars = LocalCharacterSelectionManager.Instance.GetSelectedCharacters();
+        GameObject selectedRangedPlayer = null;
+        GameObject selectedMeleePlayer = null;
+
+        for (int i = 0; i < selectedChars.Length; i++)
+        {
+            int characterID = selectedChars[i];
+            if (characterID >= 0 && characterID < characterPrefabs.Length)
+            {
+                GameObject obj = Instantiate(characterPrefabs[characterID], spawnPoints[i].position, Quaternion.identity);
+
+                PlayersUI p;
+                if (characterID < 2)
+                {
+                    p = GameObject.Find("MeleeUIManager  ").GetComponent<PlayersUI>();
+                    selectedMeleePlayer = obj;
+                }
+                else
+                {
+                    p = GameObject.Find("RangedUIManager  ").GetComponent<PlayersUI>();
+                    selectedRangedPlayer = obj;
+                }
+
+                obj.GetComponent<TopDownController>().SetPlayerUI(p);
+                obj.GetComponent<TopDownController>().RefreshUI();
+
+                Debug.Log($"Local player {i + 1} spawned with characterID: {characterID}");
+            }
+            else
+            {
+                Debug.LogError($"Invalid characterID {characterID} for player {i + 1}");
+            }
+        }
+
+        // تنظیم دوربین‌ها در CameraManager فقط در حالت Local
+       
+    }
+
+
+    // آنلاین با توجه به انتخاب بازیکنان، آنها را با NetworkObject اسپان می‌کند
+    private void SpawnAllOnlinePlayers()
+    {
+        if (!IsServer) return;
+
+        var players = PlayerStateCache.Instance.playerStates;
+
+        int spawnIndex = 0;
+        foreach (var player in players)
+        {
+            if (player.characterID >= 0 && player.characterID < characterPrefabs.Length)
+            {
+                GameObject playerObj = Instantiate(characterPrefabs[player.characterID], spawnPoints[spawnIndex].position, Quaternion.identity);
+                playerObj.GetComponent<NetworkObject>().SpawnAsPlayerObject(player.clientID);
+                var baseCtrl = playerObj.GetComponent<TopDownController>();
+                baseCtrl.CharacterID.Value = player.characterID;
+
+// صدا زدن RPC فقط برای پلیر مربوطه
+                ClientRpcParams rpcParams = new ClientRpcParams
+                {
+                    Send = new ClientRpcSendParams
+                    {
+                        TargetClientIds = new ulong[] { player.clientID }
+                    }
+                };
+               // baseCtrl.SetupCameraClientRpc(rpcParams);
+
+                bool isMelee = player.characterID < 2;
+                playerObj.GetComponent<TopDownController>().SetPlayerUIClientRpc(isMelee);
+                Debug.Log($"Online player {player.clientID} spawned with characterID: {player.characterID}");
+                spawnIndex++;
+            }
+            else
+            {
+                Debug.LogWarning($"Skipping player {player.clientID} due to invalid characterID: {player.characterID}");
+            }
+        }
+    }
+}

@@ -20,6 +20,8 @@ TagManager:
   - FadePanel
   - LightBullet
   - Level2Trigger
+  - Decor
+  - ShooterEnemyAI
   layers:
   - Default
   - TransparentFX

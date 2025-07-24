@@ -382,5 +382,7 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
     {
         currentHealth.Value -= damageAmount;
         currentHealth.Value = Mathf.Clamp(currentHealth.Value, 0, maxHealth);
+        
     }
+    
 }

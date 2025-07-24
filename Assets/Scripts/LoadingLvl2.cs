@@ -6,8 +6,8 @@ public class LoadinLvl2 : NetworkBehaviour
 {
     public Animator doorAnimator;
     private bool player1Inside = false;
-    private bool player2Inside = false;
-
+    private bool player2Inside = false; 
+    public string name;
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "RangedPlayer(Clone)" || other.gameObject.name == "Ranged1Player(Clone)")
@@ -37,7 +37,7 @@ public class LoadinLvl2 : NetworkBehaviour
             if (GameModeManager.Instance.CurrentMode == GameMode.Local)
             {
                 // برای حالت Local، می‌تونی مستقیم سکانس رو بارگذاری کنی
-                SceneManager.LoadScene("Level2");
+                SceneManager.LoadScene(name);
             }
             else
             {
@@ -57,7 +57,7 @@ public class LoadinLvl2 : NetworkBehaviour
                         bulletPool.DespawnAllBullets();
                     }
                     // فقط سرور سکانس رو بارگذاری کنه و اجازه بده Netcode خودش کلاینت‌ها رو منتقل کنه
-                    NetworkManager.Singleton.SceneManager.LoadScene("Level2", LoadSceneMode.Single);
+                    NetworkManager.Singleton.SceneManager.LoadScene(name, LoadSceneMode.Single);
                 }
             }
         }

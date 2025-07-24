@@ -373,6 +373,7 @@ public class MeleePlayerController : PlayerControllerBase
     {
         spotlight.intensity = current ? flashIntensityOn : 0f;
     }
+    
 
 
 

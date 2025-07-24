@@ -40,7 +40,18 @@ public class MeleePlayerTopDown : TopDownController
 
         if (animator != null)
         {
-            animator.SetFloat("IsRunning", move_input.magnitude);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetFloat("IsRunning",  move_input.magnitude);
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    UpdateAnimatorFloatParameterServerRpc("IsRunning", move_input.magnitude);
+                    
+                }
+            }
         }
     }
 
@@ -76,7 +87,18 @@ public class MeleePlayerTopDown : TopDownController
     
     public void OnAttack()
     {
-        animator.SetBool("IsAttacking", true);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsAttacking", true);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                UpdateAnimatorBoolParameterServerRpc("IsAttacking", true);
+            }
+        }
         StartCoroutine(ResetAttackBool());
     }
     
@@ -96,12 +118,34 @@ public class MeleePlayerTopDown : TopDownController
     {
         //چقدر طول میکشه که انیمیشن اتکمون اجرا بشه.
         yield return new WaitForSeconds(0.2f); 
-        animator.SetBool("IsAttacking", false);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsAttacking", false);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                UpdateAnimatorBoolParameterServerRpc("IsAttacking", false);
+            }
+        }
     }
     
     protected override void HandleLanding()
     {
-        animator.SetBool("IsFalling", false);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsFalling", false);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                UpdateAnimatorBoolParameterServerRpc("IsFalling", false);
+            }
+        }
     }
 
     protected override int ModifyDamage(int value)

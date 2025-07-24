@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -21,6 +22,8 @@ public class Bullet : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Hello");
+        Debug.Log(other.gameObject.name);
         if (GameModeManager.Instance.CurrentMode == GameMode.Online && !IsServer) return;
 
         if (other.CompareTag("Enemy"))
@@ -35,7 +38,10 @@ public class Bullet : NetworkBehaviour
         }
         else if (other.CompareTag("Player"))
         {
+            Debug.Log("Hello");
+            
             var targetPlayer = other.GetComponent<PlayerControllerBase>();
+            if (targetPlayer == null) Debug.Log("targetPlayer is null");
             if (targetPlayer != null)
             {
                 if (GameModeManager.Instance.CurrentMode == GameMode.Online && IsServer)
@@ -48,6 +54,22 @@ public class Bullet : NetworkBehaviour
                 }
 
                 Debug.Log($"{targetPlayer.name} got hit by bullet from {attacker?.name}");
+            }
+
+            var targertPlayerTopDown = other.GetComponent<TopDownController>();
+            if (targertPlayerTopDown == null)Debug.Log("targertPlayerTopDown is null");
+            if (targertPlayerTopDown != null)
+            {
+                if (GameModeManager.Instance.CurrentMode == GameMode.Online && IsServer)
+                {
+                   // targertPlayerTopDown.TakeDamageFromServer(30, false);
+                }
+                else
+                {
+                    targertPlayerTopDown.HealthSystem(30, false);
+                }
+
+                Debug.Log($"{targertPlayerTopDown.name} got hit by bullet from {attacker?.name}");
             }
 
             HandleBulletEnd();
