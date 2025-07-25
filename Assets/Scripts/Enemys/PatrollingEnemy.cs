@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
 {
@@ -12,6 +13,7 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
     public GameObject leftSensor;
     public GameObject rightSensor;
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
 
     private NetworkVariable<int> health = new NetworkVariable<int>(
         3,
@@ -33,6 +35,8 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
         {
             healthBarDisplay.UpdateHealthBar(health.Value);
         }
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
     }
     private void OnHealthChanged(int oldValue, int newValue)
     {
@@ -65,7 +69,15 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
         {
             GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
             attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
-            animator.SetTrigger("Attack");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("Attack");
+
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Attack");
+            }
             PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
             player.HealthSystem(50, false);
             Debug.Log("Player hited ");
@@ -101,14 +113,31 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
 
         if (health.Value <= 0 && direction == 1)
         {
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("Die");
+ 
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Die");
+            }
             
-            animator.SetTrigger("Die");
             Invoke(nameof(Die), 0.5f);
         }
         else if (health.Value <= 0 && direction == -1)
         {
+            
            
-            animator.SetTrigger("Die1");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("Die1");
+ 
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Die1");
+            }
             Invoke(nameof(Die), 0.5f);
         }
 
@@ -171,6 +200,23 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
     void ApplyDamageServerRpc(int damageAmount)
     {
         health.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
     }
     
 }

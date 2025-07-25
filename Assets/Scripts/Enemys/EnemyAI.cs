@@ -34,6 +34,7 @@ public class EnemyAI : NetworkBehaviour, InterfaceEnemies
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         PickNewDirection();
     }
 

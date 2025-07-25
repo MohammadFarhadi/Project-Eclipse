@@ -93,7 +93,15 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
 
         if (PlayerInSight())
         {
-            animator.SetBool("isRunning", false);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                UpdateAnimatorBoolParameterServerRpc("isRunnig" , false );
+            }
+            else
+            {
+                animator.SetBool("isRunning", false);
+
+            }
             FacePlayer();
             HandleCombat();
         }
@@ -117,7 +125,15 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
             return;
         }
 
-        animator.SetBool("isRunning", true);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            UpdateAnimatorBoolParameterServerRpc("isRunnig" , true );
+        }
+        else
+        {
+            animator.SetBool("isRunning", true);
+
+        }
 
         Vector3 dir = movingRight ? Vector3.right : Vector3.left;
         transform.Translate(dir * speed * Time.deltaTime);
@@ -126,7 +142,15 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
             (!movingRight && transform.position.x <= leftLimit.position.x))
         {
             isWaiting = true;
-            animator.SetBool("isRunning", false);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                UpdateAnimatorBoolParameterServerRpc("isRunnig" , false );
+            }
+            else
+            {
+                animator.SetBool("isRunning", false);
+
+            }
         }
     }
 
@@ -145,12 +169,28 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
 
             if (shotCount >= 3)
             {
-                animator.SetTrigger("ThrowGrenade");
+                if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+                {
+                    UpdateAnimatorTriggerParameterServerRpc("ThrowGrenade");
+                }
+                else
+                {
+                    animator.SetTrigger("ThrowGrenade");
+   
+                }
                 shotCount = 0; // fire happens inside animation event
             }
             else
             {
-                animator.SetTrigger("Shoot");
+                if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+                {
+                    UpdateAnimatorTriggerParameterServerRpc("Shoot");
+                }
+                else
+                {
+                    animator.SetTrigger("Shoot");
+
+                }
                 // fire happens in animation event
             }
         }
@@ -573,6 +613,20 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
     {
         currentHealth.Value -= damageAmount;
     }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+
+
+   
 
 
 }

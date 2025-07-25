@@ -44,7 +44,8 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
     private bool isInCooldown = false;
     private BulletPool bulletPool;
     [SerializeField] private BulletPoolNGO bulletPoolNGO;
-
+    [SerializeField] private bool  Is_First = true ;
+    Transform currentTarget;
     void Start()
     {
         if (GameModeManager.Instance.CurrentMode == GameMode.Online)
@@ -101,10 +102,10 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
                     players[1] = obj.transform;
                 }
             }
+            currentTarget = players[currentTargetIndex];
         }
 
         
-        Transform currentTarget = GetNearestPlayer();
         float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
 
         // اگر فاصله بیشتر از 10 بود، هیچ کاری نکن
@@ -161,6 +162,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
             if (targetSwitchTimer >= switchTargetTime)
             {
                 currentTargetIndex = (currentTargetIndex + 1) % players.Length;
+                currentTarget = players[currentTargetIndex];
                 targetSwitchTimer = 0f;
             }
         }
@@ -182,6 +184,11 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
     IEnumerator Attack(Transform target)
     {
+        Vector3 scale = transform.localScale;
+        if (target.position.x < transform.position.x)
+            scale.x = -Mathf.Abs(scale.x); // به چپ نگاه کنه
+        else
+            scale.x = Mathf.Abs(scale.x); 
         GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
         attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
         if (GameModeManager.Instance.CurrentMode == GameMode.Local)
@@ -248,12 +255,21 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
     void SpawnRandomEnemy()
     {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online && !IsServer) return;
         if (enemyPrefabs.Length == 0 || spawnPoints.Length == 0) return;
 
         GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        Instantiate(enemyToSpawn, spawnPoint.position, Quaternion.identity);
+        GameObject SpawnedObject = Instantiate(enemyToSpawn, spawnPoint.position, Quaternion.identity);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (SpawnedObject.TryGetComponent(out NetworkObject netObj))
+            {
+                netObj.Spawn();
+            }
+
+        }
     }
 
     void PlayAnimation(string animName)
@@ -423,6 +439,16 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
             currentTargetIndex = (currentTargetIndex + 1) % players.Length;
             attackCount = 0;
         }
+        NetworkObject netObj = bullet.GetComponent<NetworkObject>();
+
+        // اطلاع به کلاینت‌ها
+        InitShootBulletClientRpc(
+            netObj.NetworkObjectId,
+            firePoint.position,
+            direction,
+            bulletSpeed,
+            this.GetComponent<NetworkObject>().NetworkObjectId
+        );
 
         yield return new WaitForSeconds(1f); // صبر برای Idle
         PlayAnimation("Idle");
@@ -459,6 +485,33 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
     {
         Destroy(gameObject , 1f );
     }
-    
+    [ClientRpc]
+    void InitShootBulletClientRpc(ulong bulletNetId, Vector3 spawnPosition, Vector2 dir, float bulletSpeed, ulong attackerNetId)
+    {
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(bulletNetId, out NetworkObject spawnedBullet))
+        {
+            spawnedBullet.transform.position = spawnPosition;
+
+            Rigidbody2D rb = spawnedBullet.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = dir * bulletSpeed;
+
+                Vector3 scale = spawnedBullet.transform.localScale;
+                spawnedBullet.transform.localScale = scale;
+            }
+            Transform attacker = null;
+            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(attackerNetId, out NetworkObject attackerObj))
+            {
+                attacker = attackerObj.transform;
+            }
+
+            Bullet bScript = spawnedBullet.GetComponent<Bullet>();
+            if (bScript != null)
+            {
+                bScript.SetAttacker(attacker);
+            }
+        }
+    }
 
 }

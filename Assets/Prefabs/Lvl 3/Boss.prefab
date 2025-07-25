@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4611977415639844149}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.63, y: -0.19, z: 0}
+  m_LocalPosition: {x: 1.82, y: -0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 69321223974545167}
   - component: {fileID: 4100661704318982125}
   - component: {fileID: 5978231095515779726}
+  - component: {fileID: 2107403081452090851}
   m_Layer: 6
   m_Name: Boss
   m_TagString: Enemy
@@ -206,6 +207,7 @@ MonoBehaviour:
   - {fileID: 0}
   animator: {fileID: 7720056771999889491}
   bulletPoolNGO: {fileID: 0}
+  Is_First: 1
 --- !u!61 &4100661704318982125
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -298,3 +300,32 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 1
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &2107403081452090851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7056456192466151242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 502400690
+    DestinationState: -185719563
+    TransitionDuration: 0.25
+    TriggerNameHash: 1080829965
+    TransitionIndex: 1
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 502400690
+    DestinationState: 643787118
+    TransitionDuration: 0.25
+    TriggerNameHash: 1388814594
+    TransitionIndex: 2
+  m_Animator: {fileID: 7720056771999889491}

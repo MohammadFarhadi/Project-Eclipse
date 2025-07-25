@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 6866027791767931238}
   - component: {fileID: 4016713791529192168}
   - component: {fileID: 7161785165129671194}
-  - component: {fileID: 5598970497027608082}
   - component: {fileID: -7632340688582385627}
+  - component: {fileID: 5598970497027608082}
   - component: {fileID: 8685403775539145439}
+  - component: {fileID: -2620463061446240674}
   m_Layer: 6
   m_Name: ElectroEnemy
   m_TagString: Enemy
@@ -187,30 +188,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &5598970497027608082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7031860802170685260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae34d236ddd26a4da3c4ba2b1c82607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
-  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
-  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
-  moveSpeed: 2
-  dashSpeed: 6
-  directionChangeInterval: 5
-  dashDuration: 0.3
-  attackCooldown: 1.5
-  chaseCooldown: 1
-  damageToPlayer: 30
+  m_Constraints: 4
 --- !u!114 &-7632340688582385627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +214,29 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &5598970497027608082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031860802170685260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae34d236ddd26a4da3c4ba2b1c82607, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
+  moveSpeed: 2
+  dashSpeed: 6
+  directionChangeInterval: 5
+  dashDuration: 0.3
+  attackCooldown: 1.5
+  chaseCooldown: 1
+  damageToPlayer: 30
 --- !u!114 &8685403775539145439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,3 +283,25 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 1
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-2620463061446240674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031860802170685260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 820910496
+    DestinationState: 17986767
+    TransitionDuration: 0.25
+    TriggerNameHash: 1080829965
+    TransitionIndex: 0
+  m_Animator: {fileID: 6866027791767931238}

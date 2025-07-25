@@ -62,7 +62,7 @@ public class Bullet : NetworkBehaviour
             {
                 if (GameModeManager.Instance.CurrentMode == GameMode.Online && IsServer)
                 {
-                   // targertPlayerTopDown.TakeDamageFromServer(30, false);
+                    targertPlayerTopDown.TakeDamageFromServer(30, false);
                 }
                 else
                 {

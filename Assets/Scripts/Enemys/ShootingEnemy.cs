@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 
 public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
 {
@@ -20,6 +21,7 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
 
 
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     private List<GameObject> playersInRange = new List<GameObject>();
     private GameObject currentTarget;
     private float timer = 0f;
@@ -54,6 +56,8 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
                 Debug.LogError("BulletPoolNGO not found in the scene!");
             }
         }
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
     }
 
     private void OnHealthChanged(int oldValue, int newValue)
@@ -106,7 +110,15 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
             {
                 bullet.transform.position = firePoint.position;
                 bullet.transform.rotation = Quaternion.identity;
-                animator.SetTrigger("Attack");  
+                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                {
+                    animator.SetTrigger("Attack");  
+
+                }
+                else
+                {
+                    UpdateAnimatorTriggerParameterServerRpc("Attack");
+                }
 
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 if (rb != null)
@@ -185,7 +197,15 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
 
         if (health.Value <= 0)
         {
-            animator.SetTrigger("Die");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Die");
+            }
+            else
+            {
+                animator.SetTrigger("Die");
+
+            }
             Invoke(nameof(Die), 0.5f); 
         }
     }
@@ -352,6 +372,23 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
     void ApplyDamageServerRpc(int damageAmount)
     {
         health.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
     }
 
 }

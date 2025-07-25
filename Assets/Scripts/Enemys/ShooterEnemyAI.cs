@@ -62,16 +62,19 @@ public class ShooterEnemyAI : NetworkBehaviour, InterfaceEnemies
     }
     void Update()
     {
+        if (!IsServer && GameModeManager.Instance.CurrentMode == GameMode.Online) return;
+
+        FindClosestPlayer(); // اضافه شده
+
         if (targetPlayer == null) return;
 
         float distance = Vector2.Distance(transform.position, targetPlayer.position);
 
         if (distance > attackRange)
         {
-            // حرکت به سمت پلیر
+            // حرکت به سمت نزدیک‌ترین پلیر
             Vector2 direction = (targetPlayer.position - transform.position).normalized;
             rb.linearVelocity = direction * moveSpeed;
-
         }
         else
         {
@@ -85,6 +88,7 @@ public class ShooterEnemyAI : NetworkBehaviour, InterfaceEnemies
             }
         }
     }
+
 
     void Shoot()
     {
@@ -269,4 +273,26 @@ public class ShooterEnemyAI : NetworkBehaviour, InterfaceEnemies
             }
         }
     }
+    void FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        float closestDistance = Mathf.Infinity;
+        Transform closest = null;
+
+        foreach (GameObject p in players)
+        {
+            if (p == null) continue;
+
+            float dist = Vector2.Distance(transform.position, p.transform.position);
+            if (dist < closestDistance)
+            {
+                closestDistance = dist;
+                closest = p.transform;
+            }
+        }
+
+        targetPlayer = closest;
+    }
+
 }

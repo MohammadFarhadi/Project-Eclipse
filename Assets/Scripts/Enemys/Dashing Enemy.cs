@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class DashingEnemy : NetworkBehaviour, InterfaceEnemies
@@ -25,6 +26,7 @@ public class DashingEnemy : NetworkBehaviour, InterfaceEnemies
     
     [Header("References")]
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem dashEffect; // 🎇 پارتیکل دش
     [SerializeField] private Transform graphicsTransform; // 🔁 برای flip کردن ظاهر
@@ -48,6 +50,8 @@ public class DashingEnemy : NetworkBehaviour, InterfaceEnemies
             currentHealth.Value = maxHealth;
         }
         
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         Invoke(nameof(StartNextAttack), idleDuration);
     }
 
@@ -205,5 +209,22 @@ public class DashingEnemy : NetworkBehaviour, InterfaceEnemies
     void ApplyDamageServerRpc(int damageAmount)
     {
         currentHealth.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
     }
 }

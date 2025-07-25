@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
@@ -22,6 +23,7 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
     );
     [Header("References")]
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     [SerializeField] private Rigidbody2D rb;
 
     private GameObject player;
@@ -41,6 +43,8 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         {
             currentHealthPoints.Value = maxHealthPoints;
         }
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
        
     }
 
@@ -62,10 +66,17 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         rb.linearVelocity = jumpVector;
         isGrounded = false;
         isJumpingAtPlayer = true;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            UpdateAnimatorTriggerParameterServerRpc("Jump");
+        }
+        else
+        {
+            if (animator != null)
+                animator.SetTrigger("Jump");
 
-        if (animator != null)
-            animator.SetTrigger("Jump");
-
+        }
+        
         transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
     }
 
@@ -114,8 +125,16 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         }
         else
         {
-            if (animator != null)
-                animator.SetTrigger("GetHit");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                UpdateAnimatorTriggerParameterServerRpc("GetHit");
+            }
+            else
+            {
+                if (animator != null)
+                    animator.SetTrigger("GetHit");
+            }
+           
         }
     }
 
@@ -125,7 +144,15 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         {
             GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
             deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
-            animator.SetTrigger("IsDead");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                UpdateAnimatorTriggerParameterServerRpc("IsDead");
+            }
+            else
+            {
+                animator.SetTrigger("IsDead");
+
+            }
             
         }
             
@@ -182,6 +209,23 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
     void ApplyDamageServerRpc(int damageAmount)
     {
         currentHealthPoints.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
     }
     
 

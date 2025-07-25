@@ -123,8 +123,17 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
             if (distanceToPlayer <= detectionRange)
             {
                 FacePlayer(currentTargetPlayer);
-                animator.SetBool("run", false);
-                animator.SetTrigger("shooting");
+                if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+                {
+                    UpdateAnimatorBoolParameterServerRpc("run", false);
+                    UpdateAnimatorTriggerParameterServerRpc("shooting");
+                }
+                else
+                {
+                    animator.SetBool("run", false);
+                    animator.SetTrigger("shooting");
+                }
+               
                 Shoot();
                 return;
             }
@@ -147,7 +156,15 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
     }
     void Patrol()
     {
-        animator.SetBool("run", true);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            UpdateAnimatorBoolParameterServerRpc("run" , true);
+        }
+        else
+        {
+            animator.SetBool("run", true);
+
+        }
         animator.ResetTrigger("shooting");
 
         // حرکت به سمت جلو طبق جهت نگاه
@@ -227,16 +244,31 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
             currentHealth.Value -= damage * 5;
             currentHealth.Value = Mathf.Clamp(currentHealth.Value, 0, maxHealth);
         }
-        
-        
-        animator.SetTrigger("hurt");
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            UpdateAnimatorTriggerParameterServerRpc("hurt");
+        }
+        else
+        {
+            animator.SetTrigger("hurt");
+
+        }
         int spriteIndex = Mathf.CeilToInt(currentHealth.Value / 10f) - 1;
         healthBarDisplay.UpdateHealthBar(spriteIndex);
         healthBarDisplay.gameObject.SetActive(true);
 
         if (currentHealth.Value <= 0)
         {
-            animator.SetTrigger("Death");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Death");
+            }
+            else
+            {
+                animator.SetTrigger("Death");
+
+            }
             Invoke(nameof(Die), 0.2f); 
         }
     }
@@ -384,5 +416,23 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
         currentHealth.Value = Mathf.Clamp(currentHealth.Value, 0, maxHealth);
         
     }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
+    }
+    
     
 }

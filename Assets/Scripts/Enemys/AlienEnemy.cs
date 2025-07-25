@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
@@ -21,6 +22,7 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
     public float attackCooldown = 1f;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     [SerializeField] private NetworkVariable<int> health = new NetworkVariable<int>(
         3,
         NetworkVariableReadPermission.Everyone,
@@ -35,6 +37,8 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
@@ -57,8 +61,14 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
 
             Vector3 targetPosition = new Vector3(currentTarget.transform.position.x, transform.position.y, transform.position.z);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-            animator.SetTrigger("IsWalk");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("IsWalk");
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("IsWalk");
+            }
         }
     }
 
@@ -253,6 +263,23 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
     void ApplyDamageServerRpc(int damageAmount)
     {
         health.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
     }
     
 }

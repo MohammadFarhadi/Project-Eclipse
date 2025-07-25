@@ -23,7 +23,16 @@ public class MeleePlayerTopDown : TopDownController
     {
         base.Awake();
     }
-    
+
+    public  void Update()
+    {
+        if (playersUI == null)
+        {
+            playersUI = GameObject.Find("MeleeUIManager  ").GetComponent<PlayersUI>();
+            RefreshUI();
+        }
+    }
+
     protected override void Start()
     {
         baseDamageMultiplier = 0.5f;
