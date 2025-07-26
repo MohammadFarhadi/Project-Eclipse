@@ -95,7 +95,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
         {
             if (GameModeManager.Instance.CurrentMode == GameMode.Online)
             {
-                UpdateAnimatorBoolParameterServerRpc("isRunnig" , false );
+                UpdateAnimatorBoolParameterServerRpc("isRunning" , false );
             }
             else
             {
@@ -127,7 +127,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
 
         if (GameModeManager.Instance.CurrentMode == GameMode.Online)
         {
-            UpdateAnimatorBoolParameterServerRpc("isRunnig" , true );
+            UpdateAnimatorBoolParameterServerRpc("isRunning" , true );
         }
         else
         {
@@ -144,7 +144,7 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
             isWaiting = true;
             if (GameModeManager.Instance.CurrentMode == GameMode.Online)
             {
-                UpdateAnimatorBoolParameterServerRpc("isRunnig" , false );
+                UpdateAnimatorBoolParameterServerRpc("isRunning" , false );
             }
             else
             {

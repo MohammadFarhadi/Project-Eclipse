@@ -263,7 +263,7 @@ public class OnlineCharacterSelectionManager : NetworkBehaviour
     {
         if (NetworkManager.Singleton.IsServer)
         {
-            NetworkManager.Singleton.SceneManager.LoadScene("Level 3", UnityEngine.SceneManagement.LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
         }
     }
     public List<CharacterSelectState> GetPlayerStates()

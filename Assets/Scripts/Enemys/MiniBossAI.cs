@@ -419,7 +419,7 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
     [ServerRpc(RequireOwnership = false)]
     protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
     {
-        networkAnimator.Animator.SetBool(parameterName, value);
+            networkAnimator.Animator.SetBool(parameterName, value);
     }
     [ServerRpc(RequireOwnership = false)]
 

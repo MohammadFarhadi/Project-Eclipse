@@ -89,11 +89,12 @@ GameObject:
   - component: {fileID: 7606206746124861562}
   - component: {fileID: 4230038036668351750}
   - component: {fileID: 6842580500627669250}
+  - component: {fileID: 7506285075068318620}
   - component: {fileID: 3218516399875059002}
   - component: {fileID: 8413210805025960626}
   - component: {fileID: 6570635783109799764}
   - component: {fileID: 3572997954457656536}
-  - component: {fileID: 7506285075068318620}
+  - component: {fileID: 6490704920807784945}
   m_Layer: 6
   m_Name: Assasin
   m_TagString: Enemy
@@ -195,6 +196,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7506285075068318620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507881373411523007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &3218516399875059002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76c3a49e83e8d74b9c63374ed72707c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
   deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
   oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
@@ -224,6 +251,7 @@ MonoBehaviour:
   healthBarDisplay: {fileID: 5158330600532340840}
   Key: {fileID: 115109503595144896, guid: 843a4c8e4f766504591f5d67e477caf0, type: 3}
   Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+  bulletPoolNGO: {fileID: 0}
   targetAnimator: {fileID: 0}
   triggerBoolName: Boss Is Dead
 --- !u!61 &8413210805025960626
@@ -345,7 +373,7 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 1
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &7506285075068318620
+--- !u!114 &6490704920807784945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,22 +382,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2507881373411523007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 6842580500627669250}
 --- !u!1 &3120842794588637404
 GameObject:
   m_ObjectHideFlags: 0

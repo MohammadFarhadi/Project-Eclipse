@@ -57,7 +57,7 @@ public class LocalCharacterSelectionManager : MonoBehaviour
     {
         if (GameModeManager.Instance.CurrentMode == GameMode.Local && selectedCharacters[0] != -1 && selectedCharacters[1] != -1)
         {
-            SceneManager.LoadScene("Level 3");
+            SceneManager.LoadScene("SampleScene");
         }
     }
     public int[] GetSelectedCharacters()
