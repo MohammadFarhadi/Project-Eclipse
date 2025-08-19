@@ -137,7 +137,7 @@ MonoBehaviour:
   leftSensor: {fileID: 6693123292978048204}
   rightSensor: {fileID: 5259342217300015228}
   animator: {fileID: 6879462507796759935}
-  health: 3
+  networkAnimator: {fileID: 0}
   healthBarDisplay: {fileID: 5323041711010722782}
   dropItems:
   - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1802156087
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 8741044532947792248}
   m_Layer: 0
   m_Name: Patrolling Enemy Group
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -4850,7 +4850,7 @@ GameObject:
   - component: {fileID: 1374231244803308597}
   m_Layer: 0
   m_Name: EchoOrb_Purple   1
-  m_TagString: Untagged
+  m_TagString: SaveAble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5014,6 +5014,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatSpeed: 1
   floatHeight: 0.15
+  startPos: {x: 0, y: 0, z: 0}
   pulseSpeed: 2
   pulseAmount: 0.3
 --- !u!114 &1374231244803308597

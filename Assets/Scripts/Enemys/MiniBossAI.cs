@@ -37,7 +37,9 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
     private BulletPool bulletPool;
     [SerializeField] private BulletPoolNGO bulletPoolNGO;
     public Animator targetAnimator; // Animator مربوط به شیء دیگر
-    public string triggerBoolName = "Boss Is Dead"; 
+    public string triggerBoolName = "Boss Is Dead";
+    public int HealthPoint => Mathf.RoundToInt(currentHealth.Value);
+
     public void  InitializePlayers()
     {
         if (player1 != null && player2 != null) return;
@@ -56,6 +58,7 @@ public class MiniBossAI : NetworkBehaviour, InterfaceEnemies
             timer += Time.deltaTime;
 
         }
+
 
         // اگه هنوز نال بودن، یک هشدار لاگ کن
         if (player1 == null || player2 == null)

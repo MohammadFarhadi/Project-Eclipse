@@ -16,6 +16,7 @@ public class EnemyAI : NetworkBehaviour, InterfaceEnemies
     public float attackCooldown = 1.5f;
     public float chaseCooldown = 1f;
     private NetworkVariable<float> currentHealth = new NetworkVariable<float>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);    public int damageToPlayer = 30;
+    public int HealthPoint => Mathf.RoundToInt(currentHealth.Value);
 
     private Vector2 moveDirection;
     private float changeDirectionTime;

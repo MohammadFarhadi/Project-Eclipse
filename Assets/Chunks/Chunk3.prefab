@@ -4477,7 +4477,7 @@ GameObject:
   - component: {fileID: -2469745286591066781}
   m_Layer: 0
   m_Name: Chunk3
-  m_TagString: Untagged
+  m_TagString: Chunk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18840,6 +18840,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 584618192262620077}
     m_Modifications:
+    - target: {fileID: 7628808872375138043, guid: b816203151c524742b04a9f970127060, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 51700082
+      objectReference: {fileID: 0}
     - target: {fileID: 8741044532947792248, guid: b816203151c524742b04a9f970127060, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.904478
@@ -19246,6 +19250,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8501091025738221246, guid: ed6d20bacb02b9c43875f50542d47bf5, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 735923824
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19271,6 +19279,10 @@ PrefabInstance:
     - target: {fileID: 7344258707198791343, guid: 73515efa8691f4148b99dfd70955d53c, type: 3}
       propertyPath: m_Name
       value: Helpeer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609616666422504805, guid: 73515efa8691f4148b99dfd70955d53c, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3270836610
       objectReference: {fileID: 0}
     - target: {fileID: 7782839626959531018, guid: 73515efa8691f4148b99dfd70955d53c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19334,6 +19346,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 584618192262620077}
     m_Modifications:
+    - target: {fileID: 7628808872375138043, guid: b816203151c524742b04a9f970127060, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 425331394
+      objectReference: {fileID: 0}
     - target: {fileID: 8741044532947792248, guid: b816203151c524742b04a9f970127060, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.49
@@ -19761,6 +19777,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shooting Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8501091025738221246, guid: ed6d20bacb02b9c43875f50542d47bf5, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1567946359
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20060,6 +20080,10 @@ PrefabInstance:
     - target: {fileID: 7560879265720457689, guid: f9fb1e45178b549b28685e6aa5ee94d6, type: 3}
       propertyPath: m_Name
       value: Button(movePlat)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706331905958909536, guid: f9fb1e45178b549b28685e6aa5ee94d6, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3666969499
       objectReference: {fileID: 0}
     - target: {fileID: 8560765141051943342, guid: f9fb1e45178b549b28685e6aa5ee94d6, type: 3}
       propertyPath: m_LocalPosition.x

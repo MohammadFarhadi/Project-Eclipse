@@ -1495,7 +1495,7 @@ GameObject:
   - component: {fileID: -4299666292120161352}
   m_Layer: 0
   m_Name: Chunk6
-  m_TagString: Untagged
+  m_TagString: Chunk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4004,7 +4004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 4009913248
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -4352,7 +4352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f62ef1c6a7ae3f43a346dcc6fd8aa28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   doorAnimator: {fileID: 7191830031008445826}
+  name: 
 --- !u!114 &6384692738600760824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5660,6 +5662,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2839019245527163165}
     m_Modifications:
+    - target: {fileID: -8691659878135516074, guid: e28a789528043684c84167b9e3c3e006, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2630233578
+      objectReference: {fileID: 0}
     - target: {fileID: 73010547952160972, guid: e28a789528043684c84167b9e3c3e006, type: 3}
       propertyPath: m_Name
       value: EchoOrb_Green
@@ -5741,6 +5747,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2839019245527163165}
     m_Modifications:
+    - target: {fileID: 78109943230214116, guid: 2a823849a0f14f643965d65b113090cc, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2134392491
+      objectReference: {fileID: 0}
     - target: {fileID: 5415699854810314401, guid: 2a823849a0f14f643965d65b113090cc, type: 3}
       propertyPath: guardianBarrier
       value: 
@@ -5859,6 +5869,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2839019245527163165}
     m_Modifications:
+    - target: {fileID: -7350270010971200857, guid: e3501da7f071a44478481d6c816d2568, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1778844688
+      objectReference: {fileID: 0}
     - target: {fileID: 3141552763096339716, guid: e3501da7f071a44478481d6c816d2568, type: 3}
       propertyPath: npcText
       value: 
@@ -5940,6 +5954,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2839019245527163165}
     m_Modifications:
+    - target: {fileID: -3622995160582090174, guid: 3646ddf1c6638db4da355790bb9f0dba, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1678866720
+      objectReference: {fileID: 0}
     - target: {fileID: 3703990235555690910, guid: 3646ddf1c6638db4da355790bb9f0dba, type: 3}
       propertyPath: m_Name
       value: 'EchoOrb_Purple  '
@@ -6088,6 +6106,10 @@ PrefabInstance:
     - target: {fileID: 6322032467152419977, guid: 2f6a81ed96164a748b9a7ff46cd960bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506285075068318620, guid: 2f6a81ed96164a748b9a7ff46cd960bb, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4228883087
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

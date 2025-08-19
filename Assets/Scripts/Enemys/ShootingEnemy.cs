@@ -18,6 +18,9 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
+    public int HealthPoint => Mathf.RoundToInt(health.Value);
+
+    
 
 
     [SerializeField] private Animator animator;
@@ -30,7 +33,7 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
     private BulletPoolNGO bulletPoolNGO;
 
 
-    // 🩸 نمایش نوار سلامتی
+    //  نمایش نوار سلامتی
     public EnemyHealthBarDisplay healthBarDisplay;
     [Header("Possible Drops")]
     [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups

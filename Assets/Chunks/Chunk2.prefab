@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5883435735731322867}
   m_Layer: 0
   m_Name: Chunk2
-  m_TagString: Untagged
+  m_TagString: Chunk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27499,7 +27499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 601890774
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -27792,7 +27792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1586219252
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -28678,7 +28678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2588218384
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -30340,7 +30340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1324885163
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -30630,7 +30630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 583965468
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -31377,7 +31377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 752251302
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -35186,7 +35186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1434433263
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -35305,6 +35305,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoldierGroup (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6418126528446359740, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4281763089
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833926971759004124, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2055815610
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35374,6 +35382,14 @@ PrefabInstance:
     - target: {fileID: 5833229412436359216, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
       propertyPath: m_Name
       value: SoldierGroup (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6418126528446359740, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3485952153
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833926971759004124, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1179376528
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35445,6 +35461,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoldierGroup (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6418126528446359740, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1602016938
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833926971759004124, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 921706715
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35506,6 +35530,14 @@ PrefabInstance:
     - target: {fileID: 5833229412436359216, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
       propertyPath: m_Name
       value: SoldierGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6418126528446359740, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2357047144
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833926971759004124, guid: 1341c560eee44478c90171cecbf966f3, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 565947276
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35601,7 +35633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2713878386
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1

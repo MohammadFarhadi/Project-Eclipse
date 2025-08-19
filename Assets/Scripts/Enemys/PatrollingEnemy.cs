@@ -14,6 +14,7 @@ public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
     public GameObject rightSensor;
     [SerializeField] private Animator animator;
     [SerializeField] private NetworkAnimator networkAnimator;
+    public int HealthPoint => Mathf.RoundToInt(health.Value);
 
     private NetworkVariable<int> health = new NetworkVariable<int>(
         3,

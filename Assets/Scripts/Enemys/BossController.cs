@@ -15,7 +15,9 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
     [Header("Health")]
     public int maxHealth = 30;
     private NetworkVariable<float> currentHealth = new NetworkVariable<float>(30, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public int HealthPoint => Mathf.RoundToInt(currentHealth.Value);
 
+    
     [Header("Attack Settings")]
     public float attackRange = 1f;
     public float attackCooldown = 2f;

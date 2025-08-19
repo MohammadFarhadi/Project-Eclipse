@@ -28,6 +28,8 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
+    public int HealthPoint => health.Value;
+
     public Transform pointA;
     public Transform pointB;
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7808462894999873535}
   m_Layer: 0
   m_Name: Slot2
-  m_TagString: Untagged
+  m_TagString: SaveAble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6924318820498792073}
     m_Modifications:
+    - target: {fileID: -8691659878135516074, guid: e28a789528043684c84167b9e3c3e006, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 728548170
+      objectReference: {fileID: 0}
     - target: {fileID: 73010547952160972, guid: e28a789528043684c84167b9e3c3e006, type: 3}
       propertyPath: m_Name
       value: EchoOrb_Green

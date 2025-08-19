@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5364792558723785157}
   - component: {fileID: 6509669012581096086}
   - component: {fileID: 8860178765582632694}
-  - component: {fileID: 888205839200171703}
   - component: {fileID: 2054966684161455179}
+  - component: {fileID: 888205839200171703}
   - component: {fileID: 8163806190106178082}
   m_Layer: 9
   m_Name: Dashing Enemy
@@ -190,34 +190,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &888205839200171703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225076134685435282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c935b1e2af1cb9d42afae928b44d3134, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropItems:
-  - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
-  - {fileID: 3330495594356245476, guid: 8b9af8c2c1a99d44dafdd3e99422150f, type: 3}
-  Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
-  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
-  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
-  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
-  dashSpeed: 10
-  dashDuration: 1
-  idleDuration: 2
-  jumpForce: 8
-  maxHealth: 3
-  animator: {fileID: 5364792558723785157}
-  rb: {fileID: 8860178765582632694}
-  dashEffect: {fileID: 5226314597639641700}
-  graphicsTransform: {fileID: 7517852397221743831}
 --- !u!114 &2054966684161455179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +215,36 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &888205839200171703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225076134685435282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c935b1e2af1cb9d42afae928b44d3134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  dropItems:
+  - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
+  - {fileID: 3330495594356245476, guid: 8b9af8c2c1a99d44dafdd3e99422150f, type: 3}
+  Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
+  dashSpeed: 10
+  dashDuration: 1
+  idleDuration: 2
+  jumpForce: 8
+  maxHealth: 3
+  animator: {fileID: 5364792558723785157}
+  networkAnimator: {fileID: 0}
+  rb: {fileID: 8860178765582632694}
+  dashEffect: {fileID: 5226314597639641700}
+  graphicsTransform: {fileID: 7517852397221743831}
 --- !u!114 &8163806190106178082
 MonoBehaviour:
   m_ObjectHideFlags: 0

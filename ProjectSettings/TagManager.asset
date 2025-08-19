@@ -22,6 +22,9 @@ TagManager:
   - Level2Trigger
   - Decor
   - ShooterEnemyAI
+  - Chunk
+  - Saveable
+  - SaveAble
   layers:
   - Default
   - TransparentFX

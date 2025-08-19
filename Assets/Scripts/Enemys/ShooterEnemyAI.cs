@@ -13,6 +13,7 @@ public class ShooterEnemyAI : NetworkBehaviour, InterfaceEnemies
     public float shootCooldown = 1.5f;
     private NetworkVariable<float> currentHealth = new NetworkVariable<float>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public Transform firePoint;
+    public int HealthPoint => Mathf.RoundToInt(currentHealth.Value);
 
     public string normalBulletTag = "EnemyBullet";
 

@@ -56,7 +56,8 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
     [Header("Stamina")] 
     public NetworkVariable<float> Current_Stamina = new NetworkVariable<float>(50f,
         NetworkVariableReadPermission.Everyone,
-        NetworkVariableWritePermission.Server);    [SerializeField] protected float Stamina_gain = 5f;
+        NetworkVariableWritePermission.Server); 
+    [SerializeField] protected float Stamina_gain = 5f;
     [SerializeField] protected float Stamina_max = 50;
     [SerializeField] private float staminaRegenDelay = 2f; // تاخیر پر شدن
     [SerializeField] private float staminaRegenRate = 5f;  // نرخ بازیابی در ثانیه
@@ -720,6 +721,10 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
 
         Debug.Log($"[Camera RPC] Camera set for player with CharacterID {CharacterID.Value}");
     }
+
+
+    
+    
 
    
 

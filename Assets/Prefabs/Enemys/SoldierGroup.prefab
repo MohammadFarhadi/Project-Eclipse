@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7833926971759004124}
   m_Layer: 0
   m_Name: SoldierGroup
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1310889620
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: rightLimit
       value: 
       objectReference: {fileID: 1784166298588742454}
+    - target: {fileID: 4661487027132543269, guid: 6592c3cdbeb9ec14da91ec061980670f, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 89830822
+      objectReference: {fileID: 0}
     - target: {fileID: 7431654060691848871, guid: 6592c3cdbeb9ec14da91ec061980670f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

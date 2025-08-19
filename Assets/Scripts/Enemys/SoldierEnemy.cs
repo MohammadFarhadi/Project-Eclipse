@@ -34,7 +34,8 @@ public class SoldierEnemy : NetworkBehaviour, InterfaceEnemies
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
-    
+    public int HealthPoint => Mathf.RoundToInt(currentHealth.Value);
+
     private bool movingRight = true;
     private bool isWaiting = false;
     private float waitTimer = 0f;

@@ -2096,7 +2096,7 @@ GameObject:
   - component: {fileID: -1721746544915073994}
   m_Layer: 0
   m_Name: Chunk5
-  m_TagString: Untagged
+  m_TagString: Chunk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2554,8 +2554,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 1946844934265383716}
   dialogueTreeScript: {fileID: 4369458877522168755}
-  player1: {fileID: 0}
-  player2: {fileID: 0}
 --- !u!1 &3193309584612620310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2846,6 +2844,7 @@ MonoBehaviour:
   - {fileID: 6620377718655308802}
   triggerTarget: {fileID: 0}
   dialoguePanel: {fileID: 1946844934265383716}
+  boxCollider: {fileID: 0}
 --- !u!1 &3780170077496533191
 GameObject:
   m_ObjectHideFlags: 0
@@ -14737,6 +14736,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7015442622228313431, guid: f53894d6cc1fed6468a656d8cbad0b60, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4219514053
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14798,6 +14801,10 @@ PrefabInstance:
     - target: {fileID: 6537467470324872415, guid: f53894d6cc1fed6468a656d8cbad0b60, type: 3}
       propertyPath: m_Name
       value: FlyingEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015442622228313431, guid: f53894d6cc1fed6468a656d8cbad0b60, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 49998677
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14861,6 +14868,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6756356703302578840, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 619368146
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14922,6 +14933,10 @@ PrefabInstance:
     - target: {fileID: 6537467470324872415, guid: f53894d6cc1fed6468a656d8cbad0b60, type: 3}
       propertyPath: m_Name
       value: FlyingEnemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015442622228313431, guid: f53894d6cc1fed6468a656d8cbad0b60, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2131530297
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15332,6 +15347,10 @@ PrefabInstance:
     - target: {fileID: 6310271677969641556, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756356703302578840, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 126333094
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15790,6 +15809,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sonin (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1458843432
+      objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.043956004
@@ -15855,6 +15878,10 @@ PrefabInstance:
     - target: {fileID: 2194788725447739816, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_Name
       value: MovingSpike (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4034246289917962459, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4223994840
       objectReference: {fileID: 0}
     - target: {fileID: 6707066146726391122, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15957,6 +15984,10 @@ PrefabInstance:
     - target: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_Name
       value: Sonin (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2209760408
       objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
@@ -16288,6 +16319,10 @@ PrefabInstance:
     - target: {fileID: 2194788725447739816, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_Name
       value: MovingSpike (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4034246289917962459, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 664637737
       objectReference: {fileID: 0}
     - target: {fileID: 6707066146726391122, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16642,6 +16677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEnemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7015442622228313431, guid: f53894d6cc1fed6468a656d8cbad0b60, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 484576661
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16699,6 +16738,10 @@ PrefabInstance:
     - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220772739852062780, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3093364973
       objectReference: {fileID: 0}
     - target: {fileID: 7560879265720457689, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
       propertyPath: m_Name
@@ -16859,6 +16902,10 @@ PrefabInstance:
     - target: {fileID: 6310271677969641556, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756356703302578840, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1896546426
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17135,6 +17182,10 @@ PrefabInstance:
     - target: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_Name
       value: Sonin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 34182079
       objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
@@ -17654,6 +17705,10 @@ PrefabInstance:
     - target: {fileID: 2194788725447739816, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_Name
       value: MovingSpike
+      objectReference: {fileID: 0}
+    - target: {fileID: 4034246289917962459, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3292147310
       objectReference: {fileID: 0}
     - target: {fileID: 6707066146726391122, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_LocalScale.x

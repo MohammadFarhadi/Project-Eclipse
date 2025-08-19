@@ -21,6 +21,8 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
+    public int HealthPoint => Mathf.RoundToInt(currentHealthPoints.Value);
+
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private NetworkAnimator networkAnimator;

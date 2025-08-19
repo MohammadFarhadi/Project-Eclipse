@@ -379,6 +379,7 @@ MonoBehaviour:
   fireRate: 1.5
   bulletSpeed: 60
   animator: {fileID: 2391082511744118761}
+  networkAnimator: {fileID: 0}
   healthBarDisplay: {fileID: 8705040711575572019}
   dropItems:
   - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}

@@ -23,6 +23,8 @@ public class DashingEnemy : NetworkBehaviour, InterfaceEnemies
         NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
+    public int HealthPoint => Mathf.RoundToInt(currentHealth.Value);
+
     
     [Header("References")]
     [SerializeField] private Animator animator;
