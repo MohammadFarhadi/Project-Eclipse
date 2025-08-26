@@ -88,7 +88,7 @@ public static class SaveSystem
             string path = SlotPath(slot);
 
             BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (FileStream stream = new FileStream(path, FileMode.Create))
             {
                 formatter.Serialize(stream, data);
             }
@@ -123,7 +123,7 @@ public static class SaveSystem
             }
 
             BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (FileStream stream = new FileStream(path, FileMode.Open))
             {
                 GameData data = formatter.Deserialize(stream) as GameData;
                 if (data == null)

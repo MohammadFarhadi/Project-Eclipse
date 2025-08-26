@@ -68,9 +68,9 @@ public class SaveSlotsUI : MonoBehaviour
 
     void StartNew(int slot)
     {
-        SaveSystem.BeginSessionInSlot(slot); // bind autosaves to this slot
+        SaveSystem.BeginSessionInSlot(slot); 
         if (!string.IsNullOrEmpty(newGameSceneName))
-            SceneManager.LoadScene(newGameSceneName);   // e.g. cutscene scene
+            SceneManager.LoadScene(newGameSceneName);   
         else
             Debug.LogError("[SaveSlotsUI] newGameSceneName not set.");
     }
