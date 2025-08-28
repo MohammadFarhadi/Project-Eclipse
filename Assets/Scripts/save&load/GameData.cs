@@ -100,6 +100,7 @@ public class GameData
                     Enemies.Add(new EnemyData {
                         name      = obj.name,
                         health    = hp,
+                        isAlive   = hp > 0f,                         // <— NEW
                         PositionX = t.position.x,
                         PositionY = t.position.y,
                         PositionZ = t.position.z
@@ -163,6 +164,14 @@ public class GameData
     }
 
     [Serializable] public class ChunkData { public string prefabName; public float PositionX, PositionY, PositionZ; }
-    [Serializable] public class EnemyData { public string name; public float health; public float PositionX, PositionY, PositionZ; }
+
+    [Serializable]
+    public class EnemyData
+    {
+        public string name; 
+        public float health; 
+        public bool   isAlive;                 // <— NEW
+        public float PositionX, PositionY, PositionZ;
+    }
     [Serializable] public class CollectibleData { public string name; public float PositionX, PositionY, PositionZ; }
 }

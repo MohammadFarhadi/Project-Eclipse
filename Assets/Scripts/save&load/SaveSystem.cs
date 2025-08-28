@@ -104,7 +104,7 @@ public static class SaveSystem
         }
     }
 
-    public static GameData LoadData(int slot)
+    public static GameData LoadData(int slot, MeleePlayerController player1, RangedPlayerController player2)
     {
         if (!IsValidSlot(slot))
         {
@@ -133,6 +133,21 @@ public static class SaveSystem
                 }
 
                 Debug.Log("[Save] Loaded slot " + slot + " from '" + path + "'");
+                
+                
+                player1.Current_Stamina.Value = data.Player1Stamina;
+                player1.HealthPoint.Value = data.Player1HealthPoint;
+                player1.current_health.Value = data.Player1Health;
+                player1.transform.position = new Vector3(data.Player1PosX, data.Player1PosY, data.Player1PosZ);
+                
+                
+                player2.Current_Stamina.Value = data.Player2Stamina;
+                player2.HealthPoint.Value = data.Player2HealthPoint;
+                player2.current_health.Value = data.Player2Health;
+                player2.transform.position = new Vector3(data.Player2PosX, data.Player2PosY, data.Player2PosZ);
+                
+                
+                
                 return data;
             }
         }
