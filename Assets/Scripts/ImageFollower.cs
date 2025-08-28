@@ -5,20 +5,43 @@ public class ImageFollower : MonoBehaviour
     [System.Serializable]
     public class Pair
     {
-        public GameObject targetObject;  // گیم‌ابجکت اصلی
         public GameObject imageObject;   // عکس مربوطه (می‌تونه همون Image UI یا هر آبجکت تصویری باشه)
     }
+
+    public GameObject Player1;
+    public GameObject Player2;
 
     public Pair[] pairs;
 
     void Update()
     {
-        foreach (var pair in pairs)
+        if (Player1 == null)
         {
-            if (pair.targetObject != null && pair.imageObject != null)
+            Player1 = GameObject.Find("RangedPlayer(Clone)");
+            if (Player1 == null)
             {
-                pair.imageObject.SetActive(pair.targetObject.activeSelf);
+                Player1 = GameObject.Find("Ranged1Player(Clone)");
+                pairs[1].imageObject.SetActive(true);
+            }
+            else
+            {
+                pairs[0].imageObject.SetActive(true);
             }
         }
+        if (Player2 == null)
+        {
+            Player2 = GameObject.Find("Melle1Player(Clone)");
+            if (Player2 == null)
+            {
+                Player2 = GameObject.Find("Melle2Player(Clone)");
+                pairs[3].imageObject.SetActive(true);
+            }
+            else
+            {
+                pairs[2].imageObject.SetActive(true);
+            }
+        }
+        
+       
     }
 }

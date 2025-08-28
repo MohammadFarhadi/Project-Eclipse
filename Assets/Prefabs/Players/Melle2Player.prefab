@@ -89,7 +89,7 @@ Transform:
   m_GameObject: {fileID: 4590296507094949924}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.081017315, y: 3.4490223, z: -10}
+  m_LocalPosition: {x: 0, y: 2.2500002, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -153,7 +153,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0.0072915554, y: 0.27592176}
+    ScreenPosition: {x: 0, y: 0.18}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 4732776952302863623}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.081017315, y: 3.4490223, z: -10}
+  m_LocalPosition: {x: 0, y: 2.2500002, z: -10}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -563,6 +563,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  CharacterID:
+    m_InternalValue: 0
   jumpClip: {fileID: 8300000, guid: 30bba22ac4c38594e98b416fc800cddf, type: 3}
   deathClip: {fileID: 8300000, guid: edfc91887d2bcb046841b4aaf8a3ffbb, type: 3}
   oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}

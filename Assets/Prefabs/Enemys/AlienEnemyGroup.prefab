@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7673402384696915115}
   - component: {fileID: 5616132910403171472}
   - component: {fileID: 761826383913952756}
-  - component: {fileID: 5528267733561523051}
   - component: {fileID: 8042448440881066735}
+  - component: {fileID: 5528267733561523051}
   - component: {fileID: 8681318851813027856}
+  - component: {fileID: 8653471789984154548}
   m_Layer: 6
   m_Name: AlienEnemy
   m_TagString: Enemy
@@ -160,35 +161,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.125, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5528267733561523051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465091354337534712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c65a46b9942761e42a2faff4f7182f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
-  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
-  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
-  dropItems:
-  - {fileID: 3330495594356245476, guid: 8b9af8c2c1a99d44dafdd3e99422150f, type: 3}
-  - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
-  Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
-  moveSpeed: 1.5
-  detectionRange: 7
-  attackCooldown: 1
-  animator: {fileID: 5616132910403171472}
-  networkAnimator: {fileID: 0}
-  health:
-    m_InternalValue: 3
-  pointA: {fileID: 901735789018579890}
-  pointB: {fileID: 7640352960330781830}
 --- !u!114 &8042448440881066735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +186,35 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &5528267733561523051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465091354337534712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65a46b9942761e42a2faff4f7182f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
+  deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
+  oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
+  dropItems:
+  - {fileID: 3330495594356245476, guid: 8b9af8c2c1a99d44dafdd3e99422150f, type: 3}
+  - {fileID: 3846919016940002013, guid: a5bc5d05e60146d44b9a52f287cf59b8, type: 3}
+  Sonin: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+  moveSpeed: 1.5
+  detectionRange: 7
+  attackCooldown: 1
+  animator: {fileID: 5616132910403171472}
+  networkAnimator: {fileID: 8653471789984154548}
+  health:
+    m_InternalValue: 3
+  pointA: {fileID: 901735789018579890}
+  pointB: {fileID: 7640352960330781830}
 --- !u!50 &8681318851813027856
 Rigidbody2D:
   serializedVersion: 5
@@ -241,6 +242,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8653471789984154548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465091354337534712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 5616132910403171472}
 --- !u!1 &5944238714561638708
 GameObject:
   m_ObjectHideFlags: 0
