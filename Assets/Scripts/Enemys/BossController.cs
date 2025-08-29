@@ -2,26 +2,37 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Enemys;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using Random = UnityEngine.Random;
 
 public class BossController : NetworkBehaviour, InterfaceEnemies
 {
+    // ===================== NEW: Simple State Machine =====================
+    public enum BossState { Chasing, Attacking }
+
+    [Header("Targeting & Movement Logic")]
+    [SerializeField] private float stopDistance = 5f;            // فاصله توقف برای حمله
+    [SerializeField] private float attackPhaseDuration = 15f;     // مدت فاز حمله به یک تارگت
+    private BossState state = BossState.Chasing;
+    private float attackPhaseEndTime = 0f;
+    // ====================================================================
+
     [Header("Sounds")]
     public AudioClip attackClip;
     public AudioClip deathClip;
     public GameObject oneShotAudioPrefab;
+
     [Header("Health")]
     public int maxHealth = 30;
     private NetworkVariable<float> currentHealth = new NetworkVariable<float>(30, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public int HealthPoint => Mathf.RoundToInt(currentHealth.Value);
 
-    
     [Header("Attack Settings")]
     public float attackRange = 1f;
     public float attackCooldown = 2f;
-    public float switchTargetTime = 5f;
+    public float switchTargetTime = 5f; // (دیگر استفاده‌ای ندارد ولی حفظ شده)
     public string normalBulletTag = "BossBullet";
     public string strongBulletTag = "BossStrongBullet";
     public Transform firePoint;
@@ -40,16 +51,20 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
     private float lastAttackTime = 0f;
     private int attackCount = 0;
+    private int attackCount1 = 0;
     private int currentTargetIndex = 0;
-    private float targetSwitchTimer = 0f;
+    private float targetSwitchTimer = 0f; // (دیگر استفاده‌ای ندارد ولی حفظ شده)
     private bool isCharging = false;
     private bool isInCooldown = false;
     private BulletPool bulletPool;
     [SerializeField] private BulletPoolNGO bulletPoolNGO;
-    [SerializeField] private bool  Is_First = true ;
+    [SerializeField] private bool Is_First = true;
+
     Transform currentTarget;
+[SerializeField] private EnemyUI enemysUI;
     void Start()
     {
+        RefreshUI();
         if (GameModeManager.Instance.CurrentMode == GameMode.Online)
         {
             if (IsServer)
@@ -61,9 +76,19 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         {
             currentHealth.Value = maxHealth;
         }
+
         animator = GetComponent<Animator>();
+
+        // هدف اولیه: رندوم
+        currentTargetIndex = Random.Range(0, 2);
+        if (players != null && players.Length >= 2)
+        {
+            if (currentTargetIndex < players.Length)
+                currentTarget = players[currentTargetIndex];
+        }
+
+        state = BossState.Chasing;
     }
-    
 
     private void Awake()
     {
@@ -87,52 +112,130 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         }
     }
 
-    void Update()
+    // ===================== NEW/UPDATED: Helpers =====================
+    private void EnsurePlayersCached()
     {
+        if (players == null || players.Length < 2)
+            players = new Transform[2];
+
         if (players[0] == null || players[1] == null)
         {
             GameObject[] foundPlayers = GameObject.FindGameObjectsWithTag("Player");
-
             foreach (GameObject obj in foundPlayers)
             {
                 if (players[0] == null && obj.name.Contains("Ranged"))
-                {
                     players[0] = obj.transform;
-                }
-                else if (players[1] == null && obj.name.Contains("Melle"))
-                {
+                else if (players[1] == null && (obj.name.Contains("Melle") || obj.name.Contains("Melee")))
                     players[1] = obj.transform;
-                }
             }
-            currentTarget = players[currentTargetIndex];
+        }
+    }
+
+    private void SwitchToOtherTarget()
+    {
+        if (players == null || players.Length < 2) return;
+
+        EnsurePlayersCached();
+        if (players[0] == null && players[1] == null) return;
+
+        // تناوبی بین 0 و 1
+        currentTargetIndex = (currentTargetIndex == 0) ? 1 : 0;
+
+        // اگر تارگت جدید تهی بود و قبلی موجود، روی قبلی بمان
+        if (players[currentTargetIndex] == null)
+            currentTargetIndex = (currentTargetIndex == 0) ? 1 : 0;
+
+        currentTarget = players[currentTargetIndex];
+        targetSwitchTimer = 0f;
+    }
+
+    private void FaceTarget(Transform target)
+    {
+        if (target == null) return;
+        Vector3 scale = transform.localScale;
+        scale.x = (target.position.x < transform.position.x) ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+        transform.localScale = scale;
+    }
+    // ================================================================
+
+    // ===================== UPDATED: Update() =====================
+    void Update()
+    {
+        // در حالت آنلاین، منطق حرکت/تارگت فقط روی سرور اجرا شود تا دسی‌سینک نشود
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online && !IsServer)
+            return;
+
+        EnsurePlayersCached();
+
+        if (currentTarget == null)
+        {
+            if (players[0] != null && players[1] != null)
+            {
+                currentTargetIndex = Random.Range(0, 2);
+                currentTarget = players[currentTargetIndex];
+            }
+            else
+            {
+                PlayAnimation("Idle");
+                return;
+            }
         }
 
-        
         float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
 
-        // اگر فاصله بیشتر از 10 بود، هیچ کاری نکن
-        if (distanceToTarget > 10f)
+        // ✅ شرط جدید: اگر فاصله بیشتر از 15 باشه، هیچ کاری نکن
+        if (distanceToTarget > 15f)
         {
             PlayAnimation("Idle");
             return;
         }
 
-        if (!IsTargetInRange(currentTarget))
+        switch (state)
         {
-            MoveTowards(currentTarget);
-            PlayAnimation("Move");
-            return;
-        }
+            case BossState.Chasing:
+                if (distanceToTarget > stopDistance)
+                {
+                    MoveTowards(currentTarget);
+                    PlayAnimation("Move");
+                }
+                else
+                {
+                    // ورود به فاز حمله
+                    PlayAnimation("Idle");
+                    FaceTarget(currentTarget);
+                    state = BossState.Attacking;
+                    attackCount = 0; // ✅ شروع فاز حمله با صفر کردن شمارنده
+                }
+                break;
 
-        if (!isInCooldown)
-        {
-            HandleTargetSwitching();
-            if (Time.time - lastAttackTime > attackCooldown)
-            {
-                StartCoroutine(Attack(currentTarget));
-            }
+            case BossState.Attacking:
+                if (distanceToTarget > stopDistance)
+                {
+                    state = BossState.Chasing;
+                    PlayAnimation("Move");
+                    break;
+                }
+
+                FaceTarget(currentTarget);
+                PlayAnimation("Idle");
+
+                if (!isInCooldown && (Time.time - lastAttackTime) > attackCooldown)
+                {
+                    StartCoroutine(Attack(currentTarget));
+                }
+
+                // ✅ شرط جدید: بعد از 5 حمله، سوییچ تارگت
+                if (attackCount1 >= 5)
+                {
+                    SwitchToOtherTarget();
+                    state = BossState.Chasing;
+                    attackCount1 = 0; 
+                }
+                break;
         }
     }
+
+    // ============================================================
 
     Transform GetCurrentTarget()
     {
@@ -146,18 +249,19 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
     void MoveTowards(Transform target)
     {
+        if (target == null) return;
+
         Vector3 scale = transform.localScale;
-        if (target.position.x < transform.position.x)
-            scale.x = -Mathf.Abs(scale.x); // به چپ نگاه کنه
-        else
-            scale.x = Mathf.Abs(scale.x);  // به راست نگاه کنه
+        scale.x = (target.position.x < transform.position.x) ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
         transform.localScale = scale;
+
         Vector2 dir = (target.position - transform.position).normalized;
         transform.position += (Vector3)dir * moveSpeed * Time.deltaTime;
     }
 
     void HandleTargetSwitching()
     {
+        // (حفظ شده اما دیگر استفاده نمی‌شود)
         if (IsTargetInRange(GetCurrentTarget()))
         {
             targetSwitchTimer += Time.deltaTime;
@@ -174,11 +278,11 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         }
     }
 
-
     bool AllPlayersInRange()
     {
         foreach (var p in players)
         {
+            if (p == null) return false;
             if (!IsTargetInRange(p)) return false;
         }
         return true;
@@ -186,18 +290,16 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
     IEnumerator Attack(Transform target)
     {
+        attackCount1++;
+        // رو به تارگت
         Vector3 scale = transform.localScale;
-        if (target.position.x < transform.position.x)
-            scale.x = -Mathf.Abs(scale.x); // به چپ نگاه کنه
-        else
-            scale.x = Mathf.Abs(scale.x); 
+        scale.x = (target.position.x < transform.position.x) ? -Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+
         GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
         attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
+
         if (GameModeManager.Instance.CurrentMode == GameMode.Local)
         {
-            // Flip جهت Boss بر اساس موقعیت Target
-       
-    
             isInCooldown = true; // شروع کول‌دان
             lastAttackTime = Time.time;
 
@@ -210,7 +312,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
             }
 
             PlayAnimation("Attack");
-            yield return new WaitForSeconds(0.5f); // صبر کن تا انیمیشن اجرا بشه
+            yield return new WaitForSeconds(0.5f); // صبر تا اجرای انیمیشن
 
             GameObject bullet = bulletPool.GetBullet(isStrong ? strongBulletTag : normalBulletTag);
             bullet.transform.position = firePoint.position;
@@ -218,6 +320,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
             Vector2 direction = (target.position - firePoint.position).normalized;
             float bulletSpeed = 5f;
+
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
@@ -230,19 +333,17 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
             }
 
             attackCount++;
-            if (attackCount >= 4)
+            if (attackCount >= 2)
             {
                 SpawnRandomEnemy();
                 currentTargetIndex = (currentTargetIndex + 1) % players.Length;
                 attackCount = 0;
             }
 
-            yield return new WaitForSeconds(1f); // صبر برای Idle
+            yield return new WaitForSeconds(1f);
             PlayAnimation("Idle");
 
-            // 🕒 اینجا زمان کول‌دان واقعی رو اضافه کن
-            yield return new WaitForSeconds(attackCooldown); 
-
+            yield return new WaitForSeconds(attackCooldown);
             isInCooldown = false;
         }
         else
@@ -254,10 +355,10 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         }
     }
 
-
     void SpawnRandomEnemy()
     {
         if (GameModeManager.Instance.CurrentMode == GameMode.Online && !IsServer) return;
+        if (enemyPrefabs == null || spawnPoints == null) return;
         if (enemyPrefabs.Length == 0 || spawnPoints.Length == 0) return;
 
         GameObject enemyToSpawn = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
@@ -270,7 +371,6 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
             {
                 netObj.Spawn();
             }
-
         }
     }
 
@@ -284,39 +384,37 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
                 if (GameModeManager.Instance.CurrentMode == GameMode.Local)
                 {
                     animator.SetBool("Run", true);
-
                 }
                 else
                 {
-                    UpdateAnimatorBoolParameterServerRpc("Run" , true);
+                    UpdateAnimatorBoolParameterServerRpc("Run", true);
                 }
                 break;
+
             case "Idle":
                 if (GameModeManager.Instance.CurrentMode == GameMode.Local)
                 {
                     animator.SetBool("Run", false);
-
                 }
                 else
                 {
-                    UpdateAnimatorBoolParameterServerRpc("Run" , false);
+                    UpdateAnimatorBoolParameterServerRpc("Run", false);
                 }
                 break;
+
             default:
                 if (GameModeManager.Instance.CurrentMode == GameMode.Local)
                 {
                     animator.SetBool("Run", false);
-
                 }
                 else
                 {
-                    UpdateAnimatorBoolParameterServerRpc("Run" , false);
-                } // مطمئن شو موقع حمله حرکت نکنه
+                    UpdateAnimatorBoolParameterServerRpc("Run", false);
+                }
 
                 if (GameModeManager.Instance.CurrentMode == GameMode.Local)
                 {
                     animator.SetTrigger(animName);
-
                 }
                 else
                 {
@@ -326,47 +424,51 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         }
     }
 
-
-    public void TakeDamage(int damage, Transform attacker)
-    {
-        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        public void TakeDamage(int damage, Transform attacker)
         {
-            if (IsServer)
-            {
-                currentHealth.Value -= damage;
-            }
-            else
-            {
-                ApplyDamageServerRpc(damage * 5);
-            }
-        }
-        else
-        {
-            currentHealth.Value -= damage;
-        }
-        
-        if (currentHealth.Value <= 0)
-        {
-            GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
-            deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
-            PlayAnimation("Death");
             if (GameModeManager.Instance.CurrentMode == GameMode.Online)
             {
                 if (IsServer)
                 {
-                    UpdateAnimatorTriggerParameterServerRpc( "Death");
-                    DestroyObjectClientRpc();
-                    Destroy(gameObject , 1f );
+                    currentHealth.Value -= damage;
                 }
-            
+                else
+                {
+                    // (در کد اصلی ضربدر 5 بود؛ همان را حفظ می‌کنیم)
+                    ApplyDamageServerRpc(damage);
+                }
             }
             else
             {
-                animator.SetTrigger("Death");
-                Destroy(gameObject , 1f );
-            } // بعد از انیمیشن بمیره
+                currentHealth.Value -= damage;
+            }
+
+            RefreshUI();
+            
+
+            if (currentHealth.Value <= 0)
+            {
+                GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+                deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
+                PlayAnimation("Death");
+
+                if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+                {
+                    if (IsServer)
+                    {
+                        UpdateAnimatorTriggerParameterServerRpc("Death");
+                        DestroyObjectClientRpc();
+                        Destroy(gameObject, 1f);
+                    }
+                }
+                else
+                {
+                    animator.SetTrigger("Death");
+                    Destroy(gameObject, 1f);
+                }
+            }
         }
-    }
+
     Transform GetNearestPlayer()
     {
         Transform nearest = null;
@@ -374,6 +476,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
         foreach (Transform player in players)
         {
+            if (player == null) continue;
             float distance = Vector2.Distance(transform.position, player.position);
             if (distance < minDistance)
             {
@@ -385,11 +488,11 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         return nearest;
     }
 
-    
+    // ======================= Server/Client RPCs =======================
     [ServerRpc(RequireOwnership = false)]
     public void AttackServerRpc()
     {
-        Transform target = GetNearestPlayer(); // یا از GetCurrentTarget() استفاده کن
+        Transform target = GetNearestPlayer(); // یا GetCurrentTarget()
         if (target == null || isInCooldown) return;
 
         isInCooldown = true;
@@ -400,7 +503,6 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         if (isStrong)
         {
             PlayAnimation("Charge");
-            // زمان شارژ در حالت سرور باید با تاخیر همگام بشه، ولی فعلاً فرض کنیم روی سرور کافیه
             StartCoroutine(DelayedAttack(target, 1f, isStrong));
         }
         else
@@ -414,8 +516,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         yield return new WaitForSeconds(delay);
 
         PlayAnimation("Attack");
-
-        yield return new WaitForSeconds(0.5f); // صبر کن تا انیمیشن اجرا بشه
+        yield return new WaitForSeconds(0.5f);
 
         GameObject bullet = bulletPoolNGO.GetBullet(isStrong ? strongBulletTag : normalBulletTag);
         bullet.transform.position = firePoint.position;
@@ -423,6 +524,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
         Vector2 direction = (target.position - firePoint.position).normalized;
         float bulletSpeed = 5f;
+
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
@@ -441,6 +543,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
             currentTargetIndex = (currentTargetIndex + 1) % players.Length;
             attackCount = 0;
         }
+
         NetworkObject netObj = bullet.GetComponent<NetworkObject>();
 
         // اطلاع به کلاینت‌ها
@@ -452,7 +555,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
             this.GetComponent<NetworkObject>().NetworkObjectId
         );
 
-        yield return new WaitForSeconds(1f); // صبر برای Idle
+        yield return new WaitForSeconds(1f);
         PlayAnimation("Idle");
 
         yield return new WaitForSeconds(attackCooldown);
@@ -463,30 +566,32 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
     void ApplyDamageServerRpc(int damageAmount)
     {
         currentHealth.Value -= damageAmount;
-        
     }
+
     [ServerRpc(RequireOwnership = false)]
-    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    protected void UpdateAnimatorBoolParameterServerRpc(string parameterName, bool value)
     {
         networkAnimator.Animator.SetBool(parameterName, value);
     }
-    [ServerRpc(RequireOwnership = false)]
 
-    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorFloatParameterServerRpc(string parameterName, float value)
     {
         networkAnimator.Animator.SetFloat(parameterName, value);
     }
-    [ServerRpc(RequireOwnership = false)]
 
+    [ServerRpc(RequireOwnership = false)]
     protected void UpdateAnimatorTriggerParameterServerRpc(string parameterName)
     {
         networkAnimator.Animator.SetTrigger(parameterName);
     }
+
     [ClientRpc]
     private void DestroyObjectClientRpc()
     {
-        Destroy(gameObject , 1f );
+        Destroy(gameObject, 1f);
     }
+
     [ClientRpc]
     void InitShootBulletClientRpc(ulong bulletNetId, Vector3 spawnPosition, Vector2 dir, float bulletSpeed, ulong attackerNetId)
     {
@@ -502,6 +607,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
                 Vector3 scale = spawnedBullet.transform.localScale;
                 spawnedBullet.transform.localScale = scale;
             }
+
             Transform attacker = null;
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(attackerNetId, out NetworkObject attackerObj))
             {
@@ -516,4 +622,24 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         }
     }
 
+    public void RefreshUI()
+    {
+        enemysUI?.SetHealthBar(currentHealth.Value, maxHealth);
+    }
+    public override void OnNetworkSpawn()
+    {
+        // به تغییرات مقدار health گوش می‌کنیم
+        currentHealth.OnValueChanged += OnHealthChanged;
+
+        // وقتی کلاینت جدید join میشه، باید ui درست باشه
+        RefreshUI();
+    }
+
+    private void OnHealthChanged(float previousValue, float newValue)
+    {
+        if (enemysUI != null)
+        {
+            enemysUI.SetHealthBar(newValue, maxHealth);
+        }
+    }
 }
