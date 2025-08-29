@@ -569,7 +569,7 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: edfc91887d2bcb046841b4aaf8a3ffbb, type: 3}
   oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   moveSpeed: 2
-  jumpForce: 8
+  jumpForce: 6
   rb: {fileID: 0}
   animator: {fileID: 0}
   HasKey: 0
