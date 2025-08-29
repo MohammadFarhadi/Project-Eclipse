@@ -68,9 +68,9 @@ public class SaveSlotsUI : MonoBehaviour
 
     void StartNew(int slot)
     {
-        SaveSystem.BeginSessionInSlot(slot); // bind autosaves to this slot
+        SaveSystem.BeginSessionInSlot(slot); 
         if (!string.IsNullOrEmpty(newGameSceneName))
-            SceneManager.LoadScene(newGameSceneName);   // e.g. cutscene scene
+            SceneManager.LoadScene(newGameSceneName);   
         else
             Debug.LogError("[SaveSlotsUI] newGameSceneName not set.");
     }
@@ -78,16 +78,10 @@ public class SaveSlotsUI : MonoBehaviour
     void LoadSlot(int slot)
     {
         SaveSystem.BeginSessionInSlot(slot);
+        SaveSystem.StartRestore(slot); // NOT StartCoroutine
 
-        var data = SaveSystem.LoadData(slot);
-        if (data == null)
-        {
-            Debug.LogError("[SaveSlotsUI] Load failed for slot " + slot);
-            return;
-        }
-
-        // load saved scene
-        SceneManager.LoadScene(data.CurrentSceneName);
-        // after loading, your restore system should apply GameData
+        SaveSystem.BeginSessionInSlot(slot);
     }
+
+    
 }

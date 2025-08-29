@@ -9,7 +9,12 @@ public class GameData
     // Scene
     public string CurrentSceneName;
 
+    //saving which prefab player choose
+    public int MeleeCharacterID;
+    public int RangedCharacterID;
+    
     // Players
+    
     public float Player1Stamina;
     public int   Player1HealthPoint;
     public float Player1Health;
@@ -27,142 +32,121 @@ public class GameData
 
     public GameData(MeleePlayerController player1, RangedPlayerController player2)
     {
-        try
-        {
+
             // ---- Players ----
             if (player1 == null) { Debug.LogError("[Save] player1 (melee) is NULL"); return; }
             if (player2 == null) { Debug.LogError("[Save] player2 (ranged) is NULL"); return; }
+            var p1Base = player1.GetComponent<PlayerControllerBase>();
+            var p2Base = player2.GetComponent<PlayerControllerBase>();
+
+            MeleeCharacterID  = p1Base ? p1Base.CharacterID.Value : 0; // your melee indices
+            RangedCharacterID = p2Base ? p2Base.CharacterID.Value : 2; // your ranged indices
 
             CurrentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            
+            
 
-            try {
+            // which prefabs to respawn later (keep names simple + stable)
+
+            
                 Player1Stamina     = player1.Current_Stamina.Value;
                 Player1HealthPoint = player1.HealthPoint.Value;
                 Player1Health      = player1.current_health.Value;
                 Player1PosX        = player1.transform.position.x;
                 Player1PosY        = player1.transform.position.y;
                 Player1PosZ        = player1.transform.position.z;
-            } catch (Exception ex) {
-                Debug.LogError($"[Save] Failed reading player1: {ex}");
-            }
 
-            try {
+
                 Player2Stamina     = player2.Current_Stamina.Value;
                 Player2HealthPoint = player2.HealthPoint.Value;
                 Player2Health      = player2.current_health.Value;
                 Player2PosX        = player2.transform.position.x;
                 Player2PosY        = player2.transform.position.y;
                 Player2PosZ        = player2.transform.position.z;
-            } catch (Exception ex) {
-                Debug.LogError($"[Save] Failed reading player2: {ex}");
-            }
+
 
             // ---- Chunks ----
-            SafeForEach("Chunk", obj =>
+            GameObject[] chunks = GameObject.FindGameObjectsWithTag("Chunk");
+            foreach (var obj in chunks)
             {
-                try
-                {
-                    if (obj == null) throw new NullReferenceException("chunk obj is null");
-                    var t = obj.transform;
-                    Chunks.Add(new ChunkData {
-                        prefabName = obj.name,
-                        PositionX  = t.position.x,
-                        PositionY  = t.position.y,
-                        PositionZ  = t.position.z
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"[Save] Chunk '{obj?.name ?? "NULL"}' failed: {ex}");
-                }
-            });
+                if (obj == null) continue;
 
-            // ---- Enemies ----
-            SafeForEach("Enemy", obj =>
-            {
-                try
-                {
-                    if (obj == null) throw new NullReferenceException("enemy obj is null");
-
-                    // interface might be on self/parent/children
-                    var iEnemy = obj.GetComponent<InterfaceEnemies>()
-                                ?? obj.GetComponentInParent<InterfaceEnemies>()
-                                ?? obj.GetComponentInChildren<InterfaceEnemies>();
-
-                    if (iEnemy == null)
-                        throw new MissingComponentException($"InterfaceEnemies not found on '{obj.name}' (self/parent/children)");
-
-                    float hp;
-                    try { hp = iEnemy.HealthPoint; }
-                    catch (Exception ex) { throw new Exception($"HealthPoint getter threw: {ex.Message}", ex); }
-
-                    var t = obj.transform;
-                    Enemies.Add(new EnemyData {
-                        name      = obj.name,
-                        health    = hp,
-                        PositionX = t.position.x,
-                        PositionY = t.position.y,
-                        PositionZ = t.position.z
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"[Save] Enemy '{obj?.name ?? "NULL"}' failed: {ex}");
-                }
-            });
-
-            // ---- SaveAble / Collectibles ----
-            SafeForEach("SaveAble", obj =>
-            {
-                try
-                {
-                    if (obj == null) throw new NullReferenceException("saveable obj is null");
-                    var t = obj.transform;
-                    Collectibles.Add(new CollectibleData {
-                        name      = obj.name,
-                        PositionX = t.position.x,
-                        PositionY = t.position.y,
-                        PositionZ = t.position.z
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"[Save] SaveAble '{obj?.name ?? "NULL"}' failed: {ex}");
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"[Save] Fatal error building GameData: {ex}");
-        }
-    }
-
-    // Helper: runs the action on each object with the tag and logs only on error.
-    private static void SafeForEach(string tag, Action<GameObject> action)
-    {
-        GameObject[] objs;
-        try
-        {
-            objs = GameObject.FindGameObjectsWithTag(tag);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"[Save] FindGameObjectsWithTag('{tag}') failed: {ex}");
-            return;
-        }
-
-        for (int i = 0; i < objs.Length; i++)
-        {
-            var obj = objs[i];
-            try { action(obj); }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[Save] '{tag}' index {i} object '{obj?.name ?? "NULL"}' failed: {ex}");
+                var t = obj.transform;
+                Chunks.Add(new ChunkData {
+                    prefabName = obj.name,
+                    PositionX  = t.position.x,
+                    PositionY  = t.position.y,
+                    PositionZ  = t.position.z
+                });
             }
+
+// ---- Enemies (ساده) ----
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var obj in enemies)
+            {
+                if (obj == null) continue;
+
+                // اگر InterfaceEnemies روی خود آبجکت نبود، در بچه‌ها/والد هم چک کن
+                var iEnemy = obj.GetComponent<InterfaceEnemies>()
+                             ?? obj.GetComponentInChildren<InterfaceEnemies>()
+                             ?? obj.GetComponentInParent<InterfaceEnemies>();
+
+                float hp      = (iEnemy != null) ? iEnemy.HealthPoint : 0f;
+                bool  isAlive = (iEnemy != null) ? (iEnemy.HealthPoint > 0f) : obj.activeInHierarchy;
+
+                var t = obj.transform;
+                Enemies.Add(new EnemyData
+                {
+                    name      = obj.name,
+                    health    = hp,
+                    isAlive   = isAlive,    // اگر فیلد isAlive داری، ذخیره کن
+                    PositionX = t.position.x,
+                    PositionY = t.position.y,
+                    PositionZ = t.position.z
+                });
+            }
+
+
+// ---- SaveAble / Collectibles (ساده) ----
+            var saveables = GameObject.FindGameObjectsWithTag("SaveAble");
+            foreach (var obj in saveables)
+            {
+                if (obj == null) continue;
+
+                var t = obj.transform;
+                Collectibles.Add(new CollectibleData
+                {
+                    name      = obj.name,
+                    PositionX = t.position.x,
+                    PositionY = t.position.y,
+                    PositionZ = t.position.z
+                });
+            }
+
         }
+
+
+
+    [Serializable]
+    public class ChunkData
+    {
+        public string prefabName; 
+        public float PositionX, PositionY, PositionZ;
     }
 
-    [Serializable] public class ChunkData { public string prefabName; public float PositionX, PositionY, PositionZ; }
-    [Serializable] public class EnemyData { public string name; public float health; public float PositionX, PositionY, PositionZ; }
-    [Serializable] public class CollectibleData { public string name; public float PositionX, PositionY, PositionZ; }
+    [Serializable]
+    public class EnemyData
+    {
+        public string name; 
+        public float health; 
+        public bool   isAlive;                 // <— NEW
+        public float PositionX, PositionY, PositionZ;
+    }
+    [Serializable] public class CollectibleData
+    { 
+        public string name;
+        // public bool isAlive;
+        public float PositionX, PositionY, PositionZ;
+        
+    }
 }
