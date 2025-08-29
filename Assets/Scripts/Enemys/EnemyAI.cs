@@ -227,4 +227,16 @@ public class EnemyAI : NetworkBehaviour, InterfaceEnemies
     {
         Destroy(gameObject , 1f );
     }
+    public void SetHealth(int hp)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer) currentHealth.Value = hp;
+            else ApplyDamageServerRpc(Mathf.RoundToInt(currentHealth.Value - hp)); // or a dedicated SetHealthServerRpc
+        }
+        else
+        {
+            currentHealth.Value = hp;
+        } 
+    }
 }
