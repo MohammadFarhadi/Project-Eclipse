@@ -476,8 +476,8 @@ MonoBehaviour:
   isGrounded: 1
   attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
   firePoint: {fileID: 3530045269076448240}
-  projectileSpeed: 10
-  bulletTag: PlayerBullet
+  projectileSpeed: 5
+  bulletTag: PlayerBullet1
   SpriniingCost: 5
 --- !u!114 &2994278996587863618
 MonoBehaviour:

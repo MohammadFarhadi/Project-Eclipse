@@ -1548,6 +1548,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7402330749591593193, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: c8361a080cb7f5644bb49dd8d6a39dd8, type: 3}
+    - target: {fileID: 7402330749591593193, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c8361a080cb7f5644bb49dd8d6a39dd8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1757,7 +1765,7 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.01132071, g: 0.010914873, b: 0.010914873, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
