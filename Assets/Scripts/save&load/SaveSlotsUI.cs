@@ -78,16 +78,10 @@ public class SaveSlotsUI : MonoBehaviour
     void LoadSlot(int slot)
     {
         SaveSystem.BeginSessionInSlot(slot);
+        SaveSystem.StartRestore(slot); // NOT StartCoroutine
 
-        var data = SaveSystem.LoadData(slot);
-        if (data == null)
-        {
-            Debug.LogError("[SaveSlotsUI] Load failed for slot " + slot);
-            return;
-        }
-
-        // load saved scene
-        SceneManager.LoadScene(data.CurrentSceneName);
-        // after loading, your restore system should apply GameData
+        SaveSystem.BeginSessionInSlot(slot);
     }
+
+    
 }

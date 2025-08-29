@@ -393,5 +393,21 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
     {
         networkAnimator.Animator.SetTrigger(parameterName);
     }
+    public void SetHealth(int hp)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer) health.Value = hp;
+            else ApplyDamageServerRpc(health.Value - hp); // or a dedicated SetHealthServerRpc
+        }
+        else
+        {
+            health.Value = hp;
+        } 
+        if (healthBarDisplay != null)
+        {
+            healthBarDisplay.UpdateHealthBar(health.Value);
+        }
+    }
 
 }

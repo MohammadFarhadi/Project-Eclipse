@@ -230,6 +230,18 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         networkAnimator.Animator.SetTrigger(parameterName);
     }
     
+    public void SetHealth(int hp)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer) currentHealthPoints.Value = hp;
+            else ApplyDamageServerRpc(currentHealthPoints.Value - hp); // or a dedicated SetHealthServerRpc
+        }
+        else
+        {
+            currentHealthPoints.Value = hp;
+        } 
+    }
 
     
 }

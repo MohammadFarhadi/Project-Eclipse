@@ -1,30 +1,27 @@
-using UnityEngine;
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class SaveSystem
 {
-    private const string ActiveSlot = "ActiveSlot"; // PlayerPrefs key
-    
-    private static string Dir
-    {
-        get
-        {
-            return Application.persistentDataPath;
-        }
-    }
+    public static bool IsRestoring { get; private set; }
 
-    private static string SlotPath(int slot)
-    {
-        return Path.Combine(Dir, "Save_" + slot + ".nig");
-    }
+    private const string ActiveSlot = "ActiveSlot";
 
-    private static string MetaPath(int slot)
-    {
-        return Path.Combine(Dir, "Save_" + slot + ".meta.json");
-    }
+    // Saved selection to reuse during restore/spawn
+    public static int RestoreMeleeID  = -1;
+    public static int RestoreRangedID = -1;
 
+    private static GameData _pendingData;   // data read before scene load
+
+    // Paths
+    private static string Dir => Application.persistentDataPath;
+    private static string SlotPath(int slot) => Path.Combine(Dir, $"Save_{slot}.nig");
+    private static string MetaPath(int slot) => Path.Combine(Dir, $"Save_{slot}.meta.json");
+
+    // --- Session / basic helpers ---
     public static void BeginSessionInSlot(int slot)
     {
         if (slot == -1)
@@ -46,54 +43,27 @@ public static class SaveSystem
         Debug.Log("[Save] Active slot set: " + slot);
     }
 
-    public static int GetActiveSlot()
-    {
-        return PlayerPrefs.GetInt(ActiveSlot, -1);
-    }
+    public static int GetActiveSlot() => PlayerPrefs.GetInt(ActiveSlot, -1);
+    public static bool Exists(int slot) => File.Exists(SlotPath(slot));
 
-    public static bool Exists(int slot)
-    {
-        return File.Exists(SlotPath(slot));
-    }
-
-    public static (int slot, bool exists, SaveSlotMeta meta)[] ListSlots()
-    {
-        var res = new (int, bool, SaveSlotMeta)[5];
-        for (int s = 1; s <= 5; s++)
-        {
-            res[s - 1] = (s, Exists(s), TryReadMeta(s));
-        }
-        return res;
-    }
-
+    // --- Save ---
     public static void SaveData(int slot, MeleePlayerController melee, RangedPlayerController ranged)
     {
-        if (!IsValidSlot(slot))
-        {
-            Debug.LogError("[Save] Invalid slot " + slot);
-            return;
-        }
-
-        if (melee == null || ranged == null)
-        {
-            Debug.LogError("[Save] SaveData aborted: player ref null");
-            return;
-        }
+        if (!IsValidSlot(slot)) { Debug.LogError("[Save] Invalid slot " + slot); return; }
+        if (melee == null || ranged == null) { Debug.LogError("[Save] SaveData aborted: player ref null"); return; }
 
         try
         {
             Directory.CreateDirectory(Dir);
 
-            GameData data = new GameData(melee, ranged);
-            string path = SlotPath(slot);
+            var data = new GameData(melee, ranged);
+            var path = SlotPath(slot);
 
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(path, FileMode.Create))
-            {
+            var formatter = new BinaryFormatter();
+            using (var stream = new FileStream(path, FileMode.Create))
                 formatter.Serialize(stream, data);
-            }
 
-            SaveSlotMeta meta = SaveSlotMeta.From(data, slot);
+            var meta = SaveSlotMeta.From(data, slot);
             File.WriteAllText(MetaPath(slot), JsonUtility.ToJson(meta, true));
 
             Debug.Log("[Save] Wrote slot " + slot + ": " + path);
@@ -104,67 +74,100 @@ public static class SaveSystem
         }
     }
 
-    public static GameData LoadData(int slot, MeleePlayerController player1, RangedPlayerController player2)
+    // --- Restore (event-driven; survives scene change) ---
+    public static void StartRestore(int slot)
     {
-        if (!IsValidSlot(slot))
-        {
-            Debug.LogError("[Save] Invalid slot " + slot);
-            return null;
-        }
+        Debug.Log("[Save] StartRestore for slot: " + slot);
+        IsRestoring = true;
+
+        if (!IsValidSlot(slot)) { Debug.LogError("[Save] Invalid slot " + slot); IsRestoring = false; return; }
 
         string path = SlotPath(slot);
+        if (!File.Exists(path)) { Debug.LogWarning("[Save] Slot not found at " + path); IsRestoring = false; return; }
 
         try
         {
-            if (!File.Exists(path))
-            {
-                Debug.LogWarning("[Save] Slot " + slot + " not found at '" + path + "'.");
-                return null;
-            }
-
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(path, FileMode.Open))
-            {
-                GameData data = formatter.Deserialize(stream) as GameData;
-                if (data == null)
-                {
-                    Debug.LogError("[Save] Deserialized GameData null (slot " + slot + ")");
-                    return null;
-                }
-
-                Debug.Log("[Save] Loaded slot " + slot + " from '" + path + "'");
-                
-                
-                player1.Current_Stamina.Value = data.Player1Stamina;
-                player1.HealthPoint.Value = data.Player1HealthPoint;
-                player1.current_health.Value = data.Player1Health;
-                player1.transform.position = new Vector3(data.Player1PosX, data.Player1PosY, data.Player1PosZ);
-                
-                
-                player2.Current_Stamina.Value = data.Player2Stamina;
-                player2.HealthPoint.Value = data.Player2HealthPoint;
-                player2.current_health.Value = data.Player2Health;
-                player2.transform.position = new Vector3(data.Player2PosX, data.Player2PosY, data.Player2PosZ);
-                
-                
-                
-                return data;
-            }
+            var formatter = new BinaryFormatter();
+            using (var stream = new FileStream(path, FileMode.Open))
+                _pendingData = formatter.Deserialize(stream) as GameData;
         }
         catch (Exception ex)
         {
-            Debug.LogError("[Save] Failed to load slot " + slot + ": " + ex);
-            return null;
-        }
-    }
-
-    public static void DeleteSlot(int slot)
-    {
-        if (!IsValidSlot(slot))
-        {
-            Debug.LogError("[Save] Invalid slot " + slot);
+            Debug.LogError("[Save] Deserialize failed: " + ex);
+            IsRestoring = false;
             return;
         }
+
+        if (_pendingData == null) { Debug.LogError("[Save] Deserialized GameData is null."); IsRestoring = false; return; }
+
+        // Remember which characters to spawn
+        RestoreMeleeID  = _pendingData.MeleeCharacterID;
+        RestoreRangedID = _pendingData.RangedCharacterID;
+
+        Debug.Log("[Save] Loading scene: " + _pendingData.CurrentSceneName);
+        SceneManager.sceneLoaded += OnSceneLoadedAfterRestore;
+        SceneManager.LoadSceneAsync(_pendingData.CurrentSceneName, LoadSceneMode.Single);
+    }
+
+    private static void OnSceneLoadedAfterRestore(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoadedAfterRestore;
+        Debug.Log("[Save] Scene loaded: " + scene.name + " — restoring players…");
+
+        // Find a spawner in the new scene (even if it's inactive)
+        PlayerSpawnerManager spawner = null;
+        var spawners = UnityEngine.Object.FindObjectsOfType<PlayerSpawnerManager>(true);
+        if (spawners != null && spawners.Length > 0) spawner = spawners[0];
+
+        if (spawner == null)
+        {
+            Debug.LogWarning("[Save] PlayerSpawnerManager not found.");
+            IsRestoring = false;
+            return;
+        }
+
+        // Force spawn now (don’t rely on Start)
+        spawner.SpawnLocalPlayers();
+        RestoreMeleeID = -1;
+        RestoreRangedID = -1;
+        // Apply saved values to the correct players
+        var all = UnityEngine.Object.FindObjectsOfType<PlayerControllerBase>(true);
+        MeleePlayerController  melee  = null;
+        RangedPlayerController ranged = null;
+
+        foreach (var pcb in all)
+        {
+            int id = pcb.CharacterID.Value;
+            if (id == _pendingData.MeleeCharacterID  && melee  == null) melee  = pcb.GetComponent<MeleePlayerController>();
+            if (id == _pendingData.RangedCharacterID && ranged == null) ranged = pcb.GetComponent<RangedPlayerController>();
+        }
+
+        if (melee != null)
+        {
+            melee.transform.position    = new Vector3(_pendingData.Player1PosX, _pendingData.Player1PosY, _pendingData.Player1PosZ);
+            melee.Current_Stamina.Value = _pendingData.Player1Stamina;
+            melee.HealthPoint.Value     = _pendingData.Player1HealthPoint;
+            melee.current_health.Value  = _pendingData.Player1Health;
+        }
+        else Debug.LogWarning("[Save] MeleePlayerController not found after spawn.");
+
+        if (ranged != null)
+        {
+            ranged.transform.position    = new Vector3(_pendingData.Player2PosX, _pendingData.Player2PosY, _pendingData.Player2PosZ);
+            ranged.Current_Stamina.Value = _pendingData.Player2Stamina;
+            ranged.HealthPoint.Value     = _pendingData.Player2HealthPoint;
+            ranged.current_health.Value  = _pendingData.Player2Health;
+        }
+        else Debug.LogWarning("[Save] RangedPlayerController not found after spawn.");
+
+        IsRestoring = false;
+        Debug.Log("[Save] Restore complete.");
+    }
+
+    // --- Delete / Autosave / Meta ---
+    public static void DeleteSlot(int slot)
+    {
+        if (!IsValidSlot(slot)) { Debug.LogError("[Save] Invalid slot " + slot); return; }
 
         string save = SlotPath(slot);
         string meta = MetaPath(slot);
@@ -174,7 +177,7 @@ public static class SaveSystem
             if (File.Exists(save)) File.Delete(save);
             if (File.Exists(meta)) File.Delete(meta);
 
-            if (GetActiveSlot() == slot) BeginSessionInSlot(-1); // clear active
+            if (GetActiveSlot() == slot) BeginSessionInSlot(-1);
             Debug.Log("[Save] Deleted slot " + slot);
         }
         catch (Exception ex)
@@ -186,15 +189,10 @@ public static class SaveSystem
     public static void AutoSave(MeleePlayerController melee, RangedPlayerController ranged)
     {
         int slot = GetActiveSlot();
-        if (!IsValidSlot(slot))
-        {
-            Debug.LogWarning("[Save] No active slot for autosave");
-            return;
-        }
+        if (!IsValidSlot(slot)) { Debug.LogWarning("[Save] No active slot for autosave"); return; }
         SaveData(slot, melee, ranged);
     }
 
-    // --- Metadata ---
     public static SaveSlotMeta TryReadMeta(int slot)
     {
         if (!IsValidSlot(slot)) return null;
@@ -213,10 +211,7 @@ public static class SaveSystem
         }
     }
 
-    private static bool IsValidSlot(int s)
-    {
-        return s >= 1 && s <= 5;
-    }
+    private static bool IsValidSlot(int s) => s >= 1 && s <= 5;
 }
 
 [Serializable]
@@ -224,19 +219,21 @@ public class SaveSlotMeta
 {
     public int slot;
     public string scene;
-    public string savedAtLocal;  
+    public string savedAtLocal;
     public long savedAtUnix;
     public float p1hp, p2hp;
 
     public static SaveSlotMeta From(GameData d, int slot)
     {
-        SaveSlotMeta m = new SaveSlotMeta();
-        m.slot = slot;
-        m.scene = d.CurrentSceneName;
-        m.savedAtUnix = DateTimeOffset.Now.ToUnixTimeSeconds();
-        m.savedAtLocal = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-        m.p1hp = d.Player1Health;
-        m.p2hp = d.Player2Health;
+        var m = new SaveSlotMeta
+        {
+            slot = slot,
+            scene = d.CurrentSceneName,
+            savedAtUnix = DateTimeOffset.Now.ToUnixTimeSeconds(),
+            savedAtLocal = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
+            p1hp = d.Player1Health,
+            p2hp = d.Player2Health
+        };
         return m;
     }
 }

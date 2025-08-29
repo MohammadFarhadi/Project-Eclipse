@@ -515,5 +515,18 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
             }
         }
     }
+    
+    public void SetHealth(int hp)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer) currentHealth.Value = hp;
+            else ApplyDamageServerRpc(Mathf.RoundToInt(currentHealth.Value - hp)); // or a dedicated SetHealthServerRpc
+        }
+        else
+        {
+            currentHealth.Value = hp;
+        } 
+    }
 
 }
