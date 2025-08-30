@@ -12,7 +12,7 @@ public class ShopTrigger : MonoBehaviour
     private void Awake()
     {
         shopManager = GameObject.Find("ShopManager").GetComponent<ShopManager>();
-        //shopUI = ShopManager.Instance.GetShopUI();
+        shopUI = ShopManager.Instance.GetShopUI();
 
         if (shopUI == null)
         {
