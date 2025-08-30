@@ -262,7 +262,13 @@ IEnumerator RestoreWorldNextFrame()
              RestoreMeleeID = -1;
              RestoreRangedID = -1;
              Debug.Log("[RestoreWorldNextFrame] World restored.");
-         }    }
+             //lading tempGround state
+             var tempGround = GameObject.Find("TempGround");
+             if (tempGround != null)
+                 tempGround.SetActive(_pendingData.TempGroundActive);
+         }
+         
+    }
 
     // --- Delete / Autosave / Meta ---
     public static void DeleteSlot(int slot)
