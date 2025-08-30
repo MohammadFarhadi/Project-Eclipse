@@ -28186,7 +28186,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.4285715, y: 1.4285715}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1.1428572, y: 1.1428572}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -36497,6 +36497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sonin
       objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1081376019
+      objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.043956004
@@ -36789,6 +36793,10 @@ PrefabInstance:
     - target: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_Name
       value: Sonin (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3801741031
       objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
@@ -39174,6 +39182,10 @@ PrefabInstance:
     - target: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_Name
       value: Sonin (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4069813700
       objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
