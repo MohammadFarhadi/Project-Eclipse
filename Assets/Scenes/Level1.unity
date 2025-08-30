@@ -10457,6 +10457,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1568917183018915041, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
+      propertyPath: m_text
+      value: 'Load
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 1675120379280165756, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_Transition
       value: 2
@@ -10496,6 +10502,10 @@ PrefabInstance:
     - target: {fileID: 2919358134214216051, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_MinValue
       value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984768794385741548, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
+      propertyPath: m_Name
+      value: SaveValue
       objectReference: {fileID: 0}
     - target: {fileID: 3473141438636788487, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_Pivot.x
@@ -10580,6 +10590,22 @@ PrefabInstance:
     - target: {fileID: 3839756859019032243, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3971006637577081468, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
+      propertyPath: m_Name
+      value: Load
+      objectReference: {fileID: 0}
+    - target: {fileID: 4945245187999359272, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 303.0717
+      objectReference: {fileID: 0}
+    - target: {fileID: 4945245187999359272, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -772.3034
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482237243494342024, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
+      propertyPath: m_Name
+      value: Load
       objectReference: {fileID: 0}
     - target: {fileID: 6623138382292576416, guid: 8162253fcf1116f49a9df5d5f7193689, type: 3}
       propertyPath: m_Transition
