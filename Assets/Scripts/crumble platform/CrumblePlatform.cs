@@ -2,24 +2,27 @@ using System.Collections;
 using NUnit.Framework.Constraints;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CrumblePlatform : NetworkBehaviour
 {
     public float shakeDuration = 0.5f;
     public float fallDelay = 0.25f;
     public float fallGravityScale = 2f;
-    public float destroyDelay = 1f;
+    public float destroyDelay = 2f;
     public bool flashEffect = false;
     
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Vector3 originalPosition;
     private Color originalColor;
     private bool hasActivated = false;
 
     private void Awake()
     {
+        originalPosition = transform.localPosition;
         boxCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,6 +38,14 @@ public class CrumblePlatform : NetworkBehaviour
         {
             hasActivated = true;
             StartCoroutine(CrumbleSequence());
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            hasActivated = false;
         }
     }
 
@@ -62,7 +73,10 @@ public class CrumblePlatform : NetworkBehaviour
         }
         else
         {
-            Destroy(gameObject , destroyDelay);
+            yield return new WaitForSeconds(fallDelay); 
+            spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0);
+            StartCoroutine(ResetCrumble(2f));
+            // Destroy(gameObject , destroyDelay);
         }
     }
 
@@ -83,7 +97,6 @@ public class CrumblePlatform : NetworkBehaviour
 
         transform.localPosition = originalPos;
     }
-
     private IEnumerator Flash()
     {
         while (true)
@@ -93,6 +106,19 @@ public class CrumblePlatform : NetworkBehaviour
             spriteRenderer.color = originalColor;
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private IEnumerator ResetCrumble(float hideDuration)
+    {
+        yield return new WaitForSeconds(hideDuration);
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.gravityScale = 0f;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        spriteRenderer.color = originalColor;
+        boxCollider.isTrigger = false;
+        hasActivated = false;
+        transform.localPosition = originalPosition;
     }
     [ClientRpc]
     private void DestroyObjectClientRpc()

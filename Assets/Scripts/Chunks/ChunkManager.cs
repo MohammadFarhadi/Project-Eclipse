@@ -14,6 +14,19 @@ public class ChunkManager : NetworkBehaviour
 
     private void Start()
     {
+        if (SaveSystem.IsRestoring)
+        {
+            foreach (var c in chunks)
+            {
+                if (c)
+                {
+                    c.SetActive(true);
+                }
+            }
+            Debug.Log("[ChunkManager] Restore mode → skipping random chunk generation/arrangement.");
+            return;
+        }
+
         if (GameModeManager.Instance.CurrentMode == GameMode.Local)
         {
             GenerateChunkSequenceOffline();
@@ -28,7 +41,6 @@ public class ChunkManager : NetworkBehaviour
 
             if (!IsServer)
             {
-                // Check existing value on client join
                 if (!string.IsNullOrEmpty(chunkSequenceString.Value.ToString()) && !chunksActivated)
                 {
                     int[] indices = ParseChunkSequence(chunkSequenceString.Value.ToString());
@@ -38,6 +50,7 @@ public class ChunkManager : NetworkBehaviour
             }
         }
     }
+
 
 
     private void OnDestroy()

@@ -158,13 +158,14 @@ public class RangedPlayerController : PlayerControllerBase
         }
             
 
-        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local && SceneManager.GetActiveScene().name == "level2")
         {
             ShootLightBullet();
         }
         else
         {
-            if (IsOwner)
+            //امیرحسین من اینجا رو عوض کردم ببین در آنلاین هم این کار می کنه آیا؟(از طرف محمد)
+            if (IsOwner&& SceneManager.GetActiveScene().name == "level2")
             {
                 Debug.Log("Shooting Light Bullet ...");
                 ShootLightBulletServerRpc();

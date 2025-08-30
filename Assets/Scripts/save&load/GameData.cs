@@ -26,6 +26,7 @@ public class GameData
     public float Player2PosX, Player2PosY, Player2PosZ;
 
     // World
+    public List<string> ChunkOrder = new List<string>();
     public List<ChunkData>       Chunks       = new();
     public List<EnemyData>       Enemies      = new();
     public List<CollectibleData> Collectibles = new();
@@ -65,20 +66,26 @@ public class GameData
                 Player2PosZ        = player2.transform.position.z;
 
 
-            // ---- Chunks ----
-            GameObject[] chunks = GameObject.FindGameObjectsWithTag("Chunk");
-            foreach (var obj in chunks)
-            {
-                if (obj == null) continue;
+                // ---- Chunks (save left→right order) ----
+                var live = GameObject.FindGameObjectsWithTag("Chunk");
+                Array.Sort(live, (a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
 
-                var t = obj.transform;
-                Chunks.Add(new ChunkData {
-                    prefabName = obj.name,
-                    PositionX  = t.position.x,
-                    PositionY  = t.position.y,
-                    PositionZ  = t.position.z
-                });
-            }
+                for (int i = 0; i < live.Length; i++)
+                {
+                    var obj = live[i];
+                    if (!obj) continue;
+
+                    var t   = obj.transform;
+                    string baseName = obj.name.Replace("(Clone)", string.Empty).Trim();
+
+                    Chunks.Add(new ChunkData {
+                        prefabName = baseName,
+                        Order      = i,                     // <<— save the slot index
+                        PositionX  = t.position.x,
+                        PositionY  = t.position.y,
+                        PositionZ  = t.position.z
+                    });
+                }
 
 // ---- Enemies (ساده) ----
             var enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -131,6 +138,7 @@ public class GameData
     public class ChunkData
     {
         public string prefabName; 
+        public int    Order; 
         public float PositionX, PositionY, PositionZ;
     }
 

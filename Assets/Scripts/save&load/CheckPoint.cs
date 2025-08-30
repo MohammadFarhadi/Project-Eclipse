@@ -5,6 +5,7 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private float cooldownTime = 2f;  // seconds between autosaves at this checkpoint
     private float _lastSaveTime = -999f;
     private bool  _savedThisEntry = false;
+    public GameObject visual; // optional visual indicator
 
     private RangedPlayerController GetActiveRanged()
     {
@@ -28,7 +29,11 @@ public class CheckPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
         _savedThisEntry = false;   // allow one save per entry
         TryAutoSave();
     }
@@ -44,6 +49,7 @@ public class CheckPoint : MonoBehaviour
         {
             return;
         }
+        visual.SetActive(false);
         _savedThisEntry = false;   // next entry can save again
     }
 
@@ -76,10 +82,12 @@ public class CheckPoint : MonoBehaviour
         }
 
         SaveSystem.AutoSave(melee, ranged);
+        visual.SetActive(true);
 
         _savedThisEntry = true;
         _lastSaveTime   = Time.time;
 
         Debug.Log("[Checkpoint] Autosaved to slot " + slot + " at checkpoint '" + name + "'. Path: " + Application.persistentDataPath);
     }
+    
 }

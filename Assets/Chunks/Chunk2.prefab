@@ -27363,9 +27363,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  shakeDuration: 0.5
-  fallDelay: 0.4
-  fallGravityScale: 2
+  shakeDuration: 0.2
+  fallDelay: 0.7
+  fallGravityScale: 1
   destroyDelay: 3
   flashEffect: 0
 --- !u!61 &5961338980509980464
@@ -27656,9 +27656,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  shakeDuration: 1.5
-  fallDelay: 2.4
-  fallGravityScale: 2
+  shakeDuration: 0.2
+  fallDelay: 0.7
+  fallGravityScale: 1
   destroyDelay: 3
   flashEffect: 0
 --- !u!61 &3388702799932638883
@@ -28542,9 +28542,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  shakeDuration: 1.5
-  fallDelay: 2.4
-  fallGravityScale: 2
+  shakeDuration: 0.2
+  fallDelay: 0.7
+  fallGravityScale: 1
   destroyDelay: 3
   flashEffect: 0
 --- !u!61 &2849807731592289068
@@ -30204,9 +30204,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  shakeDuration: 1.5
-  fallDelay: 2.4
-  fallGravityScale: 2
+  shakeDuration: 0.2
+  fallDelay: 0.7
+  fallGravityScale: 1
   destroyDelay: 3
   flashEffect: 0
 --- !u!61 &4590780095996739889
@@ -35096,9 +35096,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  shakeDuration: 0.5
-  fallDelay: 0.4
-  fallGravityScale: 2
+  shakeDuration: 0.2
+  fallDelay: 0.7
+  fallGravityScale: 1
   destroyDelay: 3
   flashEffect: 0
 --- !u!61 &1221036799927123995

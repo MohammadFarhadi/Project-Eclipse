@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5578249548333544931}
   - component: {fileID: 5537199633439319495}
+  - component: {fileID: 2319008709040901275}
   - component: {fileID: 1965298911794779968}
   - component: {fileID: 3884261452359731797}
   - component: {fileID: 8058270861248393879}
@@ -90,6 +91,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2319008709040901275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542426801724333624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3645476491
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &1965298911794779968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,9 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82fcc90c08ca14a73ab6f2386c75290b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeDuration: 0.5
-  fallDelay: 0.4
-  fallGravityScale: 2
+  ShowTopMostFoldoutHeaderGroup: 1
+  shakeDuration: 0.2
+  fallDelay: 0.7
+  fallGravityScale: 1
   destroyDelay: 3
   flashEffect: 0
 --- !u!61 &3884261452359731797
