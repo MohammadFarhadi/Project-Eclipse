@@ -101,9 +101,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85311daae832efb44aa52a4e3d032230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel1: {fileID: 6454745807727758102, guid: 4d0d9a14bc1638b40b4d1e43f0df2c28, type: 3}
-  panel2: {fileID: 3845408854673066562, guid: cc406f741cac9544d85c3d333b8f7ada, type: 3}
-  panel3: {fileID: 4630167686783857387, guid: 5ccecb733ee7ef34ea475f88b81c0fd7, type: 3}
+  logDir1Text: "[Personal Log \u2013 Research Assistant]\nThe crystals keep spreading,
+    drawing life from the Artifact\u2019s pulse.\nThey shine like stars, but the
+    light is wrong\u2026 I can\u2019t look too long without feeling sick."
+  logDir2Text: "Every time I stare at them, I hear something.\nNot a voice in the
+    air, but inside my own thoughts.\nIt echoes me\u2014my words, my fears\u2014like
+    something waiting for me to answer."
+  logDir3Text: "The professor says it\u2019s harmless.\nBut last night I found myself
+    whispering to the crystals\u2026 and they whispered back.\nI don\u2019t know
+    if I\u2019m losing my mind, or if Laminia itself is listening."
 --- !u!61 &1731015385112443033
 BoxCollider2D:
   m_ObjectHideFlags: 0
