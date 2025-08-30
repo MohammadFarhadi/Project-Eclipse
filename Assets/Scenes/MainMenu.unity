@@ -416,7 +416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 71707815}
   m_Layer: 5
-  m_Name: Save&Load
+  m_Name: Credit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -874,7 +874,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2117918608}
-  - {fileID: 1608940708}
   m_Father: {fileID: 2053151049}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5954,7 +5953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1110248144
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7325,7 +7324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512bf6b2c06bd8c489c07bb2c0ecc5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  homeValue: {fileID: 185522170}
+  homeValue: {fileID: 1110248143}
   profileValue: {fileID: 669381818}
   optionValue: {fileID: 905139291}
   quitValue: {fileID: 1188628010}
@@ -9364,11 +9363,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 185522171}
+  m_Father: {fileID: 2117918608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 487, y: 377.37115}
+  m_AnchoredPosition: {x: 487.0001, y: 377.37115}
   m_SizeDelta: {x: 76.5151, y: 74.2222}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608940709
@@ -11671,7 +11670,7 @@ GameObject:
   - component: {fileID: 1991134156}
   - component: {fileID: 1991134155}
   m_Layer: 5
-  m_Name: Save&LoadPanel
+  m_Name: CreditPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12927,6 +12926,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1906489153}
+  - {fileID: 1608940708}
   m_Father: {fileID: 185522171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
