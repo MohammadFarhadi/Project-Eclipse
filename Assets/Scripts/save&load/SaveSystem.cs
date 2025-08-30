@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public static class SaveSystem
 {
@@ -90,12 +91,23 @@ public static class SaveSystem
             var formatter = new BinaryFormatter();
             using (var stream = new FileStream(path, FileMode.Open))
                 _pendingData = formatter.Deserialize(stream) as GameData;
+            
         }
         catch (Exception ex)
         {
             Debug.LogError("[Save] Deserialize failed: " + ex);
             IsRestoring = false;
             return;
+        }
+        // Debug chunk order in GameData after loading
+        if (_pendingData != null && _pendingData.Chunks != null)
+        {
+            Debug.Log("[Debug] Loaded GameData chunk count: " + _pendingData.Chunks.Count);
+            for (int i = 0; i < _pendingData.Chunks.Count; i++)
+            {
+                var c = _pendingData.Chunks[i];
+                Debug.Log($"[Debug] Chunk {i}: prefabName={c.prefabName}, Order={c.Order}, Pos=({c.PositionX}, {c.PositionY}, {c.PositionZ})");
+            }
         }
 
         if (_pendingData == null) { Debug.LogError("[Save] Deserialized GameData is null."); IsRestoring = false; return; }
@@ -109,6 +121,7 @@ public static class SaveSystem
         SceneManager.LoadSceneAsync(_pendingData.CurrentSceneName, LoadSceneMode.Single);
     }
 
+    
     private static void OnSceneLoadedAfterRestore(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= OnSceneLoadedAfterRestore;
@@ -160,9 +173,96 @@ public static class SaveSystem
         }
         else Debug.LogWarning("[Save] RangedPlayerController not found after spawn.");
 
-        IsRestoring = false;
-        Debug.Log("[Save] Restore complete.");
-    }
+        spawner.StartCoroutine(RestoreWorldNextFrame());
+        return;
+        
+IEnumerator RestoreWorldNextFrame()
+         {
+             float t = 0f;
+             while (GameObject.FindGameObjectsWithTag("Chunk").Length == 0 && t < 2f)
+             {
+                 t += Time.deltaTime;
+                 yield return null;
+             }
+             Debug.Log("[RestoreWorldNextFrame] Found " + GameObject.FindGameObjectsWithTag("Chunk").Length + " live chunks after waiting.");
+         
+             yield return null;
+         
+// --- CHUNKS: restore exact saved layout, shifted so saved-start aligns with live-start ---
+             var cm = UnityEngine.Object.FindFirstObjectByType<ChunkManager>(FindObjectsInactive.Include);
+             if (cm != null && cm.chunks != null && _pendingData.Chunks != null && _pendingData.Chunks.Count > 0)
+             {
+                 // saved order 0..N-1
+                 var saved = new System.Collections.Generic.List<GameData.ChunkData>(_pendingData.Chunks);
+                 saved.Sort((a, b) => a.Order.CompareTo(b.Order));
+
+                 // map live by canonical name
+                 string Canon(string s) => s.Replace("(Clone)", "").Replace(" ", "").ToLowerInvariant();
+                 var liveByName = new System.Collections.Generic.Dictionary<string, GameObject>();
+                 foreach (var go in cm.chunks)
+                     if (go) liveByName[Canon(go.name)] = go;
+
+                 if (liveByName.TryGetValue(Canon(saved[0].prefabName), out var startLive))
+                 {
+                     // shift so saved-start.x -> live-start.x (preserve relative spacing exactly)
+                     float dx = startLive.transform.position.x - saved[0].PositionX;
+
+                     // float dy = startLive.transform.position.y - saved[0].PositionY;
+
+                     for (int i = 0; i < saved.Count; i++)
+                     {
+                         var s = saved[i];
+                         if (!liveByName.TryGetValue(Canon(s.prefabName), out var go)) continue;
+
+                         var p = go.transform.position;
+                         p.x   = s.PositionX + dx;
+                         // p.y = s.PositionY + dy;   // uncomment if you want exact Y too
+                         go.transform.position = p;
+                     }
+                 }
+             }
+
+
+
+         
+             // --- ENEMIES (by name still ok if unique) ---
+             foreach (var e in _pendingData.Enemies)
+             {
+                 var obj = GameObject.Find(e.name);
+                 Debug.Log("[RestoreWorldNextFrame] Enemy: " + e.name + " found: " + (obj != null));
+                 if (!obj) continue;
+         
+                 if (!e.isAlive) { obj.SetActive(false); Debug.Log("[RestoreWorldNextFrame] Enemy " + e.name + " set inactive."); continue; }
+         
+                 obj.transform.position = new Vector3(e.PositionX, e.PositionY, e.PositionZ);
+                 Debug.Log("[RestoreWorldNextFrame] Enemy " + e.name + " position set to: " + obj.transform.position);
+         
+                 var iEnemy = obj.GetComponent<InterfaceEnemies>()
+                            ?? obj.GetComponentInChildren<InterfaceEnemies>()
+                            ?? obj.GetComponentInParent<InterfaceEnemies>();
+                 if (iEnemy != null)
+                 {
+                     try { iEnemy.SetHealth(Mathf.RoundToInt(e.health)); Debug.Log("[RestoreWorldNextFrame] Enemy " + e.name + " health set to: " + e.health); }
+                     catch (Exception ex) { Debug.LogError("[RestoreWorldNextFrame] Enemy SetHealth failed for '" + e.name + "': " + ex); }
+                 }
+             }
+         
+             // --- SAVEABLES / COLLECTIBLES ---
+             foreach (var col in _pendingData.Collectibles)
+             {
+                 var obj = GameObject.Find(col.name);
+                 Debug.Log("[RestoreWorldNextFrame] Collectible: " + col.name + " found: " + (obj != null));
+                 if (!obj) continue;
+                 obj.transform.position = new Vector3(col.PositionX, col.PositionY, col.PositionZ);
+                 Debug.Log("[RestoreWorldNextFrame] Collectible " + col.name + " position set to: " + obj.transform.position);
+             }
+         
+             IsRestoring = false;
+             _pendingData = null;
+             RestoreMeleeID = -1;
+             RestoreRangedID = -1;
+             Debug.Log("[RestoreWorldNextFrame] World restored.");
+         }    }
 
     // --- Delete / Autosave / Meta ---
     public static void DeleteSlot(int slot)
