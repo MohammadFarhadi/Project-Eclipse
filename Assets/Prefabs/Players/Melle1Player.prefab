@@ -600,7 +600,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   CharacterID:
     m_InternalValue: 0
-  jumpClip: {fileID: 8300000, guid: 30bba22ac4c38594e98b416fc800cddf, type: 3}
+  jumpClip: {fileID: 8300000, guid: df86a9fcdbb91324b98057d4eba24fd1, type: 3}
   deathClip: {fileID: 8300000, guid: edfc91887d2bcb046841b4aaf8a3ffbb, type: 3}
   oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
   moveSpeed: 2

@@ -422,7 +422,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
                 }
                 else
                 {
-                    SceneManager.LoadScene("Game Over");
+                    
                     current_health.Value = 0;
                     playersUI.hearts[2].SetActive(false);
                     if (GameModeManager.Instance.CurrentMode == GameMode.Local)
@@ -524,8 +524,28 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
     protected virtual void OnDestory()
     {
         PlaySound(deathClip);
-        SceneManager.LoadScene("Game Over");
-        Destroy(gameObject);
+        
+        
+       if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+       {
+               SceneManager.LoadScene("Game Over");
+       }
+       else {
+               if (NetworkManager.Singleton.IsServer) {
+                   NetworkManager.Singleton.SceneManager.LoadScene("Game Over", UnityEngine.SceneManagement.LoadSceneMode.Single);
+               }
+        }
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            Destroy(gameObject);
+        }
+        else {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject);
+            }
+        }
     }
 
     public virtual void Respawn(Vector3 position)
@@ -721,6 +741,11 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
 
         Debug.Log($"[Camera RPC] Camera set for player with CharacterID {CharacterID.Value}");
     }
+     [ClientRpc]
+      private void DestroyObjectClientRpc()
+      {
+            Destroy(gameObject);
+       }
 
 
     

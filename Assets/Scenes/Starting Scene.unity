@@ -119,83 +119,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &278932128
-GameObject:
+--- !u!1001 &57564638
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 278932129}
-  - component: {fileID: 278932131}
-  - component: {fileID: 278932130}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &278932129
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278932128}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 694403504}
-  - {fileID: 662301004}
-  m_Father: {fileID: 335191584}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -0.000030234}
-  m_SizeDelta: {x: 1617.6384, y: 2160}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &278932130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278932128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -3378922005880534257, guid: 4901764ee08271d40890fa1750dff3c8, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &278932131
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278932128}
-  m_CullTransparentMesh: 1
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1265.1179
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 670.93427
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.9912376
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5783223691173748339, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353157371810918438, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353157371810918438, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7402330749591593193, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 8cfaa4be49f1dda46a454a57ea89a485, type: 3}
+    - target: {fileID: 7402330749591593193, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8cfaa4be49f1dda46a454a57ea89a485, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ae5f9c64a0f22f24589bd214d6dc3760, type: 3}
 --- !u!1 &335191583
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,8 +219,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1322499188}
-  - {fileID: 278932129}
+  - {fileID: 1972922785}
+  - {fileID: 694403504}
+  - {fileID: 662301004}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -325,17 +318,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662301003}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1500313853}
-  m_Father: {fileID: 278932129}
+  m_Father: {fileID: 335191584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.4387, y: -947}
+  m_AnchoredPosition: {x: 3.2193398, y: -473.50003}
   m_SizeDelta: {x: 202.1199, y: 179.7233}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &662301005
@@ -470,7 +463,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "Welcome, Operatives.\r\n\r\nThis contract binds you to a high-priority
+    recovery mission on the quarantined world of Laminia.\r\nOnce a center of human
+    innovation, Laminia is now a dead planet\u2014poisoned skies, failed science,
+    and forgotten ruins.\r\n\r\nYour mission is to:\r\n\r\nInfiltrate the planet,\r\nEnter
+    Subterranean Facility Delta-5,\r\nLocate and retrieve Artifact-X,\r\nReturn it\u2014untouched\u2014to
+    ATABAKI Corp.\r\n\r\nCOMPENSATION:\r\nUpon successful recovery, each operative
+    will receive:\r\n> 10,000,000 SONIN(Galactic credit)\r\n\r\n[Place your finger
+    on biogalss to sign contract]\r\nBiometric scan in progress....."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -497,13 +497,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -11.173828}
+  m_margin: {x: -578.52954, y: 0, z: -638.8906, w: -149.19507}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -556,16 +556,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694403501}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 278932129}
+  m_Father: {fileID: 335191584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.104, y: 86.2544}
+  m_AnchoredPosition: {x: -15, y: 169.9}
   m_SizeDelta: {x: 1150.8071, y: 1466.5254}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &762263638
@@ -705,81 +705,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1322499187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1322499188}
-  - component: {fileID: 1322499190}
-  - component: {fileID: 1322499189}
-  m_Layer: 5
-  m_Name: Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1322499188
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322499187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 335191584}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1322499189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322499187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1322499190
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322499187}
-  m_CullTransparentMesh: 1
 --- !u!1 &1500313852
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,19 +874,12 @@ MonoBehaviour:
   fullText: "Welcome, Operatives.\r\n\r\nThis contract binds you to a high-priority
     recovery mission on the quarantined world of Laminia.\r\nOnce a center of human
     innovation, Laminia is now a dead planet\u2014poisoned skies, failed science,
-    and forgotten ruins.\r\n\r\nYour mission is to:\r\n\r\nInfiltrate the planet\r\nEnter
-    Subterranean Facility Delta-5\r\nLocate and retrieve Artifact-X\r\nReturn it\u2014untouched\u2014to
-    ATABAKI Corp.\r\n\r\nTERMS OF AGREEMENT:\r\nYou serve ATABAKI Corporation exclusively.\r\n\r\nYou
-    are prohibited from interfering with the artifact.\r\n\r\nAll audio, visual,
-    and genetic data becomes ATABAKI property.\r\n\r\nCommunication with outside
-    parties is strictly forbidden.\r\n\r\nBreach of contract results in immediate
-    termination\u2014of the contract or the contractor.\r\n\r\nCOMPENSATION:\r\nUpon
-    successful recovery, each operative will receive:\r\n> 10,000,000 SONIN\r\n(Certified
-    transfer through Galactic Exchange Trust)\r\n\r\n[PLACE FINGER ON BIOGLASS TO
-    SIGN CONTRACT]\r\nBiometric scan in progress...\r\nBlood sample acquired.\r\nContract
-    sealed.\r\n\r\nWelcome to Operation \u0394147.\r\nNo backup. No second chances.
-    Just the job."
-  typingSpeed: 0.01
+    and forgotten ruins.\r\n\r\nYour mission is to:\r\n\r\nInfiltrate the planet,\r\nEnter
+    Subterranean Facility Delta-5,\r\nLocate and retrieve Artifact-X,\r\nReturn it\u2014untouched\u2014to
+    ATABAKI Corp.\r\n\r\nCOMPENSATION:\r\nUpon successful recovery, each operative
+    will receive:\r\n> 10,000,000 SONIN(Galactic credit)\r\n\r\n[Place your finger
+    on biogalss to sign contract]\r\nBiometric scan in progress....."
+  typingSpeed: 0.06
   button: {fileID: 662301003}
 --- !u!4 &1596205549
 Transform:
@@ -978,6 +896,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1972922784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1972922785}
+  - component: {fileID: 1972922787}
+  - component: {fileID: 1972922786}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1972922785
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972922784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 335191584}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1972922786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972922784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9924528, g: 0.9924528, b: 0.9924528, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1243892369805425323, guid: b060046268d0e3346a710860f2b3ea90, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1972922787
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972922784}
+  m_CullTransparentMesh: 1
 --- !u!1 &2065763994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,3 +1058,4 @@ SceneRoots:
   - {fileID: 335191584}
   - {fileID: 762263642}
   - {fileID: 1596205549}
+  - {fileID: 57564638}

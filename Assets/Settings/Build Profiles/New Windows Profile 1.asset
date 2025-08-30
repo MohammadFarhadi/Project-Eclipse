@@ -37,6 +37,8 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/Level 3.unity
   - m_enabled: 1
+    m_path: Assets/Scenes/Victory.unity
+  - m_enabled: 1
     m_path: Assets/Scenes/Game Over.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:

@@ -54,7 +54,7 @@ public abstract class TopDownController : NetworkBehaviour
 
     
     [SerializeField] protected PlayersUI playersUI;
-
+    private LosingGame losingGame;
     private Vector3 originalScale;
 
     protected SpriteRenderer Sprite;
@@ -70,6 +70,11 @@ public abstract class TopDownController : NetworkBehaviour
     }
     protected virtual void Start()
     {
+        GameObject obj = GameObject.Find("LosingGame");
+        if (obj != null)
+        {
+            losingGame = obj.GetComponent<LosingGame>();
+        }
         Sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -291,7 +296,7 @@ public abstract class TopDownController : NetworkBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadScene("Game Over");
+                    
                     current_health.Value = 0;
                     playersUI.hearts[2].SetActive(false);
                     if (GameModeManager.Instance.CurrentMode == GameMode.Local)
@@ -329,8 +334,28 @@ public abstract class TopDownController : NetworkBehaviour
     protected virtual void OnDestory()
     {
         PlaySound(deathClip);
-        SceneManager.LoadScene("Game Over");
-        Destroy(gameObject);
+        if (gameObject.name.Contains("Ranged"))
+        {
+            losingGame._isPlayer1Dead = true;
+        }
+        else if (gameObject.name.Contains("Melle"))
+        {
+            losingGame._isPlayer2Dead = true;
+        }
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            Destroy(gameObject);
+
+        }
+        else
+        {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject);
+            }
+        }
     }
 
     // public virtual void Respawn(Vector3 position)
@@ -568,6 +593,11 @@ public abstract class TopDownController : NetworkBehaviour
     public void TakeDamageFromServer(int value, bool status)
     {
         HandleHealthLocally(value, status);
+    }
+    [ClientRpc]
+    private void DestroyObjectClientRpc()
+    {
+        Destroy(gameObject);
     }
 }
     

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Enemys;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class BossController : NetworkBehaviour, InterfaceEnemies
@@ -51,7 +52,7 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
 
     private float lastAttackTime = 0f;
     private int attackCount = 0;
-    private int attackCount1 = 0;
+    public int attackCount1 = 0;
     private int currentTargetIndex = 0;
     private float targetSwitchTimer = 0f; // (دیگر استفاده‌ای ندارد ولی حفظ شده)
     private bool isCharging = false;
@@ -118,18 +119,30 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         if (players == null || players.Length < 2)
             players = new Transform[2];
 
-        if (players[0] == null || players[1] == null)
+        // پیدا کردن بازیکن‌های موجود
+        GameObject[] foundPlayers = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject obj in foundPlayers)
         {
-            GameObject[] foundPlayers = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject obj in foundPlayers)
-            {
-                if (players[0] == null && obj.name.Contains("Ranged"))
-                    players[0] = obj.transform;
-                else if (players[1] == null && (obj.name.Contains("Melle") || obj.name.Contains("Melee")))
-                    players[1] = obj.transform;
-            }
+            if (obj == null) continue;
+
+            if (players[0] == null && obj.name.Contains("Ranged"))
+                players[0] = obj.transform;
+            else if (players[1] == null && (obj.name.Contains("Melle") || obj.name.Contains("Melee")))
+                players[1] = obj.transform;
+        }
+
+        // اگر currentTarget مرده بود، برو سراغ یکی دیگه
+        if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
+        {
+            if (players[0] != null && players[0].gameObject.activeInHierarchy)
+                currentTarget = players[0];
+            else if (players[1] != null && players[1].gameObject.activeInHierarchy)
+                currentTarget = players[1];
+            else
+                currentTarget = null; // یعنی دیگه هیچ بازیکنی زنده نیست
         }
     }
+
 
     private void SwitchToOtherTarget()
     {
@@ -165,21 +178,16 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
         if (GameModeManager.Instance.CurrentMode == GameMode.Online && !IsServer)
             return;
 
-        EnsurePlayersCached();
-
-        if (currentTarget == null)
+        if (currentTarget == null || !currentTarget.gameObject.activeInHierarchy)
         {
-            if (players[0] != null && players[1] != null)
+            SwitchToOtherTarget(); // برو سراغ اون یکی
+            if (currentTarget == null)
             {
-                currentTargetIndex = Random.Range(0, 2);
-                currentTarget = players[currentTargetIndex];
-            }
-            else
-            {
-                PlayAnimation("Idle");
-                return;
+                PlayAnimation("Idle"); 
+                return; // هیچ بازیکنی نیست → بیکار باشه
             }
         }
+
 
         float distanceToTarget = Vector2.Distance(transform.position, currentTarget.position);
 
@@ -465,6 +473,18 @@ public class BossController : NetworkBehaviour, InterfaceEnemies
                 {
                     animator.SetTrigger("Death");
                     Destroy(gameObject, 1f);
+                }
+
+                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                {
+                    SceneManager.LoadScene("Victory");
+                }
+                else
+                {
+                    if (NetworkManager.Singleton.IsServer)
+                    {
+                        NetworkManager.Singleton.SceneManager.LoadScene("Victory", UnityEngine.SceneManagement.LoadSceneMode.Single);
+                    }
                 }
             }
         }
