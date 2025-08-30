@@ -1,8 +1,9 @@
 // EchoOrb.cs
 
 using System;
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
-
 public class EchoOrb : MonoBehaviour
 {
     public AudioClip whisperClip;
@@ -65,7 +66,6 @@ public class EchoOrb : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log($"ClearCurrentOrb({name})");
-            controller.SetCurrentOrb(this, other.gameObject);
             dialogueTrigger?.HideDialogue();
         }
     }

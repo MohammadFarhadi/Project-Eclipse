@@ -1,6 +1,8 @@
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
-public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
+public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
 {
     [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
     [SerializeField] private GameObject Sonin;
@@ -14,10 +16,16 @@ public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
 
     [Header("Health")]
     [SerializeField] private int maxHealthPoints = 3;
-    private int currentHealthPoints;
+    private NetworkVariable<int> currentHealthPoints = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+    public int HealthPoint => Mathf.RoundToInt(currentHealthPoints.Value);
 
     [Header("References")]
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     [SerializeField] private Rigidbody2D rb;
 
     private GameObject player;
@@ -26,7 +34,20 @@ public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
 
     private void Start()
     {
-        currentHealthPoints = maxHealthPoints;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                currentHealthPoints.Value = maxHealthPoints;
+            }
+        }
+        else
+        {
+            currentHealthPoints.Value = maxHealthPoints;
+        }
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
+       
     }
 
     private void Update()
@@ -47,10 +68,17 @@ public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
         rb.linearVelocity = jumpVector;
         isGrounded = false;
         isJumpingAtPlayer = true;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            UpdateAnimatorTriggerParameterServerRpc("Jump");
+        }
+        else
+        {
+            if (animator != null)
+                animator.SetTrigger("Jump");
 
-        if (animator != null)
-            animator.SetTrigger("Jump");
-
+        }
+        
         transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
     }
 
@@ -77,16 +105,38 @@ public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
 
     public void TakeDamage(int damage, Transform attacker)
     {
-        currentHealthPoints -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                currentHealthPoints.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            currentHealthPoints.Value -= damage;
+        }
 
-        if (currentHealthPoints <= 0)
+        if (currentHealthPoints.Value <= 0)
         {
             Die();
         }
         else
         {
-            if (animator != null)
-                animator.SetTrigger("GetHit");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                UpdateAnimatorTriggerParameterServerRpc("GetHit");
+            }
+            else
+            {
+                if (animator != null)
+                    animator.SetTrigger("GetHit");
+            }
+           
         }
     }
 
@@ -96,24 +146,102 @@ public class JumpingEnemy : MonoBehaviour, InterfaceEnemies
         {
             GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
             deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
-            animator.SetTrigger("IsDead");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+            {
+                UpdateAnimatorTriggerParameterServerRpc("IsDead");
+            }
+            else
+            {
+                animator.SetTrigger("IsDead");
+
+            }
             
         }
             
         DropRandomItem();
-        Destroy(gameObject, 0.5f);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject);
+            }
+            
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public void DropRandomItem()
     {
         if (dropItems.Length == 0) return;
-        
-        int index = Random.Range(0, dropItems.Length);
-        Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
-        Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
-        Instantiate(Sonin, transform.position, Quaternion.identity);
-        
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (!IsServer) return;
+
+            int index = Random.Range(0, dropItems.Length);
+            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f);
+            GameObject dropped = Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            if (dropped.TryGetComponent(out NetworkObject netObj))
+            {
+                netObj.Spawn();
+            }
+
+            GameObject soninDrop = Instantiate(Sonin, transform.position, Quaternion.identity);
+            if (soninDrop.TryGetComponent(out NetworkObject soninNet))
+            {
+                soninNet.Spawn();
+            }
+        }
+        else
+        {
+            int index = Random.Range(0, dropItems.Length);
+            Instantiate(dropItems[index], transform.position + Vector3.up, Quaternion.identity);
+            Instantiate(Sonin, transform.position, Quaternion.identity);
+        }
+    }
+    [ClientRpc]
+    private void DestroyObjectClientRpc()
+    {
+        Destroy(gameObject);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        currentHealthPoints.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
     }
     
+    public void SetHealth(int hp)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer) currentHealthPoints.Value = hp;
+            else ApplyDamageServerRpc(currentHealthPoints.Value - hp); // or a dedicated SetHealthServerRpc
+        }
+        else
+        {
+            currentHealthPoints.Value = hp;
+        } 
+    }
 
     
 }

@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class CollectibleItem : MonoBehaviour
+public class CollectibleItem : NetworkBehaviour
 {
     public enum CollectibleType { Health, Stamina , Key}
 

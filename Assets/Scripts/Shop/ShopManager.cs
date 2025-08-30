@@ -44,7 +44,7 @@ public class ShopManager : MonoBehaviour
 
         if (ShopUI == null)
         {
-            ShopUI = GameObject.FindWithTag("ShopUI");
+            ShopUI = GameObject.FindWithTag("ShopCanvas");
         }
     }
 

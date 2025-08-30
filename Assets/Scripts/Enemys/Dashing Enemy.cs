@@ -1,6 +1,8 @@
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
-public class DashingEnemy : MonoBehaviour, InterfaceEnemies
+public class DashingEnemy : NetworkBehaviour, InterfaceEnemies
 {
     [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
     [SerializeField] private GameObject Sonin;
@@ -16,11 +18,17 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
 
     [Header("Health")]
     [SerializeField] private int maxHealth = 9;
-    private int currentHealth;
+    private NetworkVariable<int> currentHealth = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+    public int HealthPoint => Mathf.RoundToInt(currentHealth.Value);
 
     
     [Header("References")]
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ParticleSystem dashEffect; // 🎇 پارتیکل دش
     [SerializeField] private Transform graphicsTransform; // 🔁 برای flip کردن ظاهر
@@ -32,7 +40,20 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                currentHealth.Value = maxHealth;
+            }
+        }
+        else
+        {
+            currentHealth.Value = maxHealth;
+        }
+        
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         Invoke(nameof(StartNextAttack), idleDuration);
     }
 
@@ -46,7 +67,7 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
 
     private void StartNextAttack()
     {
-        if (currentHealth < 4)
+        if (currentHealth.Value < 4)
         {
             int mode = Random.Range(0, 2);
             if (mode == 0)
@@ -87,7 +108,7 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
         rb.linearVelocity = Vector2.zero;
 
         if (animator != null)
-            animator.SetTrigger("Idle"); // فقط انیمیشن Idle
+            //animator.SetTrigger("Idle"); // فقط انیمیشن Idle
 
         currentDirection *= -1;
         FlipGraphics(); // فقط بعد از دش flip می‌شه
@@ -108,9 +129,23 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
 
     public void TakeDamage(int damage, Transform attacker)
     {
-        currentHealth -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                currentHealth.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            currentHealth.Value -= damage;
+        }
 
-        if (currentHealth <= 0)
+        if (currentHealth.Value <= 0)
         {
             Die();
         }
@@ -121,7 +156,19 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
         GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
         deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
         DropRandomItem();
-        Destroy(gameObject, 0.5f);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject , 0.5f);
+            }
+            
+        }
+        else
+        {
+            Destroy(gameObject , 0.5f);
+        }
     }
 
     public void DetectPlayer(GameObject p) { }
@@ -129,11 +176,69 @@ public class DashingEnemy : MonoBehaviour, InterfaceEnemies
     public void DropRandomItem()
     {
         if (dropItems.Length == 0) return;
-        
-        int index = Random.Range(0, dropItems.Length);
-        Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
-        Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
-        Instantiate(Sonin, transform.position, Quaternion.identity);
-        
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (!IsServer) return;
+
+            int index = Random.Range(0, dropItems.Length);
+            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f);
+            GameObject dropped = Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            if (dropped.TryGetComponent(out NetworkObject netObj))
+            {
+                netObj.Spawn();
+            }
+
+            GameObject soninDrop = Instantiate(Sonin, transform.position, Quaternion.identity);
+            if (soninDrop.TryGetComponent(out NetworkObject soninNet))
+            {
+                soninNet.Spawn();
+            }
+        }
+        else
+        {
+            int index = Random.Range(0, dropItems.Length);
+            Instantiate(dropItems[index], transform.position + Vector3.up, Quaternion.identity);
+            Instantiate(Sonin, transform.position, Quaternion.identity);
+        }
+    }
+    [ClientRpc]
+    private void DestroyObjectClientRpc()
+    {
+        Destroy(gameObject , 0.5f);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        currentHealth.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
+    }
+    public void SetHealth(int hp)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer) currentHealth.Value = hp;
+            else ApplyDamageServerRpc(currentHealth.Value - hp); // or a dedicated SetHealthServerRpc
+        }
+        else
+        {
+            currentHealth.Value = hp;
+        } 
     }
 }

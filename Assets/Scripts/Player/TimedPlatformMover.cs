@@ -1,6 +1,7 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class TimedPlatformMover : MonoBehaviour
+public class TimedPlatformMover : NetworkBehaviour
 {
     public Transform platform;
     public Transform startPoint;
@@ -27,25 +28,81 @@ public class TimedPlatformMover : MonoBehaviour
 
     private void Update()
     {
-        if (currentPlayer != null && currentPlayer.IsInteracting() && !isMoving)
+        if (currentPlayer != null && currentPlayer.IsInteracting())
         {
-            isMoving = true;
+            RequestMovePlatform(currentPlayer);
         }
 
-        if (isMoving)
+        if (ShouldMoveLocally())
         {
-            platform.position = Vector3.MoveTowards(
-                platform.position,
-                currentTarget.position,
-                moveSpeed * Time.deltaTime
-            );
-
-            if (Vector3.Distance(platform.position, currentTarget.position) < 0.01f)
+            if (isMoving)
             {
-                isMoving = false;
-                currentTarget = (currentTarget == startPoint) ? endPoint : startPoint;
+                platform.position = Vector3.MoveTowards(
+                    platform.position,
+                    currentTarget.position,
+                    moveSpeed * Time.deltaTime
+                );
+
+                if (Vector3.Distance(platform.position, currentTarget.position) < 0.01f)
+                {
+                    isMoving = false;
+                    currentTarget = (currentTarget == startPoint) ? endPoint : startPoint;
+                }
             }
         }
+    }
+
+    public void RequestMovePlatform(PlayerControllerBase player)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                StartPlatformMovement();
+            }
+            else
+            {
+                RequestMovePlatformServerRpc(player.OwnerClientId);
+            }
+        }
+        else
+        {
+            StartPlatformMovement();
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestMovePlatformServerRpc(ulong playerId)
+    {
+        // اختیاری → میتونی اینجا Validation انجام بدی
+        StartPlatformMovement();
+
+        StartPlatformMovementClientRpc();
+    }
+
+    [ClientRpc]
+    private void StartPlatformMovementClientRpc()
+    {
+        if (!IsServer)
+        {
+            StartPlatformMovement();
+        }
+    }
+
+    private void StartPlatformMovement()
+    {
+        isMoving = true;
+    }
+
+    private bool ShouldMoveLocally()
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            return true;
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online && IsServer)
+            return true;
+
+        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -60,7 +117,7 @@ public class TimedPlatformMover : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
-        if (player != null && currentPlayer == player)
+        if (player != null && player == currentPlayer)
         {
             currentPlayer = null;
         }

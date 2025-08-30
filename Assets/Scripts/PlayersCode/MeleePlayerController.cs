@@ -2,8 +2,10 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Security.Cryptography.X509Certificates;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class MeleePlayerController : PlayerControllerBase
 {
@@ -20,7 +22,7 @@ public class MeleePlayerController : PlayerControllerBase
     [Header("Attack Settings")]
     //متغیر ها برای تعریف حمله کردن
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private float attackRange = 0.5f;    
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private int attackDamage = 1;
     
@@ -42,6 +44,11 @@ public class MeleePlayerController : PlayerControllerBase
     [SerializeField] private Vector3  flashlightOffset  = new Vector3(0.5f, 0f, 0f);
     private float    rotationOffset; 
     private Transform spotlightT;
+    private NetworkVariable<bool> isFlashOnNet = new NetworkVariable<bool>(
+        default,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner // فقط صاحب می‌تونه تغییر بده
+    );
 
     
     private Light2D spotlight;
@@ -73,15 +80,20 @@ public class MeleePlayerController : PlayerControllerBase
         spotlight.shadowIntensity       = 0f;
         spotlight.falloffIntensity      = 1f;
     }
+    
     protected override void Start()
     {
         baseDamageMultiplier = 0.5f;
         base.Start();
-        // شعاع‌ها و زاویه‌ها
-        spotlight.pointLightInnerRadius = flashInnerRadius;
-        spotlight.pointLightOuterRadius = flashOuterRadius;
-        spotlight.pointLightInnerAngle  = flashInnerAngle;
-        spotlight.pointLightOuterAngle  = flashOuterAngle;
+
+        if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            // شعاع‌ها و زاویه‌ها
+            spotlight.pointLightInnerRadius = flashInnerRadius;
+            spotlight.pointLightOuterRadius = flashOuterRadius;
+            spotlight.pointLightInnerAngle  = flashInnerAngle;
+            spotlight.pointLightOuterAngle  = flashOuterAngle;
+        }
     }
     protected override void FixedUpdate()
     {
@@ -90,9 +102,15 @@ public class MeleePlayerController : PlayerControllerBase
     }
     void Update()
     {
+        if (playersUI == null)
+        {
+            playersUI = GameObject.Find("MeleeUIManager  ").GetComponent<PlayersUI>();
+            RefreshUI();
+        }
+
         // Flip light cone when player flips
         float facing = Mathf.Sign(transform.localScale.x);
-        spotlightT.localEulerAngles = new Vector3(0f, 0f, facing < 0f ? 90f : -90f);
+        spotlightT.localScale = new Vector3(-1f, 0f, 0f);
 
         // Toggle on/off and drain/recover stamina
         HandleFlashlight();
@@ -134,7 +152,18 @@ public class MeleePlayerController : PlayerControllerBase
 
         if (isGrounded)
         {
-            animator.SetBool("IsJumping", true);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsJumping", true);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    UpdateAnimatorBoolParameterServerRpc("IsJumping", true);
+                }
+            }
             PlayerJump(context);
         }
         else
@@ -146,16 +175,40 @@ public class MeleePlayerController : PlayerControllerBase
 
     public void OnAttack()
     {
-        animator.SetBool("IsAttacking", true);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsAttacking", true);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                UpdateAnimatorBoolParameterServerRpc("IsAttacking", true);
+            }
+        }
+        
         StartCoroutine(ResetAttackBool());
     }
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing && Current_Stamina >= 15f)
+        if (context.performed && !isDashing && Current_Stamina.Value >= 15f)
         {
             StaminaSystem(15f, false);
             isDashing = true;
-            animator.SetTrigger("IsDashing");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("IsDashing");
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    UpdateAnimatorTriggerParameterServerRpc("IsDashing");
+                }
+            }
+            
             StartCoroutine(DelayedDashForce());
             addforceSync = 1f;
         }
@@ -183,7 +236,18 @@ public class MeleePlayerController : PlayerControllerBase
 
         if (!isGrounded && rb.linearVelocity.y < 0)
         {
-            animator.SetBool("IsFalling", true);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsFalling", true);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    UpdateAnimatorBoolParameterServerRpc("IsFalling", true);
+                }
+            }
         }
     }
 
@@ -202,12 +266,35 @@ public class MeleePlayerController : PlayerControllerBase
     {
         //چقدر طول میکشه که انیمیشن اتکمون اجرا بشه.
         yield return new WaitForSeconds(0.2f); 
-        animator.SetBool("IsAttacking", false);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsAttacking", false);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                UpdateAnimatorBoolParameterServerRpc("IsAttacking", false);
+            }
+        }
+       
     }
     
     protected override void HandleLanding()
     {
-        animator.SetBool("IsFalling", false);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            animator.SetBool("IsFalling", false);
+                
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                UpdateAnimatorBoolParameterServerRpc("IsFalling", false);
+            }
+        }
     }
     protected override bool IsInvincible()
     {
@@ -220,19 +307,30 @@ public class MeleePlayerController : PlayerControllerBase
 
     private void HandleFlashlight()
     {
-        if (isFlashOn && Current_Stamina > 0f)
+        if ((isFlashOn || isFlashOnNet.Value) && Current_Stamina.Value > 0f)
         {
             spotlight.intensity = flashIntensityOn;
             StaminaSystem(staminaDrainRate * Time.deltaTime, false);
 
             // اگر بعد از کم شدن استامینا رسید صفر، خودکار خاموشش کن
-            if (Current_Stamina <= 0f)
-                isFlashOn = false;
+            if (Current_Stamina.Value <= 0f)
+            {
+                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                {
+                    isFlashOn = false;
+                }
+                else
+                {
+                    isFlashOnNet.Value = false;
+                }
+            }
+
+   
         }
         else
         {
             spotlight.intensity = 0f;
-            if (Current_Stamina < Stamina_max)
+            if (Current_Stamina.Value < Stamina_max)
             {
                 StaminaSystem(Stamina_gain * Time.deltaTime, true);
             }
@@ -242,12 +340,41 @@ public class MeleePlayerController : PlayerControllerBase
 
     public void OnFlash(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed) return;
+        if (!IsOwner) return; // فقط صاحب اجرا می‌کنه
 
+        if (!ctx.performed) return;
+        Debug.Log("On flashlight called");
         // فقط اگر استامینا بیشتر از مصرف لحظه‌ای (مثلاً staminaDrainRate) داشت مجوز بده
-        if (Current_Stamina > staminaDrainRate * Time.deltaTime)
-            isFlashOn = !isFlashOn;
+        if (Current_Stamina.Value > staminaDrainRate * Time.deltaTime)
+        {
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                isFlashOn = !isFlashOn;
+
+            }
+            else
+            {
+                isFlashOnNet.Value = !isFlashOnNet.Value;
+
+            }
+        }
     }
+    private void OnEnable()
+    {
+        isFlashOnNet.OnValueChanged += OnFlashlightChanged;
+    }
+
+    private void OnDisable()
+    {
+        isFlashOnNet.OnValueChanged -= OnFlashlightChanged;
+    }
+
+    private void OnFlashlightChanged(bool prev, bool current)
+    {
+        spotlight.intensity = current ? flashIntensityOn : 0f;
+    }
+    
+
 
 
 

@@ -28,6 +28,6 @@ public class TypewriterEffect : MonoBehaviour
     }
     public void LoadSampleScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SelectionScene");
     }
 }

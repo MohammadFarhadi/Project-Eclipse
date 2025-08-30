@@ -19,6 +19,12 @@ TagManager:
   - ShopUI
   - FadePanel
   - LightBullet
+  - Level2Trigger
+  - Decor
+  - ShooterEnemyAI
+  - Chunk
+  - Saveable
+  - SaveAble
   layers:
   - Default
   - TransparentFX

@@ -5,12 +5,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.Universal;
 using System.Collections;
+using Unity.Netcode;
+using Unity.Netcode.Components;
+using UnityEngine.SceneManagement;
 
 
-public abstract class PlayerControllerBase : MonoBehaviour
-{
+public abstract class PlayerControllerBase : NetworkBehaviour{
+
     
-    
+    public NetworkVariable<int> CharacterID = new NetworkVariable<int>();
+
     
     [Header("Light")]
     protected Light2D AuraLight;
@@ -31,8 +35,12 @@ public abstract class PlayerControllerBase : MonoBehaviour
     [SerializeField] protected float jumpForce = 100f;
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Animator animator;
+    protected NetworkAnimator networkAnimator;
+
     public bool HasKey = false;
+    
     /* --- Wall-jump settings --------------------------------- */
+    
     [Header("Wall Jump Settings")]
     [SerializeField] private Transform wallCheckLeft;
     [SerializeField] private Transform wallCheckRight;
@@ -46,7 +54,9 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
 
     [Header("Stamina")] 
-    [SerializeField] protected float Current_Stamina = 50;
+    public NetworkVariable<float> Current_Stamina = new NetworkVariable<float>(50f,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server); 
     [SerializeField] protected float Stamina_gain = 5f;
     [SerializeField] protected float Stamina_max = 50;
     [SerializeField] private float staminaRegenDelay = 2f; // تاخیر پر شدن
@@ -54,9 +64,14 @@ public abstract class PlayerControllerBase : MonoBehaviour
     private bool isRegeneratingStamina = false;
     private Coroutine regenCoroutine;
 
-    [Header("Health")] private int HealthPoint = 3;
+    [Header("Health")]
+    public NetworkVariable<int> HealthPoint = new NetworkVariable<int>(3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server);
     [SerializeField] protected float max_health = 100f;
-    [SerializeField] protected float current_health = 30;
+    public NetworkVariable<float> current_health = new NetworkVariable<float>(100f,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server);
     [SerializeField] protected float Health_gain = 5f;
 
     protected float baseDamageMultiplier = 1f; // مقدار اولیه هر کلاس (1f برای Ranged، 0.5f برای Melee)
@@ -73,7 +88,9 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
 
 
-    [SerializeField] private PlayersUI playersUI;
+
+    [SerializeField] protected PlayersUI playersUI;
+    
 
     private Vector3 originalScale;
 
@@ -81,23 +98,34 @@ public abstract class PlayerControllerBase : MonoBehaviour
     public bool isGrounded = true;
     protected Vector2 move_input;
 
-    protected virtual void Awake()
+    public void SetPlayerUI(PlayersUI playerUI)
     {
-        // ساخت Light2D
-        AuraLight = gameObject.AddComponent<Light2D>();
-        AuraLight.lightType = Light2D.LightType.Point;
-        AuraLight.shadowIntensity = 0f;
-        AuraLight.falloffIntensity = 1f;
+        this.playersUI = playerUI;
     }
 
+    
+    protected virtual void Awake()
+    {
+        networkAnimator = GetComponent<NetworkAnimator>();
+
+        //برای اینکه وقتی لول ۲ بودیم light 2d درست کنه
+        if (SceneManager.GetActiveScene().name == "Level2")
+        {
+            // ساخت Light2D
+            AuraLight = gameObject.AddComponent<Light2D>();
+            AuraLight.lightType = Light2D.LightType.Point;
+            AuraLight.shadowIntensity = 0f;
+            AuraLight.falloffIntensity = 1f;
+        }
+    }
     protected virtual void Start()
     {
         Sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         originalScale = Sprite.transform.localScale;
-        playersUI?.SetHealthBar(current_health, max_health);
-        playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
+        playersUI?.SetHealthBar(current_health.Value, max_health);
+        playersUI?.SetStaminaBar(Current_Stamina.Value, Stamina_max);
         currentDamageMultiplier = baseDamageMultiplier;
         
         // کانفیگ اولیه‌ی نور براساس propertyها
@@ -131,7 +159,19 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetFloat("IsRunning", Mathf.Abs(move_input.x));
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetFloat("IsRunning", Mathf.Abs(move_input.x));
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    UpdateAnimatorFloatParameterServerRpc("IsRunning", Mathf.Abs(move_input.x));
+                    
+                }
+            }
+            
         }
 
         if (interactTimer > 0f)
@@ -150,7 +190,19 @@ public abstract class PlayerControllerBase : MonoBehaviour
     {
         if (isGrounded)
         {
-            animator.SetBool("IsJumping", true);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsJumping", true);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    UpdateAnimatorBoolParameterServerRpc("IsJumping", true);
+                }
+            }
+           
             PlaySound(jumpClip);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
@@ -162,7 +214,18 @@ public abstract class PlayerControllerBase : MonoBehaviour
         if (!isGrounded && isTouchingWall && canWallJump)
         {
             PlaySound(jumpClip);
-            animator.SetBool("IsJumping", true);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetBool("IsJumping", true);
+                
+            }
+            else
+            {
+                if (IsOwner)
+                {
+                    UpdateAnimatorBoolParameterServerRpc("IsJumping", true);
+                }
+            }
 
             // cancel current vertical velocity then launch upward
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
@@ -197,7 +260,18 @@ public abstract class PlayerControllerBase : MonoBehaviour
             // Is the surface mostly horizontal?  (normal pointing upward)
             if (c.normal.y >= 0.5f)
             {
-                animator?.SetBool("IsJumping", false);
+                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                {
+                    animator.SetBool("IsJumping", false);
+                
+                }
+                else
+                {
+                    if (IsOwner)
+                    {
+                        UpdateAnimatorBoolParameterServerRpc("IsJumping", false);
+                    }
+                }
                 if (!isGrounded) HandleLanding();
                 isGrounded = true;
                 break;                      // one good contact is enough
@@ -225,7 +299,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
     protected virtual void HandleLanding()
     {
         // Nothing here in base
-    }
+    } 
 
     protected virtual bool CanApplyMovement()
     {
@@ -236,24 +310,39 @@ public abstract class PlayerControllerBase : MonoBehaviour
     {
 
     }
-
     public virtual void HealthSystem(int value, bool status)
+    {
+        if (IsInvincible())
+            return;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            HandleHealthLocally(value, status);
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                HandleHealthServerRpc(value, status);
+            }
+        }
+    }
+
+    private void HandleHealthLocally(int value, bool status)
     {
         if (IsInvincible())
         {
             return;
         }
 
-        value = ModifyDamage(value);
         if (status == true)
         {
-            if (current_health + value > max_health)
+            if (current_health.Value + value > max_health)
             {
-                if (HealthPoint == 3)
+                if (HealthPoint.Value == 3)
                 {
-                    current_health = max_health;
+                    current_health.Value = max_health;
                 }
-                else if (HealthPoint < 3)
+                else if (HealthPoint.Value < 3)
                 {
                     if (playersUI != null)
                     {
@@ -261,34 +350,54 @@ public abstract class PlayerControllerBase : MonoBehaviour
                         {
                             if (playersUI.hearts[i].activeSelf == false)
                             {
-                                playersUI.hearts[i].gameObject.SetActive(true);
+                                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                                {
+                                    playersUI.hearts[i].gameObject.SetActive(true);
+                                }
+                                else
+                                {
+                                    UpdateHeartsClientRpc(true, i);
+                                }
                                 break;
                             }
                         }
                     }
 
-                    HealthPoint++;
-                    current_health = current_health + value - max_health;
+                    HealthPoint.Value++;
+                    current_health.Value = current_health.Value + value - max_health;
                 }
             }
             else
             {
-                current_health += value;
+                current_health.Value += value;
             }
         }
         else
 
         {
+            value = ModifyDamage(value);
+            Debug.Log(value);
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("GetHit")) {
-                animator.SetTrigger("GetHit");
+                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                {
+                    animator.SetTrigger("GetHit");
+                
+                }
+                else
+                {
+                    if (IsOwner)
+                    {
+                        UpdateAnimatorTriggerParameterServerRpc("GetHit");
+                    }
+                }
             }
             
 
-            if (current_health - value <= 0)
+            if (current_health.Value - value <= 0)
             {
-                if (HealthPoint > 1)
+                if (HealthPoint.Value > 1)
                 {
-                    HealthPoint--;
+                    HealthPoint.Value--;
 
                     if (playersUI != null)
                     {
@@ -296,76 +405,147 @@ public abstract class PlayerControllerBase : MonoBehaviour
                         {
                             if (playersUI.hearts[i].activeSelf == true)
                             {
-                                playersUI.hearts[i].SetActive(false);
+                                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                                {
+                                    playersUI.hearts[i].gameObject.SetActive(false);
+                                }
+                                else
+                                {
+                                    UpdateHeartsClientRpc(false , i);
+                                }
                                 break;
                             }
                         }
                     }
 
-                    current_health = max_health;
+                    current_health.Value = max_health;
                 }
                 else
                 {
-                    SceneManager.LoadScene("Game Over");
-                    current_health = 0;
+                    
+                    current_health.Value = 0;
                     playersUI.hearts[2].SetActive(false);
-                    animator.SetTrigger("IsDead");
+                    if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                    {
+                        animator.SetTrigger("IsDead");
+                
+                    }
+                    else
+                    {
+                        if (IsOwner)
+                        {
+                            UpdateAnimatorTriggerParameterServerRpc("IsDead");
+                        }
+                    }
                     Invoke(nameof(OnDestory), 1f);
                 }
             }
             else
             {
-                current_health -= value;
+                current_health.Value -= value;
             }
 
         }
+ 
+        RefreshUI();
 
-        playersUI?.SetHealthBar(current_health, max_health);
+    }
+
+    [ServerRpc]
+    private void HandleHealthServerRpc(int value, bool status)
+    {
+        HandleHealthLocally(value, status);
     }
 
     public virtual void StaminaSystem(float value, bool status)
     {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            HandleStaminaLocally(value, status);
+        }
+        else
+        {
+            if (IsOwner)
+            {
+                HandleStaminaServerRpc(value, status);
+            }
+        }
+    }
+
+    private void HandleStaminaLocally(float value, bool status)
+    {
         if (status == true)
         {
-            if (Current_Stamina + value > Stamina_max)
+            if (Current_Stamina.Value + value > Stamina_max)
             {
-                Current_Stamina = Stamina_max;
+                Current_Stamina.Value = Stamina_max;
             }
             else
             {
-                Current_Stamina += value;
+                Current_Stamina.Value += value;
             }
-            Current_Stamina = Mathf.Min(Current_Stamina + value, Stamina_max);
+            Current_Stamina.Value = Mathf.Min(Current_Stamina.Value + value, Stamina_max);
 
         }
         else
         {
-            if (Current_Stamina - value <= 0)
+            if (Current_Stamina.Value - value <= 0)
             {
-                Current_Stamina = 0;
+                Current_Stamina.Value = 0;
             }
             else
             {
-                Current_Stamina -= value;
+                Current_Stamina.Value -= value;
             }
-            Current_Stamina = Mathf.Max(Current_Stamina - value, 0f);
+            Current_Stamina.Value = Mathf.Max(Current_Stamina.Value - value, 0f);
 
-            if (Current_Stamina <= 0 && !isRegeneratingStamina)
+            if (Current_Stamina.Value <= 0 && !isRegeneratingStamina)
             {
                 if (regenCoroutine != null)
+                {
+                    regenCoroutine = StartCoroutine(RegenerateStamina());
                     StopCoroutine(regenCoroutine);
+                }
+                    
 
-                regenCoroutine = StartCoroutine(RegenerateStamina());
+               
             }
+           
         }
-        playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
+
+        RefreshUI();
     }
 
+    [ServerRpc]
+    private void HandleStaminaServerRpc(float value, bool status)
+    {
+        HandleStaminaLocally(value, status);
+    }
     protected virtual void OnDestory()
     {
         PlaySound(deathClip);
-        SceneManager.LoadScene("Game Over");
-        Destroy(gameObject);
+        
+        
+       if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+       {
+               SceneManager.LoadScene("Game Over");
+       }
+       else {
+               if (NetworkManager.Singleton.IsServer) {
+                   NetworkManager.Singleton.SceneManager.LoadScene("Game Over", UnityEngine.SceneManagement.LoadSceneMode.Single);
+               }
+        }
+        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+        {
+            Destroy(gameObject);
+        }
+        else {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject);
+            }
+        }
     }
 
     public virtual void Respawn(Vector3 position)
@@ -380,7 +560,7 @@ public abstract class PlayerControllerBase : MonoBehaviour
 
     public void SetStamina(float value)
     {
-        Current_Stamina += value;
+        Current_Stamina.Value += value;
         Stamina_max += value;
     }
     
@@ -454,15 +634,127 @@ public abstract class PlayerControllerBase : MonoBehaviour
         isRegeneratingStamina = true;
         yield return new WaitForSeconds(staminaRegenDelay);
 
-        while (Current_Stamina < Stamina_max)
+        while (Current_Stamina.Value < Stamina_max)
         {
-            Current_Stamina += staminaRegenRate * Time.deltaTime;
-            if (Current_Stamina > Stamina_max)
-                Current_Stamina = Stamina_max;
-            playersUI?.SetStaminaBar(Current_Stamina, Stamina_max);
+            Current_Stamina.Value += staminaRegenRate * Time.deltaTime;
+            if (Current_Stamina.Value > Stamina_max)
+                Current_Stamina.Value = Stamina_max;
+            playersUI?.SetStaminaBar(Current_Stamina.Value, Stamina_max);
             yield return null;
         }
 
         isRegeneratingStamina = false;
     }
+    public void RefreshUI()
+    {
+        playersUI?.SetHealthBar(current_health.Value, max_health);
+        playersUI?.SetStaminaBar(Current_Stamina.Value, Stamina_max);
+    }
+    [ClientRpc]
+    private void UpdateHeartsClientRpc(bool status , int i)
+    {
+        
+            playersUI.hearts[i].SetActive(status);
+        
+    }
+
+
+    [ClientRpc]
+    public void SetPlayerUIClientRpc(bool isMelee)
+    {
+        if (isMelee)
+            playersUI = GameObject.Find("MeleeUIManager  ").GetComponent<PlayersUI>();
+        else
+            playersUI = GameObject.Find("RangedUIManager  ").GetComponent<PlayersUI>();
+
+        RefreshUI();
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorBoolParameterServerRpc(string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc(string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc(string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
+    }
+    public override void OnNetworkSpawn()
+    {
+        // پیدا کردن کامپوننت UI (مثلا روی Canvas یا یه GameObject خاص)
+       
+
+        // Subscribe به تغییرات NetworkVariable
+        Current_Stamina.OnValueChanged += OnStaminaChanged;
+        current_health.OnValueChanged += OnHealthChanged;
+
+        // مقدار اولیه UI رو هم ست کن
+        OnStaminaChanged(0, Current_Stamina.Value);
+        OnHealthChanged(0, current_health.Value);
+        
+        
+
+    }
+
+    private void OnStaminaChanged(float previous, float current)
+    {
+        if (playersUI != null)
+            playersUI.SetStaminaBar(current, Stamina_max);
+    }
+
+    private void OnHealthChanged(float previous, float current)
+    {
+        
+        if (playersUI != null)
+            playersUI.SetHealthBar(current, max_health);
+    }
+    public void TakeDamageFromServer(int value, bool status)
+    {
+        HandleHealthLocally(value, status);
+    }
+    [ClientRpc]
+    public void SetupCameraClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        if (!IsOwner) return;
+
+        CameraManager camManager = FindObjectOfType<CameraManager>();
+        Camera cam = GetComponentInChildren<Camera>();
+
+        if (CharacterID.Value < 2)
+        {
+            camManager.player2 = gameObject;
+            camManager.camera2 = cam;
+        }
+        else
+        {
+            camManager.player1 = gameObject;
+            camManager.camera1 = cam;
+        }
+
+        Debug.Log($"[Camera RPC] Camera set for player with CharacterID {CharacterID.Value}");
+    }
+     [ClientRpc]
+      private void DestroyObjectClientRpc()
+      {
+            Destroy(gameObject);
+       }
+
+
+    
+    
+
+   
+
+
+
+
+
 }

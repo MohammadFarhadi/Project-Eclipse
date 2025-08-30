@@ -38,6 +38,7 @@ public class MenuController : MonoBehaviour
 
     public void PlayGame()
     {
+        GameModeManager.Instance.CurrentMode = GameMode.Local;
         SceneManager.LoadScene("Starting Scene"); // 👈 اسم دقیق Scene رو بذار اینجا
     }
 

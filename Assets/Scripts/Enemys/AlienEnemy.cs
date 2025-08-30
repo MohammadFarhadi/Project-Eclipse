@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
-public class AlienEnemy : MonoBehaviour, InterfaceEnemies
+public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
 {
     [Header("Sounds")]
     public AudioClip attackClip;
@@ -20,7 +22,13 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
     public float attackCooldown = 1f;
 
     [SerializeField] private Animator animator;
-    [SerializeField] private int health = 3;
+    [SerializeField] private NetworkAnimator networkAnimator;
+    [SerializeField] private NetworkVariable<int> health = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
+    public int HealthPoint => health.Value;
 
     public Transform pointA;
     public Transform pointB;
@@ -31,6 +39,8 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
@@ -53,8 +63,14 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
 
             Vector3 targetPosition = new Vector3(currentTarget.transform.position.x, transform.position.y, transform.position.z);
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-            animator.SetTrigger("IsWalk");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("IsWalk");
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("IsWalk");
+            }
         }
     }
 
@@ -122,10 +138,24 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
     {
         if (isDying) return;
 
-        health -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                health.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            health.Value -= damage;
+        }
         StartCoroutine(FlashRed());
 
-        if (health <= 0)
+        if (health.Value <= 0)
         {
             isDying = true;
             StartCoroutine(DeathEffect());
@@ -183,17 +213,88 @@ public class AlienEnemy : MonoBehaviour, InterfaceEnemies
         DropRandomItem();
         GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
         deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
-        Destroy(gameObject);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject);
+            }
+            
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public void DropRandomItem()
     {
         if (dropItems.Length == 0) return;
-        
-        int index = Random.Range(0, dropItems.Length);
-        Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
-        Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
-        Instantiate(Sonin, transform.position, Quaternion.identity);
-        
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (!IsServer) return;
+
+            int index = Random.Range(0, dropItems.Length);
+            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f);
+            GameObject dropped = Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            if (dropped.TryGetComponent(out NetworkObject netObj))
+            {
+                netObj.Spawn();
+            }
+
+            GameObject soninDrop = Instantiate(Sonin, transform.position, Quaternion.identity);
+            if (soninDrop.TryGetComponent(out NetworkObject soninNet))
+            {
+                soninNet.Spawn();
+            }
+        }
+        else
+        {
+            int index = Random.Range(0, dropItems.Length);
+            Instantiate(dropItems[index], transform.position + Vector3.up, Quaternion.identity);
+            Instantiate(Sonin, transform.position, Quaternion.identity);
+        }
+    }
+    [ClientRpc]
+    private void DestroyObjectClientRpc()
+    {
+        Destroy(gameObject);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        health.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
+    }
+    
+    public void SetHealth(int hp)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer) health.Value = hp;
+            else ApplyDamageServerRpc(health.Value - hp); // or a dedicated SetHealthServerRpc
+        }
+        else
+        {
+            health.Value = hp;
+        } 
     }
     
 }

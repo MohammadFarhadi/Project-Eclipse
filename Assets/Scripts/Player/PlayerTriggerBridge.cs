@@ -1,7 +1,7 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class PlayerTriggerBridge : MonoBehaviour
+public class PlayerTriggerBridge : NetworkBehaviour
 {
     private PlayerControllerBase currentPlayer;
 
@@ -28,33 +28,26 @@ public class PlayerTriggerBridge : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (currentPlayer != null)
         {
             if (canTrigger && currentPlayer.IsInteracting())
             {
-                Debug.Log("salammmmmmmmm");
+                Debug.Log("Bridge interaction triggered!");
 
-                // تغییر جهت حرکت
-                movingUp = !movingUp;
-                moving = true;
-
-                // فقط بار اول collider رو فعال کن
-                bridgeCollider.isTrigger = false;
-                canTrigger = false;
-
-                // اگر انیمیشن هم هست
-                Animator animator = bridgeObject.GetComponentInChildren<Animator>();
-                if (animator != null)
-                    animator.SetBool("MaskReveal", true);
+                TriggerBridge();
             }
         }
 
         if (moving)
         {
             Vector3 destination = movingUp ? startPos + Vector3.up * moveDistance : startPos;
-            bridgeObject.transform.position = Vector3.MoveTowards(bridgeObject.transform.position, destination, moveSpeed * Time.deltaTime);
+            bridgeObject.transform.position = Vector3.MoveTowards(
+                bridgeObject.transform.position,
+                destination,
+                moveSpeed * Time.deltaTime
+            );
 
             if (Vector3.Distance(bridgeObject.transform.position, destination) < 0.01f)
             {
@@ -80,4 +73,65 @@ public class PlayerTriggerBridge : MonoBehaviour
             canTrigger = false;
         }
     }
+
+    /// <summary>
+    /// تصمیم می‌گیرد پل لوکال فعال شود یا به‌صورت آنلاین سینک شود
+    /// </summary>
+    public void TriggerBridge()
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            TriggerBridgeServerRpc();
+        }
+        else
+        {
+            PlayBridgeAnimationLocal();
+        }
+    }
+
+    #region Local Mode
+
+    private void PlayBridgeAnimationLocal()
+    {
+        movingUp = !movingUp;
+        moving = true;
+
+        bridgeCollider.isTrigger = false;
+        canTrigger = false;
+
+        Animator animator = bridgeObject.GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.SetBool("MaskReveal", true);
+        }
+    }
+
+    #endregion
+
+    #region Online Mode
+
+    [ServerRpc(RequireOwnership = false)]
+    private void TriggerBridgeServerRpc()
+    {
+        movingUp = !movingUp;
+        moving = true;
+
+        bridgeCollider.isTrigger = false;
+        canTrigger = false;
+
+        PlayBridgeAnimationClientRpc();
+    }
+
+    [ClientRpc]
+    private void PlayBridgeAnimationClientRpc()
+    {
+        bridgeCollider.isTrigger = false;
+        Animator animator = bridgeObject.GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.SetBool("MaskReveal", true);
+        }
+    }
+
+    #endregion
 }

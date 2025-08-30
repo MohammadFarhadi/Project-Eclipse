@@ -2,76 +2,91 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    [Header("Point References")]
-    [Tooltip("The first point the platform moves to.")]
-    public Transform pointA;
-    [Tooltip("The second point the platform moves to.")]
-    public Transform pointB;
-
     [Header("Movement Settings")]
-    [Tooltip("Speed at which the platform moves.")]
-    public float moveSpeed = 2f;
-    [Tooltip("Time (in seconds) to wait when the platform reaches a point.")]
+    public float moveDistance = 3f;
+    public float moveDuration = 2.5f;
     public float waitTime = 1f;
+    public float startDelay = 15f;
 
-    private Vector2 _targetPosition;
+    private float _startDelayTimer;
+    private bool _startedMoving = false;
+
+    private float _moveTimer = 0f;
+    private bool _movingUp = true;
     private bool _waiting = false;
     private float _waitTimer = 0f;
-    private bool _goingToB = true;
+
+    private float _initialLocalX;
+    private float _initialLocalY;
+    private float _initialLocalZ;
 
     void Start()
     {
-        if (pointA == null || pointB == null)
-        {
-            Debug.LogError("MovingPlatform: Please assign both Point A and Point B in the Inspector.");
-            enabled = false;
-            return;
-        }
+        _startDelayTimer = startDelay;
 
-        // Initially, move toward point B
-        _targetPosition = pointB.position;
-        _goingToB = true;
+        // ذخیره لوکال پوزیشن
+        _initialLocalX = transform.localPosition.x;
+        _initialLocalY = transform.localPosition.y;
+        _initialLocalZ = transform.localPosition.z;
     }
 
     void Update()
     {
+        if (!_startedMoving)
+        {
+            _startDelayTimer -= Time.deltaTime;
+            if (_startDelayTimer <= 0f)
+            {
+                _startedMoving = true;
+                _moveTimer = 0f;
+            }
+            return;
+        }
+
         if (_waiting)
         {
             _waitTimer -= Time.deltaTime;
             if (_waitTimer <= 0f)
             {
                 _waiting = false;
-                // Swap direction
-                _goingToB = !_goingToB;
-                _targetPosition = _goingToB ? pointB.position : pointA.position;
+                _movingUp = !_movingUp;
+                _moveTimer = 0f;
             }
             return;
         }
 
-        // Move toward the current target
-        Vector2 currentPos = transform.position;
-        Vector2 newPos = Vector2.MoveTowards(currentPos, _targetPosition, moveSpeed * Time.deltaTime);
-        transform.position = newPos;
+        _moveTimer += Time.deltaTime;
 
-        // Check if we've reached the target (within a small tolerance)
-        if (Vector2.Distance(newPos, _targetPosition) < 0.01f)
+        float t = Mathf.Clamp01(_moveTimer / moveDuration);
+        float offsetY = Mathf.Lerp(
+            _movingUp ? 0f : moveDistance,
+            _movingUp ? moveDistance : 0f,
+            t
+        );
+
+        // استفاده از لوکال پوزیشن
+        transform.localPosition = new Vector3(
+            _initialLocalX,
+            _initialLocalY + offsetY,
+            _initialLocalZ
+        );
+
+        if (t >= 1f)
         {
-            // Start waiting
             _waiting = true;
             _waitTimer = waitTime;
         }
     }
 
-    // Draw gizmos in the Scene view to visualize the two points and a line between them
     void OnDrawGizmos()
     {
-        if (pointA != null && pointB != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(pointA.position, 0.1f);
-            Gizmos.DrawSphere(pointB.position, 0.1f);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(pointA.position, pointB.position);
-        }
+        Gizmos.color = Color.green;
+
+        Vector3 bottomPos = transform.position;
+        Vector3 topPos = bottomPos + new Vector3(0, moveDistance, 0);
+
+        Gizmos.DrawSphere(bottomPos, 0.1f);
+        Gizmos.DrawSphere(topPos, 0.1f);
+        Gizmos.DrawLine(bottomPos, topPos);
     }
 }

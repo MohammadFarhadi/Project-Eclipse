@@ -1,5 +1,7 @@
+using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
-public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
+public class PatrollingEnemy : NetworkBehaviour , InterfaceEnemies
 {
     [Header("Sounds")]
     public AudioClip attackClip;
@@ -11,8 +13,14 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
     public GameObject leftSensor;
     public GameObject rightSensor;
     [SerializeField] private Animator animator;
+    [SerializeField] private NetworkAnimator networkAnimator;
+    public int HealthPoint => Mathf.RoundToInt(health.Value);
 
-    public int health = 3;
+    private NetworkVariable<int> health = new NetworkVariable<int>(
+        3,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
     // 👇 اضافه کن:
     public EnemyHealthBarDisplay healthBarDisplay;
@@ -22,12 +30,28 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
     
     void Start()
     {
+        health.OnValueChanged += OnHealthChanged;
+
         if (healthBarDisplay != null)
         {
-            healthBarDisplay.UpdateHealthBar(health);
+            healthBarDisplay.UpdateHealthBar(health.Value);
+        }
+        animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
+    }
+    private void OnHealthChanged(int oldValue, int newValue)
+    {
+        if (healthBarDisplay != null)
+        {
+            healthBarDisplay.Show(newValue);
+            healthBarDisplay.UpdateHealthBar(newValue);
         }
     }
 
+    private void OnDestroy()
+    {
+        health.OnValueChanged -= OnHealthChanged;
+    }
     void Update()
     {
         transform.position += new Vector3(direction * speed * Time.deltaTime, 0, 0);
@@ -46,7 +70,15 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
         {
             GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
             attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
-            animator.SetTrigger("Attack");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("Attack");
+
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Attack");
+            }
             PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
             player.HealthSystem(50, false);
             Debug.Log("Player hited ");
@@ -55,27 +87,58 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
 
     public void TakeDamage(int damage , Transform attacker)
     {
-        health -= damage;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                health.Value -= damage;
+            }
+            else
+            {
+                ApplyDamageServerRpc(damage);
+            }
+        }
+        else
+        {
+            health.Value -= damage;
+        }
 
         // 👇 بروز رسانی نوار سلامتی
         if (healthBarDisplay != null)
         {
-            healthBarDisplay.Show(health);
-            healthBarDisplay.UpdateHealthBar(health);
+            healthBarDisplay.Show(health.Value);
+            healthBarDisplay.UpdateHealthBar(health.Value);
         }
         
 
 
-        if (health <= 0 && direction == 1)
+        if (health.Value <= 0 && direction == 1)
         {
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("Die");
+ 
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Die");
+            }
             
-            animator.SetTrigger("Die");
             Invoke(nameof(Die), 0.5f);
         }
-        else if (health <= 0 && direction == -1)
+        else if (health.Value <= 0 && direction == -1)
         {
+            
            
-            animator.SetTrigger("Die1");
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("Die1");
+ 
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Die1");
+            }
             Invoke(nameof(Die), 0.5f);
         }
 
@@ -86,16 +149,87 @@ public class PatrollingEnemy : MonoBehaviour , InterfaceEnemies
         GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
         deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
         DropRandomItem();
-        Destroy(gameObject);
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer)
+            {
+                DestroyObjectClientRpc();
+                Destroy(gameObject);
+            }
+            
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public void DropRandomItem()
     {
         if (dropItems.Length == 0) return;
-        
+
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (!IsServer) return;
+
             int index = Random.Range(0, dropItems.Length);
-            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f); // یک واحد بالاتر
-            Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            Vector3 spawnPosition = transform.position + new Vector3(0f, 1f, 0f);
+            GameObject dropped = Instantiate(dropItems[index], spawnPosition, Quaternion.identity);
+            if (dropped.TryGetComponent(out NetworkObject netObj))
+            {
+                netObj.Spawn();
+            }
+
+            GameObject soninDrop = Instantiate(Sonin, transform.position, Quaternion.identity);
+            if (soninDrop.TryGetComponent(out NetworkObject soninNet))
+            {
+                soninNet.Spawn();
+            }
+        }
+        else
+        {
+            int index = Random.Range(0, dropItems.Length);
+            Instantiate(dropItems[index], transform.position + Vector3.up, Quaternion.identity);
             Instantiate(Sonin, transform.position, Quaternion.identity);
-        
+        }
+    }
+    [ClientRpc]
+    private void DestroyObjectClientRpc()
+    {
+        Destroy(gameObject);
+    }
+    [ServerRpc(RequireOwnership = false)]
+    void ApplyDamageServerRpc(int damageAmount)
+    {
+        health.Value -= damageAmount;
+    }
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    {
+        networkAnimator.Animator.SetBool(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    {
+        networkAnimator.Animator.SetFloat(parameterName, value);
+    }
+    [ServerRpc(RequireOwnership = false)]
+
+    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    {
+        networkAnimator.Animator.SetTrigger(parameterName);
+    }
+    
+    public void SetHealth(int hp)
+    {
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (IsServer) health.Value = hp;
+            else ApplyDamageServerRpc(health.Value - hp); // or a dedicated SetHealthServerRpc
+        }
+        else
+        {
+            health.Value = hp;
+        } 
     }
 }

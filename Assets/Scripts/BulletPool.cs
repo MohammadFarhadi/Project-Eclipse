@@ -5,7 +5,7 @@ public class BulletPool : MonoBehaviour
 {  
     //می خوام یه دیکشنری درست کنم که این دیکشنری از مدل های مختلف تیر درست شده که هر کدوم از این مدل ها خودشون یه آراین.
     [System.Serializable]
-    public class BulletType
+    public class BulletType 
     {
         public string bulletTag;
         public GameObject bulletPrefab;
@@ -15,18 +15,21 @@ public class BulletPool : MonoBehaviour
     private Dictionary<string, List<GameObject>> BulletPools;
     void Start()
     {
-        BulletPools = new Dictionary<string, List<GameObject>>();
-        for (int i = 0; i < bulletTypes.Count; i++)
-        {
-            List<GameObject> pool = new List<GameObject>();
-            BulletPools[bulletTypes[i].bulletTag] = pool;
-            for (int j = 1; j < bulletTypes[i].poolSize; j++)
+//        if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+  //      {
+            BulletPools = new Dictionary<string, List<GameObject>>();
+            for (int i = 0; i < bulletTypes.Count; i++)
             {
-                GameObject obj = Instantiate(bulletTypes[i].bulletPrefab);
-                obj.SetActive(false);
-                pool.Add(obj);
+                List<GameObject> pool = new List<GameObject>();
+                BulletPools[bulletTypes[i].bulletTag] = pool;
+                for (int j = 1; j < bulletTypes[i].poolSize; j++)
+                {
+                    GameObject obj = Instantiate(bulletTypes[i].bulletPrefab);
+                    obj.SetActive(false);
+                    pool.Add(obj);
+                }
             }
-        }
+  //      }
     }
     public GameObject GetBullet(string bulletTag)
     {

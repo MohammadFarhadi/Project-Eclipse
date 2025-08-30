@@ -6,7 +6,7 @@ public class GameButtonsManager : MonoBehaviour
     // این متد بازی فعلی رو ری‌لود می‌کنه
     public void RestartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Starting Scene");
     }
 
     // این متد شما رو به منوی اصلی برمی‌گردونه (نام سین منو رو به‌جای "MainMenu" بذار)

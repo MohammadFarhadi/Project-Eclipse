@@ -1,14 +1,18 @@
 using UnityEngine;
+using Unity.Netcode; // اگر NGO استفاده میکنی
 
 public class ShopTrigger : MonoBehaviour
 {
     public GameObject shopUI;
+    private bool canOpenShop = false;
+    private PlayerControllerBase localPlayer;
+
     public ShopManager shopManager;
 
     private void Awake()
     {
         shopManager = GameObject.Find("ShopManager").GetComponent<ShopManager>();
-        shopUI = ShopManager.Instance.GetShopUI();
+        //shopUI = ShopManager.Instance.GetShopUI();
 
         if (shopUI == null)
         {
@@ -22,47 +26,70 @@ public class ShopTrigger : MonoBehaviour
         }
 
         shopUI.SetActive(false);
-        /*
-         * // مقداردهی خودکار به shopUI اگر null باشد
-        if (shopUI == null)
-        {
-            shopUI = GameObject.Find("ShopCanvas");
-            if (shopUI == null)
-                Debug.LogWarning("ShopCanvas not found in the scene. Please check the name.");
-        }
+        
+    }
 
-        // مقداردهی خودکار به shopManager اگر null باشد
-        if (shopManager == null)
+    private void Update()
+    {
+        // فقط روی لوکال پلیر منطق اجرا بشه
+        if (localPlayer != null) // شرط برای لوکال پلیر
         {
-            shopManager = FindObjectOfType<ShopManager>();
-            if (shopManager == null)
-                Debug.LogWarning("ShopManager not found in the scene.");
+            if (canOpenShop && Input.GetKeyDown(KeyCode.B))
+            {
+                ToggleShop();
+            }
         }
+    }
 
-        // غیرفعال کردن UI در شروع
-        if (shopUI != null)
-            shopUI.SetActive(false);
-         */
+    private void ToggleShop()
+    {
+        shopUI.SetActive(!shopUI.activeSelf);
+        shopManager.SetCurrentPlayer(localPlayer);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        var player = other.GetComponent<PlayerControllerBase>();
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
         {
-            if (shopUI != null) shopUI.SetActive(true);
-
-            var player = other.GetComponent<PlayerControllerBase>();
-            shopManager.SetCurrentPlayer(player);
+            if (player != null && player.IsOwner) // فقط لوکال پلیر
+            {
+                canOpenShop = true;
+                localPlayer = player;
+            }
         }
+        else
+        {
+            if (player != null)
+            {
+                canOpenShop = true;
+                localPlayer = player;
+            }
+        }
+       
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        var player = other.GetComponent<PlayerControllerBase>();
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
         {
-            if (shopUI != null) shopUI.SetActive(false);
-
-            if (shopManager != null) shopManager.SetCurrentPlayer(null);
+            if (player != null && player.IsOwner) // فقط لوکال پلیر
+            {
+                canOpenShop = false;
+                shopUI.SetActive(false); // اگه بیرون رفت ببنده
+                localPlayer = null;
+            }
         }
+        else
+        {
+            if (player != null)
+            {
+                canOpenShop = false;
+                shopUI.SetActive(false); // اگه بیرون رفت ببنده
+                localPlayer = null;
+            }
+        }
+       
     }
 }

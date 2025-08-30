@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 8334064367099894449}
   - component: {fileID: 7599771818805608776}
   - component: {fileID: 444360529227223722}
+  - component: {fileID: -283456777688920622}
   - component: {fileID: 6911501468797889475}
   m_Layer: 0
   m_Name: KeyCollectible
-  m_TagString: Untagged
+  m_TagString: SaveAble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,6 +159,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.16, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &-283456777688920622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115109503595144896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2451634537
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &6911501468797889475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,5 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b6e0a81aad53247bef3535ed48a07e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   type: 2
   value: 10

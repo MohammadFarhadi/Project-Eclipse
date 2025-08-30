@@ -15,7 +15,18 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        if (player1 == null || player2 == null) return;
+        if (player1 == null || player2 == null)
+        {
+            player1 = GameObject.Find("Melle1Player(Clone)") ?? GameObject.Find("Melle2Player(Clone)");
+            player2 = GameObject.Find("Ranged1Player(Clone)") ?? GameObject.Find("RangedPlayer(Clone)");
+            
+        }
+        if (camera1 == null || camera2 == null)
+        {
+            camera1 = player1.GetComponentInChildren<Camera>();
+            camera2 = player2.GetComponentInChildren<Camera>();
+            
+        }
 
         float distance = Vector3.Distance(player1.transform.position, player2.transform.position);
 

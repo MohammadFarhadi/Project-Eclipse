@@ -150,8 +150,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 40
-        height: 16
+        width: 55
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,55 +166,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: AddFriend_1
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 13
-        width: 27
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bf9015741efbc99d0800000000000000
-      internalID: -2766125096827287045
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: AddFriend_2
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 8
-        width: 21
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0f0d6b5fb4d267850800000000000000
-      internalID: 6374332126857711856
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 81bf14cfd48d4e1409b227e60f993520
     internalID: 0
     vertices: []
     indices: 
@@ -225,8 +181,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       AddFriend_0: -8335121031177659847
-      AddFriend_1: -2766125096827287045
-      AddFriend_2: 6374332126857711856
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
