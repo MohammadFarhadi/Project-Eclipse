@@ -3,6 +3,7 @@ using UnityEngine;
 public class OfflineModeUI : MonoBehaviour
 {
     public GameObject offlineModeUI;
+    public GameObject credit;
     void Start()
     {
     }
@@ -16,6 +17,7 @@ public class OfflineModeUI : MonoBehaviour
     public void activateOfflineModeUI()
     {
         offlineModeUI.SetActive(true);
+        credit.SetActive(false);
     }
 
     public void deactivateOfflineModeUI()

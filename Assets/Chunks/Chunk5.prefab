@@ -3526,9 +3526,11 @@ MonoBehaviour:
   - {fileID: 3156135426134705844}
   - {fileID: 7219429489285803218}
   - {fileID: 6620377718655308802}
-  triggerTarget: {fileID: 0}
   dialoguePanel: {fileID: 1946844934265383716}
-  boxCollider: {fileID: 0}
+  definition: {fileID: 11400000, guid: 1ea5f33d1e9094a44bea0e2d5b1b5bae, type: 2}
+  OnDialogueEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3780170077496533191
 GameObject:
   m_ObjectHideFlags: 0

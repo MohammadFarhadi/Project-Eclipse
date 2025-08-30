@@ -38822,9 +38822,21 @@ PrefabInstance:
       value: 0.1254902
       objectReference: {fileID: 0}
     - target: {fileID: 7508254166829689286, guid: 269f3fb81845e4dc6bb9f3606e4c609b, type: 3}
+      propertyPath: definition
+      value: 
+      objectReference: {fileID: 11400000, guid: 174467d866bd3469bba5f4cc6b1dfcc2, type: 2}
+    - target: {fileID: 7508254166829689286, guid: 269f3fb81845e4dc6bb9f3606e4c609b, type: 3}
       propertyPath: triggerTarget
       value: 
       objectReference: {fileID: 6025880641939790379}
+    - target: {fileID: 7508254166829689286, guid: 269f3fb81845e4dc6bb9f3606e4c609b, type: 3}
+      propertyPath: OnDialogueEnded.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508254166829689286, guid: 269f3fb81845e4dc6bb9f3606e4c609b, type: 3}
+      propertyPath: OnDialogueEnded.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8050387257736737945, guid: 269f3fb81845e4dc6bb9f3606e4c609b, type: 3}
       propertyPath: m_IsActive
       value: 0
