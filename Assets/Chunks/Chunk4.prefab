@@ -63,7 +63,7 @@ Transform:
   m_GameObject: {fileID: 518467052284469244}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.741732, y: -34.38481, z: 8.390856}
+  m_LocalPosition: {x: 15.389999, y: -31.439995, z: 8.390856}
   m_LocalScale: {x: 3, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26026,7 +26026,7 @@ Transform:
   m_GameObject: {fileID: 2143742204501883132}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.341732, y: -33.184814, z: 8.390856}
+  m_LocalPosition: {x: 8.99, y: -30.24, z: 8.390856}
   m_LocalScale: {x: 3, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29873,7 +29873,7 @@ Transform:
   m_GameObject: {fileID: 6795484146434793763}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.681732, y: -33.164814, z: 8.390856}
+  m_LocalPosition: {x: 19.33, y: -30.219997, z: 8.390856}
   m_LocalScale: {x: 8, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34571,7 +34571,7 @@ Transform:
   m_GameObject: {fileID: 8755686250192305660}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.771732, y: -34.164814, z: 8.390856}
+  m_LocalPosition: {x: 12.42, y: -31.219997, z: 8.390856}
   m_LocalScale: {x: 3, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34784,7 +34784,7 @@ Transform:
   m_GameObject: {fileID: 8991560789037340763}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.721732, y: -31.374815, z: 8.390856}
+  m_LocalPosition: {x: 7.62, y: -28.83, z: 8.390856}
   m_LocalScale: {x: 3, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38139,11 +38139,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1650133971107866731, guid: 1864c4c790ed8e2499a367804cdeed96, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.11173
+      value: 19.3
       objectReference: {fileID: 0}
     - target: {fileID: 1650133971107866731, guid: 1864c4c790ed8e2499a367804cdeed96, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -31.984816
+      value: -29.04
       objectReference: {fileID: 0}
     - target: {fileID: 1650133971107866731, guid: 1864c4c790ed8e2499a367804cdeed96, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38176,6 +38176,24 @@ PrefabInstance:
     - target: {fileID: 1650133971107866731, guid: 1864c4c790ed8e2499a367804cdeed96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066204647658445867, guid: 1864c4c790ed8e2499a367804cdeed96, type: 3}
+      propertyPath: logDir1Text
+      value: "[Personal Log \u2013 Research Assistant]\nThe crystals keep spreading. 
+        \nEach strike of the drill only makes them hum louder, brighter.  \nThey
+        shine like stars, but when you look too long\u2026 you lose track of time. 
+        \n\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066204647658445867, guid: 1864c4c790ed8e2499a367804cdeed96, type: 3}
+      propertyPath: logDir2Text
+      value: "Management says they\u2019re valuable\u2014\u201CLaminia\u2019s fortune.\u201D 
+        \nBut the men whisper they dream of the crystals speaking to them.  \nSome
+        don\u2019t come back from their shifts at all.  "
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066204647658445867, guid: 1864c4c790ed8e2499a367804cdeed96, type: 3}
+      propertyPath: logDir3Text
+      value: "I stayed late in the cave.  \nThought I heard my own voice echoing
+        back at me.  \nBut I was alone.  \n\u2026Wasn\u2019t I?  "
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
