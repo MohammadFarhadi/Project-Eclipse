@@ -6,6 +6,7 @@ public class PanelController : MonoBehaviour
     private GameObject panel1;
     private GameObject panel2;
     private GameObject panel3;
+    private PlayerControllerBase playerController;
 
     private bool playerInside = false;
     private bool isCoroutineRunning = false;
@@ -19,7 +20,7 @@ public class PanelController : MonoBehaviour
 
     void Update()
     {
-        if (playerInside && Input.GetKeyDown(KeyCode.O) && !isCoroutineRunning)
+        if (playerInside && playerController.IsInteracting()&& !isCoroutineRunning)
         {
             StartCoroutine(ShowPanelsSequence());
         }
