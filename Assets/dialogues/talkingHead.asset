@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf059beb43f24fef89440b91443d3d4, type: 3}
+  m_Name: talkingHead
+  m_EditorClassIdentifier: 
+  nodes:
+  - text: 'i am the TALKING HEAD. i know everything.
+
+      asnwer my 3 question
+      and i shall know you are worthy of asking me. if you answer incorrectly you
+      might die!'
+    choices:
+    - okay let's do this!
+    - i have lot's to ask about this planet.
+    - where is rest of you body?
+    next: 020000000200000002000000
+  - text: "\u201CWhat comes after gigawatt?\u201D"
+    choices:
+    - Kilowatt
+    - Niggawatt
+    - Meow-what?
+    next: 08000000090000000a000000
+  - text: "What\u2019s heavier: one kilogram of steel, or one kilogram of feathers?"
+    choices:
+    - Steel
+    - Your mama
+    - None!
+    next: 040000000500000007000000
+  - text: If you have 4 apples, and your friends take away 2, how many apples do
+      you have?
+    choices:
+    - 2
+    - what's an apple?
+    - ( say nothing and stare at his nose)
+    next: 0b0000000c0000000d000000
+  - text: wrong! next question.
+    choices:
+    - (continue.)
+    next: 01000000
+  - text: "Wrong! But\u2026 I\u2019ll allow the burn."
+    choices:
+    - (continue)
+    next: 01000000
+  - text: okay i concluded the reslut and.... you die!
+    choices:
+    - what?
+    next: feffffff
+  - text: correct!
+    choices:
+    - (continue)
+    next: 01000000
+  - text: "Wrong. That\u2019s backwards, you fool.\u201D"
+    choices:
+    - (continue)
+    next: 03000000
+  - text: "Correct! \u2026Oh, so you\u2019re a idiot and a racist too? wow."
+    choices:
+    - (continue)
+    next: 03000000
+  - text: wrong! even a cat answer that question.
+    choices:
+    - (continue)
+    next: 03000000
+  - text: "wrong! Because you don\u2019t have any friends at all. Ha! ha!\u201D"
+    choices:
+    - (continue)
+    next: 06000000
+  - text: ... waht's your iq level? Wrong! Wrong!
+    choices:
+    - (continue)
+    next: 06000000
+  - text: i guess i take that as a Wrong!
+    choices:
+    - (continue)
+    next: 06000000
+  rootIndex: 0

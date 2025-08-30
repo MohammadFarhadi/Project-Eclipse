@@ -845,6 +845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offlineModeUI: {fileID: 185522170}
+  credit: {fileID: 1110248143}
 --- !u!1 &185522170
 GameObject:
   m_ObjectHideFlags: 0

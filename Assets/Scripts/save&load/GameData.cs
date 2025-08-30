@@ -31,6 +31,10 @@ public class GameData
     public List<EnemyData>       Enemies      = new();
     public List<CollectibleData> Collectibles = new();
 
+    
+    //that one fucking object in chunk4
+    public bool TempGroundActive = true; 
+
     public GameData(MeleePlayerController player1, RangedPlayerController player2)
     {
 
@@ -130,6 +134,14 @@ public class GameData
                 });
             }
 
+            // ---- Temp Ground (special one-off) ----
+            var tempGround = GameObject.Find("TempGround");  
+            if (tempGround != null)
+            {
+                TempGroundActive = tempGround.activeSelf;
+
+            }
+            
         }
 
 
