@@ -21,14 +21,36 @@ public class LogSystem : MonoBehaviour
     [Header("Exit Button")]
     public Button exitButton;
 
-    private void Start()
-    {
-        directory1Button.onClick.AddListener(() => ShowStory("People are dying here, we need to avacuavate them as fast as possible"));
-        directory2Button.onClick.AddListener(() => ShowStory("there have been mutation in infected poeple we quantied them"));
-        directory3Button.onClick.AddListener(() => ShowStory("okay this is a valid statement: i hate niggers nigga nigga wigga ogo wiga."));
+    // These are the texts we’ll override per trigger
+    [TextArea] public string directory1Text;
+    [TextArea] public string directory2Text;
+    [TextArea] public string directory3Text;
 
+    void Awake()
+    {
+        // Wire once; listeners read the *current field values* at click time
+        directory1Button.onClick.RemoveAllListeners();
+        directory1Button.onClick.AddListener(() => ShowStory(directory1Text));
+
+        directory2Button.onClick.RemoveAllListeners();
+        directory2Button.onClick.AddListener(() => ShowStory(directory2Text));
+
+        directory3Button.onClick.RemoveAllListeners();
+        directory3Button.onClick.AddListener(() => ShowStory(directory3Text));
+
+        backButton.onClick.RemoveAllListeners();
         backButton.onClick.AddListener(BackToLogPanel);
+
+        exitButton.onClick.RemoveAllListeners();
         exitButton.onClick.AddListener(CloseLogPanel);
+    }
+
+    // Call this before showing the panel to inject per-object data
+    public void SetTexts(string t1, string t2, string t3)
+    {
+        directory1Text = t1;
+        directory2Text = t2;
+        directory3Text = t3;
     }
 
     void ShowStory(string story)
