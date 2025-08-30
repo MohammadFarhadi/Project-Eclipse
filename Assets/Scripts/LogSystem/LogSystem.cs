@@ -21,30 +21,36 @@ public class LogSystem : MonoBehaviour
     [Header("Exit Button")]
     public Button exitButton;
 
-    [Header("Click Area on the story panel (add a Button on the panel or a child)")]
-    public Button storyPanelClick;
+    // These are the texts we’ll override per trigger
+    [TextArea] public string directory1Text;
+    [TextArea] public string directory2Text;
+    [TextArea] public string directory3Text;
 
-    [Header("Story texts (set per instance)")]
-    [TextArea] public string directory1Text = "People are dying here, we need to evacuate them as fast as possible.";
-    [TextArea] public string directory2Text = "There have been mutations in infected people; we quarantined them.";
-    [TextArea] public string directory3Text = "Replace this with your third log entry.";
-
-    // typing state (so we can fast-forward)
-    Coroutine typingRoutine;
-    bool isTyping;
-    string fullStory;
-
-    void Start()
+    void Awake()
     {
+        // Wire once; listeners read the *current field values* at click time
+        directory1Button.onClick.RemoveAllListeners();
         directory1Button.onClick.AddListener(() => ShowStory(directory1Text));
+
+        directory2Button.onClick.RemoveAllListeners();
         directory2Button.onClick.AddListener(() => ShowStory(directory2Text));
+
+        directory3Button.onClick.RemoveAllListeners();
         directory3Button.onClick.AddListener(() => ShowStory(directory3Text));
 
+        backButton.onClick.RemoveAllListeners();
         backButton.onClick.AddListener(BackToLogPanel);
-        exitButton.onClick.AddListener(CloseLogPanel);
 
-        if (storyPanelClick != null)
-            storyPanelClick.onClick.AddListener(OnStoryPanelClick);
+        exitButton.onClick.RemoveAllListeners();
+        exitButton.onClick.AddListener(CloseLogPanel);
+    }
+
+    // Call this before showing the panel to inject per-object data
+    public void SetTexts(string t1, string t2, string t3)
+    {
+        directory1Text = t1;
+        directory2Text = t2;
+        directory3Text = t3;
     }
 
     void ShowStory(string story)
@@ -52,55 +58,29 @@ public class LogSystem : MonoBehaviour
         logPanel.SetActive(false);
         storyPanel.SetActive(true);
 
-        if (typingRoutine != null) StopCoroutine(typingRoutine);
-        fullStory = story ?? "";
-        typingRoutine = StartCoroutine(TypeWriterEffect(fullStory));
+        StopAllCoroutines();
+        StartCoroutine(TypeWriterEffect(story));
     }
 
     IEnumerator TypeWriterEffect(string story)
     {
-        isTyping = true;
         storyText.text = "";
-        var wait = new WaitForSeconds(0.05f);
-
         foreach (char c in story)
         {
             storyText.text += c;
-            yield return wait;
-        }
-
-        isTyping = false;
-        typingRoutine = null;
-    }
-
-    // 1st tap while typing -> finish instantly; 2nd tap -> go back
-    void OnStoryPanelClick()
-    {
-        if (isTyping)
-        {
-            if (typingRoutine != null) StopCoroutine(typingRoutine);
-            storyText.text = fullStory;
-            isTyping = false;
-            typingRoutine = null;
-        }
-        else
-        {
-            BackToLogPanel();
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
     void BackToLogPanel()
     {
-        if (typingRoutine != null) StopCoroutine(typingRoutine);
-        isTyping = false;
+        StopAllCoroutines();
         storyPanel.SetActive(false);
         logPanel.SetActive(true);
     }
 
     void CloseLogPanel()
     {
-        if (typingRoutine != null) StopCoroutine(typingRoutine);
-        isTyping = false;
         logPanel.SetActive(false);
         storyPanel.SetActive(false);
     }

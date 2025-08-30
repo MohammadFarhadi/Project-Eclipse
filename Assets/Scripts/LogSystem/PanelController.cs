@@ -25,15 +25,28 @@ public class PanelController : MonoBehaviour
         }
     }
 
+    [Header("Log content for THIS trigger")]
+    [TextArea] public string logDir1Text;
+    [TextArea] public string logDir2Text;
+    [TextArea] public string logDir3Text;
+
     IEnumerator ShowPanelsSequence()
     {
         isCoroutineRunning = true;
 
+        // Step 1: show panel1 for 5s
         panel1.SetActive(true);
         panel2.SetActive(false);
         panel3.SetActive(false);
 
         yield return new WaitForSeconds(5f);
+
+        // Step 2: inject per-object texts into the single LogSystem, then show panel2
+        var log = panel2.GetComponentInChildren<LogSystem>(true); // true finds it even if inactive
+        if (log)
+        {
+            log.SetTexts(logDir1Text, logDir2Text, logDir3Text);
+        }
 
         panel1.SetActive(false);
         panel2.SetActive(true);
@@ -56,4 +69,5 @@ public class PanelController : MonoBehaviour
             playerInside = false;
         }
     }
+    
 }
