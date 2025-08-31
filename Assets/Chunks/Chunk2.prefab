@@ -25890,6 +25890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85311daae832efb44aa52a4e3d032230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logSystem: {fileID: 0}
   logDir1Text: "[Personal Log \u2013 Maintenance Worker]\nWe were down here when
     the ground began to shake.\nAt first I thought it was another pipe burst\u2014happens
     all the time.\nBut the walls groaned, stones fell from the ceiling, and the lights

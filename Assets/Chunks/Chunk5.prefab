@@ -4722,6 +4722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85311daae832efb44aa52a4e3d032230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logSystem: {fileID: 0}
   logDir1Text: "[Personal Log \u2013 Citizen of Laminia]\nThey once called this place
     the jewel of the Republic.  \nMarkets full, lights burning all night, music in
     the streets.  \nWe thought nothing could touch us. \nNow\u2026 empty towers,

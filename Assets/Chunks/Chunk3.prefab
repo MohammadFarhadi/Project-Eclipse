@@ -1244,6 +1244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85311daae832efb44aa52a4e3d032230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logSystem: {fileID: 0}
   logDir1Text: "[Personal Log \u2013 Botanist]\nThe plants here are changing in ways
     I don\u2019t understand.\nLeaves glowing at night, roots spreading deeper than
     any survey shows.\nThe Council calls it progress, a sign that Laminia is blessed."
