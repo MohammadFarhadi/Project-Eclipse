@@ -1,40 +1,37 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
 public class FadePlatform : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private Coroutine currentFade;
-    public GameObject[] objectsToFade;
-    public float fadeSpeed;
-    bool landed = false;
+
+    [Header("Fade Settings")]
+    public float fadeInTime = 0.2f;
+    public float fadeOutTime = 0.5f;
+
+    private int playerContacts = 0; // handles multi-collisions
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // start invisible
+        Color c = spriteRenderer.color;
+        c.a = 0f;
+        spriteRenderer.color = c;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!landed)
+            playerContacts++;
+            if (playerContacts == 1) // first contact
             {
-                foreach (GameObject obj in objectsToFade)
-                {
-                    if (obj != null && obj != gameObject)
-                    { 
-                        FadePlatform fadeScript = obj.GetComponent<FadePlatform>();
-                        if (fadeScript != null)
-                        {
-                            fadeScript.StartCoroutine(fadeScript.LittleFade());
-                        }
-                    }
-                }
-                landed = true;
+                StartFade(FadeToAlpha(1f, fadeInTime)); // fully visible
             }
-
-            StartFade(FadeToAlpha(1, 0.5f)); // This platform fully visible
         }
     }
 
@@ -42,7 +39,12 @@ public class FadePlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            StartFade(FadeToAlpha(0, 1.5f)); // Fade out when leaving
+            playerContacts--;
+            if (playerContacts <= 0)
+            {
+                playerContacts = 0;
+                StartFade(FadeToAlpha(0f, fadeOutTime)); // invisible when no player
+            }
         }
     }
 
@@ -50,7 +52,6 @@ public class FadePlatform : MonoBehaviour
     {
         if (currentFade != null)
             StopCoroutine(currentFade);
-
         currentFade = StartCoroutine(routine);
     }
 
@@ -72,12 +73,5 @@ public class FadePlatform : MonoBehaviour
         Color final = spriteRenderer.color;
         final.a = targetAlpha;
         spriteRenderer.color = final;
-    }
-
-    public IEnumerator LittleFade()
-    {
-        StartFade(FadeToAlpha(0.6f, 0.1f));
-        yield return new WaitForSeconds(0.5f);
-        StartFade(FadeToAlpha(0f, 0.3f));
     }
 }
