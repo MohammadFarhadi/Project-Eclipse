@@ -3,54 +3,60 @@ using System.Collections;
 
 public class PanelController : MonoBehaviour
 {
-    private GameObject panel1;
-    private GameObject panel2;
-    private GameObject panel3;
+    [Header("Panels (filled from PanelManager at runtime)")]
+    private GameObject panel1, panel2, panel3;
+
+    [Header("Wire this in the Inspector OR we’ll find it in Start")]
+    [SerializeField] private LogSystem logSystem;
+
     private PlayerControllerBase playerController;
-
-    private bool playerInside = false;
-    private bool isCoroutineRunning = false;
-
-    void Start()
-    {
-        panel1 = PanelManager.Instance.panel1;
-        panel2 = PanelManager.Instance.panel2;
-        panel3 = PanelManager.Instance.panel3;
-    }
-
-    void Update()
-    {
-        if (playerInside && playerController.IsInteracting()&& !isCoroutineRunning)
-        {
-            StartCoroutine(ShowPanelsSequence());
-        }
-    }
+    private bool playerInside, isCoroutineRunning;
 
     [Header("Log content for THIS trigger")]
     [TextArea] public string logDir1Text;
     [TextArea] public string logDir2Text;
     [TextArea] public string logDir3Text;
 
+    void Start()
+    {
+        panel1 = PanelManager.Instance.panel1;
+        panel2 = PanelManager.Instance.panel2;
+        panel3 = PanelManager.Instance.panel3;
+
+        // If not assigned, look under panel2 once.
+        if (!logSystem && panel2)
+            logSystem = panel2.GetComponentInChildren<LogSystem>(true);
+    }
+
+    void Update()
+    {
+        if (playerInside && playerController != null &&
+            playerController.IsInteracting() && !isCoroutineRunning)
+        {
+            StartCoroutine(ShowPanelsSequence());
+        }
+    }
+
     IEnumerator ShowPanelsSequence()
     {
         isCoroutineRunning = true;
 
-        // Step 1: show panel1 for 5s
+        // Show panel1 briefly (your intro)
         panel1.SetActive(true);
         panel2.SetActive(false);
         panel3.SetActive(false);
 
         yield return new WaitForSeconds(5f);
 
-        // Step 2: inject per-object texts into the single LogSystem, then show panel2
-        var log = panel2.GetComponentInChildren<LogSystem>(true); // true finds it even if inactive
-        if (log)
+        // Inject this trigger’s texts, then open the log UI
+        if (logSystem)
         {
-            log.SetTexts(logDir1Text, logDir2Text, logDir3Text);
+            logSystem.SetTexts(logDir1Text, logDir2Text, logDir3Text);
+            logSystem.OpenLog(); // see addition below
         }
 
         panel1.SetActive(false);
-        panel2.SetActive(true);
+        panel2.SetActive(true); // shows the log UI
 
         isCoroutineRunning = false;
     }
@@ -60,7 +66,7 @@ public class PanelController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = true;
-            playerController = other.gameObject.GetComponent<PlayerControllerBase>();
+            playerController = other.GetComponent<PlayerControllerBase>();
         }
     }
 
@@ -71,5 +77,4 @@ public class PanelController : MonoBehaviour
             playerInside = false;
         }
     }
-    
 }
