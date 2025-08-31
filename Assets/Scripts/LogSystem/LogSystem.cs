@@ -84,4 +84,12 @@ public class LogSystem : MonoBehaviour
         logPanel.SetActive(false);
         storyPanel.SetActive(false);
     }
+    public void OpenLog()
+    {
+        StopAllCoroutines();
+        // start on the directory list (not the story view)
+        if (storyPanel) storyPanel.SetActive(false);
+        if (logPanel)   logPanel.SetActive(true);
+    }
+
 }
