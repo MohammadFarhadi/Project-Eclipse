@@ -185,6 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  stopDistance: 5
+  attackPhaseDuration: 15
   attackClip: {fileID: 8300000, guid: b6af7976f58ae2b4d9d4065cb9c54d89, type: 3}
   deathClip: {fileID: 8300000, guid: 5d89f8e26aa52374c9c7460859de8d81, type: 3}
   oneShotAudioPrefab: {fileID: 55081396018606172, guid: ff501874eaf95f14b9ab466329d11e26, type: 3}
@@ -195,7 +197,7 @@ MonoBehaviour:
   normalBulletTag: PlayerBullet
   strongBulletTag: FireBullet
   firePoint: {fileID: 119486235472839356}
-  moveSpeed: 2
+  moveSpeed: 5
   players:
   - {fileID: 0}
   - {fileID: 0}
@@ -206,8 +208,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   animator: {fileID: 7720056771999889491}
+  attackCount1: 0
   bulletPoolNGO: {fileID: 0}
   Is_First: 1
+  enemysUI: {fileID: 0}
 --- !u!61 &4100661704318982125
 BoxCollider2D:
   m_ObjectHideFlags: 0

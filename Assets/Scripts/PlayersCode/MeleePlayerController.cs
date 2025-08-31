@@ -340,8 +340,11 @@ public class MeleePlayerController : PlayerControllerBase
 
     public void OnFlash(InputAction.CallbackContext ctx)
     {
-        if (!IsOwner) return; // فقط صاحب اجرا می‌کنه
-
+        if (!(SceneManager.GetActiveScene().name == "Level2")) return;
+        if (GameModeManager.Instance.CurrentMode == GameMode.Online)
+        {
+            if (!IsOwner) return; // فقط صاحب اجرا می‌کنه
+        }
         if (!ctx.performed) return;
         Debug.Log("On flashlight called");
         // فقط اگر استامینا بیشتر از مصرف لحظه‌ای (مثلاً staminaDrainRate) داشت مجوز بده

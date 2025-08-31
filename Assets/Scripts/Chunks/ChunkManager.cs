@@ -5,6 +5,32 @@ using Unity.Collections;
 
 public class ChunkManager : NetworkBehaviour
 {
+    public void AdoptSequenceWithoutMoving(GameObject[] ordered)
+    {
+        if (ordered == null || ordered.Length == 0) return;
+
+        // Set internal ordering
+        sequence = new GameObject[ordered.Length];
+        for (int i = 0; i < ordered.Length; i++)
+            sequence[i] = ordered[i];
+
+        // Rebuild activeChunks in the same order
+        activeChunks.Clear();
+        foreach (var c in sequence)
+            if (c != null)
+                activeChunks.Add(c);
+
+        // Mark as activated so listeners don’t try to re-arrange
+        // (if you want to gate off listeners on this flag)
+        // If you want to keep it private, you can remove this line,
+        // but keeping a similar internal flag helps prevent double work.
+        // If 'chunksActivated' is private, you can leave it; this method
+        // doesn’t strictly need to flip it.
+        // chunksActivated = true;
+
+        Debug.Log("[ChunkManager] Adopted saved chunk sequence without moving.");
+    }
+
     public GameObject[] chunks = new GameObject[6]; // 0=start, 5=end
     public GameObject[] sequence;
     public NetworkVariable<FixedString128Bytes> chunkSequenceString =
