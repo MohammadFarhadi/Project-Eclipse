@@ -189,38 +189,86 @@ IEnumerator RestoreWorldNextFrame()
              yield return null;
          
 // --- CHUNKS: restore exact saved layout, shifted so saved-start aligns with live-start ---
-             var cm = UnityEngine.Object.FindFirstObjectByType<ChunkManager>(FindObjectsInactive.Include);
-             if (cm != null && cm.chunks != null && _pendingData.Chunks != null && _pendingData.Chunks.Count > 0)
-             {
-                 // saved order 0..N-1
-                 var saved = new System.Collections.Generic.List<GameData.ChunkData>(_pendingData.Chunks);
-                 saved.Sort((a, b) => a.Order.CompareTo(b.Order));
+{
+    var cm = UnityEngine.Object.FindFirstObjectByType<ChunkManager>(FindObjectsInactive.Include);
+    bool canRestore =
+        cm && cm.chunks != null &&
+        _pendingData?.Chunks != null &&
+        _pendingData.Chunks.Count > 0;
 
-                 // map live by canonical name
-                 string Canon(string s) => s.Replace("(Clone)", "").Replace(" ", "").ToLowerInvariant();
-                 var liveByName = new System.Collections.Generic.Dictionary<string, GameObject>();
-                 foreach (var go in cm.chunks)
-                     if (go) liveByName[Canon(go.name)] = go;
+    if (canRestore)
+    {
+        // Copy & sort saved chunks by saved order 0..N-1
+        var saved = new System.Collections.Generic.List<GameData.ChunkData>(_pendingData.Chunks);
+        saved.Sort((a, b) => a.Order.CompareTo(b.Order));
 
-                 if (liveByName.TryGetValue(Canon(saved[0].prefabName), out var startLive))
-                 {
-                     // shift so saved-start.x -> live-start.x (preserve relative spacing exactly)
-                     float dx = startLive.transform.position.x - saved[0].PositionX;
+        // Canonicalize names to map live objects robustly
+        static string Canon(string s)
+            => string.IsNullOrWhiteSpace(s) ? string.Empty
+               : s.Replace("(Clone)", "").Replace(" ", "").ToLowerInvariant();
 
-                     // float dy = startLive.transform.position.y - saved[0].PositionY;
+        // Build map: canonical live name -> live GameObject
+        var liveByName = new System.Collections.Generic.Dictionary<string, GameObject>();
+        foreach (var go in cm.chunks)
+            if (go) liveByName[Canon(go.name)] = go;
 
-                     for (int i = 0; i < saved.Count; i++)
-                     {
-                         var s = saved[i];
-                         if (!liveByName.TryGetValue(Canon(s.prefabName), out var go)) continue;
+        // Only proceed if we can find a matching live start
+        if (liveByName.TryGetValue(Canon(saved[0].prefabName), out var liveStart) && liveStart)
+        {
+            // Shift so saved-start.x -> live-start.x (preserve relative spacing exactly)
+            float dx = liveStart.transform.position.x - saved[0].PositionX;
+            // float dy = liveStart.transform.position.y - saved[0].PositionY; // enable if you want exact Y too
 
-                         var p = go.transform.position;
-                         p.x   = s.PositionX + dx;
-                         // p.y = s.PositionY + dy;   // uncomment if you want exact Y too
-                         go.transform.position = p;
-                     }
-                 }
-             }
+            // Apply positions to each live chunk based on saved data + shift
+            for (int i = 0; i < saved.Count; i++)
+            {
+                var s = saved[i];
+                if (!liveByName.TryGetValue(Canon(s.prefabName), out var go) || !go)
+                    continue;
+
+                var p = go.transform.position;
+                p.x = s.PositionX + dx;
+                // p.y = s.PositionY + dy; // enable to match Y as well
+                go.transform.position = p;
+            }
+
+        }
+        // else: couldn't find a matching start — silently skip or Debug.LogWarning if you want.
+        // ✅ Rehydrate ChunkManager's sequence + activeChunks from the saved order
+        var ordered = new System.Collections.Generic.List<GameObject>(saved.Count);
+        foreach (var s in saved)
+        {
+            if (liveByName.TryGetValue(Canon(s.prefabName), out var go) && go)
+                ordered.Add(go);
+        }
+
+// Fill public fields so traversal works
+        cm.sequence = ordered.ToArray();
+        cm.activeChunks.Clear();
+        cm.activeChunks.AddRange(ordered);
+
+// (Optional but nice in Online mode): publish the middle indices so clients match order
+        if (cm.IsServer)
+        {
+            var middleIdx = new System.Collections.Generic.List<int>(4);
+            foreach (var go in ordered)
+            {
+                int idx = System.Array.IndexOf(cm.chunks, go);
+                // keep only middle chunk indices (your ArrangeChunks expects 4 numbers)
+                if (idx >= 1 && idx <= 4) middleIdx.Add(idx);
+            }
+            if (middleIdx.Count == 4)
+            {
+                var seqStr = string.Join(",", middleIdx);
+                cm.chunkSequenceString.Value = new Unity.Collections.FixedString128Bytes(seqStr);
+            }
+        }
+
+        UnityEngine.Debug.Log("[Restore] ChunkManager sequence + activeChunks restored from save.");
+
+    }
+    
+}
 
 
 
