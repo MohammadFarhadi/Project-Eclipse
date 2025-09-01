@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -429, y: -241.1036}
-  m_SizeDelta: {x: 366.0155, y: 46.9666}
+  m_AnchoredPosition: {x: -429, y: -224.83966}
+  m_SizeDelta: {x: 366.0155, y: 77.064}
   m_Pivot: {x: 0.5, y: 0.50000024}
 --- !u!222 &7333219599440070483
 CanvasRenderer:
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -916,7 +916,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1013,8 +1013,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 442, y: -241.1036}
-  m_SizeDelta: {x: 366.0155, y: 46.9666}
+  m_AnchoredPosition: {x: 442, y: -224.83966}
+  m_SizeDelta: {x: 366.0155, y: 77.064}
   m_Pivot: {x: 0.5, y: 0.50000024}
 --- !u!222 &4808352619789399364
 CanvasRenderer:
@@ -36019,7 +36019,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -36595,8 +36595,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -243}
-  m_SizeDelta: {x: 366.0155, y: 46.9666}
+  m_AnchoredPosition: {x: 2, y: -227.95132}
+  m_SizeDelta: {x: 366.0155, y: 77.064}
   m_Pivot: {x: 0.5, y: 0.50000024}
 --- !u!222 &7897693315981196410
 CanvasRenderer:
@@ -38020,7 +38020,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5941910193225280158
 RectTransform:
   m_ObjectHideFlags: 0
