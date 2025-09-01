@@ -37436,6 +37436,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5304766548791653185, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4152144671
+      objectReference: {fileID: 0}
     - target: {fileID: 7200234467213938067, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       propertyPath: m_Name
       value: Moving Platformer (1)
@@ -37497,6 +37501,10 @@ PrefabInstance:
     - target: {fileID: 2368977953659559370, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304766548791653185, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1396947740
       objectReference: {fileID: 0}
     - target: {fileID: 7200234467213938067, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       propertyPath: m_Name
@@ -37607,6 +37615,10 @@ PrefabInstance:
     - target: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_Name
       value: Sonin (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2797674524
       objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
@@ -37992,6 +38004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sonin (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1287237593
+      objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.043956004
@@ -38062,6 +38078,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sonin (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3663546864
+      objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.043956004
@@ -38131,6 +38151,10 @@ PrefabInstance:
     - target: {fileID: 4052649666043729911, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_Name
       value: Sonin (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115565673949902055, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2281249294
       objectReference: {fileID: 0}
     - target: {fileID: 7574866463100254161, guid: 4d5f21e53562d6947a04eda53b02a58b, type: 3}
       propertyPath: m_LocalScale.y
