@@ -20476,7 +20476,7 @@ PrefabInstance:
     - target: {fileID: 7301160360236713828, guid: 0e2fce146d48448fba15762b8c4b9a5a, type: 3}
       propertyPath: shopManager
       value: 
-      objectReference: {fileID: 7230754502432272723, guid: 0fb6ba939be352a49b26032798d78a38, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8205507276703258369, guid: 0e2fce146d48448fba15762b8c4b9a5a, type: 3}
       propertyPath: m_Name
       value: Cafe

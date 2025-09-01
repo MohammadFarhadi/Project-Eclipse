@@ -60,6 +60,7 @@ public class PanelController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = true;
+            playerController = other.gameObject.GetComponent<PlayerControllerBase>();
         }
     }
 
