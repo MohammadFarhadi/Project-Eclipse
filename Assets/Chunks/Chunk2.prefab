@@ -175,18 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &328635115536649080
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,18 +5580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &684882933296994420
 GameObject:
   m_ObjectHideFlags: 0
@@ -20450,18 +20430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &1698431343817591460
 GameObject:
   m_ObjectHideFlags: 0
@@ -25817,18 +25787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &1945861998000596846
 GameObject:
   m_ObjectHideFlags: 0
@@ -27276,18 +27236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &2542608640670687757
 GameObject:
   m_ObjectHideFlags: 0
@@ -29216,18 +29166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &4049408091304213173
 GameObject:
   m_ObjectHideFlags: 0
@@ -29729,18 +29669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &4156923059148244024
 GameObject:
   m_ObjectHideFlags: 0
@@ -31457,18 +31387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &4744702258481216009
 GameObject:
   m_ObjectHideFlags: 0
@@ -32013,18 +31933,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &5125678435739862203
 GameObject:
   m_ObjectHideFlags: 0
@@ -34856,18 +34766,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c70fcca3b1b423bb5240182414216f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToFade:
-  - {fileID: 4149607035282604004}
-  - {fileID: 4710892313769968809}
-  - {fileID: 4048362225800300938}
-  - {fileID: 591205459949412310}
-  - {fileID: 5122663925353508652}
-  - {fileID: 2531964117079680426}
-  - {fileID: 6409161900869096683}
-  - {fileID: 195057385745465876}
-  - {fileID: 1904544575302471034}
-  - {fileID: 1694960402669810004}
-  fadeSpeed: 0
+  fadeInTime: 0.2
+  fadeOutTime: 0.5
 --- !u!1 &6436249919909334947
 GameObject:
   m_ObjectHideFlags: 0

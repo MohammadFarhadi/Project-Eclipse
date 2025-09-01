@@ -38050,6 +38050,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5304766548791653185, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1751614444
+      objectReference: {fileID: 0}
     - target: {fileID: 7200234467213938067, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       propertyPath: m_Name
       value: Moving Platformer
@@ -39784,7 +39788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5304766548791653185, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3258173900
+      value: 2004774084
       objectReference: {fileID: 0}
     - target: {fileID: 7200234467213938067, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       propertyPath: m_Name
