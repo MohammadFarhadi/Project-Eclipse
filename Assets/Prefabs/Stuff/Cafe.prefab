@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 527957450074617075}
   - component: {fileID: 7716322595764872223}
   - component: {fileID: 1055690356322895525}
-  - component: {fileID: 7301160360236713828}
   m_Layer: 0
   m_Name: Cafe
   m_TagString: Untagged
@@ -340,17 +339,3 @@ PolygonCollider2D:
       - {x: 7.321289, y: -3.9221191}
       - {x: 7.321289, y: -3.829834}
   m_UseDelaunayMesh: 0
---- !u!114 &7301160360236713828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8205507276703258369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c00dc2d39d61d2d498cc1560b72407a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shopUI: {fileID: 0}
-  shopManager: {fileID: 0}

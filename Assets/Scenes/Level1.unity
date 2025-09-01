@@ -531,6 +531,10 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 1771529483
       objectReference: {fileID: 0}
+    - target: {fileID: 5369416025456343625, guid: f779d898dc28745d394df5a75c136b5b, type: 3}
+      propertyPath: shopUI
+      value: 
+      objectReference: {fileID: 879036376}
     - target: {fileID: 5859490580128763182, guid: f779d898dc28745d394df5a75c136b5b, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1641212685
@@ -3349,6 +3353,10 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 3441950111
       objectReference: {fileID: 0}
+    - target: {fileID: 4196918678538120074, guid: 2b44fe98c672a46f2a6b9a877488a586, type: 3}
+      propertyPath: shopUI
+      value: 
+      objectReference: {fileID: 879036376}
     - target: {fileID: 4333475681889046862, guid: 2b44fe98c672a46f2a6b9a877488a586, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3975641414
@@ -4466,6 +4474,10 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 1380905693
       objectReference: {fileID: 0}
+    - target: {fileID: 8777563376165430781, guid: 040c7548c50d440cbbd34a91308f2950, type: 3}
+      propertyPath: shopUI
+      value: 
+      objectReference: {fileID: 879036376}
     - target: {fileID: 8850584727943305914, guid: 040c7548c50d440cbbd34a91308f2950, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1448316118
@@ -4752,6 +4764,10 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 365620938
       objectReference: {fileID: 0}
+    - target: {fileID: 8195448100954154604, guid: de2c6140f86904931af1b7e5b242990d, type: 3}
+      propertyPath: shopUI
+      value: 
+      objectReference: {fileID: 879036376}
     - target: {fileID: 8216921844575030161, guid: de2c6140f86904931af1b7e5b242990d, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 322890800
@@ -8236,6 +8252,10 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 2439232367
       objectReference: {fileID: 0}
+    - target: {fileID: 4988653280402952997, guid: 8a4469915a56d4f8fa86a7eae6b2ac64, type: 3}
+      propertyPath: shopUI
+      value: 
+      objectReference: {fileID: 879036376}
     - target: {fileID: 5284931208348842921, guid: 8a4469915a56d4f8fa86a7eae6b2ac64, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1841453382
