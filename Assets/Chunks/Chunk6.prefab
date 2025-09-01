@@ -6049,7 +6049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3218516399875059002, guid: 2f6a81ed96164a748b9a7ff46cd960bb, type: 3}
       propertyPath: maxHealth
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3218516399875059002, guid: 2f6a81ed96164a748b9a7ff46cd960bb, type: 3}
       propertyPath: targetAnimator

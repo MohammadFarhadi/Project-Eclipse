@@ -26417,7 +26417,7 @@ PrefabInstance:
       objectReference: {fileID: 1789578361}
     - target: {fileID: 69321223974545167, guid: e22151e145a13e54e913d3bbbc4b170e, type: 3}
       propertyPath: moveSpeed
-      value: 1
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 69321223974545167, guid: e22151e145a13e54e913d3bbbc4b170e, type: 3}
       propertyPath: normalBulletTag
