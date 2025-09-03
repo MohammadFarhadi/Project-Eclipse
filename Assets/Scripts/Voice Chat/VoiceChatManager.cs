@@ -15,13 +15,17 @@ public class VoiceChatManager : NetworkBehaviour
 
     void Start()
     {
-        micName = Microphone.devices[0];
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            micName = null; // مرورگر خودش دیفالت میکروفون رو می‌گیره
+        #else
+            micName = Microphone.devices.Length > 0 ? Microphone.devices[0] : null;
+        #endif
     }
 
     public void StartRecording()
     {
         if (isRecording) return;
-
+        StartCoroutine(RequestMicPermission());
         micClip = Microphone.Start(micName, true, 10, sampleRate);
         lastSamplePos = 0;
         isRecording = true;
@@ -109,4 +113,20 @@ public class VoiceChatManager : NetworkBehaviour
         }
         return floatArray;
     }
+    private IEnumerator RequestMicPermission()
+    {
+        yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
+        if (Application.HasUserAuthorization(UserAuthorization.Microphone))
+        {
+            micClip = Microphone.Start(micName, true, 10, sampleRate);
+            lastSamplePos = 0;
+            isRecording = true;
+            StartCoroutine(RecordAndSend());
+        }
+        else
+        {
+            Debug.LogError("Microphone permission denied.");
+        }
+    }
+
 }
