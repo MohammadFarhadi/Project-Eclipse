@@ -258,9 +258,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
         foreach (ContactPoint2D c in collision.contacts)
         {
             // Is the surface mostly horizontal?  (normal pointing upward)
-            if (c.normal.y >= 0.5f)
-            {
-                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+               if (GameModeManager.Instance.CurrentMode == GameMode.Local)
                 {
                     animator.SetBool("IsJumping", false);
                 
@@ -275,7 +273,7 @@ public abstract class PlayerControllerBase : NetworkBehaviour{
                 if (!isGrounded) HandleLanding();
                 isGrounded = true;
                 break;                      // one good contact is enough
-            }
+            
         }
     
     }

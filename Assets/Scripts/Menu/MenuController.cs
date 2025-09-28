@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // ➕ مهم برای کار با Sceneها
+using UnityEngine.SceneManagement;
+using UintInspector = Unity.VisualScripting.UintInspector; // ➕ مهم برای کار با Sceneها
 
 public class MenuController : MonoBehaviour
 {
     public GameObject homeValue;
-    public GameObject profileValue;
     public GameObject optionValue;
-    public GameObject quitValue;
 
     void Start()
     {
@@ -15,26 +14,18 @@ public class MenuController : MonoBehaviour
     public void ShowHome()
     {
         DeactivateAll();
-        homeValue.SetActive(true);
+        homeValue.GetComponent<UIAnimator>().Show();
     }
 
-    public void ShowProfile()
-    {
-        DeactivateAll();
-        profileValue.SetActive(true);
-    }
+  
 
     public void ShowOption()
     {
         DeactivateAll();
-        optionValue.SetActive(true);
+        optionValue.GetComponent<UIAnimator>().Show();
     }
 
-    public void ShowQuit()
-    {
-        DeactivateAll();
-        quitValue.SetActive(true);
-    }
+    
 
     public void PlayGame()
     {
@@ -45,8 +36,6 @@ public class MenuController : MonoBehaviour
     private void DeactivateAll()
     {
         homeValue.SetActive(false);
-        profileValue.SetActive(false);
         optionValue.SetActive(false);
-        quitValue.SetActive(false);
     }
 }

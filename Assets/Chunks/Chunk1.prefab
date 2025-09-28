@@ -38692,10 +38692,18 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1396947740
       objectReference: {fileID: 0}
+    - target: {fileID: 6990595758124443027, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 7eb9553abff359d4186a1705dd77101a, type: 2}
     - target: {fileID: 7200234467213938067, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
       propertyPath: m_Name
       value: Moving Platformer
       objectReference: {fileID: 0}
+    - target: {fileID: 8299067229212414401, guid: fb7e9a742c0da4b0f80d7d4c5d0fcd03, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 7eb9553abff359d4186a1705dd77101a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

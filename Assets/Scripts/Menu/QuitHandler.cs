@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class QuitHandler : MonoBehaviour
 {
-    public GameObject optionValue;
-    public GameObject quitValue;
-    public GameObject profileValue;
-    public GameObject homeValue;
-
+   
     // متصل به دکمه YES
     public void QuitGame()
     {
@@ -15,11 +11,5 @@ public class QuitHandler : MonoBehaviour
     }
 
     // متصل به دکمه NO
-    public void CancelQuit()
-    {
-        optionValue.SetActive(false);
-        quitValue.SetActive(false);
-        profileValue.SetActive(false);
-        homeValue.SetActive(true);
-    }
+    
 }

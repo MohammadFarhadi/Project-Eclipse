@@ -2964,7 +2964,6 @@ Transform:
   - {fileID: 1487483623358004894}
   - {fileID: 8721039384452272566}
   - {fileID: 1822096483634808660}
-  - {fileID: 5226418676691055651}
   - {fileID: 2657950318015275471}
   - {fileID: 5251570837497179677}
   - {fileID: 3104470136463123152}
@@ -19221,11 +19220,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6707066146726391122, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.99
+      value: 22.22
       objectReference: {fileID: 0}
     - target: {fileID: 6707066146726391122, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -34.79
+      value: -34.01
       objectReference: {fileID: 0}
     - target: {fileID: 6707066146726391122, guid: 55eefd79d70774c5a9b25f615b21b77e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19654,72 +19653,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6516007268527024811, guid: f53894d6cc1fed6468a656d8cbad0b60, type: 3}
   m_PrefabInstance: {fileID: 4780570572980125093}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5054746008749378219
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2641616382750955073}
-    m_Modifications:
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.098491
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -21.172176
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.26116997
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2220772739852062780, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3093364973
-      objectReference: {fileID: 0}
-    - target: {fileID: 7560879265720457689, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-      propertyPath: m_Name
-      value: Button(Bridge)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
---- !u!4 &5226418676691055651 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1054379625141485192, guid: cfcba96578a124001b66b2ffb5f74696, type: 3}
-  m_PrefabInstance: {fileID: 5054746008749378219}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5530069387753816359
 PrefabInstance:
@@ -20552,7 +20485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 1
   moveSpeed: 2
-  waitTime: 1
+  waitTime: 2
   initialDelay: 15
 --- !u!1001 &8731440982909345532
 PrefabInstance:

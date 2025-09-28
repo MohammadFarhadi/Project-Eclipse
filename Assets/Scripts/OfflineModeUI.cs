@@ -16,12 +16,12 @@ public class OfflineModeUI : MonoBehaviour
 
     public void activateOfflineModeUI()
     {
-        offlineModeUI.SetActive(true);
+        offlineModeUI.GetComponent<UIAnimator>().Show();
         credit.SetActive(false);
     }
 
     public void deactivateOfflineModeUI()
     {
-        offlineModeUI.SetActive(false);
+        offlineModeUI.GetComponent<UIAnimator>().Hide();
     }
 }

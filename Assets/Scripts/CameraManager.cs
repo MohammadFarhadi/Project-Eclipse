@@ -19,13 +19,11 @@ public class CameraManager : MonoBehaviour
         {
             player1 = GameObject.Find("Melle1Player(Clone)") ?? GameObject.Find("Melle2Player(Clone)");
             player2 = GameObject.Find("Ranged1Player(Clone)") ?? GameObject.Find("RangedPlayer(Clone)");
-            
         }
         if (camera1 == null || camera2 == null)
         {
             camera1 = player1.GetComponentInChildren<Camera>();
             camera2 = player2.GetComponentInChildren<Camera>();
-            
         }
 
         float distance = Vector3.Distance(player1.transform.position, player2.transform.position);
@@ -42,6 +40,10 @@ public class CameraManager : MonoBehaviour
 
     void EnableMergeCamera()
     {
+        // ریست rect تا بعداً درست کار کنه
+        camera1.rect = new Rect(0f, 0f, 1f, 1f);
+        camera2.rect = new Rect(0f, 0f, 1f, 1f);
+
         camera1.gameObject.SetActive(false);
         camera2.gameObject.SetActive(false);
         mergeCamera.gameObject.SetActive(true);
@@ -57,26 +59,27 @@ public class CameraManager : MonoBehaviour
         camera2.gameObject.SetActive(true);
         mergeCamera.gameObject.SetActive(false);
 
-        // موقعیت دوربین‌ها نسبت به پلیرها
+        // موقعیت بازیکن‌ها
         Vector3 pos1 = player1.transform.position;
         Vector3 pos2 = player2.transform.position;
 
+        // دنبال کردن هر بازیکن
         camera1.transform.position = new Vector3(pos1.x, pos1.y + cameraOffsetY, pos1.z + cameraOffsetZ);
         camera1.transform.LookAt(pos1);
 
         camera2.transform.position = new Vector3(pos2.x, pos2.y + cameraOffsetY, pos2.z + cameraOffsetZ);
         camera2.transform.LookAt(pos2);
 
-        // مشخص کردن کدام پلیر سمت راست‌تر است
+        // تعیین اینکه کدوم سمت راست‌تره
         if (pos1.x > pos2.x)
         {
-            camera1.rect = new Rect(0.5f, 0f, 0.5f, 1f); // پلیر1 سمت راست
-            camera2.rect = new Rect(0f, 0f, 0.5f, 1f);   // پلیر2 سمت چپ
+            camera1.rect = new Rect(0.5f, 0f, 0.5f, 1f); // بازیکن1 سمت راست
+            camera2.rect = new Rect(0f, 0f, 0.5f, 1f);   // بازیکن2 سمت چپ
         }
         else
         {
-            camera1.rect = new Rect(0f, 0f, 0.5f, 1f);   // پلیر1 سمت چپ
-            camera2.rect = new Rect(0.5f, 0f, 0.5f, 1f); // پلیر2 سمت راست
+            camera1.rect = new Rect(0f, 0f, 0.5f, 1f);   // بازیکن1 سمت چپ
+            camera2.rect = new Rect(0.5f, 0f, 0.5f, 1f); // بازیکن2 سمت راست
         }
     }
 }
