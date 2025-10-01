@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
@@ -11,16 +12,19 @@ public class MainMenuController : MonoBehaviour
 
     private GameObject currentPanel;    // پنل فعلی که نمایش داده می‌شود
 
+    
     // نمایش پنل Online
     public void OnOnlineModeClicked()
     {
         SwitchPanel(onlinePanel);
+        GameModeManager.Instance.CurrentMode = GameMode.Online;
     }
 
     // نمایش پنل Local
     public void OnLocalModeClicked()
     {
         SwitchPanel(localPanel);
+        GameModeManager.Instance.CurrentMode = GameMode.Local;
     }
 
     // نمایش پنل Option

@@ -59,4 +59,8 @@ public class ConnectionManager : MonoBehaviour
             Debug.Log("Client joined game scene successfully.");
         }
     }
+     public void LoadMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
 }

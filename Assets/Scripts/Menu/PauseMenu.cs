@@ -42,4 +42,9 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f; // اطمینان از اینکه بازی Pause نباشه
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }       

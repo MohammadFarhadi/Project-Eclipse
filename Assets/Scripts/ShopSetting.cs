@@ -41,7 +41,7 @@
 
         public void Update()
         {
-            Debug.Log(">>> Update called");
+           // Debug.Log(">>> Update called");
             if (localPlayer != null)
             {
                 if (canOpenShop && Input.GetKeyDown(KeyCode.B))
@@ -62,7 +62,17 @@
         {
             Debug.Log(">>> ToggleShop called. Current state: " + shopUI.activeSelf);
 
-            shopUI.SetActive(!shopUI.activeSelf);
+            if (shopUI.activeSelf)
+            {
+                // اگر فعاله، میخوایم Hide کنیم
+                shopUI.GetComponent<UIAnimator>().Hide();
+            }
+            else
+            {
+                // اگر غیرفعاله، میخوایم Show کنیم
+                shopUI.GetComponent<UIAnimator>().Show();
+            }
+
             Debug.Log(">>> shopUI new state: " + shopUI.activeSelf);
 
             shopManager.SetCurrentPlayer(localPlayer);
@@ -137,7 +147,7 @@
                 {
                     Debug.Log(">>> Offline Mode: Player exited, closing shop.");
                     canOpenShop = false;
-                    shopUI.SetActive(false);
+                    shopUI.GetComponent<UIAnimator>().Hide();
                     localPlayer = null;
                 }
                 else
