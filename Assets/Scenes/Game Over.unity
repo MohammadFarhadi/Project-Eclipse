@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: RETURN TO OPERATIONS CONSOLE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7085ae7f54aff45dc83891e3b8b6c0d8, type: 2}
-  m_sharedMaterial: {fileID: -5179844305475728448, guid: 7085ae7f54aff45dc83891e3b8b6c0d8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -408,15 +408,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc9de7dac0e06440bbaa465027ace1c4, type: 2}
-  m_sharedMaterial: {fileID: 2870937093951510251, guid: dc9de7dac0e06440bbaa465027ace1c4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.69411767, g: 0.9607844, b: 0.98823535, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverText: {fileID: 458864322}
-  typingSpeed: 0.001
+  typingSpeed: 0.01
   message: "MISSION REPORT // CHANNEL [OMEGA-BLACK] \\n Status:  MISSION FAILURE
     \\n Casualties: 2 Confirmed  Unit-673 (Close-Combat Operative) \\n Unit-229 (Ranged
     Operative) \\n Location: Planet Laminia \u2014 Zone X-47 \\n Primary Objective:
@@ -1349,8 +1349,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CLOSE TERMINAL
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7085ae7f54aff45dc83891e3b8b6c0d8, type: 2}
-  m_sharedMaterial: {fileID: -5179844305475728448, guid: 7085ae7f54aff45dc83891e3b8b6c0d8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1485,15 +1485,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: SELECT NEW SUBJECT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7085ae7f54aff45dc83891e3b8b6c0d8, type: 2}
-  m_sharedMaterial: {fileID: -5179844305475728448, guid: 7085ae7f54aff45dc83891e3b8b6c0d8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967040
-  m_fontColor: {r: 0, g: 1, b: 1, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -113,24 +113,17 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
             {
                 bullet.transform.position = firePoint.position;
                 bullet.transform.rotation = Quaternion.identity;
-                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
-                {
-                    animator.SetTrigger("Attack");  
-
-                }
-                else
-                {
-                    UpdateAnimatorTriggerParameterServerRpc("Attack");
-                }
+                
 
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
                     Vector3 bulletScale = rb.transform.localScale;
-                    bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                    bulletScale.x = Mathf.Sign(dir.x) * Mathf.Abs(bulletScale.x);
                     rb.transform.localScale = bulletScale;
                     rb.linearVelocity = dir * bulletSpeed;
                 }
+
 
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 if (bulletScript != null)
@@ -139,6 +132,15 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
                 }
             }
             GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+            if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+            {
+                animator.SetTrigger("Attack");  
+
+            }
+            else
+            {
+                UpdateAnimatorTriggerParameterServerRpc("Attack");
+            }
             attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
         }
         else
@@ -280,27 +282,35 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
             {
                 bullet.transform.position = firePoint.position;
                 bullet.transform.rotation = Quaternion.identity;
-                animator.SetTrigger("Attack");
+                
 
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                //Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 float scaleX = 1f;
 
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
                     Vector3 bulletScale = rb.transform.localScale;
-                    bulletScale.x = Mathf.Sign(transform.localScale.x) * Mathf.Abs(bulletScale.x);
+                    bulletScale.x = Mathf.Sign(dir.x) * Mathf.Abs(bulletScale.x);
                     rb.transform.localScale = bulletScale;
                     rb.linearVelocity = dir * bulletSpeed;
-
-                    scaleX = bulletScale.x;
                 }
+
 
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 if (bulletScript != null)
                 {
                     bulletScript.SetAttacker(this.transform);
                 }
+                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                {
+                    animator.SetTrigger("Attack");  
 
+                }
+                else
+                {
+                    UpdateAnimatorTriggerParameterServerRpc("Attack");
+                }
                 // صدای حمله روی سرور
                 GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
                 attackSoundObj.GetComponent<OneShotSound>().Play(attackClip);
@@ -334,15 +344,17 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
         {
             spawnedBullet.transform.position = spawnPosition;
 
+            
             Rigidbody2D rb = spawnedBullet.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 rb.linearVelocity = dir * bulletSpeed;
 
                 Vector3 scale = spawnedBullet.transform.localScale;
-                scale.x = scaleX;
+                scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
                 spawnedBullet.transform.localScale = scale;
             }
+
 
             Transform attacker = null;
             if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(attackerNetId, out NetworkObject attackerObj))
@@ -363,7 +375,16 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
             Animator attackerAnimator = attackerNetObj.GetComponent<Animator>();
             if (attackerAnimator != null)
             {
-                attackerAnimator.SetTrigger("Attack");
+                
+                if (GameModeManager.Instance.CurrentMode == GameMode.Local)
+                {
+                    attackerAnimator.SetTrigger("Attack");  
+
+                }
+                else
+                {
+                    UpdateAnimatorTriggerParameterServerRpc("Attack");
+                }
             }
         }
 

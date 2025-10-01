@@ -77,11 +77,11 @@ public class AlienEnemy : NetworkBehaviour, InterfaceEnemies
     private void FindClosestTarget()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         List<GameObject> allTargets = new List<GameObject>();
         allTargets.AddRange(players);
-        allTargets.AddRange(enemies);
+        //allTargets.AddRange(enemies);
 
         float closestDistance = Mathf.Infinity;
         GameObject closest = null;

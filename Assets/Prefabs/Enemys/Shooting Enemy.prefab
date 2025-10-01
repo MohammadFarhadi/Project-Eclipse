@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3733484594
+  GlobalObjectIdHash: 496539981
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -377,7 +377,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7012351190103006667, guid: 3fac667621162ab41b96dcb2ce3425b9, type: 3}
   firePoint: {fileID: 2646313651745766439}
   fireRate: 1.5
-  bulletSpeed: 60
+  bulletSpeed: 30
   animator: {fileID: 2391082511744118761}
   networkAnimator: {fileID: 0}
   healthBarDisplay: {fileID: 8705040711575572019}

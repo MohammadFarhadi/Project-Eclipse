@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class CameraManager : MonoBehaviour
     public float mergeDistance = 5f;
     public float cameraOffsetY = 10f;
     public float cameraOffsetZ = -5f;
+    public float smoothSpeed = 5f; // سرعت انیمیشن
+
+    public Image splitLine; // خط جداکننده (UI Image وسط صفحه)
+
+    private Rect targetRect1;
+    private Rect targetRect2;
 
     void Update()
     {
@@ -36,17 +43,22 @@ public class CameraManager : MonoBehaviour
         {
             EnableSplitCameras();
         }
+
+        // نرم کردن تغییرات rect
+        camera1.rect = SmoothRect(camera1.rect, targetRect1);
+        camera2.rect = SmoothRect(camera2.rect, targetRect2);
     }
 
     void EnableMergeCamera()
     {
-        // ریست rect تا بعداً درست کار کنه
-        camera1.rect = new Rect(0f, 0f, 1f, 1f);
-        camera2.rect = new Rect(0f, 0f, 1f, 1f);
+        targetRect1 = new Rect(0f, 0f, 1f, 1f);
+        targetRect2 = new Rect(0f, 0f, 1f, 1f);
 
         camera1.gameObject.SetActive(false);
         camera2.gameObject.SetActive(false);
         mergeCamera.gameObject.SetActive(true);
+
+        if (splitLine != null) splitLine.gameObject.SetActive(false);
 
         Vector3 center = (player1.transform.position + player2.transform.position) / 2f;
         mergeCamera.transform.position = new Vector3(center.x, center.y + cameraOffsetY, center.z + cameraOffsetZ);
@@ -59,27 +71,36 @@ public class CameraManager : MonoBehaviour
         camera2.gameObject.SetActive(true);
         mergeCamera.gameObject.SetActive(false);
 
-        // موقعیت بازیکن‌ها
+        if (splitLine != null) splitLine.gameObject.SetActive(true);
+
         Vector3 pos1 = player1.transform.position;
         Vector3 pos2 = player2.transform.position;
 
-        // دنبال کردن هر بازیکن
         camera1.transform.position = new Vector3(pos1.x, pos1.y + cameraOffsetY, pos1.z + cameraOffsetZ);
         camera1.transform.LookAt(pos1);
 
         camera2.transform.position = new Vector3(pos2.x, pos2.y + cameraOffsetY, pos2.z + cameraOffsetZ);
         camera2.transform.LookAt(pos2);
 
-        // تعیین اینکه کدوم سمت راست‌تره
         if (pos1.x > pos2.x)
         {
-            camera1.rect = new Rect(0.5f, 0f, 0.5f, 1f); // بازیکن1 سمت راست
-            camera2.rect = new Rect(0f, 0f, 0.5f, 1f);   // بازیکن2 سمت چپ
+            targetRect1 = new Rect(0.5f, 0f, 0.5f, 1f);
+            targetRect2 = new Rect(0f, 0f, 0.5f, 1f);
         }
         else
         {
-            camera1.rect = new Rect(0f, 0f, 0.5f, 1f);   // بازیکن1 سمت چپ
-            camera2.rect = new Rect(0.5f, 0f, 0.5f, 1f); // بازیکن2 سمت راست
+            targetRect1 = new Rect(0f, 0f, 0.5f, 1f);
+            targetRect2 = new Rect(0.5f, 0f, 0.5f, 1f);
         }
+    }
+
+    Rect SmoothRect(Rect current, Rect target)
+    {
+        return new Rect(
+            Mathf.Lerp(current.x, target.x, Time.deltaTime * smoothSpeed),
+            Mathf.Lerp(current.y, target.y, Time.deltaTime * smoothSpeed),
+            Mathf.Lerp(current.width, target.width, Time.deltaTime * smoothSpeed),
+            Mathf.Lerp(current.height, target.height, Time.deltaTime * smoothSpeed)
+        );
     }
 }

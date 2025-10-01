@@ -6,13 +6,18 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
 {
     [SerializeField] private GameObject[] dropItems; // Prefabs of Health/Stamina/Other pickups
     [SerializeField] private GameObject Sonin;
+
     [Header("Sounds")]
     public AudioClip attackClip;
     public AudioClip deathClip;
     public GameObject oneShotAudioPrefab;
+
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 7f;
     [SerializeField] private float horizontalForce = 3f;
+    [SerializeField] private float jumpCooldown = 2f; // ⬅️ فاصله بین پرش‌ها
+
+    private float lastJumpTime = -999f; // ⬅️ ذخیره زمان آخرین پرش
 
     [Header("Health")]
     [SerializeField] private int maxHealthPoints = 3;
@@ -45,16 +50,20 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         {
             currentHealthPoints.Value = maxHealthPoints;
         }
+
         animator = GetComponent<Animator>();
         networkAnimator = GetComponent<NetworkAnimator>();
-       
     }
 
     private void Update()
     {
         if (player != null && isGrounded && !isJumpingAtPlayer)
         {
-            JumpAtPlayer();
+            // ✅ فقط اگر زمان کافی از آخرین پرش گذشته باشه
+            if (Time.time >= lastJumpTime + jumpCooldown)
+            {
+                JumpAtPlayer();
+            }
         }
     }
 
@@ -68,6 +77,8 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         rb.linearVelocity = jumpVector;
         isGrounded = false;
         isJumpingAtPlayer = true;
+        lastJumpTime = Time.time; // ✅ ثبت زمان پرش
+
         if (GameModeManager.Instance.CurrentMode == GameMode.Online)
         {
             UpdateAnimatorTriggerParameterServerRpc("Jump");
@@ -76,9 +87,8 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         {
             if (animator != null)
                 animator.SetTrigger("Jump");
-
         }
-        
+
         transform.localScale = new Vector3(Mathf.Sign(direction), 1, 1);
     }
 
@@ -91,8 +101,7 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         }
     }
 
-
-    // ✅ این روش با استفاده از یک Trigger بیرونی کار می‌کند
+    // ✅ با Trigger خارجی کار می‌کنه
     public void DetectPlayer(GameObject playerObject)
     {
         player = playerObject;
@@ -136,7 +145,6 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
                 if (animator != null)
                     animator.SetTrigger("GetHit");
             }
-           
         }
     }
 
@@ -146,6 +154,7 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         {
             GameObject deathSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
             deathSoundObj.GetComponent<OneShotSound>().Play(deathClip);
+
             if (GameModeManager.Instance.CurrentMode == GameMode.Online)
             {
                 UpdateAnimatorTriggerParameterServerRpc("IsDead");
@@ -153,12 +162,11 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
             else
             {
                 animator.SetTrigger("IsDead");
-
             }
-            
         }
-            
+
         DropRandomItem();
+
         if (GameModeManager.Instance.CurrentMode == GameMode.Online)
         {
             if (IsServer)
@@ -166,13 +174,13 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
                 DestroyObjectClientRpc();
                 Destroy(gameObject);
             }
-            
         }
         else
         {
             Destroy(gameObject);
         }
     }
+
     public void DropRandomItem()
     {
         if (dropItems.Length == 0) return;
@@ -202,34 +210,37 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
             Instantiate(Sonin, transform.position, Quaternion.identity);
         }
     }
+
     [ClientRpc]
     private void DestroyObjectClientRpc()
     {
         Destroy(gameObject);
     }
+
     [ServerRpc(RequireOwnership = false)]
     void ApplyDamageServerRpc(int damageAmount)
     {
         currentHealthPoints.Value -= damageAmount;
     }
+
     [ServerRpc(RequireOwnership = false)]
-    protected void UpdateAnimatorBoolParameterServerRpc( string parameterName, bool value)
+    protected void UpdateAnimatorBoolParameterServerRpc(string parameterName, bool value)
     {
         networkAnimator.Animator.SetBool(parameterName, value);
     }
-    [ServerRpc(RequireOwnership = false)]
 
-    protected void UpdateAnimatorFloatParameterServerRpc( string parameterName, float value)
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorFloatParameterServerRpc(string parameterName, float value)
     {
         networkAnimator.Animator.SetFloat(parameterName, value);
     }
-    [ServerRpc(RequireOwnership = false)]
 
-    protected void UpdateAnimatorTriggerParameterServerRpc( string parameterName)
+    [ServerRpc(RequireOwnership = false)]
+    protected void UpdateAnimatorTriggerParameterServerRpc(string parameterName)
     {
         networkAnimator.Animator.SetTrigger(parameterName);
     }
-    
+
     public void SetHealth(int hp)
     {
         if (GameModeManager.Instance.CurrentMode == GameMode.Online)
@@ -240,8 +251,6 @@ public class JumpingEnemy : NetworkBehaviour, InterfaceEnemies
         else
         {
             currentHealthPoints.Value = hp;
-        } 
+        }
     }
-
-    
 }
