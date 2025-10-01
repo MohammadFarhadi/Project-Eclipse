@@ -156,7 +156,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -1108,15 +1108,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2732273489762120739, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2732273489762120739, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2732273489762120739, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.r
-      value: 0.3660378
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2735517356403668908, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1392,15 +1392,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7060877842063009248, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7060877842063009248, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7060877842063009248, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.r
-      value: 0.3660378
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7593209104247539400, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_LocalScale.x
@@ -1416,27 +1416,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7823236840077270034, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7823236840077270034, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7823236840077270034, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.r
-      value: 0.3660378
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7855157172167877519, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7855157172167877519, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7855157172167877519, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_Color.r
-      value: 0.3660378
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7964705631220659695, guid: 076f3d981fada774dbda0e16c8ce52c5, type: 3}
       propertyPath: m_fontSize

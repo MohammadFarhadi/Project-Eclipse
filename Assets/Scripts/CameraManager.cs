@@ -13,7 +13,10 @@ public class CameraManager : MonoBehaviour
     public float mergeDistance = 5f;
     public float cameraOffsetY = 10f;
     public float cameraOffsetZ = -5f;
-    public float smoothSpeed = 5f; // سرعت انیمیشن
+    
+    [Header("Smooth Settings")]
+    public float smoothSpeed = 5f; // سرعت حرکت/چرخش دوربین
+    public float rectSmoothSpeed = 2f; // سرعت نرم شدن تغییر rect
 
     public Image splitLine; // خط جداکننده (UI Image وسط صفحه)
 
@@ -44,9 +47,9 @@ public class CameraManager : MonoBehaviour
             EnableSplitCameras();
         }
 
-        // نرم کردن تغییرات rect
-        camera1.rect = SmoothRect(camera1.rect, targetRect1);
-        camera2.rect = SmoothRect(camera2.rect, targetRect2);
+        // نرم کردن تغییرات rect با سرعت جدا
+        camera1.rect = SmoothRect(camera1.rect, targetRect1, rectSmoothSpeed);
+        camera2.rect = SmoothRect(camera2.rect, targetRect2, rectSmoothSpeed);
     }
 
     void EnableMergeCamera()
@@ -61,7 +64,8 @@ public class CameraManager : MonoBehaviour
         if (splitLine != null) splitLine.gameObject.SetActive(false);
 
         Vector3 center = (player1.transform.position + player2.transform.position) / 2f;
-        mergeCamera.transform.position = new Vector3(center.x, center.y + cameraOffsetY, center.z + cameraOffsetZ);
+        Vector3 targetPos = new Vector3(center.x, center.y + cameraOffsetY, center.z + cameraOffsetZ);
+        mergeCamera.transform.position = Vector3.Lerp(mergeCamera.transform.position, targetPos, Time.deltaTime * smoothSpeed);
         mergeCamera.transform.LookAt(center);
     }
 
@@ -76,10 +80,13 @@ public class CameraManager : MonoBehaviour
         Vector3 pos1 = player1.transform.position;
         Vector3 pos2 = player2.transform.position;
 
-        camera1.transform.position = new Vector3(pos1.x, pos1.y + cameraOffsetY, pos1.z + cameraOffsetZ);
-        camera1.transform.LookAt(pos1);
+        Vector3 targetPos1 = new Vector3(pos1.x, pos1.y + cameraOffsetY, pos1.z + cameraOffsetZ);
+        Vector3 targetPos2 = new Vector3(pos2.x, pos2.y + cameraOffsetY, pos2.z + cameraOffsetZ);
 
-        camera2.transform.position = new Vector3(pos2.x, pos2.y + cameraOffsetY, pos2.z + cameraOffsetZ);
+        camera1.transform.position = Vector3.Lerp(camera1.transform.position, targetPos1, Time.deltaTime * smoothSpeed);
+        camera2.transform.position = Vector3.Lerp(camera2.transform.position, targetPos2, Time.deltaTime * smoothSpeed);
+
+        camera1.transform.LookAt(pos1);
         camera2.transform.LookAt(pos2);
 
         if (pos1.x > pos2.x)
@@ -94,13 +101,13 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    Rect SmoothRect(Rect current, Rect target)
+    Rect SmoothRect(Rect current, Rect target, float speed)
     {
         return new Rect(
-            Mathf.Lerp(current.x, target.x, Time.deltaTime * smoothSpeed),
-            Mathf.Lerp(current.y, target.y, Time.deltaTime * smoothSpeed),
-            Mathf.Lerp(current.width, target.width, Time.deltaTime * smoothSpeed),
-            Mathf.Lerp(current.height, target.height, Time.deltaTime * smoothSpeed)
+            Mathf.Lerp(current.x, target.x, Time.deltaTime * speed),
+            Mathf.Lerp(current.y, target.y, Time.deltaTime * speed),
+            Mathf.Lerp(current.width, target.width, Time.deltaTime * speed),
+            Mathf.Lerp(current.height, target.height, Time.deltaTime * speed)
         );
     }
 }

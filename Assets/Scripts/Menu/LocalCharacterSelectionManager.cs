@@ -11,7 +11,7 @@ public class LocalCharacterSelectionManager : MonoBehaviour
 
     private int currentPlayerIndex = 0; // بازیکن اول شروع می‌کند
 
-   
+    private Color[] playerColors = new Color[2] { Color.red, Color.blue };
 
     private void Awake()
     {
@@ -25,6 +25,7 @@ public class LocalCharacterSelectionManager : MonoBehaviour
         if (!IsValidSelection(characterID, currentPlayerIndex)) return;
 
         selectedCharacters[currentPlayerIndex] = characterID;
+        UpdateButtonColors();
         currentPlayerIndex = 1 - currentPlayerIndex;
         Debug.Log($"Player {currentPlayerIndex + 1} turn to select");
     }
@@ -40,7 +41,18 @@ public class LocalCharacterSelectionManager : MonoBehaviour
         return true;
     }
 
-   
+    private void UpdateButtonColors()
+    {
+        foreach(var btn in characterButtons)
+            btn.ResetColor();
+
+        for(int i=0; i<2; i++)
+        {
+            int c = selectedCharacters[i];
+            if(c != -1)
+                characterButtons[c].SetColor(playerColors[i]);
+        }
+    }
     public void ConfirmSelection()
     {
         if (GameModeManager.Instance.CurrentMode == GameMode.Local && selectedCharacters[0] != -1 && selectedCharacters[1] != -1)
