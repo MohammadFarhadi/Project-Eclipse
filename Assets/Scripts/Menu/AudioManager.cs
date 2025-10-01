@@ -24,9 +24,9 @@ public class AudioManager : MonoBehaviour
         lastFXVolume = PlayerPrefs.GetFloat("FXVolume", 0.75f);
         lastMusicVolume = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
 
-        masterSlider.value = lastMasterVolume;
-        fxSlider.value = Mathf.Min(lastFXVolume, lastMasterVolume); // وابستگی به master
-        musicSlider.value = Mathf.Min(lastMusicVolume, lastMasterVolume); // وابستگی به master
+        masterSlider.value = 1f;
+        fxSlider.value = 1f; // وابستگی به master
+        musicSlider.value = 1f; // وابستگی به master
 
         SetMasterVolume(masterSlider.value);
         SetFXVolume(fxSlider.value);
