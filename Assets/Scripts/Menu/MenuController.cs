@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UintInspector = Unity.VisualScripting.UintInspector; // ➕ مهم برای کار با Sceneها
+// ➕ مهم برای کار با Sceneها
 
 public class MenuController : MonoBehaviour
 {
