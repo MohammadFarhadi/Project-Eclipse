@@ -1,37 +1,37 @@
-using UnityEngine;
+    using UnityEngine;
 
-public class Respawn : MonoBehaviour
-{
-    public GameObject respawnPoint;
-    bool falg = false;
-
-    private void OnTriggerEnter2D(Collider2D other)
+    public class Respawn : MonoBehaviour
     {
-        PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
-        if (player != null)
+        public GameObject respawnPoint;
+        bool falg = false;
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!falg)
+            PlayerControllerBase player = other.GetComponent<PlayerControllerBase>();
+            if (player != null)
             {
-             
-                player.HealthSystem(100, false); // دمیج بخ   
-                falg = true;
+                if (!falg)
+                {
+                 
+                    player.HealthSystem(100, false); // دمیج بخ   
+                    falg = true;
+                }
+                // اگر هنوز نمرده باشه، ریسپانش کن
+                if (player.gameObject != null && player.gameObject.activeSelf)
+                {
+                    StartCoroutine(DelayedRespawn(player));
+                }
             }
-            // اگر هنوز نمرده باشه، ریسپانش کن
-            if (player.gameObject != null && player.gameObject.activeSelf)
+        }
+
+        private System.Collections.IEnumerator DelayedRespawn(PlayerControllerBase player)
+        {
+            yield return new WaitForSeconds(0.5f); // کمی صبر برای انیمیشن GetHit
+
+            if (player != null)
             {
-                StartCoroutine(DelayedRespawn(player));
+                player.Respawn(respawnPoint.transform.position);
+                falg = false;
             }
         }
     }
-
-    private System.Collections.IEnumerator DelayedRespawn(PlayerControllerBase player)
-    {
-        yield return new WaitForSeconds(0.5f); // کمی صبر برای انیمیشن GetHit
-
-        if (player != null)
-        {
-            player.Respawn(respawnPoint.transform.position);
-            falg = false;
-        }
-    }
-}

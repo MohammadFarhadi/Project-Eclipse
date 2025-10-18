@@ -131,7 +131,7 @@ public class ShootingEnemy : NetworkBehaviour , InterfaceEnemies
                     bulletScript.SetAttacker(this.transform);
                 }
             }
-            GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
+                GameObject attackSoundObj = Instantiate(oneShotAudioPrefab, transform.position, Quaternion.identity);
             if (GameModeManager.Instance.CurrentMode == GameMode.Local)
             {
                 animator.SetTrigger("Attack");  
